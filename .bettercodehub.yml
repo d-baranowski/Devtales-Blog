@@ -1,0 +1,11 @@
+languages:
+- java
+- javascript
+
+- name: java
+  production:
+    exclude:
+      - .*/Test/.*\.java
+  test:
+    include:
+      - .*/Test/.*\.java
