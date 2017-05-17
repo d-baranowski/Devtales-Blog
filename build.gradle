@@ -59,7 +59,11 @@ jacocoTestReport {
     }
 }
 
-task deployToCodeCov(type: Exec) {
+task deployToCodeCov(type: Exec, dependsOn: 'jacocoTestReport') {
     executable "sh"
     args  './.codecov', '-t', "${codecov}"
+}
+
+task checkToken {
+    print "${System.getenv('CODECOV_TOKEN')}"
 }
