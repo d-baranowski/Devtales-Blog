@@ -8,3 +8,6 @@ script: ./gradlew check
 
 jdk:
   - oraclejdk8
+
+env:
+  CODECLIMATE_REPO_TOKEN: 8fbe286f7a7b187eb1924838d7d8e338a880d9d70344ef6128d667343d0eb0e1
