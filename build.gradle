@@ -1,11 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.0.0.M1'
-<<<<<<< HEAD
         codecov = "${System.getenv('CODECOV_TOKEN')}"
-=======
-        codacyToken = "${System.getenv('CODACY_PROJECT_TOKEN')}"
->>>>>>> master
     }
     repositories {
         mavenCentral()
