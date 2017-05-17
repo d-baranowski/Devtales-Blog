@@ -53,6 +53,7 @@ jacocoTestReport {
     description = "Generate Jacoco coverage reports after running tests."
 
     reports {
+        xml.enabled true
         xml.destination "${buildDir}/reports/jacoco/report.xml"
         html.enabled false
         csv.enabled false
