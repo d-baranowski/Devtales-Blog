@@ -1,7 +1,10 @@
 buildscript {
     ext {
         springBootVersion = '2.0.0.M1'
+<<<<<<< HEAD
         codecov = "${System.getenv('CODECOV_TOKEN')}"
+=======
+>>>>>>> e33dcf3... Ensured jacoco runs
     }
     repositories {
         mavenCentral()
@@ -19,13 +22,18 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 apply plugin: 'jacoco'
+
 jacocoTestReport {
+    group = "reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+
     reports {
         xml.enabled true
         csv.enabled true
         html.destination "${buildDir}/jacocoHtml"
     }
 }
+
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
