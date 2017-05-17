@@ -1,20 +1,9 @@
 language: java
-sudo: false
-<<<<<<< HEAD
 install: true
 script: "./gradlew check jacocoTestReport"
 after_success: bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -cF "java"
 script: ./gradlew check
-jdk:
-<<<<<<< HEAD
-- oraclejdk8
-env:
-  matrix:
-    secure: q5oErtybyehDwdUUKkF4bIGLl+gQxHBMuXhrPSOK0TKy4VIelgMk9lTPKBmXCiuANLrkb+9SxrshmMbmFmwUDpbtkC02sOwGog+VIlWtXPS9riWgxYpdom61ze5mMm5RXtBbQc54p/LSSMM+usXaeJa21cpI7ziGf0G2JPNyYSUIwv+TqGitjLRygqCItTWM/QxG3zvldPx7aK8tZxz9hJdFc+bQypKl9QbepxtjX+mivX9ykZ6B8+MayzTtYT/xwM3xMCRCtcC4Qfk8hslLYZrkfGe9rgrcijvvOqJBlxgtlW2jvfMLAW8jEO4vpF2kAt1uUOt1NavAzStk3YQ4zd7kMj5Sgov/Dbqki67rwNsCFGjSVkjRpjVxlZyekhYJMedXZO+4CreAeW6m7GPSBGie1DO8pxtsIZSAKJTVx7z6elghASzwnGK6IiRimL6HKLGAukaRMaIu5wC9txHOoODnepTw3PFQj+DaZyT0VPOKUdC2ALEPM1MjihCyIRHnBFlg11UUw/DSB/MVzFlCHeu0vX5gzMvFIAxdNrStWUo4r/JGQRgyIOClBzJdcuRfrQep4XoBxx1b2G6SB6ukN5yEuDh98nImcU/X42vJrwWIv2pXFBufiFfagNHgsF1+FdmfmuYSGzREA6om5d4IK5oAZ6FLX+b2WUZm0zzNrJI=
-=======
-  - oraclejdk8
->>>>>>> cb43a04... Removed the token. I'll use codacity instead
-=======
+sudo: required
 before_install:
 - sudo apt-get install jq
 - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest
@@ -29,4 +18,3 @@ after_success:
 env:
   global:
     secure: fF2Ewk/Ll1ivPXBt9iGszYAyy0MBYpyvzGUbQQc2CxsoeyOG+yRjN2XugH9peuHJALNEGJZeGfBakuTNPSiRrikVdHgOOJ7f5l4svTfpxoE+WlqeNHIZu+a0sYv3GFobs/TZbEwMDd9rhJb7gAEjkKCx3NLrzRHPPfB7KM4STUzY59cdHkb4p9s0E2vuzYmjKm1HldWgNwYJDOOTCPKkHHzPz3/bJlXuBKexUMEpKUCvMR1tXGhdYiZ8ZkJUvBU9Lnr1uTlBIxpZrkCLyQk7BsxLkV7VglakETyKHq6od2SGJeHCMoULSV67dlDWVqp7u7Z4KAcbz+BXBrDx6I5I3OduoEWZ7w/FLa+E30vKE1mWQ4ljXqhY/MAhW30oZIyjjc3OS6dLtU82ofANMZ8FG0d0tRRJvbLJb3rHt/Nux9gJVWVRqaM3BGtRce65avFJktKJLhM86iPk5qkE7e46AukN2CS/D7sovlWtK9ZXa9LnlGTdRqEXglKDNEt57KQdWnF+6m4joiKvs4yiT4iS2ShtHvUwG//LJopE5tgOdf28Bfz9y9ZB++954lggyHWDSW/a336pwqOp+zYF5zaSJuc747w6r1BeCB5mQ7mrWOkmjiuVmi+lF4oST6ohWjMRsF+mCnhlDV9pPRSKd+Yq24GnyAcH20f2reLlZfF2MT0=
->>>>>>> 8ff2d1c... Enabling code coverage reports with codacy.
