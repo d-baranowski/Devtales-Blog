@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.0.0.M1'
-        codacyToken = "${System.getenv('CODACY_PROJECT_TOKEN')}"
+        codecov = "${System.getenv('CODECOV_TOKEN')}"
     }
     repositories {
         mavenCentral()
@@ -50,7 +50,17 @@ jacocoTestReport {
 
     reports {
         xml.enabled true
-        csv.enabled true
-        html.destination "${buildDir}/jacocoHtml"
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        html.enabled false
+        csv.enabled false
     }
+}
+
+task deployToCodeCov(type: Exec, dependsOn: 'jacocoTestReport') {
+    executable "sh"
+    args  './.codecov', '-t', "${codecov}"
+}
+
+task checkToken {
+    print "${System.getenv('CODECOV_TOKEN')}"
 }
