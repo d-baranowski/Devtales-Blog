@@ -1,4 +1,4 @@
-package net.devtales.devtales.controller;
+package net.devtales.blog.controller;
 
 
 import com.gargoylesoftware.htmlunit.WebClient;
