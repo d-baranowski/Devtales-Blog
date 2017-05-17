@@ -1,7 +1,7 @@
 language: java
-sudo: required
+sudo: false
 install: true
-script: "./gradlew check sendCoverageToCodacy"
+script: "./gradlew check checkToken sendCoverageToCodacy"
 jdk:
 - oraclejdk8
 env:
