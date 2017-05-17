@@ -1,8 +1,8 @@
 language: java
-sudo: required
+sudo: false
 install: true
 script: "./gradlew check jacocoTestReport"
-after_success: curl -s https://codecov.io/bash | bash -t ${CODECOV_TOKEN}
+after_success: bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}"
 jdk:
 - oraclejdk8
 env:
