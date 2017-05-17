@@ -1,10 +1,9 @@
 language: java
-
 sudo: false
-
 install: true
-
-script: ./gradlew check
-
+script: "./gradlew check sendCoverageToCodacy"
 jdk:
-  - oraclejdk8
+- oraclejdk8
+env:
+  matrix:
+    secure: fYPSYGrFtQ4+DPWQUnjNPNOx8qFmggKqADy88ngxb3AWzHbzWE/PJZBfBwuvXkIo8lJJ8xUR36/2vomLJZpV98RzHioyf5b+agsKfF2FarpUifbgz4gKHnLILRPWQ4DN9DsFIprgiGJ9/rM6p+ukXQD5xxn66hQ/nV0/dthG2rAUj07lvVO5FLxJrPwvr1kbGNzfRRYtqctGEKihK+QRh8xJtVHB49nO9ob3Fc3fTeTGRJkXLB9wrB8Zzd8WlRpUxF2iOI8WMgKG+XitjnlchDgL5oczTmIOic1L00ofRaGR8CenJmYJTiLNLBQyJvatGPhVBiHf/0WNnIBjftk156TgHR1IXr6wd5YsqyYzOaqzqOF9dZjclGYunMEVdvUOzgGwNqRgce4e8KA5JA9VPlOfUTs50Bpe9KnZdeAZUarcvrwSRIPdrGNZGTWTQ3iCk36IUnjBqi8291zEj2CAQ6+FBtxHfv1JkpCDQLf7X0p4Z2YwU5Exk7MRBSYwKtc0yZFohtgkY7wxvSGYYb/wltdNguidck0IZKx8lI9yPZZZdUW9YxPVeX2uSo8IWUYqSuhigUrA3a40wpjoVPMfAKZNtI0wia5BQDfi3vZxFITG0qppVqHUEj359otJfeS0jl/SjWoIxqpinBdlQbN0FKpDf0Ki7pCgLRZ22r9Yo+U=
