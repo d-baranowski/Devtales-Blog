@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.0.0.M1'
+        codacyToken = "${System.getenv('CODACY_PROJECT_TOKEN')}"
     }
     repositories {
         mavenCentral()
@@ -16,20 +17,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-
 apply plugin: 'jacoco'
-
-jacocoTestReport {
-    group = "reporting"
-    description = "Generate Jacoco coverage reports after running tests."
-
-    reports {
-        xml.enabled true
-        csv.enabled true
-        html.destination "${buildDir}/jacocoHtml"
-    }
-}
-
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -53,5 +41,42 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.26'
+}
 
+
+jacocoTestReport {
+    group = "reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+
+    reports {
+        xml.enabled true
+        csv.enabled true
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+configurations { codacy }
+repositories {
+    maven { url "https://jitpack.io" }
+    maven { url "http://dl.bintray.com/typesafe/maven-releases" }
+}
+dependencies {
+    codacy 'com.github.codacy:codacy-coverage-reporter:-SNAPSHOT'
+}
+task sendCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
+    main = "com.codacy.CodacyCoverageReporter"
+    classpath = configurations.codacy
+    args = [
+            "-l",
+            "Java",
+            "-r",
+            "${buildDir}/reports/jacoco/test/jacocoTestReport.xml",
+            "--projectToken",
+            "${codacyToken}",
+            "--debug"
+    ]
+}
+
+task checkToken {
+    print "${codacyToken}"
 }
