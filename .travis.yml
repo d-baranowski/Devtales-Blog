@@ -7,4 +7,4 @@ install: true
 script: gradle check
 
 jdk:
-- openjdk8
+  - oraclejdk8
