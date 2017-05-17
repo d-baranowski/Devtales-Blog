@@ -1,17 +1,9 @@
 language: java
-<<<<<<< HEAD
-install: true
-script: "./gradlew check jacocoTestReport"
-after_success: bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -cF "java"
-script: ./gradlew check
-sudo: required
-=======
 sudo: false
->>>>>>> 90df592... Removed sudo. Added debug for cehcking codacy token.
 install: true
 script: "./gradlew check sendCoverageToCodacy"
 jdk:
 - oraclejdk8
 env:
   matrix:
-    secure: vqRfkDecLDmOKcYMge3t+SIzrYF0KG9iwafW8OQsaggfvncwKMWJnd3cclxcJX4Zm8PDWgPyMTtehk5w5AxxGRILU+w4PvlGKUuLQ9gTyz5aZOFvVbocHAoGBlbcGk08ryZRpv5hGAmdP4ulySYuqDdBWFoUdt8fRbdbQWM4NVWEVog2emg2gjCAMX8YIzLvN2Db/Fn9CjpqgDlk2JDcslGz+iYV68Xkxfq8Ped+E1GBjl3P0haRZ/V081Z9QCC+ooWwROEQNu+zCdAYpK6ha/5viDinya5iUCxDsvZrD+ttlfyEyLito7n7n8vll7Eb1G1S6LdPUgYyVvg7TUGXP2dqP1yjNfc8yjW2nA/IvGDODWm4XIUShi1eyUm2HOrRLdTEAgp9gBkgo28arEaTel/s6XLgeSVLKGG8feSbzxIWy+5KAzE58caF6aXf8kkQ/6ZKkAGA+3s6k6Qf8diQRKTbGPQF5b0eVbs8IG4cymSRGvJ/jnRif7uMOAHSggaa+MZYF16OtopqdZjOQhhcMOefo8Fm/R4E9BL/oobsD4e6xLtrO6EB+g74+u/lF0I+83g8Hq4DZKDRlXl9UZrcMSRoHS351R+4nYiB24UxX2RjV7w0kcE0epDDiuDpAoaKFkntznfHMDV84jr0y8nn0Cwh59lFM0eJG+vtCo07HYE=
+    secure: fYPSYGrFtQ4+DPWQUnjNPNOx8qFmggKqADy88ngxb3AWzHbzWE/PJZBfBwuvXkIo8lJJ8xUR36/2vomLJZpV98RzHioyf5b+agsKfF2FarpUifbgz4gKHnLILRPWQ4DN9DsFIprgiGJ9/rM6p+ukXQD5xxn66hQ/nV0/dthG2rAUj07lvVO5FLxJrPwvr1kbGNzfRRYtqctGEKihK+QRh8xJtVHB49nO9ob3Fc3fTeTGRJkXLB9wrB8Zzd8WlRpUxF2iOI8WMgKG+XitjnlchDgL5oczTmIOic1L00ofRaGR8CenJmYJTiLNLBQyJvatGPhVBiHf/0WNnIBjftk156TgHR1IXr6wd5YsqyYzOaqzqOF9dZjclGYunMEVdvUOzgGwNqRgce4e8KA5JA9VPlOfUTs50Bpe9KnZdeAZUarcvrwSRIPdrGNZGTWTQ3iCk36IUnjBqi8291zEj2CAQ6+FBtxHfv1JkpCDQLf7X0p4Z2YwU5Exk7MRBSYwKtc0yZFohtgkY7wxvSGYYb/wltdNguidck0IZKx8lI9yPZZZdUW9YxPVeX2uSo8IWUYqSuhigUrA3a40wpjoVPMfAKZNtI0wia5BQDfi3vZxFITG0qppVqHUEj359otJfeS0jl/SjWoIxqpinBdlQbN0FKpDf0Ki7pCgLRZ22r9Yo+U=
