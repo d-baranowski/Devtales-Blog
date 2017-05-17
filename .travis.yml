@@ -1,10 +1,6 @@
 language: java
-
 sudo: false
-
 install: true
-
-script: ./gradlew check
-
+script: "./gradlew check"
 jdk:
-  - oraclejdk8
+- oraclejdk8
