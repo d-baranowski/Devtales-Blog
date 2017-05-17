@@ -4,7 +4,11 @@ install: true
 script: "./gradlew check jacocoTestReport"
 after_success: bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -cF "java"
 jdk:
+<<<<<<< HEAD
 - oraclejdk8
 env:
   matrix:
     secure: q5oErtybyehDwdUUKkF4bIGLl+gQxHBMuXhrPSOK0TKy4VIelgMk9lTPKBmXCiuANLrkb+9SxrshmMbmFmwUDpbtkC02sOwGog+VIlWtXPS9riWgxYpdom61ze5mMm5RXtBbQc54p/LSSMM+usXaeJa21cpI7ziGf0G2JPNyYSUIwv+TqGitjLRygqCItTWM/QxG3zvldPx7aK8tZxz9hJdFc+bQypKl9QbepxtjX+mivX9ykZ6B8+MayzTtYT/xwM3xMCRCtcC4Qfk8hslLYZrkfGe9rgrcijvvOqJBlxgtlW2jvfMLAW8jEO4vpF2kAt1uUOt1NavAzStk3YQ4zd7kMj5Sgov/Dbqki67rwNsCFGjSVkjRpjVxlZyekhYJMedXZO+4CreAeW6m7GPSBGie1DO8pxtsIZSAKJTVx7z6elghASzwnGK6IiRimL6HKLGAukaRMaIu5wC9txHOoODnepTw3PFQj+DaZyT0VPOKUdC2ALEPM1MjihCyIRHnBFlg11UUw/DSB/MVzFlCHeu0vX5gzMvFIAxdNrStWUo4r/JGQRgyIOClBzJdcuRfrQep4XoBxx1b2G6SB6ukN5yEuDh98nImcU/X42vJrwWIv2pXFBufiFfagNHgsF1+FdmfmuYSGzREA6om5d4IK5oAZ6FLX+b2WUZm0zzNrJI=
+=======
+  - oraclejdk8
+>>>>>>> 79ed4aa... Changed jdk to oraclejdk8 openjdk8 was not known.
