@@ -1,0 +1,10 @@
+language: java
+
+sudo: false
+
+install: true
+
+script: gradle check
+
+jdk:
+- openjdk8
