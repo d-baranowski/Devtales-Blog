@@ -1,11 +1,15 @@
 language: java
+<<<<<<< HEAD
 install: true
 script: "./gradlew check jacocoTestReport"
 after_success: bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -cF "java"
 script: ./gradlew check
 sudo: required
+=======
+sudo: false
+>>>>>>> 90df592... Removed sudo. Added debug for cehcking codacy token.
 install: true
-script: "./gradlew check sendCoverageToCodacy"
+script: "./gradlew check checkToken sendCoverageToCodacy"
 jdk:
 - oraclejdk8
 env:
