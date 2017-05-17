@@ -50,8 +50,13 @@ jacocoTestReport {
     description = "Generate Jacoco coverage reports after running tests."
 
     reports {
-        xml.enabled true
-        csv.enabled true
-        html.destination "${buildDir}/jacocoHtml"
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        html.enabled false
+        csv.enabled false
     }
+}
+
+task deployToCodeCov(type: Exec) {
+    executable "sh"
+    args  './.codecov', '-t', "${codecov}"
 }
