@@ -1,5 +1,6 @@
 language: java
 sudo: false
+<<<<<<< HEAD
 install: true
 script: "./gradlew check jacocoTestReport"
 after_success: bash <(curl -s https://codecov.io/bash) -t "${CODECOV_TOKEN}" -cF "java"
@@ -13,3 +14,19 @@ env:
 =======
   - oraclejdk8
 >>>>>>> cb43a04... Removed the token. I'll use codacity instead
+=======
+before_install:
+- sudo apt-get install jq
+- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest
+  | jq -r .assets[0].browser_download_url)
+install: true
+script: "./gradlew check"
+jdk:
+- oraclejdk8
+after_success:
+- java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter
+  -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+env:
+  global:
+    secure: fF2Ewk/Ll1ivPXBt9iGszYAyy0MBYpyvzGUbQQc2CxsoeyOG+yRjN2XugH9peuHJALNEGJZeGfBakuTNPSiRrikVdHgOOJ7f5l4svTfpxoE+WlqeNHIZu+a0sYv3GFobs/TZbEwMDd9rhJb7gAEjkKCx3NLrzRHPPfB7KM4STUzY59cdHkb4p9s0E2vuzYmjKm1HldWgNwYJDOOTCPKkHHzPz3/bJlXuBKexUMEpKUCvMR1tXGhdYiZ8ZkJUvBU9Lnr1uTlBIxpZrkCLyQk7BsxLkV7VglakETyKHq6od2SGJeHCMoULSV67dlDWVqp7u7Z4KAcbz+BXBrDx6I5I3OduoEWZ7w/FLa+E30vKE1mWQ4ljXqhY/MAhW30oZIyjjc3OS6dLtU82ofANMZ8FG0d0tRRJvbLJb3rHt/Nux9gJVWVRqaM3BGtRce65avFJktKJLhM86iPk5qkE7e46AukN2CS/D7sovlWtK9ZXa9LnlGTdRqEXglKDNEt57KQdWnF+6m4joiKvs4yiT4iS2ShtHvUwG//LJopE5tgOdf28Bfz9y9ZB++954lggyHWDSW/a336pwqOp+zYF5zaSJuc747w6r1BeCB5mQ7mrWOkmjiuVmi+lF4oST6ohWjMRsF+mCnhlDV9pPRSKd+Yq24GnyAcH20f2reLlZfF2MT0=
+>>>>>>> 8ff2d1c... Enabling code coverage reports with codacy.
