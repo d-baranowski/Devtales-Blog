@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e +o pipefail
+
 
 VERSION="8fda091"
 
