@@ -26,6 +26,9 @@ node_modules
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 bundle.js
+server-bundle.js
+src/main/resources/static/css/
+
 
 ### STS ###
 .apt_generated
@@ -48,3 +51,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
