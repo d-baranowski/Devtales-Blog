@@ -1,0 +1,80 @@
+@font-face {
+  font-family: CircuitBoredNF;
+  src: url(./fonts/CircuitBoredNF.ttf);
+}
+
+$highlight-color: #00D455;
+
+#logo {
+  height: 250px;
+  position: fixed;
+  top: 10px;
+  left: 20%;
+  z-index: 1;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5ef;
+}
+
+nav {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  position: fixed;
+  top: 187px;
+  left: 30%;
+  right: 20%;
+  z-index: 0;
+  background-color: #444;
+
+  a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: .3s background-color;
+
+    &:hover {
+      background-color: $highlight-color;
+    }
+
+    &.active {
+      background-color: #fff;
+      color: #444;
+      cursor: default;
+    }
+  }
+
+  ul {
+    float: right;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+
+    li {
+      width: 120px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 1.4em;
+      display: inline-block;
+      margin-left: -6px;
+    }
+  }
+
+  .title {
+    float: left;
+    margin-left: 110px;
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    font-variant: small-caps;
+    color: $highlight-color;
+    letter-spacing: 1pt;
+    word-spacing: 2pt;
+    font-size: 2.3em;
+    text-align: left;
+    font-family: CircuitBoredNF;
+  }
+}
