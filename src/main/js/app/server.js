@@ -1,24 +1,41 @@
-import "babel-polyfill";
+import PageNavigation from "./components/PageNavigation";
+import Hello from "./hello";
+
 import React from "react";
 import {renderToString} from "react-dom/server";
-import PageNavigation from "./components/PageNavigation";
-import createMemoryHistory from 'history/createMemoryHistory';
-import {Router, Route} from "react-router-dom";
 
-const history = createMemoryHistory();
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import {routerMiddleware, routerReducer} from "react-router-redux";
+import {Router, Route} from "react-router-dom";
+import createMemoryHistory from "history/createMemoryHistory";
 
 const ServerSideRender = function() {
-    let html;
-    html = renderToString(
-        <Router history={history}>
-            <PageNavigation/>
-        </Router>
+    const history = createMemoryHistory();
+
+    const store = createStore(
+        combineReducers({
+            router: routerReducer
+        }),
+        applyMiddleware(routerMiddleware(history))
     );
 
-    return html;
+    return renderToString(
+        <Provider store={store}>
+            <Router history={history}>
+                <div>
+                    <Route exact path="/" component={Hello}/>
+                    <Route path="/blog" component={Hello}/>
+                    <Route path="/about" component={Hello}/>
+                    <Route path="/projects" component={Hello}/>
+                    <PageNavigation/>
+                </div>
+            </Router>
+        </Provider>
+    );
 };
 
-export default ServerSideRender;
+export default ServerSideRender; //This is actually used by React.java class
 
 
 

@@ -12,8 +12,6 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {routerMiddleware, routerReducer} from "react-router-redux";
 import PageNavigation from "./components/PageNavigation";
 
-
-
 const history = createHistory();
 
 const store = createStore(
