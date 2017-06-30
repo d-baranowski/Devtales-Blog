@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.0.M1'
+        springBootVersion = '1.5.4.RELEASE'
         codecov = "${System.getenv('CODECOV_TOKEN')}"
 <<<<<<< HEAD
         codacyToken = "${System.getenv('CODACY_PROJECT_TOKEN')}"
@@ -43,15 +43,22 @@ dependencies {
     //compile 'org.liquibase:liquibase-core'
     //compile 'org.springframework.boot:spring-boot-starter-security'
     //compile 'org.springframework.session:spring-session'
-    compile 'org.jtwig:jtwig-spring-boot-starter:5.85.3.RELEASE'
+    // compile 'org.springframework.boot:spring-boot-starter-websocket'
+
+    compile 'org.springframework.boot:spring-boot-starter-freemarker'
     compile 'org.springframework.boot:spring-boot-starter-web'
-    //compile 'org.springframework.boot:spring-boot-starter-websocket'
-    runtime 'org.springframework.boot:spring-boot-devtools'
+
+    compile("org.springframework.boot:spring-boot-devtools")
+
     compileOnly 'org.projectlombok:lombok'
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.26'
 }
 
+bootRun {
+    addResources = true
+}
 
 jacocoTestReport {
     group = "reporting"
