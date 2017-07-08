@@ -47,6 +47,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
     compile 'org.springframework.boot:spring-boot-starter-web'
 
+    // Use MySQL Connector-J
+    compile 'mysql:mysql-connector-java'
+
     compile("org.springframework.boot:spring-boot-devtools")
 
     compileOnly 'org.projectlombok:lombok'
