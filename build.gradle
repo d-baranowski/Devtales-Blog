@@ -15,7 +15,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath ("com.moowork.gradle:gradle-node-plugin:1.1.1")
+        classpath("com.moowork.gradle:gradle-node-plugin:1.1.1")
     }
 }
 
@@ -37,6 +37,7 @@ repositories {
 }
 
 dependencies {
+    //Possibly useful
     //compile 'org.springframework.boot:spring-boot-starter-actuator'
     //compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     //compile 'org.liquibase:liquibase-core'
@@ -44,22 +45,33 @@ dependencies {
     //compile 'org.springframework.session:spring-session'
     // compile 'org.springframework.boot:spring-boot-starter-websocket'
 
-    compile 'org.springframework.boot:spring-boot-starter-freemarker'
+    //Base
     compile 'org.springframework.boot:spring-boot-starter-web'
 
-    // Use MySQL Connector-J
-    compile 'mysql:mysql-connector-java'
+    //Reflections
+    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.8.3'
 
-    compile("org.springframework.boot:spring-boot-devtools")
+    //Tamplating Engine
+    compile 'org.springframework.boot:spring-boot-starter-freemarker'
 
+    //Database
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+    //Devtools
+    compile 'org.springframework.boot:spring-boot-devtools'
+
+    //Scaffolding
     compileOnly 'org.projectlombok:lombok'
 
+    //Testing
+    testCompile 'nl.jqno.equalsverifier:equalsverifier:2.0.2'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.26'
 }
 
 bootRun {
-    addResources = true
+    addResources = true //TODO Disable when release
 }
 
 jacocoTestReport {
@@ -82,21 +94,15 @@ task jsInstall(type: NpmTask) {
 
 task jsBuild(type: NpmTask) {
     workingDir file("$projectDir/src/main/js")
-    args = ['run','build']
+    args = ['run', 'build']
 }
-
-jsBuild.dependsOn(jsInstall)
-build.dependsOn(jsBuild)
-bootRepackage.dependsOn(jsBuild)
 
 task deployToCodeCov(type: Exec, dependsOn: 'jacocoTestReport') {
     executable "sh"
-    args  './.codecov', '-t', "${codecov}"
+    args './.codecov', '-t', "${codecov}"
 }
 
 task checkToken {
     print "${System.getenv('CODECOV_TOKEN')}"
 }
-
-bootRun.dependsOn(build)
 
