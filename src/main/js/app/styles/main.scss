@@ -1,10 +1,11 @@
 $highlight-color: #00D455;
+$shirt-yellow: #FFCC00;
 
 #logo {
   height: 250px;
   position: fixed;
   top: 10px;
-  left: 20%;
+  left: 10%;
   z-index: 1;
 }
 
@@ -18,11 +19,15 @@ nav {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
   position: fixed;
-  top: 187px;
-  left: 30%;
-  right: 20%;
+  top: 170px;
+  left: 20%;
+  right: 10%;
   z-index: 0;
   background-color: #444;
+
+  #title {
+    margin-left: 5%;
+  }
 
   a {
     text-decoration: none;
@@ -46,7 +51,7 @@ nav {
     list-style: none;
     text-align: center;
     padding: 0;
-    margin: 0;
+    margin: 0px 0px 0px 0px;
 
     li {
       width: 120px;
@@ -54,7 +59,13 @@ nav {
       line-height: 50px;
       font-size: 1.4em;
       display: inline-block;
-      margin-left: -6px;
     }
+  }
+
+  #searchBar {
+    position: absolute;
+    top: 130px;
+    width: 100%;
+    background-color: $shirt-yellow;
   }
 }
