@@ -2,11 +2,11 @@ package net.devtales.blog.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.devtales.blog.data.annotation.CollumnName;
+import net.devtales.blog.data.annotation.Column;
 import net.devtales.blog.data.annotation.TableName;
 
-@TableName("T_Tag")
+@TableName()
 public class Tag extends BaseDataModel {
-    @CollumnName("val") @Getter @Setter
+    @Column(name = "val", type = "VARCHAR(5)") @Getter @Setter
     private String value;
 }

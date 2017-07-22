@@ -1,6 +1,6 @@
 package net.devtales.blog.data.util;
 
-import net.devtales.blog.data.annotation.CollumnName;
+import net.devtales.blog.data.annotation.Column;
 import net.devtales.blog.data.model.Article;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,12 +16,12 @@ public class ReflectionsRowMapper<T> implements RowMapper<T> {
         T result = (T) new Object();
 
         for (Field field : Article.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(CollumnName.class)) {
+            if (field.isAnnotationPresent(Column.class)) {
                 try {
                     BeanUtils.setProperty(result,
                             field.getName(),
                             field.getType().cast(rs.getObject(
-                                    field.getDeclaredAnnotation(CollumnName.class).value()
+                                    field.getDeclaredAnnotation(Column.class).name()
                             )));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
