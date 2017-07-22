@@ -2,7 +2,7 @@ package net.devtales.blog.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.devtales.blog.data.annotation.CollumnName;
+import net.devtales.blog.data.annotation.Column;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class BaseDataModel {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @CollumnName("_id") @Getter @Setter
+    @Column(name = "_id", type = "INT(11) NOT NULL AUTO_INCREMENT", primary = true) @Getter @Setter
     int id;
 
     public String getColumnNames()
@@ -26,14 +26,14 @@ public class BaseDataModel {
         Field[] fields = this.getClass().getFields();
         for (int i = 0; i < fields.length; i++)
         {
-            if (fields[i].isAnnotationPresent(CollumnName.class))
+            if (fields[i].isAnnotationPresent(Column.class))
             {
                 if (prefix != null)
                 {
                     result.append(prefix);
                     result.append(".");
                 }
-                result.append(fields[i].getAnnotation(CollumnName.class).value());
+                result.append(fields[i].getAnnotation(Column.class).name());
                 if (i == fields.length - 1)
                 {
                     result.append(", ");
@@ -55,8 +55,8 @@ public class BaseDataModel {
             try {
                 Field field = this.getClass().getField(fieldName);
 
-                if (field.isAnnotationPresent(CollumnName.class)) {
-                    result.append(field.getAnnotation(CollumnName.class).value());
+                if (field.isAnnotationPresent(Column.class)) {
+                    result.append(field.getAnnotation(Column.class).name());
                     result.append(" = ?");
                     if (i == fieldNames.length - 1 && fieldNames.length > 1) {
                         result.append(" AND ");

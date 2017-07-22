@@ -6,6 +6,8 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface CollumnName {
-    String value();
+public @interface Column {
+    String name();
+    String type();
+    boolean primary() default false;
 }
