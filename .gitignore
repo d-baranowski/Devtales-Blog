@@ -26,7 +26,9 @@ node_modules
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 bundle.js
+bundle.js.map
 server-bundle.js
+server-bundle.js.map
 src/main/resources/static/css/
 
 
