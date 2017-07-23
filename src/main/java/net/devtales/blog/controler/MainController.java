@@ -3,6 +3,7 @@ package net.devtales.blog.controler;
 import net.devtales.blog.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
@@ -17,8 +18,14 @@ public class MainController {
         this.react = new React();
     }
 
-    @RequestMapping("/*")
+    @RequestMapping("/")
     public String index(final Map<String, Object> model) throws Exception {
+        model.put("content", react.render());
+        return "index";
+    }
+
+    @RequestMapping("/article/{slug}")
+    public String index(final Map<String, Object> model, @PathVariable String slug) throws Exception {
         model.put("content", react.render());
         return "index";
     }

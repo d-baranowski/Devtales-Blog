@@ -6,9 +6,9 @@ class PageNavigation extends React.Component {
     render() {
         return (
             <header>
-                <img id="logo" src="img/devtalesico.svg"/>
+                <img id="logo" src="/img/devtalesico.svg"/>
                 <nav>
-                    <img id="title" src="img/title.svg"/>
+                    <img id="title" src="/img/title.svg"/>
                     <ul>
                         <li><NavLink activeClassName="active" exact to="/">Blog</NavLink></li>
                         <li><NavLink activeClassName="active" to="/projects">Projects</NavLink></li>

@@ -6,7 +6,7 @@ $navbar-position: 140px;
 
 #logo {
   height: 250px;
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10%;
   z-index: 1;
@@ -29,9 +29,23 @@ $navbar-position: 140px;
   }
 }
 
+#article-list {
+  position: absolute;
+  top: $navbar-position + 50px + 80px;
+  left: 10%;
+  right: 10%;
+  padding: 15px;
+
+  .article-short {
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+  }
+}
 
 #searchBar {
-  position: fixed;
+  position: absolute;
   top: $navbar-position + 50px;
   left: 20%;
   right: 10%;
@@ -59,7 +73,7 @@ body {
 nav {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
-  position: fixed;
+  position: absolute;
   top: $navbar-position;
   left: 20%;
   right: 10%;
@@ -92,7 +106,7 @@ nav {
     list-style: none;
     text-align: center;
     padding: 0;
-    margin: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
 
     li {
       width: 120px;
