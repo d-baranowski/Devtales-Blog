@@ -12,7 +12,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {routerMiddleware, routerReducer} from "react-router-redux";
 
 import PageNavigation from "./components/PageNavigation";
-import Hello from "./hello";
+
 import articleReducer from "./reducers/articleReducer";
 import articleService from "./api-middleware/articleService";
 import ArticleListContainer from "./containers/articleListContainer";
@@ -33,12 +33,11 @@ function ClientSideRender() {
        <Provider store={store}>
             <Router history={history}>
                 <div>
-                    <Route exact path="/" component={Hello}/>
-                    <Route path="/blog" component={Hello}/>
-                    <Route path="/about" component={Hello}/>
-                    <Route path="/projects" component={Hello}/>
+                    <Route exact path="/" component={ArticleListContainer}/>
+                    <Route path="/blog" component={ArticleListContainer}/>
+                    <Route path="/about" component={}/>
+                    <Route path="/projects" component={}/>
                     <PageNavigation/>
-                    <ArticleListContainer />
                 </div>
             </Router>
         </Provider>,document.getElementById('mount'));

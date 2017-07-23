@@ -8,7 +8,7 @@ import {Router, Route} from "react-router-dom";
 import createMemoryHistory from "history/createMemoryHistory";
 
 import PageNavigation from "./components/PageNavigation";
-import Hello from "./hello";
+import ArticleListContainer from "./containers/articleListContainer";
 
 
 const ServerSideRender = function() {
@@ -25,10 +25,10 @@ const ServerSideRender = function() {
         <Provider store={store}>
             <Router history={history}>
                 <div>
-                    <Route exact path="/" component={Hello}/>
-                    <Route path="/blog" component={Hello}/>
-                    <Route path="/about" component={Hello}/>
-                    <Route path="/projects" component={Hello}/>
+                    <Route exact path="/" component={ArticleListContainer}/>
+                    <Route path="/blog" component={ArticleListContainer}/>
+                    <Route path="/about" component={}/>
+                    <Route path="/projects" component={}/>
                     <PageNavigation/>
 
                 </div>

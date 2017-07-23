@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
+import {NavLink} from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
@@ -17,13 +18,17 @@ const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class 
 
         let result = [];
         articles.forEach((element, index, array) => {
-            result.push(<div>
-                <h2>{element.title}</h2>
-                <div>{element.body}</div>
-            </div>);
+            result.push(
+                <div className="article-short">
+                    <NavLink exact to={'/article/' + element.slug}>
+                        <h2>{element.title}</h2>
+                        <div>{element.body}</div>
+                    </NavLink>
+                </div>
+            );
         });
 
-        return result ? <div>{result}</div> : <div>Loading</div>
+        return result ? <div id="article-list">{result}</div> : <div>Loading</div>
     }
 });
 
