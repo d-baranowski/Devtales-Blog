@@ -3,12 +3,15 @@ package net.devtales.blog.data.util;
 import net.devtales.blog.data.annotation.Column;
 import net.devtales.blog.data.model.Article;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConversionException;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static net.devtales.blog.extensions.LoggersBasket.trace;
 
 public class ReflectionsRowMapper<T> implements RowMapper<T> {
     private final Class<T> model;
@@ -43,6 +46,8 @@ public class ReflectionsRowMapper<T> implements RowMapper<T> {
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
+                } catch (ConversionException e) {
+                    trace(ReflectionsRowMapper.class, e, "Failed to convert value. Often caused by null properties");
                 }
             }
         }
