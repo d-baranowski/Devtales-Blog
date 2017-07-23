@@ -11,12 +11,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.List;
 
 import static net.devtales.blog.extensions.LoggersBasket.error;
 import static net.devtales.blog.generator.InsertGenerator.generateInsertQuery;
 import static net.devtales.blog.generator.InsertGenerator.getArguments;
 import static net.devtales.blog.generator.SelectGenerator.getColumnNames;
+import static net.devtales.blog.extensions.Slugify.slugs;
 
 @Repository
 public class ArticleDAO  implements Crud<Article> {
@@ -45,14 +47,15 @@ public class ArticleDAO  implements Crud<Article> {
     @Override
     public void create(@RequestBody @Valid Article obj) throws DataManipulationFailedException {
         try {
+            obj.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+            obj.setSlug(slugs(obj.getTitle()));
             jdbcTemplate.update(generateInsertQuery(Article.class), getArguments(obj, false));
         } catch (IllegalAccessException e) {
             error(this.getClass(),e,
                     "Failed to create Article %s due to issue with reflections.",
                     obj.toString());
+            throw new DataManipulationFailedException("Creating the Article failed.");
         }
-
-        throw new DataManipulationFailedException("Creating the Article failed.");
     }
 
     @Override
