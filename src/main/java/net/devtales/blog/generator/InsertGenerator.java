@@ -1,4 +1,4 @@
-package net.devtales.blog.unit.generator;
+package net.devtales.blog.generator;
 
 import net.devtales.blog.data.annotation.Column;
 
@@ -6,9 +6,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.devtales.blog.unit.generator.util.Utilities.getColumnFields;
-import static net.devtales.blog.unit.generator.util.Utilities.getColumns;
-import static net.devtales.blog.unit.generator.util.Utilities.getTableName;
+import static net.devtales.blog.generator.util.Utilities.getColumnFields;
+import static net.devtales.blog.generator.util.Utilities.getColumns;
+import static net.devtales.blog.generator.util.Utilities.getTableName;
 
 public abstract class InsertGenerator {
     public static String generateInsertQuery(Class model) {

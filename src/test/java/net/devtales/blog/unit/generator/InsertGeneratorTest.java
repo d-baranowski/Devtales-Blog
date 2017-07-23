@@ -1,19 +1,15 @@
 package net.devtales.blog.unit.generator;
 
 import net.devtales.blog.data.model.Article;
+import net.devtales.blog.generator.InsertGenerator;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
-
-import static net.devtales.blog.unit.generator.InsertGenerator.generateInsertQuery;
-import static net.devtales.blog.unit.generator.InsertGenerator.getArguments;
 
 public class InsertGeneratorTest {
 
     @Test
     public void canGenerateSqlForArticleTable() {
-        String actual = generateInsertQuery(Article.class);
+        String actual = InsertGenerator.generateInsertQuery(Article.class);
         String expected = "INSERT INTO T_Article(title, body) VALUES (?, ?);";
 
         Assert.assertEquals(expected, actual);
@@ -27,7 +23,7 @@ public class InsertGeneratorTest {
         article.setTitle("Siema");
         article.setBody("Heniu");
 
-        Object[] actual = getArguments(article, false);
+        Object[] actual = InsertGenerator.getArguments(article, false);
 
         Assert.assertArrayEquals(expected, actual);
     }

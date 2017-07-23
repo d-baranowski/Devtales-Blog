@@ -11,9 +11,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReflectionsRowMapper<T> implements RowMapper<T> {
+    private final Class<T> model;
+    public ReflectionsRowMapper(Class<T> model) {
+        this.model = model;
+    }
+
     @Override
     public T mapRow(ResultSet rs, int rowNum) throws SQLException {
-        T result = (T) new Object();
+        T result = null;
+        try {
+            result = model.getConstructor().newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
         for (Field field : Article.class.getDeclaredFields()) {
             if (field.isAnnotationPresent(Column.class)) {

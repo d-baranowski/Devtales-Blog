@@ -27,6 +27,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-eslint": "^4.0.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
@@ -44,7 +45,8 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^4.0.8",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "superagent": "^3.5.2"
   },
   "babel": {
     "presets": [

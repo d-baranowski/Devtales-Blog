@@ -1,4 +1,4 @@
-package net.devtales.blog.unit.generator.util;
+package net.devtales.blog.generator.util;
 
 import net.devtales.blog.data.annotation.Column;
 import net.devtales.blog.data.annotation.TableName;
@@ -7,9 +7,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Daniel on 22/07/2017.
- */
 public abstract class Utilities {
     public static String getTableName(Class model) {
         String value = ((TableName) model.getAnnotation(TableName.class)).value();

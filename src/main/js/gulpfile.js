@@ -7,6 +7,7 @@ const gulp = require("gulp"),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
     streamify = require('gulp-streamify'),
+    plumber = require('gulp-plumber'),
     sourcemaps = require("gulp-sourcemaps");
 
 
@@ -28,6 +29,7 @@ gulp.task("css", ["compile:sass"], () => {
     const postcss = require('gulp-postcss');
 
     return gulp.src(paths.resources + 'css/main.css')
+        .pipe(plumber())
         .pipe(concat(paths.resources + 'css/main.css'))
         .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest("."))
@@ -38,6 +40,7 @@ gulp.task("css", ["compile:sass"], () => {
 
 gulp.task("compile:sass", () => {
     return gulp.src('./app/styles/main.scss')
+        .pipe(plumber())
         .pipe(sass())
         .pipe(gulp.dest(paths.resources + 'css/'));
 });
@@ -48,6 +51,7 @@ gulp.task("lint", () => { //Lint is a code quality checker for java script. Lint
     const eslint = require('gulp-eslint');
 
     return gulp.src(["app\**\*.js", "!node_modules/**"])
+        .pipe(plumber())
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -74,6 +78,7 @@ const renderReact = (entryFile, outputFile, standalone) =>{
     const bundler = browserify(options);
 
     return bundler.bundle() //Grab our bundle
+        .pipe(plumber())
         .pipe(source(outputFile)) //Name of file once done
         .pipe(buffer()) //Use vinyl buffer
         .pipe(sourcemaps.init({ loadMaps: true })) //Initialise sourcemaps.
