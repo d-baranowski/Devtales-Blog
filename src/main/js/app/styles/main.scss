@@ -1,5 +1,8 @@
-$highlight-color: #00D455;
 $shirt-yellow: #FFCC00;
+$circuit-green: #00D455;
+$navbar-gray: #444444;
+
+$navbar-position: 140px;
 
 #logo {
   height: 250px;
@@ -7,6 +10,44 @@ $shirt-yellow: #FFCC00;
   top: 10px;
   left: 10%;
   z-index: 1;
+}
+
+.pretty-input {
+  display: inline-block;
+  box-sizing: content-box;
+  padding: 2px 15px;
+  border: 1px solid #b7b7b7;
+  border-radius: 20px;
+  text-overflow: clip;
+  opacity: 0.9;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  width: 35%;
+  font-size: 1.1em;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+
+#searchBar {
+  position: fixed;
+  top: $navbar-position + 50px;
+  left: 20%;
+  right: 10%;
+  padding: 5px;
+  background-color: #f8c300;
+
+  i {
+    float: right;
+    padding: 2px 5px;
+    font-size: 1.4em;
+    color: $navbar-gray;
+  }
+
+  input {
+    float: right;
+  }
 }
 
 body {
@@ -19,7 +60,7 @@ nav {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
   position: fixed;
-  top: 170px;
+  top: $navbar-position;
   left: 20%;
   right: 10%;
   z-index: 0;
@@ -36,7 +77,7 @@ nav {
     transition: .3s background-color;
 
     &:hover {
-      background-color: $highlight-color;
+      background-color: $circuit-green;
     }
 
     &.active {
@@ -60,12 +101,5 @@ nav {
       font-size: 1.4em;
       display: inline-block;
     }
-  }
-
-  #searchBar {
-    position: absolute;
-    top: 130px;
-    width: 100%;
-    background-color: $shirt-yellow;
   }
 }

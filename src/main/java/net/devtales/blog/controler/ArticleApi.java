@@ -3,13 +3,13 @@ package net.devtales.blog.controler;
 import net.devtales.blog.data.ArticleDAO;
 import net.devtales.blog.data.exceptions.DataManipulationFailedException;
 import net.devtales.blog.data.model.Article;
-import net.devtales.blog.data.model.Gowno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/article")
@@ -19,6 +19,11 @@ public class ArticleApi {
     @Autowired
     ArticleApi(ArticleDAO dao) {
         this.dao = dao;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Article> getAll() {
+        return dao.readAll();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)

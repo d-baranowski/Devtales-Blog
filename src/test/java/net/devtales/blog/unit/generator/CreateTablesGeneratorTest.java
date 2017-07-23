@@ -2,7 +2,8 @@ package net.devtales.blog.unit.generator;
 
 import net.devtales.blog.data.model.Article;
 import net.devtales.blog.data.model.Tag;
-import net.devtales.blog.unit.generator.util.ClassFinder;
+import net.devtales.blog.generator.CreateTablesGenerator;
+import net.devtales.blog.generator.util.ClassFinder;
 import org.junit.Assert;
 import org.junit.Test;
 
