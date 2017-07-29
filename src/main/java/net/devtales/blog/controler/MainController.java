@@ -2,9 +2,12 @@ package net.devtales.blog.controler;
 
 import net.devtales.blog.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
@@ -28,5 +31,10 @@ public class MainController {
     public String index(final Map<String, Object> model, @PathVariable String slug) throws Exception {
         model.put("content", react.render());
         return "index";
+    }
+
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 }

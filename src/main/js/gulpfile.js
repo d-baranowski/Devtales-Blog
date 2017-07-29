@@ -17,6 +17,7 @@ const paths = {
 
 paths.serverBundleDest = '../' + paths.resources + 'js/server-bundle.js';
 paths.clientBundleDest = '../' + paths.resources + 'js/bundle.js';
+paths.adminBundleDest = '../' + paths.resources + 'js/admin-bundle.js';
 
 
 // CSS Bundle: Gulp watch is placed on all sass files in the 'Styles' folder. If a sass file changes the "global-bundle:css" task is ran.
@@ -87,23 +88,21 @@ const renderReact = (entryFile, outputFile, standalone) =>{
         .pipe(gulp.dest('js'));
 };
 
-gulp.task('reactify', ['react-compilation-server', 'react-compilation']);
+gulp.task('reactify', ['react-compilation-server', 'react-compilation-client', 'react-compilation-admin']);
 
-//React document management component
+gulp.task('react-compilation-admin', ['lint'], () => { //Lint task is a prerequisite to this task.
+    return renderReact('./app/admin.js', paths.adminBundleDest);
+});
+
 gulp.task('react-compilation-server', ['lint'], () => { //Lint task is a prerequisite to this task.
     return renderReact('./app/server.js', paths.serverBundleDest, 'MyApp');
 });
 
-//React document management component
-gulp.task('react-compilation', ['lint'], () => { //Lint task is a prerequisite to this task.
+gulp.task('react-compilation-client', ['lint'], () => { //Lint task is a prerequisite to this task.
     return renderReact('./app/index.js', paths.clientBundleDest);
 });
 
-
-// Gulp Watch: Define our watch tasks. The watch task for "global-bundle:js" was not picking up the creating and deleting of a new js file in the 'js/global-bundles' folder.
-// A solution to this is to use the 'cwd' attribute as stated here: https://stackoverflow.com/a/34346524/5049502
 gulp.task("watch", () => {
     gulp.watch('app/styles/*.scss', ["css"]);
     gulp.watch('app/**/*.js', ["reactify"]);
 });
-//----

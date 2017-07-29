@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import {NavLink} from "react-router-dom";
 
 const mapStateToProps = (state) => {
-    return {
-        articles: state.articleReducer.articles || []
+    if (state.articleReducer) {
+        return {
+            articles: state.articleReducer.articles || []
+        }
+    } else {
+        return {
+            articles: []
+        }
     }
 };
 

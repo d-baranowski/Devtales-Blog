@@ -4,11 +4,10 @@ import {renderToString} from "react-dom/server";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import {routerMiddleware, routerReducer} from "react-router-redux";
-import {Router, Route} from "react-router-dom";
+import {Router} from "react-router-dom";
 import createMemoryHistory from "history/createMemoryHistory";
 
 import PageNavigation from "./components/PageNavigation";
-import ArticleListContainer from "./containers/articleListContainer";
 
 
 const ServerSideRender = function() {
@@ -25,12 +24,7 @@ const ServerSideRender = function() {
         <Provider store={store}>
             <Router history={history}>
                 <div>
-                    <Route exact path="/" component={ArticleListContainer}/>
-                    <Route path="/blog" component={ArticleListContainer}/>
-                    <Route path="/about" component={}/>
-                    <Route path="/projects" component={}/>
-                    <PageNavigation/>
-
+                       <PageNavigation/>
                 </div>
             </Router>
         </Provider>
