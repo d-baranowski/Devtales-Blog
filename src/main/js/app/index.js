@@ -35,8 +35,8 @@ function ClientSideRender() {
                 <div>
                     <Route exact path="/" component={ArticleListContainer}/>
                     <Route path="/blog" component={ArticleListContainer}/>
-                    <Route path="/about" component={}/>
-                    <Route path="/projects" component={}/>
+                   {/* <Route path="/about" component={}/>
+                    <Route path="/projects" component={}/>*/}
                     <PageNavigation/>
                 </div>
             </Router>

@@ -54,3 +54,4 @@ dist/
 nbdist/
 .nb-gradle/
 
+/src/main/resources/static/js/admin-bundle.js

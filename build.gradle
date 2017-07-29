@@ -41,7 +41,6 @@ dependencies {
     //compile 'org.springframework.boot:spring-boot-starter-actuator'
     //compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     //compile 'org.liquibase:liquibase-core'
-    //compile 'org.springframework.boot:spring-boot-starter-security'
     //compile 'org.springframework.session:spring-session'
     // compile 'org.springframework.boot:spring-boot-starter-websocket'
 
@@ -51,12 +50,15 @@ dependencies {
     //Reflections
     compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.8.3'
 
-    //Tamplating Engine
+    //Templating Engine
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
 
     //Database
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+    //Security
+    compile 'org.springframework.boot:spring-boot-starter-security'
 
     //Devtools
     compile 'org.springframework.boot:spring-boot-devtools'
