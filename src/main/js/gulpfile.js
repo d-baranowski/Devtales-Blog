@@ -39,6 +39,10 @@ gulp.task("css", ["compile:sass"], () => {
         .pipe(gulp.dest("."));
 });
 
+gulp.task("copy-css-from-modules", () => {
+    return gulp.src('./node_modules/draft-js/dist/Draft.css').pipe(gulp.dest(paths.resources + 'css'))
+});
+
 gulp.task("compile:sass", () => {
     return gulp.src('./app/styles/main.scss')
         .pipe(plumber())
