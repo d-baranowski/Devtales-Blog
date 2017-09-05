@@ -3,6 +3,7 @@ package net.devtales.blog.controler;
 import net.devtales.blog.data.ArticleDAO;
 import net.devtales.blog.data.exceptions.DataManipulationFailedException;
 import net.devtales.blog.data.model.Article;
+import net.devtales.blog.data.model.CreateArticleBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +34,9 @@ public class ArticleApi {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody @Valid Article article) {
-        try {
-            dao.create(article);
-        } catch (DataManipulationFailedException e) {
-            return new ResponseEntity<>( e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity create(@RequestBody CreateArticleBody article) {
+        CreateArticleBody anotherVariable = article;
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
