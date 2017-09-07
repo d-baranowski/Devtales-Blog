@@ -1,0 +1,1 @@
+I'll work for 2 hours. I'll send editor state to API when user presses CTRL+S
