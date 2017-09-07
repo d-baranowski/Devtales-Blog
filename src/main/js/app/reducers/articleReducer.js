@@ -9,7 +9,7 @@ const articleReducer = (state = [], action) => {
             } else {
                 return {
                     ...state,
-                    error: "Failed to get articles"
+                    error: "Failed to get articles."
                 }
             }
         default:

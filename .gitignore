@@ -1,6 +1,3 @@
-# Compiled class file
-*.class
-
 # Log file
 *.log
 
@@ -23,13 +20,11 @@ hs_err_pid*
 
 node_modules
 .gradle
-/build/
 !gradle/wrapper/gradle-wrapper.jar
 bundle.js
-bundle.js.map
 server-bundle.js
-server-bundle.js.map
 src/main/resources/static/css/
+**/*.js.map
 
 
 ### STS ###
@@ -50,7 +45,6 @@ src/main/resources/static/css/
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
 

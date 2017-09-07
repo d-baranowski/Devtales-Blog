@@ -1,4 +1,4 @@
-import request from 'superagent';
+import superagent from 'superagent';
 
 const articleService = store => next => action => {
     /*
@@ -7,15 +7,15 @@ const articleService = store => next => action => {
     next(action);
     switch (action.type) {
         case 'CREATE_ARTICLE':
-            request
+            superagent
                 .post('/api/article')
-                .data(action.data)
+                .send(action.data)
                 .end((err, res) => {
                     if (err) {
                         /*
                          in case there is any error, dispatch an action containing the error
                          */
-                        return next({
+                        next({
                             type: 'CREATE_ARTICLE_ERROR', //Naming convention for data service action types is “<ACTION>_<NAME>_<STATUS>”
                             err
                         })
@@ -30,7 +30,7 @@ const articleService = store => next => action => {
             /*
              In case we receive an action to send an API request, send the appropriate request
              */
-            request
+            superagent
                 .get('/api/article')
                 .end((err, res) => {
                     if (err) {

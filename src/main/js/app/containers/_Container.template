@@ -1,0 +1,18 @@
+import React, { Component }  from 'react';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return { };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return({});
+};
+
+const Example = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+    render() {
+        return <ExampleComponent />
+    }
+});
+
+export default Example;

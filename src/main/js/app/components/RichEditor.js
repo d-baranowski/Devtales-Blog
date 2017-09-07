@@ -40,7 +40,7 @@ class RichEditor extends React.Component {
         const state = this.state.editorState.getCurrentContent();
         const data  = {
             html: stateToHTML(state),
-            json: convertToRaw(state)
+            json: JSON.stringify(convertToRaw(state))
         };
         this.props.saveArticle(data)
     }
