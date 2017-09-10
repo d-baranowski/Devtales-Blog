@@ -7,19 +7,23 @@ import net.devtales.commons.data.util.ReflectionsRowMapper;
 import net.devtales.commons.generator.SelectGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import static net.devtales.blog.extensions.LoggersBasket.error;
-import static net.devtales.blog.extensions.Slugify.slugs;
 import static net.devtales.commons.generator.InsertGenerator.generateInsertQuery;
 import static net.devtales.commons.generator.InsertGenerator.getArguments;
 import static net.devtales.commons.generator.SelectGenerator.getColumnNames;
 
 @Repository
-public class ArticleDAO  implements Crud<Article> {
+public class ArticleDAO implements Crud<Article> {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -43,17 +47,29 @@ public class ArticleDAO  implements Crud<Article> {
     }
 
     @Override
-    public void create(Article obj) throws DataManipulationFailedException {
-        try {
-            obj.setCreatedOn(new Timestamp(System.currentTimeMillis()));
-            obj.setSlug(slugs(obj.getTitle()));
-            jdbcTemplate.update(generateInsertQuery(Article.class), getArguments(obj, false));
-        } catch (IllegalAccessException e) {
-            error(this.getClass(),e,
-                    "Failed to create Article %s due to issue with reflections.",
-                    obj.toString());
-            throw new DataManipulationFailedException("Creating the Article failed.");
-        }
+    public Integer create(Article obj) throws DataManipulationFailedException {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(
+                connection -> {
+                    PreparedStatement ps =
+                            connection.prepareStatement(generateInsertQuery(Article.class), new String[] {"_id"});
+
+                    try {
+                        Object[] arguments = getArguments(obj, false);
+                        for (int i = 0; i < arguments.length; i++) {
+                            ps.setObject(i + 1, arguments[i]);
+                        }
+
+                        return ps;
+                    } catch (IllegalAccessException e) {
+                        error(this.getClass(),e,
+                                "Failed to create Article %s due to issue with reflections.",
+                                obj.toString());
+                    }
+                    return null;
+                }, keyHolder);
+
+        return keyHolder.getKey().intValue();
     }
 
     @Override

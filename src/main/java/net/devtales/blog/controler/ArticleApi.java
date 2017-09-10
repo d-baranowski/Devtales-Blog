@@ -1,9 +1,9 @@
 package net.devtales.blog.controler;
 
+import net.devtales.blog.controler.model.CreateArticleBody;
 import net.devtales.blog.data.ArticleDAO;
 import net.devtales.blog.data.ValidatorPool;
 import net.devtales.blog.data.model.Article;
-import net.devtales.blog.controler.model.CreateArticleBody;
 import net.devtales.blog.data.parser.CreateArticleBodyToArticleParser;
 import net.devtales.commons.data.exceptions.DataManipulationFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid.*;
-
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +43,6 @@ public class ArticleApi {
 
         if (validationConstraints.isEmpty()) {
             result.setCreatedOn(new Timestamp(System.currentTimeMillis()));
-
             dao.create(result);
             return new ResponseEntity<>(HttpStatus.OK);
         }
