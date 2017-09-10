@@ -17,13 +17,15 @@ const articleService = store => next => action => {
                          */
                         next({
                             type: 'CREATE_ARTICLE_ERROR', //Naming convention for data service action types is “<ACTION>_<NAME>_<STATUS>”
-                            err
+                            err,
+                            data: {message: err}
                         })
                     }
 
                     next({
                         type: 'CREATE_ARTICLE_SUCCESS',
-                        id: res //Id of newly created
+                        id: res, //Id of newly created
+                        data: {message: res}
                     })
                 });
         case 'ARTICLE_GET_ALL':
@@ -39,7 +41,7 @@ const articleService = store => next => action => {
                          */
                         return next({
                             type: 'ARTICLE_GET_ALL_ERROR', //Naming convention for data service action types is “<ACTION>_<NAME>_<STATUS>”
-                            err
+                            data: {message: err}
                         })
                     }
                     const data = JSON.parse(res.text);
