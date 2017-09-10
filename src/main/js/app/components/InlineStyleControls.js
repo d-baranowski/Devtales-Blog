@@ -6,6 +6,7 @@ const INLINE_STYLES = [
     {label: 'Italic', style: 'ITALIC'},
     {label: 'Underline', style: 'UNDERLINE'},
     {label: 'Monospace', style: 'CODE'},
+    {label: 'Code Block', style: 'code-block'}
 ];
 
 const InlineStyleControls = (props) => {

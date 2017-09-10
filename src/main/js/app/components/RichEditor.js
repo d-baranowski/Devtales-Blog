@@ -1,9 +1,32 @@
 import React from "react";
-import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
-import {stateToHTML} from 'draft-js-export-html';
+import {CompositeDecorator, DefaultDraftBlockRenderMap, Editor ,EditorState, RichUtils, convertToRaw} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
+import SummaryBlock from "./EditorComponents/SummaryBlock";
 
+
+//Custom Block Types
+const blockRenderMap = {
+    'summary': {
+        element: 'section',
+        wrapper: SummaryBlock
+    }
+};
+
+function getBlockStyle(block) {
+    switch (block.getType()) {
+        case 'blockquote':
+            return 'RichEditor-blockquote';
+        case 'summary':
+            return 'summary';
+        default:
+            return null;
+    }
+}
+
+// Include 'summary' as a valid block and updated the unstyled element but
+// keep support for other draft default block types
+const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
 // Custom overrides for "code" style.
 const styleMap = {
@@ -12,22 +35,49 @@ const styleMap = {
         fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
         fontSize: 16,
         padding: 2,
-    },
+    }
 };
 
-function getBlockStyle(block) {
-    switch (block.getType()) {
-        case 'blockquote':
-            return 'RichEditor-blockquote';
-        default:
-            return null;
+const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
+function hashtagStrategy(contentBlock, callback, contentState) {
+    findWithRegex(HASHTAG_REGEX, contentBlock, callback);
+}
+
+function findWithRegex(regex, contentBlock, callback) {
+    const text = contentBlock.getText();
+    let matchArr, start;
+    while ((matchArr = regex.exec(text)) !== null) {
+        start = matchArr.index;
+        callback(start, start + matchArr[0].length);
     }
 }
+
+const HashtagSpan = (props) => {
+    return (
+        <span
+            style = {{
+                color: 'rgba(95, 184, 138, 1.0)'
+            }}
+            className="tag"
+            data-offset-key={props.offsetKey}
+        >
+            {props.children}
+          </span>
+    );
+};
+
+const compositeDecorator = new CompositeDecorator([
+    {
+        strategy: hashtagStrategy,
+        component: HashtagSpan,
+    },
+]);
+
 
 class RichEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
+        this.state = {editorState: EditorState.createEmpty(compositeDecorator)};
         this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => this.setState({editorState});
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
@@ -38,8 +88,8 @@ class RichEditor extends React.Component {
 
     _saveAction() {
         const state = this.state.editorState.getCurrentContent();
-        const data  = {
-            html: stateToHTML(state),
+        const data = {
+            html: document.getElementsByClassName('public-DraftEditor-content')[0].outerHTML,
             json: JSON.stringify(convertToRaw(state))
         };
         this.props.saveArticle(data)
@@ -100,10 +150,11 @@ class RichEditor extends React.Component {
                     editorState={editorState}
                     onToggle={this.toggleInlineStyle}
                 />
-                <button value="Save Button" onClick={this._saveAction.bind(this)} />
+                <button value="Save Button" onClick={this._saveAction.bind(this)}/>
                 <div className="middle-section">
                     <div className={className} onClick={this.focus}>
                         <Editor
+                            blockRenderMap={extendedBlockRenderMap}
                             blockStyleFn={getBlockStyle}
                             customStyleMap={styleMap}
                             editorState={editorState}

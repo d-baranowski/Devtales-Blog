@@ -66,6 +66,12 @@ dependencies {
     //Scaffolding
     compileOnly 'org.projectlombok:lombok'
 
+    //Html Parser
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
+
+    //Create readable urls
+    compile group: 'com.github.slugify', name: 'slugify', version: '2.1.9'
+
     //Testing
     testCompile 'nl.jqno.equalsverifier:equalsverifier:2.0.2'
     testCompile 'org.springframework.boot:spring-boot-starter-test'

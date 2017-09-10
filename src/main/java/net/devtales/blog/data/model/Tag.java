@@ -9,4 +9,9 @@ import net.devtales.blog.data.annotation.TableName;
 public class Tag extends BaseDataModel {
     @Column(name = "val", type = "VARCHAR(5)") @Getter @Setter
     private String value;
+
+    public Tag(String value) {
+        super();
+        this.value = value;
+    }
 }
