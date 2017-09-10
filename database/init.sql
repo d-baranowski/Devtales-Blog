@@ -3,10 +3,11 @@ CREATE TABLE T_Article (
 	PRIMARY KEY(_id),
 	title VARCHAR(30),
 	slug VARCHAR(50),
-	body VARCHAR(20480),
+	html VARCHAR(20480),
 	summary VARCHAR(1024),
 	createdOn DATETIME,
-	updatedOn DATETIME
+	updatedOn DATETIME,
+	jsonRepresentation VARCHAR(20480)
 );
 
 CREATE TABLE T_Tag (

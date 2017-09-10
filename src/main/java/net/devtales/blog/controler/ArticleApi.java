@@ -5,6 +5,7 @@ import net.devtales.blog.data.ValidatorPool;
 import net.devtales.blog.data.model.Article;
 import net.devtales.blog.controler.model.CreateArticleBody;
 import net.devtales.blog.data.parser.CreateArticleBodyToArticleParser;
+import net.devtales.commons.data.exceptions.DataManipulationFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +39,14 @@ public class ArticleApi {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody CreateArticleBody article) {
+    public ResponseEntity create(@RequestBody CreateArticleBody article) throws DataManipulationFailedException {
         Article result = CreateArticleBodyToArticleParser.getInstance().parse(article);
         Set<ConstraintViolation<Article>> validationConstraints = ValidatorPool.getValidator().validate(result);
 
         if (validationConstraints.isEmpty()) {
             result.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+
+            dao.create(result);
             return new ResponseEntity<>(HttpStatus.OK);
         }
 

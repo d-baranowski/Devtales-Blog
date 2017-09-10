@@ -1,4 +1,4 @@
-package net.devtales.blog.generator.util;
+package net.devtales.commons.generator.util;
 
 import net.devtales.blog.data.model.BaseDataModel;
 import org.slf4j.Logger;

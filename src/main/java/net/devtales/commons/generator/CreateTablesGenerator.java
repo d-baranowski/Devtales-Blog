@@ -1,16 +1,18 @@
-package net.devtales.blog.generator;
+package net.devtales.commons.generator;
 
-import net.devtales.blog.data.annotation.Column;
-import net.devtales.blog.data.annotation.LinkTable;
-import net.devtales.blog.data.annotation.TableName;
-import net.devtales.blog.generator.util.ClassFinder;
+import net.devtales.commons.data.annotation.Column;
+import net.devtales.commons.data.annotation.LinkTable;
+import net.devtales.commons.data.annotation.TableName;
+import net.devtales.commons.generator.util.ClassFinder;
 import net.devtales.blog.data.model.BaseDataModel;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
-import static net.devtales.blog.generator.util.Utilities.getColumns;
-import static net.devtales.blog.generator.util.Utilities.getTableName;
+import static net.devtales.commons.generator.util.Utilities.getColumns;
+import static net.devtales.commons.generator.util.Utilities.getTableName;
 
 public class CreateTablesGenerator {
 
@@ -76,7 +78,9 @@ public class CreateTablesGenerator {
         result.append(parentForeign);
         result.append(" INT(11),\n\t");
 
-        String childForeign = getTableName(children.getType().getComponentType()) + "_Id";
+        Type listType = ((ParameterizedType) children.getGenericType()).getActualTypeArguments()[0];
+
+        String childForeign = getTableName((Class<?>)listType) + "_Id";
         result.append(childForeign);
         result.append(" INT(11),\n\t");
 
@@ -89,7 +93,7 @@ public class CreateTablesGenerator {
         result.append("FOREIGN KEY (");
         result.append(childForeign).append(") ");
         result.append("REFERENCES ");
-        result.append(getTableName(children.getType().getComponentType()));
+        result.append(getTableName((Class<?>)listType));
         result.append("(_id)\n);");
 
         return result.toString();

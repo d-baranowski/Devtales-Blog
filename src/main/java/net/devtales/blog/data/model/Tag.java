@@ -2,8 +2,8 @@ package net.devtales.blog.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.devtales.blog.data.annotation.Column;
-import net.devtales.blog.data.annotation.TableName;
+import net.devtales.commons.data.annotation.Column;
+import net.devtales.commons.data.annotation.TableName;
 
 @TableName()
 public class Tag extends BaseDataModel {

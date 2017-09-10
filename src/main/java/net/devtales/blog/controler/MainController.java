@@ -1,9 +1,7 @@
 package net.devtales.blog.controler;
 
-import net.devtales.blog.nashorn.React;
+import net.devtales.commons.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
