@@ -1,6 +1,6 @@
-package net.devtales.blog.generator;
+package net.devtales.commons.generator;
 
-import net.devtales.blog.generator.util.ClassFinder;
+import net.devtales.commons.generator.util.ClassFinder;
 import net.devtales.blog.data.model.BaseDataModel;
 
 import java.io.FileNotFoundException;

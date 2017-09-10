@@ -1,24 +1,22 @@
 package net.devtales.blog.data;
 
-import net.devtales.blog.data.exceptions.DataManipulationFailedException;
-import net.devtales.blog.data.interfaces.Crud;
 import net.devtales.blog.data.model.Article;
-import net.devtales.blog.data.util.ReflectionsRowMapper;
-import net.devtales.blog.generator.SelectGenerator;
+import net.devtales.commons.data.exceptions.DataManipulationFailedException;
+import net.devtales.commons.data.interfaces.Crud;
+import net.devtales.commons.data.util.ReflectionsRowMapper;
+import net.devtales.commons.generator.SelectGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
 
 import static net.devtales.blog.extensions.LoggersBasket.error;
-import static net.devtales.blog.generator.InsertGenerator.generateInsertQuery;
-import static net.devtales.blog.generator.InsertGenerator.getArguments;
-import static net.devtales.blog.generator.SelectGenerator.getColumnNames;
 import static net.devtales.blog.extensions.Slugify.slugs;
+import static net.devtales.commons.generator.InsertGenerator.generateInsertQuery;
+import static net.devtales.commons.generator.InsertGenerator.getArguments;
+import static net.devtales.commons.generator.SelectGenerator.getColumnNames;
 
 @Repository
 public class ArticleDAO  implements Crud<Article> {
@@ -45,7 +43,7 @@ public class ArticleDAO  implements Crud<Article> {
     }
 
     @Override
-    public void create(@RequestBody @Valid Article obj) throws DataManipulationFailedException {
+    public void create(Article obj) throws DataManipulationFailedException {
         try {
             obj.setCreatedOn(new Timestamp(System.currentTimeMillis()));
             obj.setSlug(slugs(obj.getTitle()));

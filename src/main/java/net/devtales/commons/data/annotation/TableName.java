@@ -1,4 +1,4 @@
-package net.devtales.blog.data.annotation;
+package net.devtales.commons.data.annotation;
 
 import java.lang.annotation.*;
 

@@ -1,4 +1,4 @@
-package net.devtales.blog.data.exceptions;
+package net.devtales.commons.data.exceptions;
 
 
 public class DataManipulationFailedException extends Exception {

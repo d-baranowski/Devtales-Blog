@@ -1,4 +1,4 @@
-package net.devtales.blog.nashorn;
+package net.devtales.commons.nashorn;
 
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 

@@ -1,6 +1,6 @@
 package net.devtales.blog;
 
-import net.devtales.blog.nashorn.React;
+import net.devtales.commons.nashorn.React;
 import org.junit.Assert;
 import org.junit.Test;
 

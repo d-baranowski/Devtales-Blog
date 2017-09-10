@@ -1,6 +1,6 @@
-package net.devtales.blog.data.util;
+package net.devtales.commons.data.util;
 
-import net.devtales.blog.data.annotation.Column;
+import net.devtales.commons.data.annotation.Column;
 import net.devtales.blog.data.model.Article;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConversionException;

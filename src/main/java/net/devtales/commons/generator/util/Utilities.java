@@ -1,7 +1,7 @@
-package net.devtales.blog.generator.util;
+package net.devtales.commons.generator.util;
 
-import net.devtales.blog.data.annotation.Column;
-import net.devtales.blog.data.annotation.TableName;
+import net.devtales.commons.data.annotation.Column;
+import net.devtales.commons.data.annotation.TableName;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

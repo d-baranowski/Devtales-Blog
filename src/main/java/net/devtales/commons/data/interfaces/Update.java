@@ -1,4 +1,4 @@
-package net.devtales.blog.data.interfaces;
+package net.devtales.commons.data.interfaces;
 
 /**
  * Created by Daniel on 08/07/2017.

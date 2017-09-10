@@ -1,4 +1,4 @@
-package net.devtales.blog.data.interfaces;
+package net.devtales.commons.data.interfaces;
 
 import java.util.List;
 
