@@ -66,7 +66,7 @@ public class CreateArticleBodyToArticleParser extends ParsesInto<CreateArticleBo
             tags.add(element.text());
         });
 
-        List<Tag> convertedTags = new ArrayList<>();
+        Set<Tag> convertedTags = new HashSet<>();
         for (String t: tags) {
             convertedTags.add(new Tag(t));
         }

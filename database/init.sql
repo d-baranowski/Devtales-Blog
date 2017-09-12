@@ -13,7 +13,7 @@ CREATE TABLE T_Article (
 CREATE TABLE T_Tag (
 	_id INT(11) NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(_id),
-	val VARCHAR(5)
+	val VARCHAR(50)
 );
 
 CREATE TABLE T_Article_Tags (
