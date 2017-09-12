@@ -1,16 +1,42 @@
 package net.devtales.commons.generator;
 
+import net.devtales.blog.data.model.Article;
 import net.devtales.commons.data.annotation.Column;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.devtales.blog.extensions.LoggersBasket.error;
 import static net.devtales.commons.generator.util.Utilities.getColumnFields;
 import static net.devtales.commons.generator.util.Utilities.getColumns;
 import static net.devtales.commons.generator.util.Utilities.getTableName;
 
 public abstract class InsertGenerator {
+
+    public static PreparedStatement generateInsertPreparedStatement(Connection conn, Object obj, Class scope) throws SQLException {
+        PreparedStatement ps =
+                conn.prepareStatement(generateInsertQuery(obj.getClass()), new String[] {"_id"});
+
+        try {
+            Object[] arguments = getArguments(obj, false);
+            for (int i = 0; i < arguments.length; i++) {
+                ps.setObject(i + 1, arguments[i]);
+            }
+
+            return ps;
+        } catch (IllegalAccessException e) {
+            error(scope,e,
+                    "Failed to create Article %s due to issue with reflections.",
+                    obj.toString());
+        }
+        return null;
+    }
+
     public static String generateInsertQuery(Class model) {
         StringBuilder result = new StringBuilder();
 

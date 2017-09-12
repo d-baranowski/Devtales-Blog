@@ -9,6 +9,7 @@ import net.devtales.commons.data.annotation.TableName;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @TableName
 public class Article extends BaseDataModel {
@@ -33,7 +34,7 @@ public class Article extends BaseDataModel {
     private String jsonRepresentation;
 
     @LinkTable("Article_Tags") @Getter @Setter
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
     public static final Article EMPTY = new Article();
 }
