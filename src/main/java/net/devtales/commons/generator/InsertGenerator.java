@@ -1,10 +1,10 @@
 package net.devtales.commons.generator;
 
-import net.devtales.blog.data.model.Article;
 import net.devtales.commons.data.annotation.Column;
-import org.springframework.jdbc.support.KeyHolder;
+import net.devtales.commons.data.annotation.LinkTable;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.devtales.blog.extensions.LoggersBasket.error;
-import static net.devtales.commons.generator.util.Utilities.getColumnFields;
-import static net.devtales.commons.generator.util.Utilities.getColumns;
-import static net.devtales.commons.generator.util.Utilities.getTableName;
+import static net.devtales.commons.generator.util.Utilities.*;
 
 public abstract class InsertGenerator {
 
@@ -35,6 +33,31 @@ public abstract class InsertGenerator {
                     obj.toString());
         }
         return null;
+    }
+
+    public static String retrieveListFieldTypeName(Field f) {
+        return ((ParameterizedType)f.getGenericType()).getActualTypeArguments()[0].getTypeName();
+    }
+
+    public static String generateLinkQuery(Class parent, Field linked) throws ClassNotFoundException {
+        StringBuilder result = new StringBuilder();
+
+        result.append("INSERT INTO ");
+
+        LinkTable annotation = linked.getAnnotation(LinkTable.class);
+        result.append("T_");
+        result.append(annotation.value());
+        result.append("(");
+        result.append(getTableName(parent)).append("_Id");
+        result.append(", ");
+
+        String className = retrieveListFieldTypeName(linked);
+
+        result.append(getTableName(Class.forName(className))).append("_Id").append(")");
+        result.append(" VALUES ");
+        result.append("(?,?)");
+
+        return result.toString();
     }
 
     public static String generateInsertQuery(Class model) {

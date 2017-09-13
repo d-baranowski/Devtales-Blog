@@ -18,6 +18,14 @@ public class InsertGeneratorTest {
     }
 
     @Test
+    public void canGenerateLinkQuery() throws NoSuchFieldException, ClassNotFoundException {
+        String expected = "INSERT INTO T_Article_Tags(T_Article_Id, T_Tag_Id) VALUES (?,?)";
+        String actual = InsertGenerator.generateLinkQuery(Article.class, Article.class.getDeclaredField("tags"));
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void canGetArguments() throws IllegalAccessException {
         Object[] expected = new Object[] { "Siema", "witam-w-devtales", "Heniu", "Ziom", new Timestamp(10), new Timestamp(10), "gonwo"};
 

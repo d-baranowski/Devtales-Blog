@@ -1,8 +1,10 @@
 package net.devtales.blog.data;
 
 import net.devtales.blog.data.model.Article;
+import net.devtales.blog.data.model.Tag;
 import net.devtales.commons.data.BaseDAO;
 import net.devtales.commons.data.interfaces.Crud;
+import net.devtales.commons.data.interfaces.Link;
 import net.devtales.commons.data.util.ReflectionsRowMapper;
 import net.devtales.commons.generator.SelectGenerator;
 import org.springframework.stereotype.Repository;
