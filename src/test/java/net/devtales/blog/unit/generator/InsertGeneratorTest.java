@@ -20,7 +20,7 @@ public class InsertGeneratorTest {
     @Test
     public void canGenerateLinkQuery() throws NoSuchFieldException, ClassNotFoundException {
         String expected = "INSERT INTO T_Article_Tags(T_Article_Id, T_Tag_Id) VALUES (?,?)";
-        String actual = InsertGenerator.generateLinkQuery(Article.class, Article.class.getDeclaredField("tags"));
+        String actual = InsertGenerator.generateLinkQuery(Article.class, Article.class.getDeclaredField("tags")).get();
 
         Assert.assertEquals(expected, actual);
     }

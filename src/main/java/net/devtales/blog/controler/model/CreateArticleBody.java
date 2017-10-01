@@ -3,9 +3,13 @@ package net.devtales.blog.controler.model;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter @Setter
 public class CreateArticleBody {
-    @Getter @Setter
     private String html;
-    @Getter @Setter
     private String json;
+
+    public CreateArticleBody(String html, String json) {
+        this.html = html;
+        this.json = json;
+    }
 }

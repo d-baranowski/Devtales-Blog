@@ -1,5 +1,6 @@
 package net.devtales.blog.data.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import net.devtales.commons.data.annotation.Column;
@@ -15,6 +16,10 @@ public class Tag extends BaseDataModel {
     public Tag(String value) {
         super();
         this.value = value;
+    }
+
+    public Tag() {
+        super();
     }
 
 

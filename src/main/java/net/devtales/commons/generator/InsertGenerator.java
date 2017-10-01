@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static net.devtales.blog.extensions.LoggersBasket.error;
 import static net.devtales.commons.generator.util.Utilities.*;
@@ -35,11 +36,15 @@ public abstract class InsertGenerator {
         return null;
     }
 
-    public static String retrieveListFieldTypeName(Field f) {
-        return ((ParameterizedType)f.getGenericType()).getActualTypeArguments()[0].getTypeName();
+    public static Optional<String> retrieveListFieldTypeName(Field f) {
+        if (!(f.getGenericType() instanceof ParameterizedType)){
+            return Optional.empty();
+        }
+
+        return Optional.of(((ParameterizedType)f.getGenericType()).getActualTypeArguments()[0].getTypeName());
     }
 
-    public static String generateLinkQuery(Class parent, Field linked) throws ClassNotFoundException {
+    public static Optional<String> generateLinkQuery(Class parent, Field linked) throws ClassNotFoundException {
         StringBuilder result = new StringBuilder();
 
         result.append("INSERT INTO ");
@@ -51,13 +56,17 @@ public abstract class InsertGenerator {
         result.append(getTableName(parent)).append("_Id");
         result.append(", ");
 
-        String className = retrieveListFieldTypeName(linked);
+        Optional<String> className = retrieveListFieldTypeName(linked);
 
-        result.append(getTableName(Class.forName(className))).append("_Id").append(")");
+        if (!className.isPresent()) {
+            return Optional.empty();
+        }
+
+        result.append(getTableName(Class.forName(className.get()))).append("_Id").append(")");
         result.append(" VALUES ");
         result.append("(?,?)");
 
-        return result.toString();
+        return Optional.of(result.toString());
     }
 
     public static String generateInsertQuery(Class model) {

@@ -42,7 +42,7 @@ public class ArticleApi {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody CreateArticleBody article) throws DataManipulationFailedException {
+    public ResponseEntity create(@RequestBody CreateArticleBody article) throws DataManipulationFailedException, ClassNotFoundException {
         Article result = CreateArticleBodyToArticleParser.getInstance().parse(article);
         Set<ConstraintViolation<Article>> validationConstraints = ValidatorPool.getValidator().validate(result);
 
