@@ -5,6 +5,7 @@ import net.devtales.commons.data.BaseDAO;
 import net.devtales.commons.data.exceptions.DataManipulationFailedException;
 import net.devtales.commons.data.interfaces.Create;
 import net.devtales.commons.data.interfaces.Crud;
+import net.devtales.commons.data.interfaces.Link;
 import net.devtales.commons.data.interfaces.Read;
 import net.devtales.commons.generator.SelectGenerator;
 import org.springframework.beans.factory.annotation.Autowired;

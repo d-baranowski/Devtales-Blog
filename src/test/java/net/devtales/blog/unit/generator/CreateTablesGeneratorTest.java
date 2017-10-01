@@ -28,7 +28,7 @@ public class CreateTablesGeneratorTest {
         String expected = "CREATE TABLE T_Tag (\n" +
                 "\t_id INT(11) NOT NULL AUTO_INCREMENT,\n" +
                 "\tPRIMARY KEY(_id),\n" +
-                "\tval VARCHAR(5)\n" +
+                "\tval VARCHAR(50)\n" +
                 ");\n\n";
         Assert.assertEquals(expected, sqlGenerator.generateBaseTablesSQL());
     }

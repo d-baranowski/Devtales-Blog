@@ -14,7 +14,7 @@ import java.util.List;
 import static net.devtales.commons.generator.SelectGenerator.getColumnNames;
 
 @Repository
-public class ArticleDAO extends BaseDAO<Article> implements Crud<Article> {
+public class ArticleDAO extends BaseDAO<Article> implements Crud<Article>, Link<Article, Tag> {
     private final SelectGenerator<Article> select = new SelectGenerator<>(Article.class);
 
     @Override

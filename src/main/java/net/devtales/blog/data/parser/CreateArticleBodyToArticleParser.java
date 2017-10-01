@@ -26,6 +26,8 @@ public class CreateArticleBodyToArticleParser extends ParsesInto<CreateArticleBo
         return instance;
     }
 
+    private CreateArticleBodyToArticleParser() {}
+
     @Override
     public Article parse(CreateArticleBody input) {
         Document parsedHtml = Jsoup.parse(input.getHtml());
@@ -62,9 +64,7 @@ public class CreateArticleBodyToArticleParser extends ParsesInto<CreateArticleBo
         parsedHtml.select(".summary").forEach(element -> summaryHtml[0] += element.outerHtml() + "<br>");
         result.setSummary(summaryHtml[0]);
         Set<String> tags = new HashSet<>();
-        parsedHtml.getElementsByClass("tag").forEach(element -> {
-            tags.add(element.text());
-        });
+        parsedHtml.getElementsByClass("tag").forEach(element -> tags.add(element.text()));
 
         Set<Tag> convertedTags = new HashSet<>();
         for (String t: tags) {
