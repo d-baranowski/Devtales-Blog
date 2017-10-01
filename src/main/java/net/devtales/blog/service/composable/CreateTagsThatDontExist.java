@@ -1,4 +1,4 @@
-package net.devtales.blog.logic.composable;
+package net.devtales.blog.service.composable;
 
 import net.devtales.blog.data.TagDAO;
 import net.devtales.blog.data.model.Tag;

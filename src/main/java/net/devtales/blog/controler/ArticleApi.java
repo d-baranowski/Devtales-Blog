@@ -1,11 +1,10 @@
 package net.devtales.blog.controler;
 
 import net.devtales.blog.controler.model.CreateArticleBody;
-import net.devtales.blog.data.ArticleDAO;
 import net.devtales.blog.data.ValidatorPool;
 import net.devtales.blog.data.model.Article;
 import net.devtales.blog.data.parser.CreateArticleBodyToArticleParser;
-import net.devtales.blog.logic.ArticlesService;
+import net.devtales.blog.service.ArticlesService;
 import net.devtales.commons.data.exceptions.DataManipulationFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 import static org.springframework.http.ResponseEntity.badRequest;
