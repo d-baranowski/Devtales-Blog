@@ -13,6 +13,7 @@ const gulp = require("gulp"),
 
 const paths = {
     resources : '../resources/static/',
+    testResources: '../../test/resources/static/'
 };
 
 paths.serverBundleDest = '../' + paths.resources + 'js/server-bundle.js';

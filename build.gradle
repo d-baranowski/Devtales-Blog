@@ -57,6 +57,9 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
 
+    testCompile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
+
     //Security
     compile 'org.springframework.boot:spring-boot-starter-security'
 
@@ -78,7 +81,11 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.mockito:mockito-core:2.8.47'
     testCompile 'org.assertj:assertj-core:3.8.0'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.5.3'
+
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
+    // For downloading browser-specific drivers that browsers like Chrome and IE require
+    testCompile 'io.github.bonigarcia:webdrivermanager:1.7.2'
+    testCompile group: 'com.google.guava', name: 'guava', version: '19.0'
 }
 
 bootRun {

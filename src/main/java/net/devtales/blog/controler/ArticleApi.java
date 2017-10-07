@@ -23,8 +23,7 @@ import static org.springframework.http.ResponseEntity.status;
 public class ArticleApi {
     private final ArticlesService service;
 
-    @Autowired
-    ArticleApi(ArticlesService service) {
+    public ArticleApi(ArticlesService service) {
         this.service = service;
     }
 
