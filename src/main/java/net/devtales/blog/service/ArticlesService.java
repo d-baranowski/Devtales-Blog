@@ -1,40 +1,49 @@
 package net.devtales.blog.service;
 
-import net.devtales.blog.data.ArticleDAO;
+import com.google.common.collect.Sets;
 import net.devtales.blog.data.model.Article;
 import net.devtales.blog.data.model.Tag;
+import net.devtales.blog.data.repository.ArticleRepository;
+import net.devtales.blog.data.repository.TagRepository;
 import net.devtales.blog.service.composable.CreateTagsThatDontExist;
-import net.devtales.commons.data.exceptions.DataManipulationFailedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Entity;
 import java.sql.Timestamp;
+import java.util.HashSet;
 
 @Service
 public class ArticlesService {
-    private final ArticleDAO articleDAO;
+    private final ArticleRepository articleRepo;
+    private final TagRepository tagRepo;
     private final CreateTagsThatDontExist createTagsThatDontExist;
 
-    public ArticlesService(ArticleDAO articleDAO, CreateTagsThatDontExist createTagsThatDontExist) {
-        this.articleDAO = articleDAO;
+    public ArticlesService(ArticleRepository articleRepo,
+                           TagRepository tagRepo,
+                           CreateTagsThatDontExist createTagsThatDontExist) {
+        this.articleRepo = articleRepo;
+        this.tagRepo = tagRepo;
         this.createTagsThatDontExist = createTagsThatDontExist;
     }
 
 
     @Transactional
-    public Article createArticle(Article article) throws ClassNotFoundException, DataManipulationFailedException {
+    public Article createArticle(Article article) {
         if (article.getId() != null) {
             if (article.getId() != 0) {
                 return article;
             }
         }
+        HashSet<Tag> existingTags = Sets.newHashSet(tagRepo.findAll());
         article.setCreatedOn(new Timestamp(System.currentTimeMillis()));
-        article.setId(articleDAO.create(article));
-        createTagsThatDontExist.apply(article.getTags());
-        for (Tag t : article.getTags()) {
-            articleDAO.link(article, t);
-        }
-
-        return article;
+        existingTags.forEach(existingTag -> {
+           article.getTags().stream()
+                   .filter(tag -> tag.getValue().equals(existingTag.getValue()))
+                   .findFirst().ifPresent(tag -> {
+                       tag = existingTag;
+                    });
+                   });
+        return articleRepo.save(article);
     }
 }

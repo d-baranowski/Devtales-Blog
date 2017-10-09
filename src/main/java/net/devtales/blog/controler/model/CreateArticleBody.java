@@ -8,6 +8,8 @@ public class CreateArticleBody {
     private String html;
     private String json;
 
+    public CreateArticleBody() {}
+
     public CreateArticleBody(String html, String json) {
         this.html = html;
         this.json = json;

@@ -54,8 +54,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
 
     //Database
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
 
     testCompile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.4.RELEASE'
@@ -75,6 +75,8 @@ dependencies {
     //Create readable urls
     compile group: 'com.github.slugify', name: 'slugify', version: '2.1.9'
 
+    //Utils
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
 
     //Testing
     testCompile 'nl.jqno.equalsverifier:equalsverifier:2.0.2'
@@ -85,7 +87,6 @@ dependencies {
     testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
     // For downloading browser-specific drivers that browsers like Chrome and IE require
     testCompile 'io.github.bonigarcia:webdrivermanager:1.7.2'
-    testCompile group: 'com.google.guava', name: 'guava', version: '19.0'
 }
 
 bootRun {
