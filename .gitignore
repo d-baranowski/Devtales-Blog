@@ -48,4 +48,6 @@ nbbuild/
 nbdist/
 .nb-gradle/
 
+/out
+
 /src/main/resources/static/js/admin-bundle.js

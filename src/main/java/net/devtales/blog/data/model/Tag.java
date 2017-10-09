@@ -1,38 +1,39 @@
 package net.devtales.blog.data.model;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import net.devtales.commons.data.annotation.Column;
-import net.devtales.commons.data.annotation.TableName;
+import lombok.ToString;
 
-import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@TableName()
-public class Tag extends BaseDataModel {
-    @Column(name = "val", type = "VARCHAR(50)") @Getter @Setter
+@EqualsAndHashCode
+@ToString
+@Entity
+@Getter
+@Setter
+public class Tag {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+    @Column(nullable = false, unique = true, length = 32)
     private String value;
 
-    public Tag(String value) {
-        super();
-        this.value = value;
+    public Tag() {}
+
+    public Tag(String val) {
+        this.value = val;
     }
 
-    public Tag() {
-        super();
+    public Tag(Integer id, String val) {
+        this.id = id;
+        this.value = val;
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tag tag = (Tag) o;
-        return Objects.equals(getValue(), tag.getValue());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getValue());
-    }
 }

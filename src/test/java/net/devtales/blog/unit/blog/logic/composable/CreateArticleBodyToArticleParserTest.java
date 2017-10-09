@@ -3,7 +3,7 @@ package net.devtales.blog.unit.blog.logic.composable;
 import net.devtales.blog.controler.model.CreateArticleBody;
 import net.devtales.blog.data.model.Article;
 import net.devtales.blog.data.model.Tag;
-import net.devtales.blog.data.parser.CreateArticleBodyToArticleParser;
+import net.devtales.blog.data.parser.CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
 
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class CreateArticleBodyToArticleParserTest {
-    private CreateArticleBodyToArticleParser parser = CreateArticleBodyToArticleParser.getInstance();
+    private CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe parser = CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe.getInstance();
     private Article article = parser.parse(new CreateArticleBody(fixture("/fixtures/body1.html"), fixture("/fixtures/body1.json")));
 
     public CreateArticleBodyToArticleParserTest() throws IOException {

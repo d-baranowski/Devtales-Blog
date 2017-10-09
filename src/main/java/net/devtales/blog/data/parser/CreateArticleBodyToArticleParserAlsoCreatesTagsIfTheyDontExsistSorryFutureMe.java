@@ -16,10 +16,10 @@ import java.util.Iterator;
 import java.util.Set;
 
 @Component
-public class CreateArticleBodyToArticleParser {
+public class CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe {
     private final TagRepository tagRepository;
 
-    public CreateArticleBodyToArticleParser(TagRepository tagRepository) {
+    public CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe(TagRepository tagRepository) {
         this.tagRepository = tagRepository;
     }
 

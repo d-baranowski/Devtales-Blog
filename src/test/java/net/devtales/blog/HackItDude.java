@@ -1,6 +1,8 @@
 package net.devtales.blog;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import net.devtales.blog.data.model.Article;
+import net.devtales.blog.service.ArticlesService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,12 +12,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.Keys.ENTER;
@@ -38,6 +43,9 @@ public class HackItDude {
 
     @LocalServerPort
     private int port;
+
+    @Autowired
+    ArticlesService articlesService;
 
     @Test
     @Transactional
@@ -85,6 +93,8 @@ public class HackItDude {
         UlBtn.click();
 
         saveBtn.click();
+
+        List<Article> myVar = articlesService.getAllArticles();
         webDriver.close();
     }
 

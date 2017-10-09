@@ -1,30 +1,28 @@
 package net.devtales.blog.controler;
 
 import net.devtales.blog.controler.model.CreateArticleBody;
-import net.devtales.blog.data.ValidatorPool;
 import net.devtales.blog.data.model.Article;
-import net.devtales.blog.data.parser.CreateArticleBodyToArticleParser;
+import net.devtales.blog.data.parser.CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe;
 import net.devtales.blog.service.ArticlesService;
-import net.devtales.commons.data.exceptions.DataManipulationFailedException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.ConstraintViolation;
-import java.util.Set;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
-import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("/api/article")
 public class ArticleApi {
     private final ArticlesService service;
+    private final CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe parser;
 
-    public ArticleApi(ArticlesService service) {
+    public ArticleApi(ArticlesService service, CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe parser) {
         this.service = service;
+        this.parser = parser;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -33,20 +31,14 @@ public class ArticleApi {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Article get(@PathVariable int id) {
-        return new Article();
+    public ResponseEntity get(@PathVariable int id) {
+        return badRequest().build();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody CreateArticleBody article) throws DataManipulationFailedException, ClassNotFoundException {
-        Article result = CreateArticleBodyToArticleParser.getInstance().parse(article);
-        Set<ConstraintViolation<Article>> validationConstraints = ValidatorPool.getValidator().validate(result);
-
-        if (validationConstraints.isEmpty()) {
-            return ok(service.createArticle(result));
-        }
-
-        return status(HttpStatus.EXPECTATION_FAILED).body(validationConstraints);
+    public ResponseEntity create(@RequestBody CreateArticleBody article) {
+        Article result = parser.parse(article);
+        return ok(service.createArticle(result));
     }
 }
 
