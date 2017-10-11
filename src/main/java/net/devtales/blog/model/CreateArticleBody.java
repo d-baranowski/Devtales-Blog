@@ -1,4 +1,4 @@
-package net.devtales.blog.controler.model;
+package net.devtales.blog.model;
 
 import lombok.Getter;
 import lombok.Setter;

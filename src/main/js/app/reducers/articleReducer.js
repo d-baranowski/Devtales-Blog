@@ -12,6 +12,11 @@ const articleReducer = (state = [], action) => {
                     error: "Failed to get articles."
                 }
             }
+        case 'CREATE_ARTICLE_SUCCESS':
+            return {
+                ...state,
+                updating: action.data.body
+            };
         default:
             return state;
     }

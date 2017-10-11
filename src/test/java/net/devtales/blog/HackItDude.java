@@ -1,7 +1,9 @@
 package net.devtales.blog;
 
+import com.google.common.collect.Lists;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import net.devtales.blog.data.model.Article;
+import net.devtales.blog.model.Article;
+import net.devtales.blog.repository.ArticleRepository;
 import net.devtales.blog.service.ArticlesService;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.Keys.ENTER;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
@@ -45,11 +48,11 @@ public class HackItDude {
     private int port;
 
     @Autowired
-    ArticlesService articlesService;
+    ArticleRepository articleRepository;
 
     @Test
     @Transactional
-    public void hacItLikeThereIsNoTommorow() {
+    public void hacItLikeThereIsNoTommorow() throws InterruptedException {
         webDriver.get("http://admin:adsadsadsads@localhost:" + port + "/admin");
 
         WebElement H1Btn = find(By.xpath("//*[@id=\"content\"]/div/div[1]/div[1]"));
@@ -59,7 +62,6 @@ public class HackItDude {
         WebElement UlBtn = find(By.xpath("//*[@id=\"content\"]/div/div[1]/div[8]"));
         WebElement saveBtn = find(By.xpath("//*[@id=\"content\"]/div/button"));
 
-        //H1Btn.click();
         type("Welcome to Devtales" + ENTER + ENTER +
                 "This is the first line of the summary." + ENTER +
                 "This should be bold on the second line of summary." + ENTER +
@@ -94,7 +96,10 @@ public class HackItDude {
 
         saveBtn.click();
 
-        List<Article> myVar = articlesService.getAllArticles();
+
+        List<Article> myVar = Lists.newArrayList(articleRepository.findAll());
+
+        assertEquals(1, myVar.size());
         webDriver.close();
     }
 

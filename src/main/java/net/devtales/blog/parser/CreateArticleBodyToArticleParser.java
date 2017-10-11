@@ -1,10 +1,9 @@
-package net.devtales.blog.data.parser;
+package net.devtales.blog.parser;
 
-import net.devtales.blog.controler.model.CreateArticleBody;
-import net.devtales.blog.data.model.Article;
-import net.devtales.blog.data.model.Tag;
-import net.devtales.blog.data.parser.util.SingletonSlugify;
-import net.devtales.blog.data.repository.TagRepository;
+import net.devtales.blog.model.Article;
+import net.devtales.blog.model.CreateArticleBody;
+import net.devtales.blog.model.Tag;
+import net.devtales.blog.util.Slugify;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
@@ -16,11 +15,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 @Component
-public class CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe {
-    private final TagRepository tagRepository;
+public class CreateArticleBodyToArticleParser {
+    private final Slugify slugify;
 
-    public CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorryFutureMe(TagRepository tagRepository) {
-        this.tagRepository = tagRepository;
+    public CreateArticleBodyToArticleParser(Slugify slugify) {
+        this.slugify = slugify;
     }
 
     public Article parse(CreateArticleBody input) {
@@ -51,23 +50,17 @@ public class CreateArticleBodyToArticleParserAlsoCreatesTagsIfTheyDontExsistSorr
 
         final Set<Tag> tags = new HashSet<>();
         parsedHtml.getElementsByClass("tag").forEach(element -> {
-            Tag tag = tagRepository.findByValue(element.text());
-            if (tag != null) {
-                tags.add(tag);
-            } else {
-                tags.add(tagRepository.save(new Tag(element.text())));
-            }
+            tags.add(new Tag(element.text()));
         });
 
         final String title = parsedHtml.select("h1:first-of-type").text();
 
-        return Article.builder()
-                .title(title)
-                .slug(SingletonSlugify.getInstance().slugify(title))
-                .html(parsedHtml.html())
-                .jsonRepresentation(input.getJson())
-                .summary(summaryHtml[0])
-                .tags(tags)
-                .build();
+        return new Article()
+                .setTitle(title)
+                .setSlug(slugify.slugify(title))
+                .setHtml(parsedHtml.html())
+                .setJsonRepresentation(input.getJson())
+                .setSummary(summaryHtml[0])
+                .setTags(tags);
     }
 }
