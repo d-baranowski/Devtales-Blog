@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import RichEditor from "../components/RichEditor";
 
 const mapStateToProps = (state) => {
-    return { };
+    return {
+        article: state.articleReducer.updating
+    };
 };
 
 const saveArticleAction = (data) => {
@@ -13,17 +15,28 @@ const saveArticleAction = (data) => {
     }
 };
 
+const updateArticleAction = (id) => (data) => {
+    return {
+        type: 'UPDATE_ARTICLE',
+        id: id,
+        data
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
     return({
         saveArticle: (data) => {
             dispatch(saveArticleAction(data))
+        },
+        updateArticle: (id) => (data) => {
+            dispatch(updateArticleAction(id)(data))
         }
     });
 };
 
 const ArticleEditorContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
     render() {
-       return <RichEditor saveArticle={ this.props.saveArticle }/>
+       return <RichEditor saveArticle={ this.props.article ? this.props.updateArticle(this.props.article.id) : this.props.saveArticle }/>
     }
 });
 

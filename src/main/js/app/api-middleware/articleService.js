@@ -24,8 +24,28 @@ const articleService = store => next => action => {
 
                     next({
                         type: 'CREATE_ARTICLE_SUCCESS',
-                        id: res, //Id of newly created
-                        data: {message: res}
+                        data: res
+                    })
+                });
+        case 'UPDATE_ARTICLE':
+            superagent
+                .put('/api/article/' + action.id)
+                .send(action.data)
+                .end((err, res) => {
+                    if (err) {
+                        /*
+                         in case there is any error, dispatch an action containing the error
+                         */
+                        next({
+                            type: 'UPDATE_ARTICLE_ERROR', //Naming convention for data service action types is “<ACTION>_<NAME>_<STATUS>”
+                            err,
+                            data: {message: err}
+                        })
+                    }
+
+                    next({
+                        type: 'UPDATE_ARTICLE_SUCCESS',
+                        data: res
                     })
                 });
         case 'ARTICLE_GET_ALL':

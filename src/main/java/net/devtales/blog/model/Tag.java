@@ -1,6 +1,5 @@
-package net.devtales.blog.data.model;
+package net.devtales.blog.model;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

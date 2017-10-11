@@ -1,4 +1,6 @@
-package net.devtales.blog.extensions;
+package net.devtales.blog.util;
+
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.text.Normalizer;
@@ -6,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
+@Component
 public class Slugify {
     private static final String BUILTIN_REPLACEMENTS_FILENAME = "replacements.properties";
     private static final Properties replacements = new Properties();
@@ -16,20 +19,12 @@ public class Slugify {
     private final static Pattern PATTERN_NORMALIZE_TRIM_DASH = Pattern.compile("^-|-$");
 
     private boolean lowerCase = true;
-    private static Slugify instance;
 
-    public static String slugs(final String text) {
-        if (instance == null) {
-            instance = new Slugify();
-        }
-        return instance.slugify(text);
-    }
-
-    private Slugify() {
+    public Slugify() {
         loadReplacements(BUILTIN_REPLACEMENTS_FILENAME);
     }
 
-    private String slugify(final String text) {
+    public String slugify(final String text) {
         String input = text;
         if (isNullOrBlank(input)) {
             return EMPTY;

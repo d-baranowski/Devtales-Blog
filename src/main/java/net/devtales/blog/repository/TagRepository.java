@@ -1,6 +1,6 @@
-package net.devtales.blog.data.repository;
+package net.devtales.blog.repository;
 
-import net.devtales.blog.data.model.Tag;
+import net.devtales.blog.model.Tag;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TagRepository extends CrudRepository<Tag, Long> {

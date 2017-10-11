@@ -150,7 +150,7 @@ class RichEditor extends React.Component {
                     editorState={editorState}
                     onToggle={this.toggleInlineStyle}
                 />
-                <button value="Save Button" onClick={this._saveAction.bind(this)}/>
+                <button onClick={this._saveAction.bind(this)}>Save</button>
                 <div className="middle-section">
                     <div className={className} onClick={this.focus}>
                         <Editor
