@@ -14,27 +14,39 @@ const mapStateToProps = (state) => {
     }
 };
 
+const getAllArticlesAction = () => {
+    return {
+        type: 'ARTICLE_GET_ALL'
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
-    return({})
+    return({
+        getAllArticles: () => {dispatch(getAllArticlesAction())}
+    })
 };
 
 const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+    componentDidMount() {
+        this.props.getAllArticles();
+    }
+
     render() {
         const articles = this.props.articles;
 
         let result = [];
         articles.forEach((element, index, array) => {
             result.push(
-                <div className="article-short">
+                <div key={'article-' + index + 1} className="article-short">
                     <NavLink exact to={'/article/' + element.slug}>
                         <h2>{element.title}</h2>
-                        <div>{element.body}</div>
+                        <div dangerouslySetInnerHTML={{__html: element.summary}}/>
                     </NavLink>
                 </div>
             );
         });
 
-        return result ? <div id="article-list">{result}</div> : <div>Loading</div>
+        return result.length > 0 ? <div id="article-list">{result}</div> : <div>Loading</div>
     }
 });
 
