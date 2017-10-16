@@ -1,5 +1,6 @@
 package net.devtales.blog.controler;
 
+import net.devtales.blog.repository.UserRepository;
 import net.devtales.commons.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +30,5 @@ public class MainController {
     public String index(final Map<String, Object> model, @PathVariable String slug) throws Exception {
         model.put("content", react.render());
         return "index";
-    }
-
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "login";
     }
 }
