@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import {articleReducer, messageReducer} from "./reducers";
+import {articleReducer, messageReducer, adminReducer} from "./reducers";
 import articleService from "./api-middleware/articleService";
 import {routerMiddleware, routerReducer} from "react-router-redux";
 import {applyMiddleware, combineReducers, createStore} from "redux";
@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 
 const store = createStore(
     combineReducers({
+        adminReducer,
         articleReducer,
         messageReducer,
         router: routerReducer
