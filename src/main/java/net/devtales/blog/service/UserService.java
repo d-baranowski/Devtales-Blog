@@ -24,9 +24,9 @@ public class UserService {
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         User admin = new User();
-        Role admin_role = new Role();
-        admin_role.setName("ADMIN");
-        admin.setRoles(Sets.newHashSet(admin_role));
+        Role adminRole = new Role();
+        adminRole.setName("ADMIN");
+        admin.setRoles(Sets.newHashSet(adminRole));
         admin.setUsername("admin");
         admin.setPassword(new BCryptPasswordEncoder().encode("password"));
         userRepository.save(admin);
