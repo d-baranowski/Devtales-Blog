@@ -1,5 +1,6 @@
 package net.devtales.commons.nashorn;
 
+import jdk.nashorn.api.scripting.JSObject;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 
 import javax.script.ScriptEngineManager;
@@ -15,17 +16,18 @@ public class React {
         try {
             nashornScriptEngine.eval(resolveFile("static/js/polyfill.js"));
             nashornScriptEngine.eval(resolveFile("static/js/server-bundle.js"));
-            nashornScriptEngine.eval("function renderServer() {return JSON.stringify(MyApp['default']())}");
+            //http://redux.js.org/docs/recipes/ServerRendering.html
+            nashornScriptEngine.eval("function renderServer(isAdmin) { return MyApp['default'](isAdmin); }");
         } catch (ScriptException e) {
             throw new RuntimeException(e);
         }
         return nashornScriptEngine;
     });
 
-    public String render() {
+    public JSObject render(boolean isAdmin) {
         try {
-            Object html = engineHolder.get().invokeFunction("renderServer");
-            return String.valueOf(html);
+
+            return (JSObject) engineHolder.get().invokeFunction("renderServer", isAdmin);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }

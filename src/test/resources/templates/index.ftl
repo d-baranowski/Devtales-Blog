@@ -6,9 +6,7 @@
 </head>
 <body>
     <div id="mount">${ content }</div>
-    <#if isAdmin == true>
-        <div id="ophf4efwilur480us"></div>
-    </#if>
+
     <script type="text/javascript" src="/js/bundle.js"></script>
 </body>
 </html>

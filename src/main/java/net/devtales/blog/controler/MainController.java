@@ -1,5 +1,6 @@
 package net.devtales.blog.controler;
 
+import jdk.nashorn.api.scripting.JSObject;
 import net.devtales.commons.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,15 +23,14 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(final Map<String, Object> model, Authentication authentication) throws Exception {
-        model.put("content", react.render());
-        model.put("isAdmin", authentication != null && authentication.getAuthorities().stream()
-                .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN")));
-        return "index";
-    }
-
-    @RequestMapping("/article/{slug}")
-    public String index(final Map<String, Object> model, @PathVariable String slug) throws Exception {
-        model.put("content", react.render());
+        final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN"));
+        model.put("isAdmin", isAdmin);
+        JSObject renderResult = react.render(isAdmin);
+        String html = String.valueOf(renderResult.getMember("html"));
+        String state = String.valueOf(renderResult.getMember("state"));
+        model.put("content", html);
+        model.put("state", state);
         return "index";
     }
 }
