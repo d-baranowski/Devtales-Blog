@@ -36,7 +36,11 @@ const mapDispatchToProps = (dispatch) => {
 
 const ArticleEditorContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
     render() {
-       return <RichEditor saveArticle={ this.props.article ? this.props.updateArticle(this.props.article.id) : this.props.saveArticle }/>
+       return <RichEditor
+           loadState={this.props.article ? this.props.article.jsonRepresentation : false}
+           saveArticle={ this.props.article ?
+               this.props.updateArticle(this.props.article.id) : this.props.saveArticle }
+       />
     }
 });
 

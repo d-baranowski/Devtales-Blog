@@ -1,7 +1,7 @@
 import React from "react";
 import {renderToString} from "react-dom/server";
 
-import {adminReducer} from "./reducers";
+import {adminReducer, articleReducer} from "./reducers";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import {routerMiddleware, routerReducer} from "react-router-redux";
@@ -18,6 +18,7 @@ const ServerSideRender = function (isAdmin) {
     const store = createStore(
         combineReducers({
             adminReducer,
+            articleReducer,
             router: routerReducer
         }),
         applyMiddleware(routerMiddleware(history))
