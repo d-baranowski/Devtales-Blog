@@ -8,12 +8,12 @@
     <#if isAdmin>
         <div id="ophf4efwilur480us"></div>
     </#if>
-    <div id="mount"><div>${ content }</div></div>
+    <div id="mount">${ content }</div>
 
     <script>
         // WARNING: See the following for security issues around embedding JSON in HTML:
         // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-        window.__PRELOADED_STATE__ = ${ state }
+        window.__PRELOADED_STATE__ = ${ state };
     </script>
     <script type="text/javascript" src="/js/bundle.js"></script>
 </body>

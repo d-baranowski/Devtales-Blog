@@ -1,5 +1,5 @@
 import React from "react";
-import {CompositeDecorator, DefaultDraftBlockRenderMap, Editor ,EditorState, RichUtils, convertToRaw} from 'draft-js';
+import {CompositeDecorator, DefaultDraftBlockRenderMap, Editor ,EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
 import SummaryBlock from "./EditorComponents/SummaryBlock";
@@ -77,7 +77,9 @@ const compositeDecorator = new CompositeDecorator([
 class RichEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty(compositeDecorator)};
+        this.state = {editorState: props.loadState ?
+            EditorState.createWithContent(convertFromRaw(JSON.parse(props.loadState))) :
+            EditorState.createEmpty(compositeDecorator)};
         this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => this.setState({editorState});
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);

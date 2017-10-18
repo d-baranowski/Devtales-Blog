@@ -8,6 +8,13 @@
 </head>
 <body>
     <div id="content"></div>
+    <#if state??>
+    <script>
+        // WARNING: See the following for security issues around embedding JSON in HTML:
+        // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
+        window.__PRELOADED_STATE__ = ${ state };
+    </script>
+    </#if>
     <script type="text/javascript" src="/js/admin-bundle.js"></script>
 </body>
 </html>
