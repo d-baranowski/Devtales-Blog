@@ -4,12 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -28,6 +23,7 @@ public class Article {
     @Size(max = 30, message = "Title can't be longer than 30 characters.")
     private String title;
     @Size(max = 50, message = "Title can't be longer than 50 characters.")
+    @Column(nullable = false, unique = true, length = 50)
     private String slug;
     @Size(max = 20480, message = "Html can't be longer than 20480 characters.")
     private String html;

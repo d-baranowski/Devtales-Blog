@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArticlesService {
@@ -30,6 +31,10 @@ public class ArticlesService {
         article.setTags(createNotExistingTags.apply(article.getTags()));
 
         return articleRepo.save(article);
+    }
+
+    public Optional<Article> readBySlug(String slug) {
+        return Optional.ofNullable(articleRepo.findArticleBySlug(slug));
     }
 
     @Transactional

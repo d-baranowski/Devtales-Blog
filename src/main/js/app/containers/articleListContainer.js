@@ -2,6 +2,7 @@ import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 import {NavLink} from "react-router-dom";
 
+
 const mapStateToProps = (state) => {
     return {
         articles: state.articleReducer.articles || [],
@@ -31,16 +32,17 @@ const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class 
         const isAdmin = this.props.isAdmin;
 
         let result = [];
-        articles.forEach((element, index, array) => {
+        Object.keys(articles).forEach((element, index, array) => {
+            const article = articles[element];
             result.push(
                 <div key={'article-' + index + 1} className="article-short">
-                    <NavLink exact to={'/article/' + element.slug}>
-                        <h2>{element.title}</h2>
-                        <div dangerouslySetInnerHTML={{__html: element.summary}}/>
+                    <NavLink exact to={'/article/' + article.slug}>
+                        <h2>{article.title}</h2>
+                        <div dangerouslySetInnerHTML={{__html: article.summary}}/>
                     </NavLink>
                         {(() => {
                             if (isAdmin) {
-                                return (<a href={'/admin/' + element.id}>Edit</a>);
+                                return (<a href={'/admin/' + article.id}>Edit</a>);
                             }
                         })()}
                 </div>

@@ -1,19 +1,15 @@
 package net.devtales.blog.controler;
 
-import net.devtales.blog.model.CreateArticleBody;
 import net.devtales.blog.model.Article;
+import net.devtales.blog.model.CreateArticleBody;
 import net.devtales.blog.parser.CreateArticleBodyToArticleParser;
 import net.devtales.blog.service.ArticlesService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -28,8 +24,8 @@ public class ArticleApi {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Article>> getAll() {
-        return ok(service.readAll());
+    public ResponseEntity<Map<String,Article>> getAll() {
+        return ok(service.readAll().stream().collect(Collectors.toMap(Article::getSlug, article -> article)));
     }
 
     //This isn't used yet I think.
