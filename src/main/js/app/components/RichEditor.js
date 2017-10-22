@@ -1,85 +1,13 @@
 import React from "react";
-import {CompositeDecorator, DefaultDraftBlockRenderMap, Editor ,EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
+import {RichUtils, convertToRaw} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
-import SummaryBlock from "./EditorComponents/SummaryBlock";
-
-
-//Custom Block Types
-const blockRenderMap = {
-    'summary': {
-        element: 'section',
-        wrapper: SummaryBlock
-    }
-};
-
-function getBlockStyle(block) {
-    switch (block.getType()) {
-        case 'blockquote':
-            return 'RichEditor-blockquote';
-        case 'summary':
-            return 'summary';
-        default:
-            return null;
-    }
-}
-
-// Include 'summary' as a valid block and updated the unstyled element but
-// keep support for other draft default block types
-const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
-
-// Custom overrides for "code" style.
-const styleMap = {
-    CODE: {
-        backgroundColor: 'rgba(0, 0, 0, 0.05)',
-        fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-        fontSize: 16,
-        padding: 2,
-    }
-};
-
-const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
-function hashtagStrategy(contentBlock, callback, contentState) {
-    findWithRegex(HASHTAG_REGEX, contentBlock, callback);
-}
-
-function findWithRegex(regex, contentBlock, callback) {
-    const text = contentBlock.getText();
-    let matchArr, start;
-    while ((matchArr = regex.exec(text)) !== null) {
-        start = matchArr.index;
-        callback(start, start + matchArr[0].length);
-    }
-}
-
-const HashtagSpan = (props) => {
-    return (
-        <span
-            style = {{
-                color: 'rgba(95, 184, 138, 1.0)'
-            }}
-            className="tag"
-            data-offset-key={props.offsetKey}
-        >
-            {props.children}
-          </span>
-    );
-};
-
-const compositeDecorator = new CompositeDecorator([
-    {
-        strategy: hashtagStrategy,
-        component: HashtagSpan,
-    },
-]);
-
+import MyEditor, {generateState} from "./MyEditor"
 
 class RichEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {editorState: props.loadState ?
-            EditorState.createWithContent(convertFromRaw(JSON.parse(props.loadState))) :
-            EditorState.createEmpty(compositeDecorator)};
+        this.state = {editorState: generateState(props.loadState)};
         this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => this.setState({editorState});
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
@@ -131,7 +59,7 @@ class RichEditor extends React.Component {
     }
 
     render() {
-        const {editorState} = this.state;
+        const editorState = this.state.editorState;
 
         // If the user changes block type before entering any text, we can
         // either style the placeholder or hide it. Let's just hide it now.
@@ -155,16 +83,12 @@ class RichEditor extends React.Component {
                 <button onClick={this._saveAction.bind(this)}>Save</button>
                 <div className="middle-section">
                     <div className={className} onClick={this.focus}>
-                        <Editor
-                            blockRenderMap={extendedBlockRenderMap}
-                            blockStyleFn={getBlockStyle}
-                            customStyleMap={styleMap}
+                        <MyEditor
                             editorState={editorState}
                             handleKeyCommand={this.handleKeyCommand}
                             onChange={this.onChange}
                             onTab={this.onTab}
                             placeholder="Write here..."
-                            ref="editor"
                             spellCheck={true}
                         />
                     </div>

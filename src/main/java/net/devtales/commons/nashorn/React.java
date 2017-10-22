@@ -17,17 +17,16 @@ public class React {
             nashornScriptEngine.eval(resolveFile("static/js/polyfill.js"));
             nashornScriptEngine.eval(resolveFile("static/js/server-bundle.js"));
             //http://redux.js.org/docs/recipes/ServerRendering.html
-            nashornScriptEngine.eval("function renderServer(isAdmin) { return MyApp['default'](isAdmin); }");
+            nashornScriptEngine.eval("function renderServer(url, preState) { return MyApp['default'](url, preState); }");
         } catch (ScriptException e) {
             throw new RuntimeException(e);
         }
         return nashornScriptEngine;
     });
 
-    public JSObject render(boolean isAdmin) {
+    public JSObject render(String url, String preState) {
         try {
-
-            return (JSObject) engineHolder.get().invokeFunction("renderServer", isAdmin);
+            return (JSObject) engineHolder.get().invokeFunction("renderServer", url, preState);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
