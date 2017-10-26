@@ -8,9 +8,4 @@ import org.junit.Test;
 
 public class NashornTest {
 
-    @Test
-    public void sanityCheck() {
-        React react = new React();
-        Assert.assertTrue(react.render().contains("div"));
-    }
 }
