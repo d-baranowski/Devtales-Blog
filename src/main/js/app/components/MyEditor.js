@@ -83,6 +83,7 @@ const MyEditor = (props) => {
             blockRenderMap={extendedBlockRenderMap}
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
+            editorKey="serverSide"
         />
     );
 };
