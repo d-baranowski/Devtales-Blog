@@ -51,3 +51,6 @@ nbdist/
 /out
 
 /src/main/resources/static/js/admin-bundle.js
+
+# Folder containing pictures uplaoded for the blog.
+blog-content

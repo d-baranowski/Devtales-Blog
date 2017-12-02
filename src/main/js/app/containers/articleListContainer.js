@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 import {NavLink} from "react-router-dom";
+import PublishingContainer from "./PublishingContainer";
 
 
 const mapStateToProps = (state) => {
@@ -42,7 +43,11 @@ const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class 
                     </NavLink>
                         {(() => {
                             if (isAdmin) {
-                                return (<a href={'/admin/' + article.id}>Edit</a>);
+                                return (
+                                    <div>
+                                        <a href={'/admin/' + article.id}>Edit</a>
+                                        <PublishingContainer slug={article.slug} />
+                                    </div>);
                             }
                         })()}
                 </div>
