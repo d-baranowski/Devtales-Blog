@@ -29,9 +29,10 @@ public class Article {
     private String html;
     @Size(max = 1024, message = "Summary can't be longer than 1024 characters.")
     private String summary;
-    @OrderBy
     private Timestamp createdOn;
     private Timestamp updatedOn;
+    @OrderBy
+    private Timestamp publishedDate;
     @Size(max = 20480, message = "Json representation can't be longer than 20480 characters.")
     private String jsonRepresentation;
     @ManyToMany(cascade = {MERGE, PERSIST})
@@ -79,6 +80,11 @@ public class Article {
 
     public Article setJsonRepresentation(String jsonRepresentation) {
         this.jsonRepresentation = jsonRepresentation;
+        return this;
+    }
+
+    public Article setPublishedDate(Timestamp publishedDate) {
+        this.publishedDate = publishedDate;
         return this;
     }
 }

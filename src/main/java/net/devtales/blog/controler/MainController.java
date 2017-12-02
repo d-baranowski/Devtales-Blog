@@ -9,6 +9,7 @@ import net.devtales.blog.state.StateModel;
 import net.devtales.commons.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class MainController {
     }
 
     @GetMapping({"/", "/blog"})
+    @PreAuthorize("permitAll()")
     public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
         final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
                 .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN"));
@@ -48,13 +50,14 @@ public class MainController {
     }
 
     @GetMapping("/article/{slug}")
+    @PreAuthorize("permitAll()")
     public String readArticle(@PathVariable String slug, final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws JsonProcessingException {
-        Optional<Article> optArticle = service.readBySlug(slug);
+        final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN"));
+
+        Optional<Article> optArticle = service.readBySlug(slug,isAdmin);
 
         if (optArticle.isPresent()) {
-            final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
-                    .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN"));
-
             final StateModel stateObject = new StateModel(isAdmin, optArticle.get());
             final String preState = objectMapper.writeValueAsString(stateObject);
 

@@ -17,6 +17,22 @@ const articleReducer = (state = [], action) => {
                 ...state,
                 updating: action.data.body
             };
+        case 'PUBLISH_ARTICLE_SUCCESS':
+            const updatedArticles = state.articles;
+              updatedArticles[action.data.slug] = action.data;
+
+            return {
+                ...state,
+                articles: updatedArticles
+            };
+        case 'HIDE_ARTICLE_SUCCESS':
+            const updatedArticles2 = state.articles;
+            updatedArticles2[action.data.slug] = action.data;
+
+            return {
+                ...state,
+                articles: updatedArticles2
+            };
         default:
             return state;
     }

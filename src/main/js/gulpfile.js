@@ -73,6 +73,7 @@ const renderReact = (entryFile, outputFile, standalone) =>{
         entries: entryFile, //Entrypoint to the application.
         debug: true,
         transform: [babelify.configure({
+            plugins: ["transform-class-properties"],
             presets: ['stage-2', 'es2015', 'react'] //Browserivy does not understand JSX and ES6 so we need to use transformers to translate our code before bundling.
         })]
     };
