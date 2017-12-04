@@ -8,30 +8,39 @@ import net.devtales.blog.service.ArticlesService;
 import net.devtales.blog.state.StateModel;
 import net.devtales.commons.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
     private final ArticlesService service;
     private final React react;
     private final ObjectMapper objectMapper;
+    private final ResourcePatternResolver resourcePatternResolver;
 
     @Autowired
-    MainController(ArticlesService service, ObjectMapper objectMapper) {
+    MainController(ArticlesService service, ObjectMapper objectMapper, ResourcePatternResolver resourcePatternResolver) {
         this.service = service;
         this.objectMapper = objectMapper;
-        this.react = new React();
+                this.resourcePatternResolver = resourcePatternResolver;
+                this.react = new React();
     }
 
     @GetMapping({"/", "/blog"})
@@ -71,5 +80,14 @@ public class MainController {
         }
 
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/file")
+    @ResponseBody
+    public List<String> listBlogContentImages() throws IOException {
+        return Arrays
+                .stream(resourcePatternResolver.getResources("file:blog-content/*.jpg"))
+                .map((Resource::getFilename))
+                .collect(Collectors.toList());
     }
 }

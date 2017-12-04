@@ -48,6 +48,8 @@ public class AdminController {
     @PostMapping("/file")
     @ResponseBody
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(storageService.store(file));
+        String fileName = storageService.store(file);
+        storageService.thumbnail(fileName);
+        return ResponseEntity.ok(fileName);
     }
 }

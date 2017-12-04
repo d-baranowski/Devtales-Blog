@@ -17,5 +17,7 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/blog-content/**")
                 .addResourceLocations("file:blog-content/")
                 .setCachePeriod(3600*24*30*360);
+
+
     }
 }
