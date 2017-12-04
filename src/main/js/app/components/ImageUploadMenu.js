@@ -1,14 +1,6 @@
 import React from "react";
 import If from "./If";
 
-function ImageAddMenu() {
-    return (
-        <div>
-            Hello Menu!
-        </div>
-    );
-}
-
 class ImageUploadMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +19,7 @@ class ImageUploadMenu extends React.Component {
         <div>
             <button onClick={this.handleToggleClick}>Add Image</button>
             <If _={this.state.showMenu}>
-                <ImageAddMenu />
+                <div className="overlay-menu">Hello World</div>
             </If>
         </div>
         );

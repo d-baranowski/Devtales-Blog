@@ -45,7 +45,7 @@ gulp.task("copy-css-from-modules", () => {
 });
 
 gulp.task("compile:sass", () => {
-    return gulp.src('./app/styles/main.scss')
+    return gulp.src(['./app/styles/main.scss', './app/styles/admin.scss'])
         .pipe(plumber())
         .pipe(sass())
         .pipe(gulp.dest(paths.resources + 'css/'));

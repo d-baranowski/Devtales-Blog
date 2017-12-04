@@ -4,6 +4,9 @@ import com.google.common.io.Files;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -22,6 +25,34 @@ public class FileStorageService {
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload file",e);
         }
+    }
+
+    public String thumbnail(String fileName) {
+        try {
+            BufferedImage img = ImageIO.read(new File("blog-content/" + fileName));
+            BufferedImage scaledImage = scaleImage(img);
+            ImageIO.write(scaledImage, "jpg", new File("blog-content/" + "thumb-" + fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create thumbnail for a file", e);
+        }
+
+        return "thumb-" + fileName;
+    }
+
+    private BufferedImage scaleImage(BufferedImage img) {
+        final int preferredWidth = 300;
+        final int preferredHeight = 300;
+        int xTimes = img.getWidth() / preferredWidth;
+        int yTimes = img.getHeight() / preferredHeight;
+        int times = xTimes >= yTimes ? xTimes : yTimes;
+
+        int scaleX = new Double(img.getWidth() * (1.0 / times)).intValue();
+        int scaleY = new Double(img.getHeight() * (1.0 / times)).intValue();
+        Image image = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
+        BufferedImage buffered = new BufferedImage(scaleX, scaleY, BufferedImage.TYPE_INT_RGB);
+        buffered.getGraphics().drawImage(image, 0, 0 , null);
+
+        return buffered;
     }
 
     private String extractFileExtension(String fileName) {

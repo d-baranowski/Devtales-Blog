@@ -9,7 +9,6 @@ class RichEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {editorState: generateState(props.loadState)};
-        this.focus = () => this.refs.editor.focus();
         this.onChange = (editorState) => this.setState({editorState});
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
         this.onTab = (e) => this._onTab(e);
@@ -84,7 +83,7 @@ class RichEditor extends React.Component {
                 <ImageUploadMenu />
                 <button onClick={this._saveAction.bind(this)}>Save</button>
                 <div className="middle-section">
-                    <div className={className} onClick={this.focus}>
+                    <div className={className}>
                         <MyEditor
                             editorState={editorState}
                             handleKeyCommand={this.handleKeyCommand}
