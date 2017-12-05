@@ -2,7 +2,9 @@ const prependWithAddress = (x) => {
   return "/blog-content/" + x;
 };
 
-const imagesReducer = (state = [], action) => {
+
+const defaultState = {showMenu: false};
+const imagesReducer = (state = defaultState, action) => {
     switch (action.type) {
         case 'GET_IMAGES_SUCCESS':
             if (action.data.text) {
@@ -23,7 +25,7 @@ const imagesReducer = (state = [], action) => {
             if (action.data.text) {
                 return {
                     ...state,
-                    images: [...state.images, { 
+                    images: [...state.images, {
                         image: prependWithAddress(action.data.text),
                         thumb: prependWithAddress('thumb-' + action.data.text) }]
                 }
@@ -33,6 +35,11 @@ const imagesReducer = (state = [], action) => {
                     error: "Failed to get uploaded image."
                 }
             }
+        case 'TOGGLE_MENU':
+            return {
+                ...state,
+                showMenu: !state.showMenu
+            };
         default:
             return state;
     }

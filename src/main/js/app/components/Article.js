@@ -1,12 +1,12 @@
 import React from 'react';
-import MyEditor, {generateState} from './MyEditor';
+import ConfiguredEditor, {generateState} from './ConfiguredEditor';
 
 const Article = (props) => {
     const {article} = props;
 
     return (
         <div>
-            <MyEditor
+            <ConfiguredEditor
                 readOnly="true"
                 editorState= {generateState(article.jsonRepresentation)}
                 spellCheck={false}

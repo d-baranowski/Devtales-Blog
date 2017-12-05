@@ -7,6 +7,10 @@ const blockRenderMap = {
     'summary': {
         element: 'section',
         wrapper: SummaryBlock
+    },
+    'atomic': {
+        component: Media,
+        editable: false,
     }
 };
 
@@ -76,11 +80,48 @@ export const generateState = (article) => {
         EditorState.createEmpty(compositeDecorator)
 };
 
-const MyEditor = (props) => {
+const Audio = (props) => {
+    return <audio controls src={props.src} />;
+};
+const Image = (props) => {
+    return <img src={props.src} />;
+};
+const Video = (props) => {
+    return <video controls src={props.src} />;
+};
+const Media = (props) => {
+    const entity = props.contentState.getEntity(
+        props.block.getEntityAt(0)
+    );
+    const {src} = entity.getData();
+    const type = entity.getType();
+    let media;
+    if (type === 'audio') {
+        media = <Audio src={src}/>;
+    } else if (type === 'image') {
+        media = <Image src={src}/>;
+    } else if (type === 'video') {
+        media = <Video src={src}/>;
+    }
+    return media;
+};
+function mediaBlockRenderer(block) {
+    if (block.getType() === 'atomic') {
+        return {
+            component: Media,
+            editable: false,
+        };
+    }
+    return null;
+}
+
+
+const ConfiguredEditor = (props) => {
     return (
         <Editor
             {...props}
             blockRenderMap={extendedBlockRenderMap}
+            blockRendererFn={mediaBlockRenderer}
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             editorKey="serverSide"
@@ -88,4 +129,4 @@ const MyEditor = (props) => {
     );
 };
 
-export default MyEditor;
+export default ConfiguredEditor;
