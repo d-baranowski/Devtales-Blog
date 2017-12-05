@@ -3,7 +3,7 @@ import {RichUtils, convertToRaw} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
 import MyEditor, {generateState} from "./MyEditor"
-import ImageUploadMenu from "./ImageUploadMenu";
+import ImageUploadMenuContainer from "../containers/ImageUploadMenuContainer"; 
 
 class RichEditor extends React.Component {
     constructor(props) {
@@ -80,7 +80,7 @@ class RichEditor extends React.Component {
                     editorState={editorState}
                     onToggle={this.toggleInlineStyle}
                 />
-                <ImageUploadMenu />
+                <ImageUploadMenuContainer />
                 <button onClick={this._saveAction.bind(this)}>Save</button>
                 <div className="middle-section">
                     <div className={className}>

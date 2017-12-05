@@ -40,8 +40,8 @@ public class FileStorageService {
     }
 
     private BufferedImage scaleImage(BufferedImage img) {
-        final int preferredWidth = 300;
-        final int preferredHeight = 300;
+        final int preferredWidth = 100;
+        final int preferredHeight = 100;
         int xTimes = img.getWidth() / preferredWidth;
         int yTimes = img.getHeight() / preferredHeight;
         int times = xTimes >= yTimes ? xTimes : yTimes;

@@ -88,6 +88,7 @@ public class MainController {
         return Arrays
                 .stream(resourcePatternResolver.getResources("file:blog-content/*.jpg"))
                 .map((Resource::getFilename))
+                .filter(name -> !name.startsWith("thumb-"))
                 .collect(Collectors.toList());
     }
 }
