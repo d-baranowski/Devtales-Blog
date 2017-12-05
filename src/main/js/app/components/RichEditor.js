@@ -1,9 +1,9 @@
 import React from "react";
-import {RichUtils, convertToRaw} from 'draft-js';
+import {RichUtils, convertToRaw, AtomicBlockUtils, EditorState} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
-import MyEditor, {generateState} from "./MyEditor"
-import ImageUploadMenuContainer from "../containers/ImageUploadMenuContainer"; 
+import ConfiguredEditor, {generateState} from "./ConfiguredEditor"
+import ImageUploadMenuContainer from "../containers/ImageUploadMenuContainer";
 
 class RichEditor extends React.Component {
     constructor(props) {
@@ -14,6 +14,9 @@ class RichEditor extends React.Component {
         this.onTab = (e) => this._onTab(e);
         this.toggleBlockType = (type) => this._toggleBlockType(type);
         this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
+
+        this._confirmMedia = this._confirmMedia.bind(this);
+        this._saveAction = this._saveAction.bind(this);
     }
 
     _saveAction() {
@@ -23,6 +26,30 @@ class RichEditor extends React.Component {
             json: JSON.stringify(convertToRaw(state))
         };
         this.props.saveArticle(data)
+    }
+
+    _confirmMedia(url) {
+        const {editorState} = this.state;
+        const contentState = editorState.getCurrentContent();
+        const contentStateWithEntity = contentState.createEntity(
+            'image', //audio, video
+            'IMMUTABLE',
+            {src: url}
+        );
+        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+        const newEditorState = EditorState.set(
+            editorState,
+            {currentContent: contentStateWithEntity}
+        );
+        this.setState({
+            editorState: AtomicBlockUtils.insertAtomicBlock(
+                newEditorState,
+                entityKey,
+                ' '
+            ),
+            showURLInput: false,
+            urlValue: '',
+        });
     }
 
     _handleKeyCommand(command) {
@@ -80,11 +107,11 @@ class RichEditor extends React.Component {
                     editorState={editorState}
                     onToggle={this.toggleInlineStyle}
                 />
-                <ImageUploadMenuContainer />
-                <button onClick={this._saveAction.bind(this)}>Save</button>
+                <ImageUploadMenuContainer addImage={this._confirmMedia} />
+                <button onClick={this._saveAction}>Save</button>
                 <div className="middle-section">
                     <div className={className}>
-                        <MyEditor
+                        <ConfiguredEditor
                             editorState={editorState}
                             handleKeyCommand={this.handleKeyCommand}
                             onChange={this.onChange}
@@ -94,6 +121,7 @@ class RichEditor extends React.Component {
                         />
                     </div>
                 </div>
+
             </div>
         );
     }

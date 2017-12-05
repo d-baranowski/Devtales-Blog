@@ -2,21 +2,13 @@ import React from "react";
 import If from "./If";
 
 function Image(props) {
-    return <img src={props.image.thumb} />
+    return <img onClick={props.image.onClick} src={props.image.thumb} />
 }
 
 class ImageUploadMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showMenu: false};
-        this.handleToggleClick = this.handleToggleClick.bind(this);
         this.handleAddImageClick = this.handleAddImageClick.bind(this);
-    }
-
-    handleToggleClick() {
-        this.setState(prevState => ({
-            showMenu: !prevState.showMenu
-        }));
     }
 
     handleAddImageClick(e) {
@@ -35,8 +27,8 @@ class ImageUploadMenu extends React.Component {
 
         return (
         <div>
-            <button onClick={this.handleToggleClick}>Add Image</button>
-            <If _={this.state.showMenu}>
+            <button onClick={this.props.toggleMenu}>Add Image</button>
+            <If _={this.props.showMenu}>
                 <div className="overlay-menu">
                     <div className="body">{imageElements}</div>
                     <div className="footer">

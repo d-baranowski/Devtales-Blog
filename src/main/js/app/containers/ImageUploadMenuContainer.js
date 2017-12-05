@@ -4,7 +4,8 @@ import React, {Component} from "react"
 
 const mapStateToProps = (state) => {
     return {
-        images: state.imagesReducer.images
+        images: state.imagesReducer.images,
+        showMenu: state.imagesReducer.showMenu
     };
 };
 
@@ -20,7 +21,8 @@ const uploadImageAction = {
 const mapDispatchToProps = (dispatch) => {
     return({
         getImages: () => dispatch(getImagesAction),
-        uploadImage: () => dispatch(uploadImageAction)
+        uploadImage: () => dispatch(uploadImageAction),
+        toggleMenu: () => dispatch({type: 'TOGGLE_MENU'})
     });
 };
 
@@ -30,7 +32,23 @@ const ImageUploadMenuContainer = connect(mapStateToProps, mapDispatchToProps)(cl
     }
 
     render() {
-        return <ImageUploadMenu uploadImage={this.props.uploadImage} images={this.props.images}/>
+        const actualImages = this.props.images ? this.props.images : [];
+        const addImage = this.props.addImage;
+        const withFunction = actualImages.map((x) =>
+        {
+            return {
+                ...x,
+                onClick: () => {
+                    this.props.toggleMenu();
+                    addImage(x.image)
+                }
+            }
+        });
+
+        return <ImageUploadMenu toggleMenu={this.props.toggleMenu}
+                                showMenu={this.props.showMenu}
+                                uploadImage={this.props.uploadImage}
+                                images={withFunction}/>
     }
 });
 
