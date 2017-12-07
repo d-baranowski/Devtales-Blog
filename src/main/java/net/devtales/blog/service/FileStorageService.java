@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import static net.devtales.blog.service.VideoUtils.getBufferedImageFromVideo;
+
 @Component
 public class FileStorageService {
 
@@ -28,7 +30,30 @@ public class FileStorageService {
     }
 
     public String thumbnail(String fileName) {
+        switch (fileName.split("\\.")[1]) {
+            case "img": return thumbnailImg(fileName);
+            case "gif": return thumbnailImg(fileName);
+            case "mp4": return thumbnailVideo(fileName);
+            default: throw new RuntimeException("Unrecognised file extension");
+        }
+    }
+
+    private String thumbnailVideo(String fileName) {
+        File initialFile = new File("blog-content/" + fileName);
+        BufferedImage img = getBufferedImageFromVideo(initialFile);
+        BufferedImage scaledImage = scaleImage(img);
         try {
+            ImageIO.write(scaledImage, "jpg", new File("blog-content/" + "thumb-" + fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save a thumbnail for a video");
+        }
+
+        return "thumb-" + fileName;
+    }
+
+    private String thumbnailImg(String fileName) {
+        try {
+
             BufferedImage img = ImageIO.read(new File("blog-content/" + fileName));
             BufferedImage scaledImage = scaleImage(img);
             ImageIO.write(scaledImage, "jpg", new File("blog-content/" + "thumb-" + fileName));
