@@ -84,9 +84,9 @@ public class MainController {
 
     @GetMapping("/file")
     @ResponseBody
-    public List<String> listBlogContentImages() throws IOException {
+    public List<String> listBlogContent() throws IOException {
         return Arrays
-                .stream(resourcePatternResolver.getResources("file:blog-content/*.jpg"))
+                .stream(resourcePatternResolver.getResources("file:blog-content/**"))
                 .map((Resource::getFilename))
                 .filter(name -> !name.startsWith("thumb-"))
                 .collect(Collectors.toList());
