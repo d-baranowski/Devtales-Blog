@@ -31,8 +31,10 @@ class RichEditor extends React.Component {
     _confirmMedia(url) {
         const {editorState} = this.state;
         const contentState = editorState.getCurrentContent();
+
+        const extension = url.split('.').pop();
         const contentStateWithEntity = contentState.createEntity(
-            'image', //audio, video
+            extension == 'mp4' ? 'video' : 'image', //audio,
             'IMMUTABLE',
             {src: url}
         );
