@@ -45,7 +45,7 @@ public class AdminController {
         return "admin";
     }
 
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping("/file")
     @ResponseBody
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {

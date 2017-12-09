@@ -54,7 +54,7 @@ const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class 
             );
         });
 
-        return result.length > 0 ? <div id="article-list">{result}</div> : <div>Loading</div>
+        return result.length > 0 ? <div>{result}</div> : <div>Loading</div>
     }
 });
 
