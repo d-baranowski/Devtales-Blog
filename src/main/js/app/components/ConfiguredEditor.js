@@ -81,13 +81,13 @@ export const generateState = (article) => {
 };
 
 const Audio = (props) => {
-    return <audio controls src={props.src} />;
+    return <audio className="media" controls src={props.src} />;
 };
 const Image = (props) => {
-    return <img src={props.src} />;
+    return <img className="media" src={props.src} />;
 };
 const Video = (props) => {
-    return <video controls src={props.src} />;
+    return <video className="media" controls src={props.src} />;
 };
 const Media = (props) => {
     const entity = props.contentState.getEntity(

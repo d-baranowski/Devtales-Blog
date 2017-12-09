@@ -5,7 +5,7 @@ const Article = (props) => {
     const {article} = props;
 
     return (
-        <div>
+        <div className="article-container">
             <ConfiguredEditor
                 readOnly="true"
                 editorState= {generateState(article.jsonRepresentation)}

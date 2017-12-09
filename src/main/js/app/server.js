@@ -31,7 +31,7 @@ const ServerSideRender = function (url, preState) {
         html: renderToString(
             <Provider store={store}>
                 <Router context={{}} location={url} history={history}>
-                    <div>
+                    <div className="page-content">
                         <PageNavigation/>
                         <Routes />
                     </div>

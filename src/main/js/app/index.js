@@ -38,7 +38,7 @@ function ClientSideRender() {
     ReactDOM.render(
         <Provider store={store}>
             <Router history={history}>
-                <div>
+                <div className="page-content">
                     <PageNavigation/>
                     <Routes />
                 </div>

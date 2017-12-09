@@ -5,7 +5,7 @@ import ArticleReaderContaier from "../containers/ArticleReaderContainer";
 
 const Routes = (props) => {
     return (
-    <div>
+    <div id="main-section">
         <Route exact path="/" component={ArticleListContainer}/>
         <Route
             path="/blog"
