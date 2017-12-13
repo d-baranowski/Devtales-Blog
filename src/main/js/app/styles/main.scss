@@ -1,5 +1,11 @@
 @import "variables";
 @import "navbar";
+@import "../../node_modules/prismjs/themes/prism";
+@import "../../node_modules/prism-themes/themes/prism-atom-dark";
+
+pre[class*=language-] {
+  line-height: 0.1em;
+}
 
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
