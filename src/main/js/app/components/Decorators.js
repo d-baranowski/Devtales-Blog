@@ -1,12 +1,47 @@
 import React  from "react";
 import {CompositeDecorator} from "draft-js";
+import Prism from 'prismjs/components/prism-core';
+import clike from 'prismjs/components/prism-clike';
+import js from 'prismjs/components/prism-javascript';
 
-
+//Prism.tokenize("function() { return 'helloWorld' }", Prism.languages.javascript)
 const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
 const hashtagStrategy = (contentBlock, callback, contentState) => {
     findWithRegex(HASHTAG_REGEX, contentBlock, callback);
 };
 
+const prismStrategy = (contentBlock, callback, contentState) => {
+    if (contentBlock.getType() !== "code-block") {
+        return
+    }
+
+    const text = contentBlock.getText();
+    const tokens = Prism.tokenize(text, Prism.languages.javascript);
+    if (tokens) {
+        contentBlock.tokenMap = {};
+        let stringIndex = 0;
+        for (let i = 0; i < tokens.length; i++) {
+            let token = tokens[i];
+            if (token.content) {
+                contentBlock.tokenMap[token.content] = token;
+            }
+            callback(stringIndex, stringIndex + tokens[i].length);
+            stringIndex+=tokens[i].length;
+        }
+    }
+};
+
+const PrismSpan = (props) => {
+    const block = props.children[0].props.block;
+    const token =  block.tokenMap[props.decoratedText] || {};
+    const prismClass = token.type ? token.type : '';
+    return (<span
+        className={"token " + prismClass}
+        data-offset-key={props.offsetKey}
+    >
+            {props.children}
+          </span>);
+};
 
 const findWithRegex = (regex, contentBlock, callback) => {
     const text = contentBlock.getText();
@@ -36,6 +71,10 @@ const Decorators = new CompositeDecorator([
         strategy: hashtagStrategy,
         component: HashtagSpan,
     },
+    {
+        strategy: prismStrategy,
+        component: PrismSpan,
+    }
 ]);
 
 export default Decorators;
