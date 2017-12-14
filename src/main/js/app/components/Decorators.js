@@ -6,6 +6,10 @@ import js from 'prismjs/components/prism-javascript';
 
 const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
 const hashtagStrategy = (contentBlock, callback, contentState) => {
+    if (contentBlock.getType() === "code-block") {
+        return
+    }
+
     findWithRegex(HASHTAG_REGEX, contentBlock, callback);
 };
 
@@ -43,7 +47,7 @@ const PrismSpan = (props) => {
     const block = props.children[0].props.block;
     const token =  block.tokenMap[props.decoratedText] || {};
     const prismClass = token.type ? token.type : '';
-    return (<span
+    return (<span spellCheck={!token.type || token.type === "comment"}
         className={"token " + prismClass}
         data-offset-key={props.offsetKey}
     >
