@@ -8,7 +8,6 @@ class StyledCodeBlock extends React.Component {
     render() {
         return (
             <div>
-                <button>Chuj Ci w Dupe</button>
                 <pre className="language-">
                     {this.props.children}
                 </pre>
@@ -50,13 +49,6 @@ function customBlockRenderFunction(block) {
             editable: false,
         };
     }
-  /*  if (block.getType() === 'code-block') {
-        return {
-            component: StyledCodeBlock,
-            editable: true
-        }
-    }*/
-    console.log(block.getType());
     return null;
 }
 

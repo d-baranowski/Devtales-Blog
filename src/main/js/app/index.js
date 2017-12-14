@@ -12,8 +12,6 @@ import articleService from "./api-middleware/articleService";
 import {routerMiddleware, routerReducer} from "react-router-redux";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-
-
 const history = createHistory();
 
 // Grab the state from a global variable injected into the server-generated HTML

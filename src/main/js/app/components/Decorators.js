@@ -4,10 +4,17 @@ import Prism from 'prismjs/components/prism-core';
 import clike from 'prismjs/components/prism-clike';
 import js from 'prismjs/components/prism-javascript';
 
-//Prism.tokenize("function() { return 'helloWorld' }", Prism.languages.javascript)
 const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
 const hashtagStrategy = (contentBlock, callback, contentState) => {
     findWithRegex(HASHTAG_REGEX, contentBlock, callback);
+};
+
+let activeLanguage = Prism.languages.clike;
+
+const detectLanguage = (text) => {
+    if (text.includes('## javascript ##')) {
+        activeLanguage = Prism.languages.javascript;
+    }
 };
 
 const prismStrategy = (contentBlock, callback, contentState) => {
@@ -16,7 +23,8 @@ const prismStrategy = (contentBlock, callback, contentState) => {
     }
 
     const text = contentBlock.getText();
-    const tokens = Prism.tokenize(text, Prism.languages.javascript);
+    detectLanguage(text);
+    const tokens = Prism.tokenize(text, activeLanguage);
     if (tokens) {
         contentBlock.tokenMap = {};
         let stringIndex = 0;
