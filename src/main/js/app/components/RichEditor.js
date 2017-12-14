@@ -1,5 +1,5 @@
 import React from "react";
-import {RichUtils, convertToRaw, AtomicBlockUtils, EditorState} from 'draft-js';
+import {RichUtils, convertToRaw, AtomicBlockUtils, EditorState, Modifier} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
 import ConfiguredEditor, {generateState} from "./ConfiguredEditor"
@@ -66,7 +66,35 @@ class RichEditor extends React.Component {
 
     _onTab(e) {
         const maxDepth = 4;
-        this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
+        const editorState = this.state.editorState;
+        const listHandle = RichUtils.onTab(e, editorState, maxDepth);
+        if (listHandle !== editorState) {
+            this.onChange(listHandle);
+        } else {
+            const selection = editorState.getSelection();
+            const key = selection.getAnchorKey();
+            if (key !== selection.getFocusKey()) {
+                return editorState;
+            }
+
+            const content = editorState.getCurrentContent();
+            const block = content.getBlockForKey(key);
+            const type = block.getType();
+            if (type !== 'code-block') {
+                return editorState;
+            }
+
+            let currentState = this.state.editorState;
+            let newContentState = Modifier.replaceText(
+                editorState.getCurrentContent(),
+                editorState.getSelection(),
+                "   "
+            );
+
+            e.preventDefault();
+
+            this.onChange(EditorState.push(currentState, newContentState, 'insert-characters'));
+        }
     }
 
     _toggleBlockType(blockType) {
