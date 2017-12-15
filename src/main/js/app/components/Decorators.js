@@ -16,7 +16,7 @@ const hashtagStrategy = (contentBlock, callback, contentState) => {
 let activeLanguage = Prism.languages.clike;
 
 const detectLanguage = (text) => {
-    if (text.includes('## javascript ##')) {
+    if (text.includes('// javascript //')) {
         activeLanguage = Prism.languages.javascript;
     }
 };
@@ -47,7 +47,7 @@ const PrismSpan = (props) => {
     const block = props.children[0].props.block;
     const token =  block.tokenMap[props.decoratedText] || {};
     const prismClass = token.type ? token.type : '';
-    return (<span spellCheck={!token.type || token.type === "comment"}
+    return (<span spellCheck={token.type === "comment"}
         className={"token " + prismClass}
         data-offset-key={props.offsetKey}
     >
