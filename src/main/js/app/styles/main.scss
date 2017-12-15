@@ -1,10 +1,14 @@
 @import "variables";
 @import "navbar";
 @import "../../node_modules/prismjs/themes/prism";
-@import "../../node_modules/prism-themes/themes/prism-atom-dark";
+@import "../../node_modules/prism-themes/themes/prism-darcula";
 
 pre[class*=language-] {
   line-height: 0.1em;
+}
+
+.token.operator {
+  background: inherit;
 }
 
 body {
