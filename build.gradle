@@ -44,6 +44,9 @@ dependencies {
     //compile 'org.springframework.session:spring-session'
     // compile 'org.springframework.boot:spring-boot-starter-websocket'
 
+    //Caching interceptor
+    compile 'net.rossillo.mvc.cache:spring-mvc-cache-control:1.1.1-RELEASE'
+
     //Base
     compile 'org.springframework.boot:spring-boot-starter-web'
 

@@ -1,12 +1,17 @@
 package net.devtales.blog.controler;
 
+import net.devtales.blog.cache.FrontEndBundleTagilator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.nashorn.api.scripting.JSObject;
+import net.devtales.blog.cache.DeepETagger;
+import net.devtales.blog.cache.LastChangedArticleTagilator;
 import net.devtales.blog.jsengine.CachedReact;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.service.ArticlesService;
 import net.devtales.blog.state.StateModel;
+import net.rossillo.spring.web.mvc.CacheControl;
+import net.rossillo.spring.web.mvc.CachePolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -43,9 +48,7 @@ public class MainController {
         this.react = react;
     }
 
-    @GetMapping({"/", "/blog"})
-    @PreAuthorize("permitAll()")
-    public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
+    private String serverSideReact(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) {
         final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
                 .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN"));
         String preState = "{\"adminReducer\":{\"isAdmin\":"+isAdmin+"}}";
@@ -58,8 +61,25 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping({"/", "/blog"})
+    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 60 * 60 * 60)
+    @PreAuthorize("permitAll()")
+    public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
+        return serverSideReact(model, authentication, request);
+    }
+
+    @GetMapping({"/about", "/projects"})
+    @PreAuthorize("permitAll()")
+    @DeepETagger(eTagger = {FrontEndBundleTagilator.class})
+    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 24 * 60 * 60 * 60)
+    public String staticPages(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) {
+        return serverSideReact(model, authentication, request);
+    }
+
     @GetMapping("/article/{slug}")
     @PreAuthorize("permitAll()")
+    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 60 * 60 * 60)
+    @DeepETagger(eTagger = {LastChangedArticleTagilator.class, FrontEndBundleTagilator.class})
     public String readArticle(@PathVariable String slug, final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws JsonProcessingException {
         final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
                 .anyMatch(a -> Objects.equals(a.getAuthority(), "ADMIN"));
