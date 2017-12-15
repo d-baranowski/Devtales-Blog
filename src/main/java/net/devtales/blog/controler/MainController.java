@@ -3,10 +3,10 @@ package net.devtales.blog.controler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.nashorn.api.scripting.JSObject;
+import net.devtales.blog.jsengine.CachedReact;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.service.ArticlesService;
 import net.devtales.blog.state.StateModel;
-import net.devtales.commons.nashorn.React;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -31,16 +31,16 @@ import java.util.stream.Collectors;
 @Controller
 public class MainController {
     private final ArticlesService service;
-    private final React react;
+    private final CachedReact react;
     private final ObjectMapper objectMapper;
     private final ResourcePatternResolver resourcePatternResolver;
 
     @Autowired
-    MainController(ArticlesService service, ObjectMapper objectMapper, ResourcePatternResolver resourcePatternResolver) {
+    MainController(ArticlesService service, ObjectMapper objectMapper, ResourcePatternResolver resourcePatternResolver, CachedReact react) {
         this.service = service;
         this.objectMapper = objectMapper;
-                this.resourcePatternResolver = resourcePatternResolver;
-                this.react = new React();
+        this.resourcePatternResolver = resourcePatternResolver;
+        this.react = react;
     }
 
     @GetMapping({"/", "/blog"})
