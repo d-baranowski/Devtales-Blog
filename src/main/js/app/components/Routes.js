@@ -2,6 +2,8 @@ import React from "react";
 import {Route} from "react-router-dom";
 import ArticleListContainer from "../containers/articleListContainer";
 import ArticleReaderContaier from "../containers/ArticleReaderContainer";
+import AboutMe from "./AboutMe";
+import Projects from "./Projects";
 
 const Routes = (props) => {
     return (
@@ -11,6 +13,8 @@ const Routes = (props) => {
             path="/blog"
             component={ArticleListContainer}/>
         <Route path="/article/:articleSlug" component={ArticleReaderContaier}/>
+        <Route path="/about" component={AboutMe}/>
+        <Route path="/projects" component={Projects}/>
     </div>
     )
 };
