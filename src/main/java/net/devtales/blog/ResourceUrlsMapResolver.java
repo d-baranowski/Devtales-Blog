@@ -14,7 +14,7 @@ public class ResourceUrlsMapResolver {
     public Map<String, String> getRelativeToVersionedUrls() {
         try {
             Path staticFilesDirectory = new ClassPathResource("static").getFile().toPath();
-            List<String> listOfStaticFiles = Files.walk(staticFilesDirectory).filter(path -> path.toFile().isFile()).map(path -> path.toString()).map(path -> path.replace(staticFilesDirectory.toAbsolutePath().toString(), "")).collect(Collectors.toList());
+            List<String> listOfStaticFiles = Files.walk(staticFilesDirectory).filter(path -> path.toFile().isFile()).map(path -> path.toString()).map(path -> path.replace(staticFilesDirectory.toAbsolutePath().toString(), "")).map(path -> path.replaceAll("\\\\", "/")).collect(Collectors.toList());
 
         } catch (IOException e) {
             throw new RuntimeException();
