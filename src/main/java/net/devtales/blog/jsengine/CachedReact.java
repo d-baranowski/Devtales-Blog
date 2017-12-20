@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class CachedReact {
     private final LoadingCache<Pair<String, String>, JSObject> cache;
 
-    CachedReact() {
-        React react = new React();
+    CachedReact(JsBundleResolver resolver) {
+        React react = new React(resolver);
 
         CacheLoader<Pair<String, String>, JSObject> loader = new CacheLoader<Pair<String, String>, JSObject>() {
             @Override

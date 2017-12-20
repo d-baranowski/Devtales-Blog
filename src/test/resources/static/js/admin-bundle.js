@@ -32120,7 +32120,7 @@ var ATTRS = {
   clipRule: 'clip-rule',
   clipPathUnits: 'clipPathUnits',
   colorInterpolation: 'color-interpolation',
-  colorInterpolationFilters: 'color-interpolation-filters',
+  colorInterpolationFilters: 'color-interpolation-transformer',
   colorProfile: 'color-profile',
   colorRendering: 'color-rendering',
   contentScriptType: 'contentScriptType',

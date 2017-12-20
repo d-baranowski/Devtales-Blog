@@ -1,22 +1,26 @@
 package net.devtales.blog.config;
 
+import net.devtales.blog.config.transformer.VersionedLinksToStaticResourcesTransformer;
 import net.rossillo.spring.web.mvc.CacheControlHandlerInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.resource.ContentVersionStrategy;
+import org.springframework.web.servlet.resource.CssLinkResourceTransformer;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 
-import javax.servlet.Filter;
-
 @Configuration
+@ComponentScan("net.devtales.blog.config.transformer")
 public class MvcConfigurer extends WebMvcConfigurerAdapter {
 
     private final ApplicationContext context;
+
+    @Autowired
+    private VersionedLinksToStaticResourcesTransformer jsVersionResourcesTransformer;
 
     public MvcConfigurer(ApplicationContext context) {
         this.context = context;
@@ -32,7 +36,9 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
                 .addResourceLocations("classpath:/static/")
                 .setCachePeriod(60 * 60 * 24 * 365) /* one year */
                 .resourceChain(true)
-                .addResolver(versionResourceResolver);
+                .addResolver(versionResourceResolver)
+                .addTransformer(new CssLinkResourceTransformer())
+                .addTransformer(jsVersionResourcesTransformer);
 
         // Resources controlled by Spring Security, which
         // adds "Cache-Control: must-revalidate".
