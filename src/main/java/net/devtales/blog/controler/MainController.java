@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.nashorn.api.scripting.JSObject;
 import net.devtales.blog.cache.DeepETagger;
 import net.devtales.blog.cache.LastChangedArticleTagilator;
+import net.devtales.blog.cache.LatestChangedArticleTagilator;
 import net.devtales.blog.jsengine.CachedReact;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.service.ArticlesService;
@@ -62,6 +63,7 @@ public class MainController {
     }
 
     @GetMapping({"/", "/blog"})
+    @DeepETagger(eTagger = {LatestChangedArticleTagilator.class, FrontEndBundleTagilator.class})
     @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 60 * 60 * 60)
     @PreAuthorize("permitAll()")
     public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
