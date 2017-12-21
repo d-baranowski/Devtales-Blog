@@ -29,7 +29,10 @@ public class ETagilatorInterceptor extends HandlerInterceptorAdapter implements 
                 for (int i = 0; i < methodAnnotation.eTagger().length; i++) {
                     Class<? extends DeepETagilator> beanType = methodAnnotation.eTagger()[i];
                     DeepETagilator currentTagilator = context.getBean(beanType);
-                    newETag.append(currentTagilator.tagilate(request, response, handler));
+                    String result = currentTagilator.tagilate(request, response, handler);
+                    if (result != null) {
+                        newETag.append(result);
+                    }
                 }
                 String resultTag = newETag.toString().hashCode() + "";
                 if (resultTag.equals(requestETag)) {

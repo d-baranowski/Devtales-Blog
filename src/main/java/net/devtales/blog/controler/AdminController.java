@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.service.ArticlesService;
-import net.devtales.blog.service.FileStorageService;
 import net.devtales.blog.service.FileUploadService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

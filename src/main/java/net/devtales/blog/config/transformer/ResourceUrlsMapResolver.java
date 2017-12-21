@@ -1,6 +1,5 @@
 package net.devtales.blog.config.transformer;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;

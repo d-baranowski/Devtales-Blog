@@ -1,18 +1,18 @@
 package net.devtales.blog.controler;
 
-import net.devtales.blog.cache.FrontEndBundleTagilator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.nashorn.api.scripting.JSObject;
+import net.devtales.blog.cache.CacheControl;
+import net.devtales.blog.cache.CachePolicy;
 import net.devtales.blog.cache.DeepETagger;
+import net.devtales.blog.cache.FrontEndBundleTagilator;
 import net.devtales.blog.cache.LastChangedArticleTagilator;
 import net.devtales.blog.cache.LatestChangedArticleTagilator;
 import net.devtales.blog.jsengine.CachedReact;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.service.ArticlesService;
 import net.devtales.blog.state.StateModel;
-import net.rossillo.spring.web.mvc.CacheControl;
-import net.rossillo.spring.web.mvc.CachePolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -64,7 +64,11 @@ public class MainController {
 
     @GetMapping({"/", "/blog"})
     @DeepETagger(eTagger = {LatestChangedArticleTagilator.class, FrontEndBundleTagilator.class})
-    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 60 * 60 * 60)
+    @CacheControl(
+            policy = CachePolicy.PUBLIC,
+            maxAge = 60 * 60 * 60,
+            staleIfError = 7 * 24 * 60 * 60 * 60,
+            staleWhileRevalidate = 24 * 60 * 60 * 60)
     @PreAuthorize("permitAll()")
     public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
         return serverSideReact(model, authentication, request);
@@ -73,14 +77,22 @@ public class MainController {
     @GetMapping({"/about", "/projects"})
     @PreAuthorize("permitAll()")
     @DeepETagger(eTagger = {FrontEndBundleTagilator.class})
-    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 24 * 60 * 60 * 60)
+    @CacheControl(
+            policy = CachePolicy.PUBLIC,
+            maxAge = 24 * 60 * 60 * 60,
+            staleIfError = 7 * 24 * 60 * 60 * 60,
+            staleWhileRevalidate = 2 * 24 * 60 * 60 * 60)
     public String staticPages(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) {
         return serverSideReact(model, authentication, request);
     }
 
     @GetMapping("/article/{slug}")
     @PreAuthorize("permitAll()")
-    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 60 * 60 * 60)
+    @CacheControl(
+            policy = CachePolicy.PUBLIC,
+            maxAge = 60 * 60 * 60,
+            staleIfError = 7 * 24 * 60 * 60 * 60,
+            staleWhileRevalidate = 24 * 60 * 60 * 60)
     @DeepETagger(eTagger = {LastChangedArticleTagilator.class, FrontEndBundleTagilator.class})
     public String readArticle(@PathVariable String slug, final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws JsonProcessingException {
         final boolean isAdmin = authentication != null && authentication.getAuthorities().stream()
