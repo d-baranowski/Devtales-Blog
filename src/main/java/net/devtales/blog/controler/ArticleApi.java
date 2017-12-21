@@ -1,14 +1,13 @@
 package net.devtales.blog.controler;
 
+import net.devtales.blog.cache.CacheControl;
+import net.devtales.blog.cache.CachePolicy;
 import net.devtales.blog.cache.DeepETagger;
-import net.devtales.blog.cache.FrontEndBundleTagilator;
 import net.devtales.blog.cache.LatestChangedArticleTagilator;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.model.CreateArticleBody;
 import net.devtales.blog.parser.CreateArticleBodyToArticleParser;
 import net.devtales.blog.service.ArticlesService;
-import net.rossillo.spring.web.mvc.CacheControl;
-import net.rossillo.spring.web.mvc.CachePolicy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,7 +39,11 @@ public class ArticleApi {
     @GetMapping()
     @PreAuthorize("permitAll()")
     @DeepETagger(eTagger = {LatestChangedArticleTagilator.class})
-    @CacheControl(policy = CachePolicy.PUBLIC, maxAge = 60 * 60 * 60)
+    @CacheControl(
+            policy = CachePolicy.PUBLIC,
+            maxAge = 60 * 60 * 60,
+            staleIfError = 7 * 24 * 60 * 60 * 60,
+            staleWhileRevalidate = 24 * 60 * 60 * 60)
     public ResponseEntity<Map<String,Article>> getPublished() {
         return ok(service.readPublishedArticles().stream().collect(Collectors.toMap(Article::getSlug, article -> article)));
     }

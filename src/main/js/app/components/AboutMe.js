@@ -22,12 +22,12 @@ const AboutMe = (props) => {
             <p>Don't hesitate to contact me with any questions or requests you might have.</p>
             <div className="social">
                 <a href="https://www.linkedin.com/in/daniel-baranowski-220011a8/"><img
-                    src="https://ed.team/sites/default/files/social-icons/linkedin-icon.png" width="50"/></a>
+                    src="/img/linkedin-icon.png" width="50"/></a>
                 <a href="https://github.com/d-baranowski"><img
-                    src="https://ed.team/sites/default/files/social-icons/github-icon.png" width="50"
+                    src="/img/github-icon.png" width="50"
                     /></a>
                 <a href="mailto:dan@devtales.net">
-                    <img src="https://ed.team/themes/custom/escueladigital/img/email.svg" width="45"
+                    <img src="/img/email.svg" width="45"
                          className="email" /></a>
             </div>
         </div>
