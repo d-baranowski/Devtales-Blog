@@ -2,6 +2,7 @@ package net.devtales.blog.service;
 
 import com.google.common.collect.Lists;
 import net.devtales.blog.BadRequestException;
+import net.devtales.blog.exception.NotFoundException;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.parser.CreateNotExistingTags;
 import net.devtales.blog.repository.ArticleRepository;
