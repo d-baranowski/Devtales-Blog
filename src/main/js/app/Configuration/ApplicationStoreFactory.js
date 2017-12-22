@@ -1,8 +1,8 @@
 import {applyMiddleware, createStore} from "redux";
-import ApplicationReducer from "./ApplicationReducer";
-import ApplicationServices from "./ApplicationServices";
+import {ApplicationReducer} from "./ApplicationReducer";
+import {ApplicationServices} from "./ApplicationServices";
 
-const ApplicationStoreFactory = (history) => {
+export const ApplicationStoreFactory = (history) => {
     // Grab the state from a global variable injected into the server-generated HTML
     const preloadedState = window.__PRELOADED_STATE__;
     delete window.__PRELOADED_STATE__;
@@ -15,5 +15,3 @@ const ApplicationStoreFactory = (history) => {
             applyMiddleware(...Object.entries(middleWare).map((obj) => { return obj[1]})))
     );
 };
-
-export default ApplicationStoreFactory;

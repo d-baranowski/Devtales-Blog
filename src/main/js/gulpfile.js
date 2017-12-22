@@ -74,7 +74,7 @@ const renderReact = (entryFile, outputFile, standalone) =>{
         debug: true,
         transform: [babelify.configure({
             plugins: ["transform-class-properties"],
-            presets: ['stage-2', 'es2015', 'react'] //Browserivy does not understand JSX and ES6 so we need to use transformers to translate our code before bundling.
+            presets: ['stage-2', 'es2015', 'react','flow'] //Browserivy does not understand JSX and ES6 so we need to use transformers to translate our code before bundling.
         })]
     };
 
@@ -97,15 +97,15 @@ const renderReact = (entryFile, outputFile, standalone) =>{
 gulp.task('reactify', ['react-compilation-server', 'react-compilation-client', 'react-compilation-admin']);
 
 gulp.task('react-compilation-admin', ['lint'], () => { //Lint task is a prerequisite to this task.
-    return renderReact('./app/admin.js', paths.adminBundleDest);
+    return renderReact('./app/admin.index.js', paths.adminBundleDest);
 });
 
 gulp.task('react-compilation-server', ['lint'], () => { //Lint task is a prerequisite to this task.
-    return renderReact('./app/server.js', paths.serverBundleDest, 'MyApp');
+    return renderReact('./app/server.index.js', paths.serverBundleDest, 'MyApp');
 });
 
 gulp.task('react-compilation-client', ['lint'], () => { //Lint task is a prerequisite to this task.
-    return renderReact('./app/index.js', paths.clientBundleDest);
+    return renderReact('./app/client.index.js', paths.clientBundleDest);
 });
 
 gulp.task("watch", () => {

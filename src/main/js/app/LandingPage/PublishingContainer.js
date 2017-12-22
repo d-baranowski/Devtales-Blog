@@ -1,10 +1,11 @@
-import React, { Component }  from 'react';
-import { connect } from 'react-redux';
+import React, {Component}  from 'react';
+import {connect} from 'react-redux';
+import type {ApplicationReducerType} from "../Configuration"
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: ApplicationReducerType, ownProps) => {
     return {
-        isAdmin: state.adminReducer.isAdmin,
-        article: state.articleReducer.articles[ownProps.slug],
+        isAdmin: state.AdminReducer.isAdmin,
+        article: state.ArticleReducer.articles[ownProps.slug],
     };
 };
 
@@ -22,7 +23,7 @@ const hideArticleAction = (id) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return({
+    return ({
         publish: (id) => dispatch(publishArticleAction(id)),
         hide: (id) => dispatch(hideArticleAction(id))
     })

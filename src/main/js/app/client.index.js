@@ -5,7 +5,7 @@ import createHistory from "history/createBrowserHistory";
 import {BrowserRouter as Router} from "react-router-dom";
 import PageNavigation from "./Navigation/PageNavigation";
 import {Provider} from "react-redux";
-import ApplicationStoreFactory from "./Configuration/ApplicationStoreFactory";
+import {ApplicationStoreFactory} from "./Configuration";
 
 
 const history = createHistory();

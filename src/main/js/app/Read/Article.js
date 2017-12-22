@@ -1,18 +1,16 @@
 import React from 'react';
-import ConfiguredEditor, {generateState} from '../Display/ConfiguredEditor';
+import {ConfiguredEditor, GenerateConfiguredEditorState} from '../Display';
 
-const Article = (props) => {
+export const Article = (props) => {
     const {article} = props;
 
     return (
         <div className="article-container">
             <ConfiguredEditor
                 readOnly="true"
-                editorState= {generateState(article.jsonRepresentation)}
+                editorState= {GenerateConfiguredEditorState(article.jsonRepresentation)}
                 spellCheck={false}
             />
         </div>
     );
 };
-
-export default Article;

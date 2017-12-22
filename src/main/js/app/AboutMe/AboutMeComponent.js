@@ -1,7 +1,6 @@
 import React from "react";
 
-const AboutMe = (props) => {
-
+export const AboutMeComponent = (props) => {
     return (
         <div className="article-container">
             <h1>About Me</h1>
@@ -33,5 +32,3 @@ const AboutMe = (props) => {
         </div>
     )
 };
-
-export default AboutMe;

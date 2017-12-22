@@ -1,4 +1,7 @@
-const adminReducer = (state = [], action) => {
+// @flow
+import type {Reducer} from "redux"
+
+export const AdminReducer : Reducer<AdminReducerType, any> = (state = {isAdmin: false}, action) => {
     switch (action.type) {
         case 'ADMIN_BECOME':
             return {
@@ -15,4 +18,6 @@ const adminReducer = (state = [], action) => {
     }
 };
 
-export default adminReducer
+export type AdminReducerType = {
+    isAdmin: boolean
+};

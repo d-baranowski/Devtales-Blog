@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 
-const ArticleService = store => next => action => {
+export const ArticleService = store => next => action => {
     /*
      Pass all actions through by default
      */
@@ -132,5 +132,3 @@ const ArticleService = store => next => action => {
     }
 
 };
-
-export default ArticleService

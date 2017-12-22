@@ -1,10 +1,14 @@
+// @flow
+
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
-import Article from "./Article";
+import {Article} from "./Article";
+import type {ApplicationReducerType} from "../Configuration"
 
-const mapStateToProps = (state) => {
+
+const mapStateToProps = (state : ApplicationReducerType) => {
     return {
-        articles: state.articleReducer.articles || []
+        articles: state.ArticleReducer.articles || []
     }
 };
 
@@ -14,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
     })
 };
 
-const ArticleReaderContaier = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+export const ArticleReaderContaier = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
     componentDidMount() {
         //If article doesn't exist fetch it
     }
@@ -26,5 +30,3 @@ const ArticleReaderContaier = connect(mapStateToProps, mapDispatchToProps)(class
         return <Article article={article}/>
     }
 });
-
-export default ArticleReaderContaier;

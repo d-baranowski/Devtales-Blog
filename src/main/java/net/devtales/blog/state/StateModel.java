@@ -1,12 +1,15 @@
 package net.devtales.blog.state;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import net.devtales.blog.model.Article;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StateModel {
+    @JsonProperty("AdminReducer")
     private AdminReducer adminReducer;
+    @JsonProperty("ArticleReducer")
     private ArticleReducer articleReducer;
 
     public StateModel(boolean isAdmin, Article... articles) {

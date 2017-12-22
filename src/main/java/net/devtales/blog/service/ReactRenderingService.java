@@ -1,7 +1,10 @@
 package net.devtales.blog.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.nashorn.api.scripting.JSObject;
 import net.devtales.blog.jsengine.CachedReact;
+import net.devtales.blog.state.StateModel;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +14,11 @@ import java.util.Objects;
 @Component
 public class ReactRenderingService {
     private final CachedReact react;
+    private final ObjectMapper objectMapper;
 
-    public ReactRenderingService(CachedReact react) {
+    public ReactRenderingService(CachedReact react, ObjectMapper objectMapper) {
         this.react = react;
+        this.objectMapper = objectMapper;
     }
 
     public String serverSideReact(final Map<String, Object> model, boolean isAdmin, String uri, String preState) {
@@ -27,7 +32,13 @@ public class ReactRenderingService {
     }
 
     public String serverSideReact(final Map<String, Object> model, boolean isAdmin, String uri) {
-        String preState = "{\"adminReducer\":{\"isAdmin\":"+isAdmin+"}}";
-        return serverSideReact(model, isAdmin, uri, preState);
+        final StateModel stateObject = new StateModel(isAdmin);
+
+        try {
+            final String preState = objectMapper.writeValueAsString(stateObject);
+            return serverSideReact(model, isAdmin, uri, preState);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

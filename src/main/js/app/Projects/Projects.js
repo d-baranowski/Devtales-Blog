@@ -18,7 +18,7 @@ const Tile = (props) => {
     )
 };
 
-const Projects = (props) => {
+export const Projects = (props) => {
 
     return (
         <div className="tile-parent">
@@ -46,5 +46,3 @@ const Projects = (props) => {
         </div>
     )
 };
-
-export default Projects;

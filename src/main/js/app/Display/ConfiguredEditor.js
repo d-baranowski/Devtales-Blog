@@ -1,25 +1,13 @@
 import React from "react";
-import {Editor ,DefaultDraftBlockRenderMap, EditorState, convertFromRaw} from 'draft-js';
+import {Editor, DefaultDraftBlockRenderMap} from 'draft-js';
 import Immutable from "immutable";
-import Decorators from "./Decorators"
 import Media from "./Media";
-
-class StyledCodeBlock extends React.Component {
-    render() {
-        return (
-            <div>
-                <pre className="language-">
-                    {this.props.children}
-                </pre>
-            </div>
-        )
-    }
-}
+import StyledCodeBlock from "./StyledCodeBlock";
 
 const blockRenderMap = DefaultDraftBlockRenderMap.merge(
     Immutable.Map({
-        'atomic': { component: Media, editable: false },
-        'code-block': { element: 'pre', wrapper: <StyledCodeBlock /> }
+        'atomic': {component: Media, editable: false},
+        'code-block': {element: 'pre', wrapper: <StyledCodeBlock />}
     })
 );
 
@@ -34,34 +22,13 @@ const getBlockStyle = (block) => {
     }
 };
 
-export const generateState = (article) => {
-    return article ?
-        EditorState.createWithContent(convertFromRaw(JSON.parse(article)), Decorators) :
-        EditorState.createEmpty(Decorators)
-};
-
-
-
-function customBlockRenderFunction(block) {
-    if (block.getType() === 'atomic') {
-        return {
-            component: Media,
-            editable: false,
-        };
-    }
-    return null;
-}
-
-const ConfiguredEditor = (props) => {
+export const ConfiguredEditor = (props) => {
     return (
         <Editor
             {...props}
             blockRenderMap={blockRenderMap}
-            blockRendererFn={customBlockRenderFunction}
             blockStyleFn={getBlockStyle}
             editorKey="serverSide"
         />
     );
 };
-
-export default ConfiguredEditor;

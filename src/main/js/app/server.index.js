@@ -8,7 +8,7 @@ import {routerMiddleware} from "react-router-redux";
 import {StaticRouter as Router} from "react-router-dom";
 import createMemoryHistory from "history/createMemoryHistory";
 import PageNavigation from "./Navigation/PageNavigation";
-import ApplicationReducer from "./Configuration/ApplicationReducer";
+import {ApplicationReducer} from "./Configuration";
 
 
 const ServerSideRender = function (url, preState) {
@@ -38,7 +38,8 @@ const ServerSideRender = function (url, preState) {
     }
 };
 
-export default ServerSideRender; //This is actually used by React.java class
+//noinspection JSUnusedGlobalSymbols This is actually used by React.java class
+export default ServerSideRender;
 
 
 

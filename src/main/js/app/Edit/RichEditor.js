@@ -2,7 +2,7 @@ import React from "react";
 import {RichUtils, convertToRaw, AtomicBlockUtils, EditorState, Modifier} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
-import ConfiguredEditor, {generateState} from "../../Display/ConfiguredEditor"
+import ConfiguredEditor, {generateState} from "../Display/ConfiguredEditor"
 import ImageUploadMenuContainer from "./ImageUploadMenuContainer";
 
 class RichEditor extends React.Component {

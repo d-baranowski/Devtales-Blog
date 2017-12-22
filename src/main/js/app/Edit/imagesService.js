@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 
-const imagesService = store => next => action => {
+export const ImagesService = store => next => action => {
     /*
      Pass all actions through by default
      */
@@ -54,7 +54,4 @@ const imagesService = store => next => action => {
         default:
             break
     }
-
 };
-
-export default imagesService

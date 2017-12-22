@@ -62,7 +62,9 @@ public class MainController {
             staleWhileRevalidate = 24 * 60 * 60 * 60)
     @PreAuthorize("permitAll()")
     public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
-        return render.serverSideReact(model, isAdmin(authentication), request.getRequestURI());
+        final StateModel stateObject = new StateModel(isAdmin(authentication));
+        final String preState = objectMapper.writeValueAsString(stateObject);
+        return render.serverSideReact(model, isAdmin(authentication), request.getRequestURI(),preState);
     }
 
     @GetMapping({"/about", "/projects"})

@@ -1,15 +1,28 @@
+// @flow
+
 import {combineReducers} from "redux";
 import {routerReducer} from "react-router-redux";
-import articleReducer from '../Edit/ArticleReducer';
-import messageReducer from '../Notifications/messageReducer';
-import adminReducer from '../Admin/adminReducer';
-import imagesReducer from '../Edit/imagesReducer';
+import {ArticleReducer, ImagesReducer} from "../Edit";
+import {MessageReducer} from "../Notifications";
+import {AdminReducer} from "../Admin";
 
-const ApplicationReducer = combineReducers({
-    articleReducer,
-    messageReducer,
-    adminReducer,
-    imagesReducer,
+import type {Reducer} from "redux"
+import type {ArticleReducerType, ImagesReducerType} from "../Edit";
+import type {MessageReducerType} from "../Notifications";
+import type {AdminReducerType} from "../Admin";
+
+
+export const ApplicationReducer: Reducer<ApplicationReducerType, any> = combineReducers({
+    ArticleReducer,
+    MessageReducer,
+    AdminReducer,
+    ImagesReducer,
     router: routerReducer
 });
-export default ApplicationReducer;
+
+export type ApplicationReducerType = {
+    ArticleReducer: ArticleReducerType,
+    AdminReducer: AdminReducerType,
+    ImagesReducer: ImagesReducerType,
+    MessageReducer: MessageReducerType
+};

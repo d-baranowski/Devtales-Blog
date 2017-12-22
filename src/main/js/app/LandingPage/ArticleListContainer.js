@@ -1,12 +1,15 @@
+// @flow
+
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import ArticlePreviewComponent from "./ArticlePreviewComponent";
+import type { ApplicationReducerType } from "../Configuration";
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state : ApplicationReducerType) => {
     return {
-        articles: state.articleReducer.articles || [],
-        isAdmin: state.adminReducer.isAdmin
+        articles: state.ArticleReducer.articles || [],
+        isAdmin: state.ArticleReducer.isAdmin
     }
 };
 
@@ -22,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
     })
 };
 
-const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
     componentDidMount() {
         this.props.getAllArticles();
     }
@@ -42,5 +45,3 @@ const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class 
         return result.length > 0 ? <div>{result}</div> : <div />
     }
 });
-
-export default ArticleListContainer;
