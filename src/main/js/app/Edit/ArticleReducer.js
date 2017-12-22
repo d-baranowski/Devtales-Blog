@@ -1,4 +1,7 @@
-const ArticleReducer = (state = [], action) => {
+// @flow
+import type {Reducer} from "redux";
+
+export const ArticleReducer : Reducer<ArticleReducerType, any> = (state = {articles: {}}, action) => {
     switch (action.type) {
         case 'ARTICLE_GET_ALL_RECEIVED':
             if (action.data) {
@@ -38,4 +41,6 @@ const ArticleReducer = (state = [], action) => {
     }
 };
 
-export default ArticleReducer
+export type ArticleReducerType = {
+    articles: { [slug: string]: any }
+};

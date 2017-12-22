@@ -1,0 +1,1 @@
+export {AboutMeComponent} from "./AboutMeComponent"

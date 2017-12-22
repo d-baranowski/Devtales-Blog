@@ -1,10 +1,11 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
+import type {ApplicationReducerType} from "../Configuration"
 
-const mapStateToProps = (state) => {
-    if (state.messageReducer) {
+const mapStateToProps = (state : ApplicationReducerType) => {
+    if (state.MessageReducer) {
         return {
-            messages: state.messageReducer.messages || []
+            messages: state.MessageReducer.messages || []
         }
     } else {
         return {

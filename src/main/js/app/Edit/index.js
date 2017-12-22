@@ -1,2 +1,5 @@
-export {default as imagesService} from './imagesService';
-export {default as articleService} from './articleService';
+// @flow
+export {ImagesService} from './ImagesService';
+export {ArticleService} from './ArticleService';
+export {ArticleReducer, ArticleReducerType} from "./ArticleReducer"
+export {ImagesReducer, ImagesReducerType} from "./ImagesReducer"

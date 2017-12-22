@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ArticleEditorContainer from "./Edit/Edit/ArticleEditorContainer";
+import ArticleEditorContainer from "./Edit/ArticleEditorContainer";
 import {Provider} from "react-redux";
-import ApplicationStoreFactory from "./Configuration/ApplicationStoreFactory";
+import {ApplicationStoreFactory} from "./Configuration";
 
 const store = ApplicationStoreFactory();
 

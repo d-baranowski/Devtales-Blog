@@ -54,3 +54,6 @@ nbdist/
 
 # Folder containing pictures uplaoded for the blog.
 blog-content
+
+# Ignore folder which contains flow types for npm modules.
+flow-typed

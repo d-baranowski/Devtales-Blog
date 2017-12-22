@@ -1,10 +1,12 @@
+// @flow
+import type {Reducer} from "redux";
+
 const prependWithAddress = (x) => {
   return "/blog-content/" + x;
 };
 
-
-const defaultState = {showMenu: false};
-const imagesReducer = (state = defaultState, action) => {
+const defaultState : ImagesReducerType = {showMenu: false, images: []};
+export const ImagesReducer : Reducer<ImagesReducerType, any> = (state = defaultState, action) => {
     switch (action.type) {
         case 'GET_IMAGES_SUCCESS':
             if (action.data.text) {
@@ -45,4 +47,12 @@ const imagesReducer = (state = defaultState, action) => {
     }
 };
 
-export default imagesReducer;
+type ImageStateType = {
+    image: string,
+    thumb: string
+}
+
+export type ImagesReducerType = {
+    showMenu: boolean,
+    images: ImageStateType[]
+}
