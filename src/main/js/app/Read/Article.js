@@ -1,5 +1,5 @@
 import React from 'react';
-import ConfiguredEditor, {generateState} from './ConfiguredEditor';
+import ConfiguredEditor, {generateState} from '../Display/ConfiguredEditor';
 
 const Article = (props) => {
     const {article} = props;

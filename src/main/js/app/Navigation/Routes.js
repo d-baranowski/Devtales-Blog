@@ -1,9 +1,9 @@
 import React from "react";
 import {Route} from "react-router-dom";
-import ArticleListContainer from "../containers/articleListContainer";
-import ArticleReaderContaier from "../containers/ArticleReaderContainer";
-import AboutMe from "./AboutMe";
-import Projects from "./Projects";
+import ArticleListContainer from "../LandingPage/articleListContainer";
+import ArticleReaderContaier from "../Read/ArticleReaderContainer";
+import AboutMe from "../AboutMe/AboutMe";
+import Projects from "../Projects/Projects";
 
 const Routes = (props) => {
     return (

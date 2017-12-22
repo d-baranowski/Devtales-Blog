@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
-import RichEditor from "../components/RichEditor";
+import RichEditor from "./RichEditor";
 
 const mapStateToProps = (state) => {
     return {

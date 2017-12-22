@@ -1,7 +1,9 @@
 import React  from "react";
 import {CompositeDecorator} from "draft-js";
 import Prism from 'prismjs/components/prism-core';
+//noinspection ES6UnusedImports
 import clike from 'prismjs/components/prism-clike';
+//noinspection ES6UnusedImports
 import js from 'prismjs/components/prism-javascript';
 
 const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;

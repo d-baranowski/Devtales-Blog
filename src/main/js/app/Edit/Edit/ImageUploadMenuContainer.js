@@ -1,4 +1,4 @@
-import ImageUploadMenu from "../components/ImageUploadMenu";
+import ImageUploadMenu from "./ImageUploadMenu";
 import {connect} from "react-redux";
 import React, {Component} from "react"
 
