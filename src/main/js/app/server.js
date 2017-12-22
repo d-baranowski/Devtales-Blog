@@ -1,25 +1,21 @@
 import React from "react";
 import {renderToString} from "react-dom/server";
 
-import Routes from "./components/Routes"
-import {adminReducer, articleReducer} from "./reducers";
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import Routes from "./Navigation/Routes"
+import {applyMiddleware, createStore} from "redux";
 import {Provider} from "react-redux";
-import {routerMiddleware, routerReducer} from "react-router-redux";
+import {routerMiddleware} from "react-router-redux";
 import {StaticRouter as Router} from "react-router-dom";
 import createMemoryHistory from "history/createMemoryHistory";
-import PageNavigation from "./components/PageNavigation";
+import PageNavigation from "./Navigation/PageNavigation";
+import ApplicationReducer from "./Configuration/ApplicationReducer";
 
 
 const ServerSideRender = function (url, preState) {
     const history = createMemoryHistory();
 
     const store = createStore(
-        combineReducers({
-            adminReducer,
-            articleReducer,
-            router: routerReducer
-        }),
+        ApplicationReducer,
         JSON.parse(preState),
         applyMiddleware(routerMiddleware(history))
     );

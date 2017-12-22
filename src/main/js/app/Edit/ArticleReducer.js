@@ -1,4 +1,4 @@
-const articleReducer = (state = [], action) => {
+const ArticleReducer = (state = [], action) => {
     switch (action.type) {
         case 'ARTICLE_GET_ALL_RECEIVED':
             if (action.data) {
@@ -38,4 +38,4 @@ const articleReducer = (state = [], action) => {
     }
 };
 
-export default articleReducer
+export default ArticleReducer

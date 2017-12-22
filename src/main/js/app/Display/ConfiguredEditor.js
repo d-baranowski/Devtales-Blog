@@ -1,5 +1,5 @@
 import React from "react";
-import draft, {Editor ,DefaultDraftBlockRenderMap, EditorState, convertFromRaw} from 'draft-js';
+import {Editor ,DefaultDraftBlockRenderMap, EditorState, convertFromRaw} from 'draft-js';
 import Immutable from "immutable";
 import Decorators from "./Decorators"
 import Media from "./Media";
