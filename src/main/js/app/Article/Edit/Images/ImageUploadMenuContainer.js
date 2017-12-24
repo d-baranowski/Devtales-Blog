@@ -1,11 +1,23 @@
+// @flow
 import ImageUploadMenu from "./ImageUploadMenu";
 import {connect} from "react-redux";
 import React, {Component} from "react"
+import type {ApplicationReducerType} from "../../../Configuration"
+import type {Images} from "../index"
 
-const mapStateToProps = (state) => {
+type Props = {
+    images: Images,
+    showMenu: boolean,
+    getImages: Function,
+    uploadImage: Function,
+    toggleMenu: Function,
+    addImage: Function //Passed from editor used as confirmation
+}
+
+const mapStateToProps = (state : ApplicationReducerType) => {
     return {
-        images: state.imagesReducer.images,
-        showMenu: state.imagesReducer.showMenu
+        images: state.ImagesReducer.images,
+        showMenu: state.ImagesReducer.showMenu
     };
 };
 
@@ -26,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
     });
 };
 
-const ImageUploadMenuContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+const ImageUploadMenuContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
     componentWillMount() {
         this.props.getImages();
     }

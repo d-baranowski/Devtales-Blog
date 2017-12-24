@@ -1,7 +1,7 @@
 import React from "react";
 import {Route} from "react-router-dom";
 import {ArticleListContainer} from "../LandingPage";
-import {ArticleReaderContainer} from "../Read";
+import {ArticleReaderContainer} from "../Article/Read";
 import {AboutMeComponent} from "../AboutMe";
 import {Projects} from "../Projects";
 

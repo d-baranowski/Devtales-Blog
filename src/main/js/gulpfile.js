@@ -8,6 +8,7 @@ const gulp = require("gulp"),
     uglify = require("gulp-uglify"),
     streamify = require('gulp-streamify'),
     plumber = require('gulp-plumber'),
+    flow = require('flow'),
     sourcemaps = require("gulp-sourcemaps");
 
 
@@ -74,7 +75,7 @@ const renderReact = (entryFile, outputFile, standalone) =>{
         debug: true,
         transform: [babelify.configure({
             plugins: ["transform-class-properties"],
-            presets: ['stage-2', 'es2015', 'react','flow'] //Browserivy does not understand JSX and ES6 so we need to use transformers to translate our code before bundling.
+            presets: ['stage-2', 'es2015', 'react', 'flow'] //Browserivy does not understand JSX and ES6 so we need to use transformers to translate our code before bundling.
         })]
     };
 

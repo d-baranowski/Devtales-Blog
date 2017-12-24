@@ -1,10 +1,20 @@
 // @flow
+import type {ApplicationReducerType} from "../../Configuration/index"
+import type {Articles} from "../."
 
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 import {Article} from "./Article";
-import type {ApplicationReducerType} from "../Configuration"
 
+
+type Props = {
+    articles: Articles,
+    match: { // Injected by router
+        params: {
+            articleSlug: string
+        }
+    }
+}
 
 const mapStateToProps = (state : ApplicationReducerType) => {
     return {
@@ -18,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     })
 };
 
-export const ArticleReaderContaier = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
     componentDidMount() {
         //If article doesn't exist fetch it
     }

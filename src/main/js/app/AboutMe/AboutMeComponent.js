@@ -1,6 +1,6 @@
 import React from "react";
 
-export const AboutMeComponent = (props) => {
+export const AboutMeComponent = () => {
     return (
         <div className="article-container">
             <h1>About Me</h1>

@@ -1,11 +1,11 @@
-import {ImagesService, ArticleService} from "../Edit";
+import {ImagesService, ArticleService} from "../Article/Edit";
 import {routerMiddleware} from "react-router-redux";
 
 export const ApplicationServices = (history) => {
     return ({
         routerMiddleware: routerMiddleware(history),
-        ArticleService,
-        ImagesService
+        ArticleMiddleware: ArticleService,
+        ImagesMiddleware: ImagesService
     });
 };
 

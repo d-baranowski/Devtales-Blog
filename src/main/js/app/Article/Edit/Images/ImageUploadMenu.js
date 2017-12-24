@@ -1,5 +1,5 @@
 import React from "react";
-import {If} from "../Utility";
+import {If} from "../../../Utility";
 
 function Image(props) {
     return <img onClick={props.image.onClick} src={props.image.thumb} />

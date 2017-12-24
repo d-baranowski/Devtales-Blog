@@ -1,7 +1,8 @@
 // @flow
 import type {Reducer} from "redux";
 
-export const MessageReducer : Reducer<MessageReducerType, any> = (state = {messages: []}, action) => {
+export const MessageReducerInitialState = {messages: []};
+export const MessageReducer : Reducer<MessageReducerType, any> = (state = MessageReducerInitialState, action) => {
     if (typeof action.type !== "string") {
         return state
     }

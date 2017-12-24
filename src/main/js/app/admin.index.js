@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ArticleEditorContainer from "./Edit/ArticleEditorContainer";
+import {ArticleEditorContainer} from "./Article";
 import {Provider} from "react-redux";
 import {ApplicationStoreFactory} from "./Configuration";
 

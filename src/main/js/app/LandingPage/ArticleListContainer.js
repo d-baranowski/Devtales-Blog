@@ -3,13 +3,19 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import ArticlePreviewComponent from "./ArticlePreviewComponent";
-import type { ApplicationReducerType } from "../Configuration";
+import type {ApplicationReducerType} from "../Configuration";
+import type {Articles} from "../Article";
 
+type Props = {
+    articles: Articles,
+    isAdmin: boolean,
+    getAllArticles: Function
+};
 
-const mapStateToProps = (state : ApplicationReducerType) => {
+const mapStateToProps = (state: ApplicationReducerType) => {
     return {
         articles: state.ArticleReducer.articles || [],
-        isAdmin: state.ArticleReducer.isAdmin
+        isAdmin: state.AdminReducer.isAdmin
     }
 };
 
@@ -20,12 +26,14 @@ const getAllArticlesAction = () => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return({
-        getAllArticles: () => {dispatch(getAllArticlesAction())}
+    return ({
+        getAllArticles: () => {
+            dispatch(getAllArticlesAction())
+        }
     })
 };
 
-export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
+export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
     componentDidMount() {
         this.props.getAllArticles();
     }
