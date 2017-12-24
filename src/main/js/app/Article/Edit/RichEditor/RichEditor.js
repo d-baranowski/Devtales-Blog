@@ -1,14 +1,23 @@
-import React from "react";
-import {RichUtils, convertToRaw, AtomicBlockUtils, EditorState, Modifier} from 'draft-js';
+import React, {Component} from "react";
+import {RichUtils, convertToRaw, AtomicBlockUtils, Modifier} from 'draft-js';
 import BlockStyleControls from "./BlockStyleControls";
 import InlineStyleControls from "./InlineStyleControls";
-import ConfiguredEditor, {generateState} from "../Display/ConfiguredEditor"
-import ImageUploadMenuContainer from "./ImageUploadMenuContainer";
+import {ConfiguredEditor, GenerateConfiguredEditorState} from "../../Display/index"
+import ImageUploadMenuContainer from "../Images/ImageUploadMenuContainer";
+import type {EditorState} from "draft-js";
 
-class RichEditor extends React.Component {
+type Props = {
+
+}
+
+type State = {
+    editorState: EditorState
+}
+
+class RichEditor extends Component<Props, State> {
     constructor(props) {
         super(props);
-        this.state = {editorState: generateState(props.loadState)};
+        this.state = {editorState: GenerateConfiguredEditorState(props.loadState)};
         this.onChange = (editorState) => this.setState({editorState});
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
         this.onTab = (e) => this._onTab(e);
@@ -151,7 +160,6 @@ class RichEditor extends React.Component {
                         />
                     </div>
                 </div>
-
             </div>
         );
     }

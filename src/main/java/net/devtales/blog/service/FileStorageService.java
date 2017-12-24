@@ -25,16 +25,20 @@ public class FileStorageService {
             Files.write(file.getBytes(), serverFile);
             return fileName;
         } catch (IOException e) {
-            throw new RuntimeException("Failed to upload file",e);
+            throw new RuntimeException("Failed to upload file", e);
         }
     }
 
     public String thumbnail(String fileName) {
         switch (fileName.split("\\.")[1]) {
-            case "img": return thumbnailImg(fileName);
-            case "gif": return thumbnailImg(fileName);
-            case "mp4": return thumbnailVideo(fileName);
-            default: throw new RuntimeException("Unrecognised file extension");
+            case "jpg":
+                return thumbnailImg(fileName);
+            case "gif":
+                return thumbnailImg(fileName);
+            case "mp4":
+                return thumbnailVideo(fileName);
+            default:
+                throw new RuntimeException("Unrecognised file extension");
         }
     }
 
@@ -75,7 +79,7 @@ public class FileStorageService {
         int scaleY = new Double(img.getHeight() * (1.0 / times)).intValue();
         Image image = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
         BufferedImage buffered = new BufferedImage(scaleX, scaleY, BufferedImage.TYPE_INT_RGB);
-        buffered.getGraphics().drawImage(image, 0, 0 , null);
+        buffered.getGraphics().drawImage(image, 0, 0, null);
 
         return buffered;
     }

@@ -1,1 +1,2 @@
-export {MessageReducer, MessageReducerType} from "./messageReducer"
+export {MessageReducer, MessageReducerInitialState} from "./messageReducer"
+export type {MessageReducerType} from "./messageReducer"

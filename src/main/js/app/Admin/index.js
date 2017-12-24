@@ -1,4 +1,5 @@
 // @flow
 
-export {AdminReducer} from "./AdminReducer"
+export {AdminReducer, AdminReducerInitialState} from "./AdminReducer"
+
 export type {AdminReducerType} from "./AdminReducer"

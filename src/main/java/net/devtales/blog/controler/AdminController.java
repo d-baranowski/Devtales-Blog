@@ -21,13 +21,11 @@ import java.util.Map;
 public class AdminController {
     private final ArticlesService service;
     private final ObjectMapper objectMapper;
-    private final FileUploadService fileUploadService;
 
 
     public AdminController(ArticlesService service, ObjectMapper objectMapper,FileUploadService fileUploadService) {
         this.service = service;
         this.objectMapper = objectMapper;
-        this.fileUploadService = fileUploadService;
     }
 
     @GetMapping(path = "/admin")
@@ -42,12 +40,5 @@ public class AdminController {
         String state = "{articleReducer: {updating: "+articleJson+"}, adminReducer:{isAdmin: true}}";
         model.put("state", state);
         return "admin";
-    }
-
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @PostMapping("/file")
-    @ResponseBody
-    public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(fileUploadService.handle(file));
     }
 }
