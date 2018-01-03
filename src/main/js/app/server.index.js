@@ -10,7 +10,6 @@ import createMemoryHistory from "history/createMemoryHistory";
 import PageNavigation from "./Navigation/PageNavigation";
 import {ApplicationReducer} from "./Configuration";
 
-
 const ServerSideRender = function (url, preState) {
     const history = createMemoryHistory();
 

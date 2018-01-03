@@ -12,6 +12,6 @@ export const ApplicationStoreFactory = (history) => {
         ApplicationReducer,
         preloadedState,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__( //DEBUG remove in production
-            applyMiddleware(Object.entries(middleWare).map((obj) => { return obj})))
+            applyMiddleware(...middleWare))
     );
 };
