@@ -12,7 +12,7 @@ const history = createHistory();
 const store = ApplicationStoreFactory(history);
 
 function ClientSideRender() {
-    ReactDOM.render(
+    ReactDOM.hydrate(
         <Provider store={store}>
             <Router history={history}>
                 <div className="page-content">
