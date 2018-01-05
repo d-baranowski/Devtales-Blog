@@ -22,11 +22,22 @@ const getBlockStyle = (block) => {
     }
 };
 
+const customBlockRenderFunction = (block) => {
+    if (block.getType() === 'atomic') {
+        return {
+            component: Media,
+            editable: false,
+        };
+    }
+    return null;
+};
+
 export const ConfiguredEditor = (props) => {
     return (
         <Editor
             {...props}
             blockRenderMap={blockRenderMap}
+            blockRendererFn={customBlockRenderFunction}
             blockStyleFn={getBlockStyle}
             editorKey="serverSide"
         />

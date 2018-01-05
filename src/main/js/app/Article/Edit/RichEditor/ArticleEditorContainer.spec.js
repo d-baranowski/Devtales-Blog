@@ -55,9 +55,22 @@ describe("Article container will receive a fake article", () => {
         </Provider>
     );
 
-    it("Should render", () => {
+    describe("When I open the image upload menu and select an image ", () => {
         wrapper.find("#displayImageUploadMenuButton").simulate("click");
         wrapper.find("img").at(0).simulate("click");
-        expect(wrapper.find("img").length).toEqual(1);
+
+        it("There should be a single visible image", () => {
+            expect(wrapper.find("img").length).toEqual(1);
+        });
+
+        it("The image source should be equal to the image selected earlier", () => {
+            expect(wrapper.find("img").get(0).props.src).toEqual("https://www.placecage.com/500/500");
+        });
+
+        it("The menu should be toggled twice once to show and once to hide the image", () => {
+            expect(actionsDispatched).toContain({ type: 'TOGGLE_MENU' }, { type: 'TOGGLE_MENU' });
+            expect(statesInOrder[0].ImagesReducer.showMenu).toEqual(true);
+            expect(statesInOrder[1].ImagesReducer.showMenu).toEqual(false);
+        });
     })
 });
