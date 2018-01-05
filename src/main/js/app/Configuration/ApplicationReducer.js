@@ -35,3 +35,9 @@ export type ApplicationReducerType = {
     ImagesReducer: ImagesReducerType,
     MessageReducer: MessageReducerType
 };
+
+type Action = {
+    type: string
+}
+
+export type Dispatch = (action: Action) => void;

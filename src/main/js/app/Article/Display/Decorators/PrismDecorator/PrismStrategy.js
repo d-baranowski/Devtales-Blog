@@ -3,13 +3,31 @@ import Prism from 'prismjs/components/prism-core';
 import clike from 'prismjs/components/prism-clike';
 //noinspection ES6UnusedImports
 import js from 'prismjs/components/prism-javascript';
+//noinspection ES6UnusedImports
+import java from 'prismjs/components/prism-java';
+//noinspection ES6UnusedImports
+import css from 'prismjs/components/prism-css';
+//noinspection ES6UnusedImports
+import sass from 'prismjs/components/prism-sass';
+//noinspection ES6UnusedImports
+import bash from 'prismjs/components/prism-bash';
+//noinspection ES6UnusedImports
+import json from 'prismjs/components/prism-json';
+//noinspection ES6UnusedImports
+import sql from 'prismjs/components/prism-sql';
 
-let activeLanguage = Prism.languages.clike;
+const supportedLanguages = [
+    "clike", "javascript", "java", "sass", "css", "bash", "json", "sql"
+];
 
 const detectLanguage = (text) => {
-    if (text.includes('// javascript //')) {
-        activeLanguage = Prism.languages.javascript;
-    }
+    supportedLanguages.forEach((lang) => {
+        if (text.includes("// " + lang + " //")) {
+            return Prism.languages[lang];
+        }
+    });
+
+    return Prism.languages.clike
 };
 
 const PrismStrategy = (contentBlock, callback, contentState) => {
@@ -18,8 +36,7 @@ const PrismStrategy = (contentBlock, callback, contentState) => {
     }
 
     const text = contentBlock.getText();
-    detectLanguage(text);
-    const tokens = Prism.tokenize(text, activeLanguage);
+    const tokens = Prism.tokenize(text, detectLanguage(text));
     if (tokens) {
         contentBlock.tokenMap = {};
         let stringIndex = 0;
@@ -28,8 +45,9 @@ const PrismStrategy = (contentBlock, callback, contentState) => {
             if (token.content) {
                 contentBlock.tokenMap[token.content] = token;
             }
-            callback(stringIndex, stringIndex + tokens[i].length);
-            stringIndex+=tokens[i].length;
+
+            callback(stringIndex, stringIndex + token.length);
+            stringIndex+=token.length;
         }
     }
 };

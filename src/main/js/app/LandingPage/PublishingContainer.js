@@ -1,8 +1,24 @@
+// @flow
 import React, {Component}  from 'react';
 import {connect} from 'react-redux';
-import type {ApplicationReducerType} from "../Configuration"
+import PublishingComponent from "./PublishingComponent";
 
-const mapStateToProps = (state: ApplicationReducerType, ownProps) => {
+import type {ApplicationReducerType, Dispatch} from "../Configuration"
+import type {ArticleType} from "../Article";
+
+export type Props = {
+    isAdmin: boolean,
+    article: ArticleType,
+    publish: (id: number) => void,
+    hide: (id: number) => void,
+    slug: string
+}
+
+type OwnProps = {
+    slug: string
+}
+
+const mapStateToProps = (state: ApplicationReducerType, ownProps : OwnProps) => {
     return {
         isAdmin: state.AdminReducer.isAdmin,
         article: state.ArticleReducer.articles[ownProps.slug],
@@ -22,36 +38,30 @@ const hideArticleAction = (id) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = ((dispatch : Dispatch) => {
     return ({
-        publish: (id) => dispatch(publishArticleAction(id)),
-        hide: (id) => dispatch(hideArticleAction(id))
+        publish: (id : number) => dispatch(publishArticleAction(id)),
+        hide: (id : number) => dispatch(hideArticleAction(id))
     })
-};
-const PublishingContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component {
-    constructor(props) {
+});
+const PublishingContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
+    onButtonClick: () => void;
+
+    constructor(props : Props) {
         super(props);
         this.onButtonClick = this.onButtonClick.bind(this);
     }
 
-    onButtonClick() {
-        const article = this.props.article;
-        const publish = this.props.publish.bind(this);
-        const hide = this.props.hide.bind(this);
-
-        if (article.publishedDate > 0) {
-            hide(article.id);
-        } else {
-            publish(article.id);
-        }
-    };
 
     render() {
-        const isAdmin = this.props.isAdmin;
-        const article = this.props.article;
-        return isAdmin ? <div>
-            <button onClick={this.onButtonClick}>{ article.publishedDate > 0 ? 'Hide' : 'Publish'}</button>
-        </div> : (null);
+        return (
+            <PublishingComponent
+                article={this.props.article}
+                isAdmin={this.props.isAdmin}
+                slug={this.props.slug}
+                publish={this.props.publish}
+                hide={this.props.hide}
+            />)
     }
 });
 

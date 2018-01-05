@@ -1,7 +1,21 @@
+// @flow
+
 import React from "react";
 import StyleButton from "./StyleButton";
+import type {EditorState} from "draft-js";
 
-const INLINE_STYLES = [
+
+type InlineStyleType = {
+    label: string,
+    style: string
+}
+
+type Props = {
+    editorState: EditorState,
+    onToggle: (inlineStyle: string) => void
+}
+
+const INLINE_STYLES: InlineStyleType[] = [
     {label: 'Bold', style: 'BOLD'},
     {label: 'Italic', style: 'ITALIC'},
     {label: 'Underline', style: 'UNDERLINE'},
@@ -9,8 +23,9 @@ const INLINE_STYLES = [
     {label: 'Code Block', style: 'code-block'}
 ];
 
-const InlineStyleControls = (props) => {
+const InlineStyleControls = (props : Props) => {
     const currentStyle = props.editorState.getCurrentInlineStyle();
+
     return (
         <div>
             {INLINE_STYLES.map(type =>

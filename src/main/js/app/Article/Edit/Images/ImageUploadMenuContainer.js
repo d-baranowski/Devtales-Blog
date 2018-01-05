@@ -5,13 +5,13 @@ import React, {Component} from "react"
 import type {ApplicationReducerType} from "../../../Configuration"
 import type {Images} from "../index"
 
-type Props = {
+export type Props = {
     images: Images,
     showMenu: boolean,
     getImages: Function,
     uploadImage: Function,
     toggleMenu: Function,
-    addImage: Function //Passed from editor used as confirmation
+    addImage: (imageUrl: string) => void; //Passed from editor used as confirmation
 }
 
 const mapStateToProps = (state : ApplicationReducerType) => {
@@ -38,30 +38,13 @@ const mapDispatchToProps = (dispatch) => {
     });
 };
 
-const ImageUploadMenuContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
-    componentWillMount() {
-        this.props.getImages();
-    }
-
+export const ImageUploadMenuContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
     render() {
-        const actualImages = this.props.images ? this.props.images : [];
-        const addImage = this.props.addImage;
-        const withFunction = actualImages.map((x) =>
-        {
-            return {
-                ...x,
-                onClick: () => {
-                    this.props.toggleMenu();
-                    addImage(x.image)
-                }
-            }
-        });
-
         return <ImageUploadMenu toggleMenu={this.props.toggleMenu}
                                 showMenu={this.props.showMenu}
                                 uploadImage={this.props.uploadImage}
-                                images={withFunction}/>
+                                getImages={this.props.getImages}
+                                addImage={this.props.addImage}
+                                images={this.props.images}/>
     }
 });
-
-export default ImageUploadMenuContainer;

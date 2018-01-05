@@ -6,6 +6,15 @@ import java.util.Map;
 
 public class ArticleReducer {
     private Map<String, Article> articles;
+    private Article updating;
+
+    public Article getUpdating() {
+        return updating;
+    }
+
+    public void setUpdating(Article updating) {
+        this.updating = updating;
+    }
 
     public Map<String, Article> getArticles() {
         return articles;

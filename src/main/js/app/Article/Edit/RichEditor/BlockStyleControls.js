@@ -1,7 +1,15 @@
+//@flow
 import React from "react";
 import StyleButton from "./StyleButton";
 
-const BLOCK_TYPES = [
+import type {EditorState} from "draft-js";
+
+type BlockType = {
+    label: string,
+    style: string
+}
+
+const BLOCK_TYPES: BlockType[] = [
     {label: 'H1', style: 'header-one'},
     {label: 'H2', style: 'header-two'},
     {label: 'H3', style: 'header-three'},
@@ -16,7 +24,12 @@ const BLOCK_TYPES = [
 
 ];
 
-const BlockStyleControls = (props) => {
+type Props = {
+    editorState: EditorState,
+    onToggle: (blockType: string) => void
+}
+
+const BlockStyleControls = (props: Props) => {
     const {editorState} = props;
     const selection = editorState.getSelection();
     const blockType = editorState

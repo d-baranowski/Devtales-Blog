@@ -8,7 +8,7 @@ export const Article = (props) => {
         <div className="article-container">
             <ConfiguredEditor
                 readOnly="true"
-                editorState= {GenerateConfiguredEditorState(article.jsonRepresentation)}
+                editorState={GenerateConfiguredEditorState(article.jsonRepresentation)}
                 spellCheck={false}
             />
         </div>
