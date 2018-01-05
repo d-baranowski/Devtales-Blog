@@ -1,5 +1,4 @@
 // @flow
-
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import ArticlePreviewComponent from "./ArticlePreviewComponent";
@@ -46,7 +45,7 @@ export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)
         Object.keys(articles).forEach((element, index, array) => {
             const article = articles[element];
             result.push(
-                <ArticlePreviewComponent key={'article-' + index + 1} isAdmin={isAdmin} article={article}/>
+                <ArticlePreviewComponent key={'article-' + article.id} isAdmin={isAdmin} article={article}/>
             );
         });
 

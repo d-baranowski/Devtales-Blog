@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticlesService {
@@ -58,12 +60,12 @@ public class ArticlesService {
         return articleRepo.save(oldState);
     }
 
-    public List<Article> readPublishedArticles() {
-        return articleRepo.findArticlesByPublishedDateNotNull();
+    public Map<String, Article> readPublishedArticles() {
+        return articleRepo.findArticlesByPublishedDateNotNull().stream().collect(Collectors.toMap(Article::getSlug, article -> article));
     }
 
-    public List<Article> readAll() {
-        return Lists.newArrayList(articleRepo.findAll());
+    public Map<String, Article> readAll() {
+        return Lists.newArrayList(articleRepo.findAll()).stream().collect(Collectors.toMap(Article::getSlug, article -> article));
     }
 
     public Article read(Long id) {

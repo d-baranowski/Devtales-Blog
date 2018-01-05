@@ -46,7 +46,7 @@ public class MainController {
 
 
     @Autowired
-    MainController(ArticlesService service, ObjectMapper objectMapper, ResourcePatternResolver resourcePatternResolver, ReactRenderingService render) {
+    MainController(ArticlesService service, ObjectMapper objectMapper, ReactRenderingService render) {
         this.service = service;
         this.objectMapper = objectMapper;
         this.render = render;
@@ -61,7 +61,8 @@ public class MainController {
             staleWhileRevalidate = 24 * 60 * 60 * 60)
     @PreAuthorize("permitAll()")
     public String index(final Map<String, Object> model, Authentication authentication, HttpServletRequest request) throws Exception {
-        final StateModel stateObject = new StateModel(isAdmin(authentication));
+        boolean isAdmin = isAdmin(authentication);
+        final StateModel stateObject = new StateModel(isAdmin, isAdmin ? service.readAll() : service.readPublishedArticles());
         final String preState = objectMapper.writeValueAsString(stateObject);
         return render.serverSideReact(model, isAdmin(authentication), request.getRequestURI(),preState);
     }
@@ -101,8 +102,6 @@ public class MainController {
 
         throw new NotFoundException("Article with slug " + slug + " was not found.");
     }
-
-
 
     public static boolean isAdmin(Authentication authentication) {
         return authentication != null && authentication.getAuthorities().stream()

@@ -45,13 +45,13 @@ public class ArticleApi {
             staleIfError = 7 * 24 * 60 * 60 * 60,
             staleWhileRevalidate = 24 * 60 * 60 * 60)
     public ResponseEntity<Map<String,Article>> getPublished() {
-        return ok(service.readPublishedArticles().stream().collect(Collectors.toMap(Article::getSlug, article -> article)));
+        return ok(service.readPublishedArticles());
     }
 
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<Map<String,Article>> getAll() {
-        return ok(service.readAll().stream().collect(Collectors.toMap(Article::getSlug, article -> article)));
+        return ok(service.readAll());
     }
 
     @PostMapping()

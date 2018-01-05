@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
     componentDidMount() {
-        //If article doesn't exist fetch it
+        //TODO If article doesn't exist fetch it
     }
 
     render() {

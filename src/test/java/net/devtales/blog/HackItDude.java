@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.repository.ArticleRepository;
-import net.devtales.blog.service.ArticlesService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

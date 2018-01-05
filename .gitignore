@@ -57,3 +57,4 @@ blog-content
 
 # Ignore folder which contains flow types for npm modules.
 flow-typed
+/src/main/js/npm-debug.log.*

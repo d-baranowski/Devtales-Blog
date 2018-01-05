@@ -15,7 +15,7 @@ class PageNavigation extends React.Component {
                         <li><NavLink activeClassName="active" to="/about">About</NavLink></li>
                     </ul>
                 </nav>
-                <div id="searchBar"><input placeholder="search" className="pretty-input"/><i className="fa fa-search" aria-hidden="true"/></div>
+               <div id="searchBar">{/*<input placeholder="search" className="pretty-input"/><i className="fa fa-search" aria-hidden="true"/>*/}</div>
             </header>
         )
     }

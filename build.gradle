@@ -84,6 +84,7 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.mockito:mockito-core:2.8.47'
     testCompile 'org.assertj:assertj-core:3.8.0'
+    testCompile 'org.skyscreamer:jsonassert:1.5.0'
 
     testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
     // For downloading browser-specific drivers that browsers like Chrome and IE require

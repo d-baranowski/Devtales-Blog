@@ -1,6 +1,16 @@
+// @flow
 import React, {Component} from "react";
 
-class StyleButton extends Component {
+type Props = {
+    onToggle: (style: string) => void,
+    style: string,
+    label: string,
+    active: boolean
+}
+
+class StyleButton extends Component<Props> {
+    onToggle: (e : SyntheticMouseEvent<*>) => void;
+
     constructor() {
         super();
         this.onToggle = (e) => {
@@ -15,7 +25,7 @@ class StyleButton extends Component {
             className += ' active';
         }
         return (
-            <div className={className} onMouseDown={this.onToggle}>
+            <div className={className} onClick={this.onToggle}>
                 {this.props.label}
             </div>
         );

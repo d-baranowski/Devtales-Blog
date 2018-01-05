@@ -6,8 +6,6 @@ export const HttpRequesterFactory = (superagent : superagentType) => {
     return new HttpRequester(superagent)
 };
 
-
-
 export interface HttpRequesterInterface {
     superagent: superagentType,
     post(url: string, data: any, callback: (err: any, res: any) => void): void;
@@ -40,14 +38,14 @@ class HttpRequester implements HttpRequesterInterface {
 
     patch(url: string, callback: (err: any, res: any) => void) {
         this.superagent
-            .post(url)
+            .patch(url)
             .send()
             .end(callback)
     }
 
     delete(url: string, callback: (err: any, res: any) => void) {
         this.superagent
-            .post(url)
+            .delete(url)
             .send()
             .end(callback)
     }
