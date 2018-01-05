@@ -23,6 +23,22 @@ describe("The ConfiguredEditor gets expected parameters ", () => {
     it("It should contain editorKey to avoid problems when server side rendering", () => {
         expect(wrapper.get(0).props.blockStyleFn).toBeTruthy();
     });
+
+    describe("It should contain a custom block render function which will allow it to render media elements", () =>{
+        const customBlockRenderFunction = wrapper.get(0).props.blockRendererFn;
+
+        it("Should return media element when called with block of type atomic", () => {
+            let blockMock = {getType: () => "atomic"};
+            expect(typeof(customBlockRenderFunction(blockMock).component)).toEqual('function');
+            expect(customBlockRenderFunction(blockMock).editable).toEqual(false);
+        });
+
+        it("Should return null when called with block that is not atomic", () => {
+            let blockMock = {getType: () => "other"};
+            expect(customBlockRenderFunction(blockMock)).toEqual(null);
+        });
+
+    })
 });
 
 describe("The ConfiguredEditor gets expected parameters ", () => {
