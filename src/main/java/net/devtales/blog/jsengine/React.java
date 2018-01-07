@@ -3,17 +3,18 @@ package net.devtales.blog.jsengine;
 import jdk.nashorn.api.scripting.JSObject;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+@Component
 @Slf4j
 public class React {
-    private final JsBundleResolver resolver;
     private final ThreadLocal<NashornScriptEngine> engineHolder;
 
     public React(JsBundleResolver resolver) {
-        this.resolver = resolver;
         this.engineHolder = ThreadLocal.withInitial(() -> {
             NashornScriptEngine nashornScriptEngine = (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
             try {

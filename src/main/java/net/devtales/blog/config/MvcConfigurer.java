@@ -2,6 +2,7 @@ package net.devtales.blog.config;
 
 import net.devtales.blog.cache.CacheControlHandlerInterceptor;
 import net.devtales.blog.config.transformer.VersionedLinksToStaticResourcesTransformer;
+import net.devtales.blog.jsengine.ReactWarmupStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;

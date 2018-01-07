@@ -23,10 +23,15 @@ public class ReactRenderingService {
 
     public String serverSideReact(final Map<String, Object> model, boolean isAdmin, String uri, String preState) {
         JSObject renderResult = react.render(uri, preState);
-        String html = String.valueOf(renderResult.getMember("html"));
-        String state = String.valueOf(renderResult.getMember("state"));
-        model.put("content", html);
-        model.put("state", state);
+        if (renderResult != null) {
+            String html = String.valueOf(renderResult.getMember("html"));
+            String state = String.valueOf(renderResult.getMember("state"));
+            model.put("content", html);
+            model.put("state", state);
+        } else {
+            model.put("content", "");
+            model.put("state", "");
+        }
         model.put("isAdmin", isAdmin);
         return "index";
     }

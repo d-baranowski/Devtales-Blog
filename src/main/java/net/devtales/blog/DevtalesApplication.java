@@ -1,7 +1,9 @@
 package net.devtales.blog;
 
+import net.devtales.blog.jsengine.ReactWarmupStrategy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
@@ -9,6 +11,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 public class DevtalesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DevtalesApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(DevtalesApplication.class, args);
     }
 }
