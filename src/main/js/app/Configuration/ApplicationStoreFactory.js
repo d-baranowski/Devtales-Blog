@@ -1,5 +1,5 @@
 import {applyMiddleware, createStore} from "redux";
-import {ApplicationReducer} from "./ApplicationReducer";
+import {ApplicationReducer, ApplicationReducerInitialState} from "./ApplicationReducer";
 import {ApplicationServices} from "./ApplicationServices";
 
 export const ApplicationStoreFactory = (history) => {
@@ -10,7 +10,7 @@ export const ApplicationStoreFactory = (history) => {
     const middleWare = ApplicationServices(history);
     return createStore(
         ApplicationReducer,
-        preloadedState,
+        preloadedState || ApplicationReducerInitialState,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__( //TODO DEBUG remove in production
             applyMiddleware(...middleWare))
     );
