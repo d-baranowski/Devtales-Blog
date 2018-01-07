@@ -7,8 +7,8 @@ import {Provider} from "react-redux";
 import {routerMiddleware} from "react-router-redux";
 import {StaticRouter as Router} from "react-router-dom";
 import createMemoryHistory from "history/createMemoryHistory";
-import PageNavigation from "./Navigation/PageNavigation";
 import {ApplicationReducer} from "./Configuration";
+import {PageNavigationContainer} from "./Navigation";
 
 const ServerSideRender = function (url, preState) {
     const history = createMemoryHistory();
@@ -27,7 +27,7 @@ const ServerSideRender = function (url, preState) {
             <Provider store={store}>
                 <Router context={{}} location={url} history={history}>
                     <div className="page-content">
-                        <PageNavigation/>
+                        <PageNavigationContainer/>
                         <Routes />
                     </div>
                 </Router>

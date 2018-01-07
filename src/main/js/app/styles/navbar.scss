@@ -8,7 +8,7 @@ $position-right: 0;
   position: absolute;
   top: 10px;
   left: $position-left;
-  z-index: 1;
+  z-index: 11;
 }
 
 #searchBar {
@@ -56,44 +56,119 @@ nav {
   top: $navbar-position;
   left: $position-left + 10%;
   right: $position-right;
-  z-index: 0;
+  z-index: 10;
   background-color: #444;
 
   #title {
-    margin-left: 5%;
+    margin-left: 150px;
   }
 
-  a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    transition: .3s background-color;
+  responsivenav {
+    a {
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      transition: .3s background-color;
 
-    &:hover {
-      background-color: $circuit-green;
+      &:hover {
+        background-color: $circuit-green;
+      }
+
+      &.active {
+        background-color: #fff;
+        color: #444;
+        cursor: default;
+      }
     }
 
-    &.active {
-      background-color: #fff;
-      color: #444;
-      cursor: default;
+    ul {
+      float: right;
+      list-style: none;
+      text-align: center;
+      padding: 0;
+      margin: 0 0 0 0;
+
+      li {
+        width: 150px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
+        display: inline-block;
+      }
     }
   }
+}
 
-  ul {
-    float: right;
-    list-style: none;
-    text-align: center;
-    padding: 0;
-    margin: 0 0 0 0;
+@media screen and (max-width: $media-medium), (device-width: $media-medium) {
+  #searchBar {
+    left: 120px;
+  }
+  nav {
+    left: 120px;
+  }
+}
 
-    li {
-      width: 150px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 1.4em;
-      display: inline-block;
+@media screen and (max-width: $media-navigation-links-go-lower), (device-width: $media-navigation-links-go-lower) {
+  nav {
+    responsivenav {
+      ul {
+        margin-top: 10px;
+      }
     }
   }
+}
 
+@media screen and (max-width: $media-small), (device-width: $media-small) {
+  #logo {
+    display: none;
+  }
+
+  #searchBar {
+    left:0;
+    top: 60px;
+  }
+
+  nav {
+    left:0;
+    right: 0;
+    top: 0;
+    height: 60px;
+
+    #title {
+      margin-left: 50px;
+    }
+
+    responsivenav {
+      $responsive-nav-width: 250px;
+
+      display: block;
+      position: fixed;
+      top:70px;
+      left:0;
+      width: $responsive-nav-width;
+      height: 100%;
+      margin:0 0 0 -250px;
+      transition:all 200ms ease-in;
+
+      &.open {
+        margin: 0;
+      }
+
+      ul {
+        width: $responsive-nav-width;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        background: $navbar-gray;
+        opacity: 0.8;
+        overflow: hidden;
+
+        li{
+          margin:0;
+          width: 100%;
+        }
+      }
+    }
+  }
 }
