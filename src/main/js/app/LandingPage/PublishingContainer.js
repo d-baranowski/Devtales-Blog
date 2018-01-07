@@ -19,6 +19,10 @@ type OwnProps = {
 }
 
 const mapStateToProps = (state: ApplicationReducerType, ownProps : OwnProps) => {
+    if (!ownProps.slug) {
+        throw "Publishing container did not receive a valid slug.";
+    }
+
     return {
         isAdmin: state.AdminReducer.isAdmin,
         article: state.ArticleReducer.articles[ownProps.slug],
@@ -45,11 +49,8 @@ const mapDispatchToProps = ((dispatch : Dispatch) => {
     })
 });
 const PublishingContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
-    onButtonClick: () => void;
-
     constructor(props : Props) {
         super(props);
-        this.onButtonClick = this.onButtonClick.bind(this);
     }
 
 

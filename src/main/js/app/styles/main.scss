@@ -1,5 +1,6 @@
 @import "variables";
 @import "navbar";
+@import "hamburger";
 @import "../../node_modules/prismjs/themes/prism";
 @import "../../node_modules/prism-themes/themes/prism-atom-dark";
 
@@ -7,11 +8,13 @@
   margin-left: 5%;
 }
 
+$tile-height: 25em;
+
 .tile {
   float: left;
   background: #444444;
   width: 32%;
-  height: 300px;
+  height: $tile-height;
   position: relative;
   margin: 5px;
 
@@ -47,11 +50,17 @@
     opacity: 0.9;
   }
 
+  @media (any-hover: none) {
+    .overlay {
+      opacity: 0.9;
+    }
+  }
+
   .footer {
     position: absolute;
     left: 10px;
     right: 10px;
-    top: 240px;
+    top: calc(#{$tile-height} - 60px);
     bottom: 10px;
   }
 }
@@ -170,4 +179,41 @@ h1, h2, h3, h4, h5, h6 {
   -moz-hyphens: none;
   hyphens: none;
   word-wrap: break-word;
+}
+
+@media screen and (max-width: $media-medium), (device-width: $media-medium) {
+  .page-content {
+    left: 10px;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: $media-navigation-links-go-lower), (device-width: $media-navigation-links-go-lower) {
+  .tile {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: $media-small), (device-width: $media-small) {
+  .page-content {
+    min-width: 450px;
+    left: 0;
+    right: 0;
+  }
+
+  #main-section {
+    margin-top: 60px;
+  }
+
+  .media {
+    max-width: 100%;
+  }
+
+  .tile-parent {
+    margin: 0;
+  }
+
+  .tile {
+    width: 100%;
+  }
 }

@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import Routes from "./Navigation/Routes";
 import createHistory from "history/createBrowserHistory";
 import {BrowserRouter as Router} from "react-router-dom";
-import PageNavigation from "./Navigation/PageNavigation";
 import {Provider} from "react-redux";
 import {ApplicationStoreFactory} from "./Configuration";
+import {PageNavigationContainer} from "./Navigation";
 
 
 const history = createHistory();
@@ -16,7 +16,7 @@ function ClientSideRender() {
         <Provider store={store}>
             <Router history={history}>
                 <div className="page-content">
-                    <PageNavigation/>
+                    <PageNavigationContainer/>
                     <Routes />
                 </div>
             </Router>
