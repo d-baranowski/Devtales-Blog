@@ -15,5 +15,6 @@ export type Article = {
     updatedOn: number,
     publishedDate: number,
     jsonRepresentation: string,
-    tags: Tag[]
+    tags: Tag[],
+    isLoading: boolean
 }

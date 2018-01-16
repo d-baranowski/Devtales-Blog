@@ -3,6 +3,41 @@ import type {Store} from "../Configuration";
 import type {HttpRequesterInterface} from "../HttpRequest";
 import type {Article} from "./ArticleType"
 
+
+const ArticleGetSpecific = (httpRequester, store, next, action) => {
+    if (!action.slug) {
+        next({
+            type: 'ARTICLE_GET_SPECIFIC_ERROR',
+            data: {message: "ARTICLE_GET_SPECIFIC action did not contain a valid slug"}
+        });
+    } else {
+        next({
+            type: 'ARTICLE_GET_SPECIFIC_LOADING',
+            slug: action.slug
+        });
+
+        let isAdmin = store.getState().AdminReducer.isAdmin;
+
+        httpRequester
+            .get((isAdmin ? '/api/article/all/' : '/api/article/') + action.slug, (err, res) => {
+                if (err) {
+                    next({
+                        type: 'ARTICLE_GET_SPECIFIC_ERROR',
+                        data: {message: err, err},
+                        slug: action.slug
+                    });
+                } else {
+                    const data = JSON.parse(res.text);
+
+                    next({
+                        type: 'ARTICLE_GET_SPECIFIC_SUCCESS',
+                        data
+                    });
+                }
+            });
+    }
+};
+
 export const ArticleServiceFactory =
     (httpRequester : HttpRequesterInterface) =>
     (store : Store) =>
@@ -111,9 +146,9 @@ export const ArticleServiceFactory =
                     });
                 break;
             case 'ARTICLE_GET_ALL':
-                /*
-                 In case we receive an action to send an API request, send the appropriate request
-                 */
+                next({
+                    type: 'ARTICLE_GET_ALL_LOADING'
+                });
                 const isAdmin = store.getState().AdminReducer.isAdmin;
                 httpRequester
                     .get(isAdmin ? '/api/article/all' : '/api/article', (err, res) => {
@@ -131,6 +166,10 @@ export const ArticleServiceFactory =
                             });
                         }
                     });
+                break;
+
+            case 'ARTICLE_GET_SPECIFIC':
+                ArticleGetSpecific(httpRequester, store, next, action);
                 break;
 
             default:

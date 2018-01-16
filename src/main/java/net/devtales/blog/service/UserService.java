@@ -5,12 +5,14 @@ import net.devtales.blog.model.Role;
 import net.devtales.blog.model.User;
 import net.devtales.blog.repository.RoleRepository;
 import net.devtales.blog.repository.UserRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 
 @Service
+@Profile("dev")
 public class UserService {
 
     private final UserRepository userRepository;
@@ -23,15 +25,19 @@ public class UserService {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        User admin = new User();
-        Role adminRole = new Role();
-        adminRole.setName("ADMIN");
-        admin.setRoles(Sets.newHashSet(adminRole));
-        admin.setUsername("admin");
-        admin.setPassword(new BCryptPasswordEncoder().encode("password"));
-        userRepository.save(admin);
+        createUser("admin", "password", "ADMIN");
+
     }
 
+    public void createUser(String username, String password, String role) {
+        User admin = new User();
+        Role adminRole = new Role();
+        adminRole.setName(role);
+        admin.setRoles(Sets.newHashSet(adminRole));
+        admin.setUsername(username);
+        admin.setPassword(new BCryptPasswordEncoder().encode(password));
+        userRepository.save(admin);
+    }
 
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

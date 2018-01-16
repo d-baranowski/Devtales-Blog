@@ -541,10 +541,14 @@ describe('The api will respond to get with success and store will contain all re
         });
 
         expect(actionList).toContain({
+            type: 'ARTICLE_GET_ALL_LOADING'
+        });
+
+        expect(actionList).toContain({
             type: 'ARTICLE_GET_ALL_SUCCESS',
             data: returendArticles
         });
-        expect(actionList.length).toEqual(2);
+        expect(actionList.length).toEqual(3);
     });
 });
 
@@ -630,10 +634,14 @@ describe('The api will respond to get with success and store will contain all re
         });
 
         expect(actionList).toContain({
+            type: 'ARTICLE_GET_ALL_LOADING'
+        });
+
+        expect(actionList).toContain({
             type: 'ARTICLE_GET_ALL_SUCCESS',
             data: returendArticles
         });
-        expect(actionList.length).toEqual(2);
+        expect(actionList.length).toEqual(3);
     });
 });
 
@@ -677,10 +685,14 @@ describe('The api will respond to get with error and store will contain all redu
         });
 
         expect(actionList).toContain({
+            type: 'ARTICLE_GET_ALL_LOADING',
+        });
+
+        expect(actionList).toContain({
             type: 'ARTICLE_GET_ALL_ERROR',
             data: {message: returendError}
         });
-        expect(actionList.length).toEqual(2);
+        expect(actionList.length).toEqual(3);
     });
 });
 
@@ -722,9 +734,236 @@ describe('The api will respond to get with error and store will contain all redu
         });
 
         expect(actionList).toContain({
+            type: 'ARTICLE_GET_ALL_LOADING',
+        });
+
+        expect(actionList).toContain({
             type: 'ARTICLE_GET_ALL_ERROR',
             data: {message: returendError}
         });
-        expect(actionList.length).toEqual(2);
+        expect(actionList.length).toEqual(3);
     });
 });
+
+function theApiGetWillReturn(context, expectedUrl, result, error) {
+    context.apiMock = {
+        get: (url, callback) => {
+            if (url === expectedUrl) {
+                callback(error, result);
+            } else {
+                throw "Called unexpected endpoint";
+            }
+        }
+    };
+}
+
+const returnedError = "Some error";
+const returnedArticle = {
+    id: 1,
+    title: "Hello World",
+    slug: "hello-world",
+    html: "<div></div>",
+    summary: "This is some summary",
+    createdOn: 123412,
+    updatedOn: 124123,
+    publishedDate: 12500,
+    jsonRepresentation: "{}",
+    tags: [
+        {
+            id: 1,
+            value: "java"
+        },
+        {
+            id: 2,
+            value: "programming"
+        }
+    ],
+    isLoading: false
+};
+const setupSteps = {
+    "the api will respond to get specific with success": function(context) {
+        theApiGetWillReturn(context, '/api/article/hello-world', {text: JSON.stringify(returnedArticle)}, undefined);
+        return context;
+    },
+    "the api will respond to get specific with error": function(context) {
+        theApiGetWillReturn(context, '/api/article/hello-world', undefined, returnedError);
+        return context;
+    },
+    "the api will respond to get specific all with success": function(context) {
+        theApiGetWillReturn(context, '/api/article/all/hello-world', {text: JSON.stringify(returnedArticle)}, undefined);
+        return context;
+    },
+    "the api will respond to get specific all with error": function(context) {
+        theApiGetWillReturn(context, '/api/article/all/hello-world', undefined, returnedError);
+        return context;
+    },
+    "ArticleServiceMiddleware middleware is initialised with the api mock": function(context) {
+        context.middleware = ArticleServiceFactory(context.apiMock);
+        return context;
+    },
+    "the Store will indicate that user is admin": function(context) {
+        context.actionList = [];
+        context.store = createStore(
+            ApplicationReducer,
+            {
+                ...ApplicationReducerInitialState,
+                AdminReducer: {...ApplicationReducerInitialState.AdminReducer, isAdmin: true},
+            },
+            applyMiddleware(context.middleware, SpyMiddlewareFactory(context.actionList))
+        );
+        return context;
+    },
+    "the Store will indicate that user is not admin": function(context) {
+        context.actionList = [];
+        context.store = createStore(
+            ApplicationReducer,
+            {
+                ...ApplicationReducerInitialState,
+                AdminReducer: {...ApplicationReducerInitialState.AdminReducer, isAdmin: false},
+            },
+            applyMiddleware(context.middleware, SpyMiddlewareFactory(context.actionList))
+        );
+        return context;
+    }
+};
+
+const beforeEachByString = (context, description) => {
+    const chunks = description.split("and");
+    const setupStepDefinitions = Object.keys(setupSteps);
+    for (let chunk of chunks) {
+        for (let definition of setupStepDefinitions) {
+            if (chunk.includes(definition)) {
+                context = setupSteps[definition](context)
+            }
+        }
+    }
+    return context;
+};
+
+let testSuites = [
+    {
+        description:
+        "Given the api will respond to get specific with success " +
+        "and ArticleServiceMiddleware middleware is initialised with the api mock " +
+        "and the Store will indicate that user is not admin.",
+        context: {}
+    },
+    {
+        description:
+        "Given the api will respond to get specific with error" +
+        "and ArticleServiceMiddleware middleware is initialised with the api mock " +
+        "and the Store will indicate that user is not admin.",
+        context: {}
+    },
+    {
+        description:
+        "Given the api will respond to get specific all with success " +
+        "and ArticleServiceMiddleware middleware is initialised with the api mock " +
+        "and the Store will indicate that user is admin.",
+        context: {}
+    },
+    {
+        description:
+        "Given the api will respond to get specific all with error " +
+        "and ArticleServiceMiddleware middleware is initialised with the api mock " +
+        "and the Store will indicate that user is admin.",
+        context: {}
+    }
+];
+
+
+describe(testSuites[0].description, function () {
+    let context = testSuites[0].context;
+    beforeEach(function() {
+        context = beforeEachByString(context, testSuites[0].description);
+    });
+
+    it("When we dispatch ARTICLE_GET_SPECIFIC with correct payload",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: "hello-world"});
+            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: returnedArticle})
+        });
+    it("When we dispatch ARTICLE_GET_SPECIFIC with correct payload",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: "hello-world"});
+            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: returnedArticle})
+
+        });
+    it("When we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC"});
+            expect(context.actionList).toContain({
+                type: "ARTICLE_GET_SPECIFIC_ERROR",
+                data: {message: "ARTICLE_GET_SPECIFIC action did not contain a valid slug"}
+            })
+        })
+});
+
+
+describe(testSuites[1].description, function () {
+    let context = testSuites[1].context;
+    beforeEach(function () {
+        context = beforeEachByString(context, testSuites[1].description);
+    });
+
+    it("when we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug then we should receive failed action",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC"});
+            expect(context.actionList).toContain({
+                type: "ARTICLE_GET_SPECIFIC_ERROR",
+                data: {message: "ARTICLE_GET_SPECIFIC action did not contain a valid slug"}
+            })
+        }
+    );
+});
+
+describe(testSuites[2].description, function () {
+    let context = testSuites[2].context;
+    beforeEach(function() {
+        context = beforeEachByString(context, testSuites[2].description);
+    });
+
+    it("When we dispatch ARTICLE_GET_SPECIFIC with correct payload",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: "hello-world"});
+            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: returnedArticle})
+        }
+    );
+    it("When we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC"});
+            expect(context.actionList).toContain({
+                type: "ARTICLE_GET_SPECIFIC_ERROR",
+                data: {message: "ARTICLE_GET_SPECIFIC action did not contain a valid slug"}
+            })
+        }
+    );
+});
+
+describe(testSuites[3].description, function() {
+    let context = testSuites[3].context;
+    beforeEach(function() {
+        context = beforeEachByString(context, testSuites[3].description);
+    });
+
+    it("when we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug then we should receive failed action",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC"});
+            expect(context.actionList).toContain({
+                type: "ARTICLE_GET_SPECIFIC_ERROR",
+                data: {message: "ARTICLE_GET_SPECIFIC action did not contain a valid slug"}
+            })
+        }
+    );
+    it("when we dispatch ARTICLE_GET_SPECIFIC with payload then we should receive failed action",
+        function () {
+            context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: 'hello-world'});
+            expect(context.actionList).toContain({
+                type: "ARTICLE_GET_SPECIFIC_ERROR",
+                data: {message: returnedError, err: returnedError},
+                slug: 'hello-world'
+            })
+        }
+    );
+});
+
