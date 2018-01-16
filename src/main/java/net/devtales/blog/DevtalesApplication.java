@@ -1,6 +1,5 @@
 package net.devtales.blog;
 
-import net.devtales.blog.jsengine.ReactWarmupStrategy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

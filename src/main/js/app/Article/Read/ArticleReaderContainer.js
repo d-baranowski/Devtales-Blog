@@ -1,10 +1,10 @@
 // @flow
-import type {ApplicationReducerType} from "../../Configuration/index"
-import type {Articles} from "../."
-
-import React, { Component }  from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Article} from "./Article";
+
+import type {ApplicationReducerType} from "../../Configuration"
+import type {Articles} from "../."
 
 
 type Props = {
@@ -13,7 +13,8 @@ type Props = {
         params: {
             articleSlug: string
         }
-    }
+    },
+    fetchArticles: () => void
 }
 
 const mapStateToProps = (state : ApplicationReducerType) => {
@@ -24,19 +25,21 @@ const mapStateToProps = (state : ApplicationReducerType) => {
 
 const mapDispatchToProps = (dispatch) => {
     return({
-
+        fetchArticles: dispatch({type: "ARTICLE_GET_ALL"})
     })
 };
 
 export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
     componentDidMount() {
-        //TODO If article doesn't exist fetch it
+        if (!this.props.articles[this.props.match.params.articleSlug]) {
+            this.props.fetchArticles();
+        }
     }
 
     render() {
         const slug = this.props.match.params.articleSlug;
         const article = this.props.articles[slug];
 
-        return <Article article={article}/>
+        return <Article article={article}/>;
     }
 });

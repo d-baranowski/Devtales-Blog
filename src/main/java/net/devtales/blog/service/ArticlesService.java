@@ -99,4 +99,15 @@ public class ArticlesService {
         data.setPublishedDate(null);
         return articleRepo.save(data);
     }
+
+    public Article findPublishedArticleByslug(String slug) {
+        Article data = articleRepo.findArticleBySlug(slug);
+        if (data == null) {
+            throw new NotFoundException("Article with slug " + slug + " does not exist.");
+        }
+        if (data.getPublishedDate() == null) {
+            throw new NotFoundException("Article with slug " + slug + " does not exist.");
+        }
+        return data;
+    }
 }

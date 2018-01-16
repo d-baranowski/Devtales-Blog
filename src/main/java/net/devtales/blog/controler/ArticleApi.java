@@ -4,6 +4,7 @@ import net.devtales.blog.cache.CacheControl;
 import net.devtales.blog.cache.CachePolicy;
 import net.devtales.blog.cache.DeepETagger;
 import net.devtales.blog.cache.LatestChangedArticleTagilator;
+import net.devtales.blog.cache.SpecificArticleChangedTagilator;
 import net.devtales.blog.model.Article;
 import net.devtales.blog.model.CreateArticleBody;
 import net.devtales.blog.parser.CreateArticleBodyToArticleParser;
@@ -46,6 +47,18 @@ public class ArticleApi {
             staleWhileRevalidate = 24 * 60 * 60 * 60)
     public ResponseEntity<Map<String,Article>> getPublished() {
         return ok(service.readPublishedArticles());
+    }
+
+    @GetMapping("/{slug}")
+    @PreAuthorize("permitAll()")
+    @DeepETagger(eTagger = {SpecificArticleChangedTagilator.class})
+    @CacheControl(
+            policy = CachePolicy.PUBLIC,
+            maxAge = 60 * 60 * 60,
+            staleIfError = 7 * 24 * 60 * 60 * 60,
+            staleWhileRevalidate = 24 * 60 * 60 * 60)
+    public ResponseEntity<Article> getSpecificPublished(@PathVariable String slug) {
+        return ok(service.findPublishedArticleByslug(slug));
     }
 
     @GetMapping("/all")
