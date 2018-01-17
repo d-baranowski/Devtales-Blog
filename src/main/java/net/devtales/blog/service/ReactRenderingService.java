@@ -30,7 +30,7 @@ public class ReactRenderingService {
             model.put("state", state);
         } else {
             model.put("content", "");
-            model.put("state", "");
+            model.put("state", preState);
         }
         model.put("isAdmin", isAdmin);
         return "index";

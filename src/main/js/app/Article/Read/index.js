@@ -1,3 +1,3 @@
 export {ArticleReaderContainer} from "./ArticleReaderContainer"
-export {Article} from "./Article"
+export {ArticleReader} from "./ArticleReader"
 

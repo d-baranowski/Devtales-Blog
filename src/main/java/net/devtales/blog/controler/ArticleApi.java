@@ -61,6 +61,12 @@ public class ArticleApi {
         return ok(service.findPublishedArticleByslug(slug));
     }
 
+    @GetMapping("/all/{slug}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public ResponseEntity<Article> getSpecificAll(@PathVariable String slug) {
+        return ok(service.findArticleBySlug(slug));
+    }
+
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<Map<String,Article>> getAll() {

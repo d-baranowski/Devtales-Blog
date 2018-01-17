@@ -1,9 +1,8 @@
 import {ArticleReducer, ArticleReducerInitialState} from "./ArticleReducer";
+import {LoadingTypeEnum} from "./ArticleType";
 
 
 describe('The article reducer has initial state', () => {
-    let reducer;
-    let state;
     let returnedArticle = {
         id: 2,
         title: "Hello World",
@@ -24,7 +23,7 @@ describe('The article reducer has initial state', () => {
                 value: "programming"
             }
         ],
-        isLoading: false
+        isLoading: LoadingTypeEnum.WILL_LOAD
     };
     let returendArticles = {
         "hello-world": {
@@ -47,7 +46,7 @@ describe('The article reducer has initial state', () => {
                     value: "programming"
                 }
             ],
-            isLoading: false
+            isLoading: LoadingTypeEnum.WILL_LOAD
         },
         "hello-world-2": {
             id: 2,
@@ -69,87 +68,89 @@ describe('The article reducer has initial state', () => {
                     value: "programming"
                 }
             ],
-            isLoading: false
+            isLoading: LoadingTypeEnum.WILL_LOAD
         }
     };
 
-    beforeEach(() => {
-        state = ArticleReducerInitialState;
-        reducer = ArticleReducer;
-    });
-
     it('If I dispatch articles get all loading action, then loadingAll will be true', () => {
-        expect(reducer(state, {type: 'ARTICLE_GET_ALL_LOADING'})).toEqual({
-            ...state,
-            loadingAll: true
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'ARTICLE_GET_ALL_LOADING'})).toEqual({
+            ...ArticleReducerInitialState,
+            loadingAll: LoadingTypeEnum.LOADING
         });
     });
 
     it('If I dispatch articles get all success action with data the state will contain a map of articles.', () => {
-        expect(reducer(state, {type: 'ARTICLE_GET_ALL_SUCCESS', data: returendArticles})).toEqual({
-            ...state,
-            articles: returendArticles
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'ARTICLE_GET_ALL_SUCCESS', data: returendArticles})).toEqual({
+            ...ArticleReducerInitialState,
+            articles: returendArticles,
+            loadingAll: LoadingTypeEnum.LOADED
         });
     });
 
     it('If I dispatch article get specific success action with data the state will update correct article.', () => {
         const updatedArticle = returendArticles["hello-world"];
         updatedArticle.html = "<p></p>";
-        expect(reducer(state, {type: 'ARTICLE_GET_SPECIFIC_SUCCESS', data: updatedArticle})).toEqual({
-            ...state,
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'ARTICLE_GET_SPECIFIC_SUCCESS', data: updatedArticle})).toEqual({
+            ...ArticleReducerInitialState,
             articles: {["hello-world"]: updatedArticle}
         });
     });
 
-    it('If I dispatch articles get all success action without data the state will contain an error.', () => {
-        expect(reducer(state, {type: 'ARTICLE_GET_ALL_SUCCESS'})).toEqual({
-            ...state,
-            error: "Failed to get articles."
+    it('If I dispatch article get specific error action with data the state will update correct article to loaded.', () => {
+        const state = ArticleReducer({...ArticleReducerInitialState}, {type: 'ARTICLE_GET_SPECIFIC_ERROR', slug: 'hello-world'});
+        expect(state.articles['hello-world'].isLoading).toEqual(LoadingTypeEnum.LOADED);
+    });
+
+   it('If I dispatch articles get all success action without data the state will contain an error.', () => {
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'ARTICLE_GET_ALL_SUCCESS'})).toEqual({
+            ...ArticleReducerInitialState,
+            error: "Failed to get articles.",
+            loadingAll: LoadingTypeEnum.LOADED
         });
     });
 
     it('If I dispatch create article success action with data and body the state will contain the article Im updating.', () => {
-        expect(reducer(state, {type: 'CREATE_ARTICLE_SUCCESS', data: {
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'CREATE_ARTICLE_SUCCESS', data: {
             body: returnedArticle
         }})).toEqual({
-            ...state,
+            ...ArticleReducerInitialState,
             updating: returnedArticle
         });
     });
 
     it('If I dispatch create article success action with data and no body the state will contain an error.', () => {
-        expect(reducer(state, {type: 'CREATE_ARTICLE_SUCCESS', data: {}})).toEqual({
-            ...state,
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'CREATE_ARTICLE_SUCCESS', data: {}})).toEqual({
+            ...ArticleReducerInitialState,
             error: "Failed to create article."
         });
     });
 
     it('If I dispatch create article success action without data the state will contain an error.', () => {
-        expect(reducer(state, {type: 'CREATE_ARTICLE_SUCCESS'})).toEqual({
-            ...state,
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'CREATE_ARTICLE_SUCCESS'})).toEqual({
+            ...ArticleReducerInitialState,
             error: "Failed to create article."
         });
     });
 
     it('If I dispatch publish article success action with data the state will update the corresponding article.', () => {
-        const newState = reducer(state, {type: 'PUBLISH_ARTICLE_SUCCESS', data: returnedArticle});
+        const newState = ArticleReducer({...ArticleReducerInitialState}, {type: 'PUBLISH_ARTICLE_SUCCESS', data: returnedArticle});
         const expectedState = {
-            ...state,
-            articles: {...state.articles , "hello-world-2": returnedArticle}
+            ...ArticleReducerInitialState,
+            articles: {...ArticleReducerInitialState.articles , "hello-world-2": returnedArticle}
         };
         expect(newState).toEqual(expectedState);
     });
 
     it('If I dispatch publish article success action with data that isnt article the state will contain error', () => {
-        expect(reducer(state, {type: 'PUBLISH_ARTICLE_SUCCESS', data: {}})).toEqual({
-            ...state,
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'PUBLISH_ARTICLE_SUCCESS', data: {}})).toEqual({
+            ...ArticleReducerInitialState,
             error: "Failed to publish article."
         });
     });
 
     it('If I dispatch publish article success action without data the state will contain error', () => {
-        expect(reducer(state, {type: 'PUBLISH_ARTICLE_SUCCESS'})).toEqual({
-            ...state,
+        expect(ArticleReducer({...ArticleReducerInitialState}, {type: 'PUBLISH_ARTICLE_SUCCESS'})).toEqual({
+            ...ArticleReducerInitialState,
             error: "Failed to publish article."
         });
     });
@@ -160,19 +161,19 @@ describe('The article reducer state indicates loadingAll', () => {
     let state;
 
     beforeEach(() => {
-        state = {...ArticleReducerInitialState, loadingAll: true};
+        state = {...ArticleReducerInitialState, loadingAll: LoadingTypeEnum.LOADING};
         reducer = ArticleReducer;
     });
 
-    it('If I dispatch publish article success action with data the state will update loading to be false', () => {
+    it('If I dispatch publish article success action with data the state will update loading to be loaded', () => {
         expect(reducer(state, {type: 'ARTICLE_GET_ALL_SUCCESS', data: {}}).loadingAll).toEqual(
-            false
+            LoadingTypeEnum.LOADED
         );
     });
 
-    it('If I dispatch publish article error action with data the state will update loading to be false', () => {
+    it('If I dispatch publish article error action with data the state will update loading to be loaded', () => {
         expect(reducer(state, {type: 'ARTICLE_GET_ALL_ERROR', data: {}}).loadingAll).toEqual(
-            false
+            LoadingTypeEnum.LOADED
         );
     });
 });
@@ -263,7 +264,7 @@ describe('The article reducer state already contains articles', () => {
         updatedArticle.html = "<p></p>";
         updatedArticle.summary = "I decided to update my summary";
         expect(reducer(state, {type: 'ARTICLE_GET_SPECIFIC_SUCCESS', data: updatedArticle}).articles["hello-world"]).toEqual(
-            {...updatedArticle, isLoading: false}
+            {...updatedArticle, isLoading: LoadingTypeEnum.LOADED}
         );
     });
 });

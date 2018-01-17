@@ -1,29 +1,44 @@
 // @flow
+import {LoadingTypeEnum} from "./ArticleType";
 import type {Reducer} from "redux";
-import type {Article} from "./ArticleType";
+import type {Article, LoadingType} from "./ArticleType";
 
 type ArticleGetAllSuccessType = {
-    type: string,
+    type: "ARTICLE_GET_ALL_SUCCESS",
     data: Articles
 }
+
+const EMPTY_ARTICLE = {
+    id: -1,
+    title: "",
+    slug: "",
+    html: "",
+    summary: "",
+    createdOn: 0,
+    updatedOn: 0,
+    publishedDate: 0,
+    jsonRepresentation: null,
+    tags: [],
+    isLoading: LoadingTypeEnum.WILL_LOAD
+};
 
 const ArticleGetAllSuccess = (state: ArticleReducerType, action: ArticleGetAllSuccessType) : ArticleReducerType => {
     if (action.data) {
         return {
             ...state,
             articles: action.data,
-            loadingAll: false
+            loadingAll: LoadingTypeEnum.LOADED
         }
     }
     return {
         ...state,
         error: "Failed to get articles.",
-        loadingAll: false
+        loadingAll: LoadingTypeEnum.LOADED
     }
 };
 
 type ArticleGetAllErrorType = {
-    type: string,
+    type: 'ARTICLE_GET_ALL_ERROR',
     err: string,
     data: {message: string, err: string}
 }
@@ -31,12 +46,12 @@ type ArticleGetAllErrorType = {
 const ArticleGetAllError = (state: ArticleReducerType, action: ArticleGetAllErrorType) : ArticleReducerType => {
     return {
         ...state,
-        loadingAll: false
+        loadingAll: LoadingTypeEnum.LOADED
     }
 };
 
 type CreateArticleSuccessType = {
-    type: string,
+    type: 'CREATE_ARTICLE_SUCCESS',
     data: {
         body: Article
     }
@@ -76,20 +91,22 @@ const PublishOrHideArticleSuccess = (state: ArticleReducerType, action: PublishO
 };
 
 type ArticleGetSpecificLoadingType = {
-    type: string,
+    type: 'ARTICLE_GET_SPECIFIC_LOADING',
     slug: string
 };
 
 const ArticleGetSpecificLoading = (state: ArticleReducerType, action: ArticleGetSpecificLoadingType) : ArticleReducerType => {
-  if (action.slug) {
-      let newState = state;
-      let article = newState[action.slug];
-      if (article) {
-          newState[action.slug].isLoading = true;
-          return newState;
-      }
-  }
-  return state;
+    if (!action.slug) {
+        return {...state, error: "Failed to determine which article is loading."}
+    }
+    const slug = action.slug;
+    const newState = {...state};
+
+    if (!newState.articles[slug]) {
+        newState.articles[slug] = {...EMPTY_ARTICLE, slug: slug}
+    }
+    newState.articles[slug].isLoading = LoadingTypeEnum.LOADING;
+    return newState;
 };
 
 type ArticleGetSpecificSuccessType = {
@@ -102,9 +119,9 @@ const ArticleGetSpecificSuccess = (state: ArticleReducerType, action: ArticleGet
         return {...state, error: "Failed to get specific article."}
     }
 
-    const updatedArticles = state.articles;
+    const updatedArticles = {...state.articles};
     updatedArticles[action.data.slug] = action.data;
-    updatedArticles[action.data.slug].isLoading = false;
+    updatedArticles[action.data.slug].isLoading = LoadingTypeEnum.LOADED;
 
     return {
         ...state,
@@ -123,19 +140,27 @@ const ArticleGetSpecificError = (state: ArticleReducerType, action: ArticleGetSp
     if (!action.slug) {
         return state;
     }
-    let newState = state;
-    newState.articles[action.slug].isLoading = false;
+    let newState = {...state};
+
+    if (!newState.articles[action.slug]) {
+        newState.articles[action.slug] = {
+            ...EMPTY_ARTICLE,
+            slug: action.slug,
+            isLoading: LoadingTypeEnum.LOADED
+        }
+    }
+
     return newState;
 };
 
-export const ArticleReducerInitialState : ArticleReducerType = {articles: {}, updating: undefined, loadingAll: false};
+export const ArticleReducerInitialState : ArticleReducerType = {articles: {}, updating: undefined, loadingAll: LoadingTypeEnum.WILL_LOAD};
 
 export const ArticleReducer: Reducer<ArticleReducerType, any> = (state = ArticleReducerInitialState, action) => {
     switch (action.type) {
         case 'ARTICLE_GET_ALL_LOADING':
             return {
                 ...state,
-                loadingAll: true
+                loadingAll: LoadingTypeEnum.LOADING
             };
         case 'ARTICLE_GET_ALL_SUCCESS':
             return ArticleGetAllSuccess(state, action);
@@ -161,7 +186,7 @@ export const ArticleReducer: Reducer<ArticleReducerType, any> = (state = Article
 export type Articles = { [slug: string]: Article }
 
 export type ArticleReducerType = {
-    loadingAll: boolean,
+    loadingAll: LoadingType,
     articles: Articles,
     updating: Article | void
 };

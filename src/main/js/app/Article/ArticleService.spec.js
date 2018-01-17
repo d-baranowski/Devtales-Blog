@@ -2,6 +2,7 @@ import {ArticleServiceFactory} from "./ArticleService";
 
 import {applyMiddleware, createStore} from "redux";
 import {ApplicationReducer, ApplicationReducerInitialState} from "../Configuration";
+import {LoadingTypeEnum} from "./ArticleType";
 
 
 const SpyMiddlewareFactory = (actionList) => (store) => (next) => (action) => {
@@ -778,7 +779,7 @@ const returnedArticle = {
             value: "programming"
         }
     ],
-    isLoading: false
+    isLoading: LoadingTypeEnum.WILL_LOAD
 };
 const setupSteps = {
     "the api will respond to get specific with success": function(context) {
@@ -840,7 +841,7 @@ const beforeEachByString = (context, description) => {
     return context;
 };
 
-let testSuites = [
+const testDescriptions = [
     {
         description:
         "Given the api will respond to get specific with success " +
@@ -872,21 +873,21 @@ let testSuites = [
 ];
 
 
-describe(testSuites[0].description, function () {
-    let context = testSuites[0].context;
+describe(testDescriptions[0].description, function () {
+    let context = testDescriptions[0].context;
     beforeEach(function() {
-        context = beforeEachByString(context, testSuites[0].description);
+        context = beforeEachByString(context, testDescriptions[0].description);
     });
 
     it("When we dispatch ARTICLE_GET_SPECIFIC with correct payload",
         function () {
             context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: "hello-world"});
-            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: returnedArticle})
+            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data:  {...returnedArticle, isLoading: LoadingTypeEnum.LOADED}})
         });
     it("When we dispatch ARTICLE_GET_SPECIFIC with correct payload",
         function () {
             context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: "hello-world"});
-            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: returnedArticle})
+            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: {...returnedArticle, isLoading: LoadingTypeEnum.LOADED}})
 
         });
     it("When we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug",
@@ -900,10 +901,10 @@ describe(testSuites[0].description, function () {
 });
 
 
-describe(testSuites[1].description, function () {
-    let context = testSuites[1].context;
+describe(testDescriptions[1].description, function () {
+    let context = testDescriptions[1].context;
     beforeEach(function () {
-        context = beforeEachByString(context, testSuites[1].description);
+        context = beforeEachByString(context, testDescriptions[1].description);
     });
 
     it("when we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug then we should receive failed action",
@@ -917,16 +918,16 @@ describe(testSuites[1].description, function () {
     );
 });
 
-describe(testSuites[2].description, function () {
-    let context = testSuites[2].context;
+describe(testDescriptions[2].description, function () {
+    let context = testDescriptions[2].context;
     beforeEach(function() {
-        context = beforeEachByString(context, testSuites[2].description);
+        context = beforeEachByString(context, testDescriptions[2].description);
     });
 
     it("When we dispatch ARTICLE_GET_SPECIFIC with correct payload",
         function () {
             context.store.dispatch({type: "ARTICLE_GET_SPECIFIC", slug: "hello-world"});
-            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: returnedArticle})
+            expect(context.actionList).toContain({type: "ARTICLE_GET_SPECIFIC_SUCCESS", data: {...returnedArticle, isLoading: LoadingTypeEnum.LOADED}})
         }
     );
     it("When we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug",
@@ -940,10 +941,10 @@ describe(testSuites[2].description, function () {
     );
 });
 
-describe(testSuites[3].description, function() {
-    let context = testSuites[3].context;
+describe(testDescriptions[3].description, function() {
+    let context = testDescriptions[3].context;
     beforeEach(function() {
-        context = beforeEachByString(context, testSuites[3].description);
+        context = beforeEachByString(context, testDescriptions[3].description);
     });
 
     it("when we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug then we should receive failed action",

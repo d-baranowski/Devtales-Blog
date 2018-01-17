@@ -12,7 +12,12 @@ const history = createHistory();
 const store = ApplicationStoreFactory(history);
 
 function ClientSideRender() {
-    ReactDOM.hydrate(
+    store.dispatch({type: 'IS_ADMIN'});
+
+    const root = document.getElementById('mount');
+    const renderStratety = root.innerHTML ? ReactDOM.hydrate : ReactDOM.render;
+
+    renderStratety(
         <Provider store={store}>
             <Router history={history}>
                 <div className="page-content">
@@ -20,7 +25,7 @@ function ClientSideRender() {
                     <Routes />
                 </div>
             </Router>
-        </Provider>, document.getElementById('mount'));
+        </Provider>, root);
 }
 
 ClientSideRender();
