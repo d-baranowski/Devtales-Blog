@@ -89,9 +89,9 @@ const renderReact = (entryFile, outputFile, standalone) =>{
         .pipe(plumber())
         .pipe(source(outputFile)) //Name of file once done
         .pipe(buffer()) //Use vinyl buffer
-        .pipe(sourcemaps.init({ loadMaps: true })) //Initialise sourcemaps.
-        //.pipe(streamify(uglify())) //Minify and uglify the code.
-        .pipe(sourcemaps.write('.'))
+        //.pipe(sourcemaps.init({ loadMaps: true })) //Initialise sourcemaps.
+        .pipe(streamify(uglify())) //Minify and uglify the code.
+        //.pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('js'));
 };
 
