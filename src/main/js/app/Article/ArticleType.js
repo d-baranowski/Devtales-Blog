@@ -14,7 +14,14 @@ export type Article = {
     createdOn: number,
     updatedOn: number,
     publishedDate: number,
-    jsonRepresentation: string,
+    jsonRepresentation: string | null,
     tags: Tag[],
-    isLoading: boolean
+    isLoading: LoadingType
 }
+
+export const LoadingTypeEnum = {
+    LOADING: "Loading",
+    LOADED: "Loaded",
+    WILL_LOAD: "Will-Load"
+};
+export type LoadingType = "Loading" | "Loaded" | "Will-Load";

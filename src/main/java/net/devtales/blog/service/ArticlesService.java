@@ -110,4 +110,12 @@ public class ArticlesService {
         }
         return data;
     }
+
+    public Article findArticleBySlug(String slug) {
+        Article data = articleRepo.findArticleBySlug(slug);
+        if (data == null) {
+            throw new NotFoundException("Article with slug " + slug + " does not exist.");
+        }
+        return data;
+    }
 }
