@@ -1,1 +1,1 @@
-export {PrismDecorator} from "./PrismDecorator"
+export {PrismDecorator} from './PrismDecorator';

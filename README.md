@@ -1,10 +1,4 @@
 # Devtales-Blog
-Source code for my blog. 
+An over engineered blog developed using React, draft-js with server side rendered react on the JVM using Nashorn. 
 
 ![alt text](https://api.travis-ci.org/d-baranowski/Devtales-Blog.svg?branch=master)
-[![BCH compliance](https://bettercodehub.com/edge/badge/d-baranowski/Devtales-Blog?branch=master)](https://bettercodehub.com/)
-<<<<<<< HEAD
-[![codecov](https://codecov.io/gh/d-baranowski/Devtales-Blog/branch/master/graph/badge.svg)](https://codecov.io/gh/d-baranowski/Devtales-Blog)
-=======
-[![codecov](https://codecov.io/gh/d-baranowski/Devtales-Blog/branch/master/graph/badge.svg)](https://codecov.io/gh/d-baranowski/Devtales-Blog)
->>>>>>> 38e1c4d... Added the badge to readme

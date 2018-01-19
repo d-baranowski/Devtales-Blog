@@ -1,19 +1,19 @@
-import "../Test/setup"
-import React from "react";
-import PublishingContainer from "./PublishingContainer";
+import '../Test/setup';
+import React from 'react';
+import PublishingContainer from './PublishingContainer';
 import {mount} from 'enzyme';
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {Provider} from "react-redux";
-import {ArticleReducer, ArticleReducerInitialState} from "../Article";
-import {AdminReducer, AdminReducerInitialState} from "../Admin";
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {ArticleReducer, ArticleReducerInitialState} from '../Article';
+import {AdminReducer, AdminReducerInitialState} from '../Admin';
 
 const SpyMiddlewareFactory = (actionList, stateList) => (store) => (next) => (action) => {
     next(action);
     actionList.push(action);
-    stateList.push(store.getState())
+    stateList.push(store.getState());
 };
 
-describe("PublishingContainer container will receive a fake article", () => {
+describe('PublishingContainer container will receive a fake article', () => {
     const fakeArticle = {
         id: 1,
         title: 'This is test data',
@@ -49,7 +49,7 @@ describe("PublishingContainer container will receive a fake article", () => {
         </Provider>
     );
 
-    it("PublishingContainer will render", ()  => {
+    it('PublishingContainer will render', ()  => {
         expect(wrapper.find(PublishingContainer).exists()).toEqual(true);
     });
 });

@@ -1,17 +1,17 @@
 // @flow
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import PageNavigation from "./PageNavigation";
-import {withRouter} from "react-router";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import PageNavigation from './PageNavigation';
+import {withRouter} from 'react-router';
 
-import type {ApplicationReducerType} from "../Configuration";
+import type {ApplicationReducerType} from '../Configuration';
 
 export type Props = {
     showMenu: boolean,
     toggleMenu: () => void
 }
 
-const mapStateToProps = (state : ApplicationReducerType) => {
+const mapStateToProps = (state: ApplicationReducerType) => {
     return {
         showMenu: state.PageNavigationReducer.navigationMenuIsOpen
     };
@@ -23,9 +23,11 @@ const mapDispatchToProps = (dispatch) => {
     });
 };
 
-export const PageNavigationContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
-    render() {
-        return <PageNavigation toggleMenu={this.props.toggleMenu}
-                                showMenu={this.props.showMenu}/>
-    }
-}));
+export const PageNavigationContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(
+    class PageNavigationContainer extends Component<Props> {
+        render() {
+            return <PageNavigation
+                toggleMenu={this.props.toggleMenu}
+                showMenu={this.props.showMenu}/>;
+        }
+    }));

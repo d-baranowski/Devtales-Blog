@@ -1,7 +1,7 @@
-const HASHTAG_REGEX = /\#[\w\u0590-\u05ff]+/g;
-const HashtagStrategy = (contentBlock, callback, contentState) => {
-    if (contentBlock.getType() === "code-block") {
-        return
+const HASHTAG_REGEX = /#[\w\u0590-\u05ff]+/g;
+const HashtagStrategy = (contentBlock, callback/*, contentState*/) => {
+    if (contentBlock.getType() === 'code-block') {
+        return;
     }
 
     findWithRegex(HASHTAG_REGEX, contentBlock, callback);

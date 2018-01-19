@@ -49,7 +49,7 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
                 )
                 .resourceChain(true);
 
-        if (profiles.contains("prod")) {
+        if (profiles.contains("prod") || profiles.contains("ci") ) {
             chainRegistration.addResolver(versionResourceResolver)
                     .addTransformer(new CssLinkResourceTransformer())
                     .addTransformer(jsVersionResourcesTransformer);

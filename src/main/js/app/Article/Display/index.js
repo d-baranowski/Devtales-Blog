@@ -1,2 +1,2 @@
-export {ConfiguredEditor} from "./ConfiguredEditor"
-export {GenerateConfiguredEditorState} from "./GenerateConfiguredEditorState"
+export {ConfiguredEditor} from './ConfiguredEditor';
+export {GenerateConfiguredEditorState} from './GenerateConfiguredEditorState';

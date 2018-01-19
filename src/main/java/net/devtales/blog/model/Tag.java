@@ -20,7 +20,7 @@ public class Tag {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @Column(nullable = false, unique = true, length = 32)
+    @Column(nullable = false, unique = true)
     private String value;
 
     public Tag() {}

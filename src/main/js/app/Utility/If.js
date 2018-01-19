@@ -1,4 +1,4 @@
-import React from "react";
+import 'react';
 
 export const If = (props) => {
     if (!props._) {

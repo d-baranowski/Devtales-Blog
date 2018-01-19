@@ -1,22 +1,22 @@
-import "../Test/setup"
-import React from "react";
-import {PageNavigationContainer} from "./PageNavigationContainer";
+import '../Test/setup';
+import React from 'react';
+import {PageNavigationContainer} from './PageNavigationContainer';
 import {mount} from 'enzyme';
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {Provider} from "react-redux";
-import {PageNavigationReducer, PageNavigationReducerInitialState} from "./PageNavigationReducer";
-import {routerReducer} from "react-router-redux";
-import createHistory from "history/createBrowserHistory";
-import {MemoryRouter} from "react-router-dom";
-import {routerMiddleware} from "react-router-redux";
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {PageNavigationReducer, PageNavigationReducerInitialState} from './PageNavigationReducer';
+import {routerReducer} from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import {MemoryRouter} from 'react-router-dom';
+import {routerMiddleware} from 'react-router-redux';
 
 const SpyMiddlewareFactory = (actionList, stateList) => (store) => (next) => (action) => {
     next(action);
     actionList.push(action);
-    stateList.push(store.getState())
+    stateList.push(store.getState());
 };
 
-describe("PageNavigationContainer will be mounted with initial state", () => {
+describe('PageNavigationContainer will be mounted with initial state', () => {
     const actionsDispatched = [];
     const statesInOrder = [];
     const spyMiddleware = SpyMiddlewareFactory(actionsDispatched, statesInOrder);
@@ -42,16 +42,16 @@ describe("PageNavigationContainer will be mounted with initial state", () => {
         </Provider>
     );
 
-    describe("When I click on the hamburger it should open the navigation menu", () => {
-        wrapper.find("#nav-icon").simulate("click");
+    describe('When I click on the hamburger it should open the navigation menu', () => {
+        wrapper.find('#nav-icon').simulate('click');
 
-        it("hamburger should be open", () => {
-            expect(wrapper.find("#nav-icon").hasClass("open")).toEqual(true);
+        it('hamburger should be open', () => {
+            expect(wrapper.find('#nav-icon').hasClass('open')).toEqual(true);
         });
 
-        it("navbar should be open", () => {
-            expect(wrapper.find("responsivenav").hasClass("open")).toEqual(true);
-        })
+        it('navbar should be open', () => {
+            expect(wrapper.find('responsivenav').hasClass('open')).toEqual(true);
+        });
     });
 
     afterAll(()=>{
@@ -59,7 +59,7 @@ describe("PageNavigationContainer will be mounted with initial state", () => {
     });
 });
 
-describe("PageNavigationContainer will be mounted with navbar open", () => {
+describe('PageNavigationContainer will be mounted with navbar open', () => {
     const actionsDispatched = [];
     const statesInOrder = [];
     const spyMiddleware = SpyMiddlewareFactory(actionsDispatched, statesInOrder);
@@ -85,16 +85,16 @@ describe("PageNavigationContainer will be mounted with navbar open", () => {
         </Provider>
     );
 
-    describe("When I click on the hamburger it should open the navigation menu", () => {
-        wrapper.find("#nav-icon").simulate("click");
+    describe('When I click on the hamburger it should open the navigation menu', () => {
+        wrapper.find('#nav-icon').simulate('click');
 
-        it("hamburger should be open", () => {
-            expect(wrapper.find("#nav-icon").hasClass("open")).toEqual(false);
+        it('hamburger should be open', () => {
+            expect(wrapper.find('#nav-icon').hasClass('open')).toEqual(false);
         });
 
-        it("navbar should be open", () => {
-            expect(wrapper.find("responsivenav").hasClass("open")).toEqual(false);
-        })
+        it('navbar should be open', () => {
+            expect(wrapper.find('responsivenav').hasClass('open')).toEqual(false);
+        });
     });
 
     afterAll(()=>{

@@ -1,6 +1,6 @@
-import {applyMiddleware, createStore} from "redux";
-import {ApplicationReducer, ApplicationReducerInitialState} from "./ApplicationReducer";
-import {ApplicationServices} from "./ApplicationServices";
+import {applyMiddleware, createStore} from 'redux';
+import {ApplicationReducer, ApplicationReducerInitialState} from './ApplicationReducer';
+import {ApplicationServices} from './ApplicationServices';
 
 export const ApplicationStoreFactory = (history) => {
     // Grab the state from a global variable injected into the server-generated HTML
@@ -11,7 +11,7 @@ export const ApplicationStoreFactory = (history) => {
     return createStore(
         ApplicationReducer,
         preloadedState || ApplicationReducerInitialState,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__( //TODO DEBUG remove in production
-            applyMiddleware(...middleWare))
+        /*window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__( */
+        applyMiddleware(...middleWare)/*) TODO DEBUG remove in production*/
     );
 };

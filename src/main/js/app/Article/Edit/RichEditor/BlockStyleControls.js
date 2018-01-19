@@ -1,8 +1,8 @@
 //@flow
-import React from "react";
-import StyleButton from "./StyleButton";
+import React from 'react';
+import StyleButton from './StyleButton';
 
-import type {EditorState} from "draft-js";
+import type {EditorState} from 'draft-js';
 
 type BlockType = {
     label: string,

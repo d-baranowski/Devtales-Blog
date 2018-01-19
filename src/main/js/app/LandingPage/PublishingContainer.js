@@ -1,10 +1,10 @@
 // @flow
 import React, {Component}  from 'react';
 import {connect} from 'react-redux';
-import PublishingComponent from "./PublishingComponent";
+import PublishingComponent from './PublishingComponent';
 
-import type {ApplicationReducerType, Dispatch} from "../Configuration"
-import type {ArticleType} from "../Article";
+import type {ApplicationReducerType, Dispatch} from '../Configuration';
+import type {ArticleType} from '../Article';
 
 export type Props = {
     isAdmin: boolean,
@@ -18,9 +18,9 @@ type OwnProps = {
     slug: string
 }
 
-const mapStateToProps = (state: ApplicationReducerType, ownProps : OwnProps) => {
+const mapStateToProps = (state: ApplicationReducerType, ownProps: OwnProps) => {
     if (!ownProps.slug) {
-        throw "Publishing container did not receive a valid slug.";
+        throw 'Publishing container did not receive a valid slug.';
     }
 
     return {
@@ -33,23 +33,23 @@ const publishArticleAction = (id) => {
     return {
         type: 'PUBLISH_ARTICLE',
         id
-    }
+    };
 };
 const hideArticleAction = (id) => {
     return {
         type: 'HIDE_ARTICLE',
         id
-    }
+    };
 };
 
-const mapDispatchToProps = ((dispatch : Dispatch) => {
+const mapDispatchToProps = ((dispatch: Dispatch) => {
     return ({
-        publish: (id : number) => dispatch(publishArticleAction(id)),
-        hide: (id : number) => dispatch(hideArticleAction(id))
-    })
+        publish: (id: number) => dispatch(publishArticleAction(id)),
+        hide: (id: number) => dispatch(hideArticleAction(id))
+    });
 });
-const PublishingContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
-    constructor(props : Props) {
+const PublishingContainer = connect(mapStateToProps, mapDispatchToProps)(class PublishingContainer extends Component<Props> {
+    constructor(props: Props) {
         super(props);
     }
 
@@ -62,7 +62,7 @@ const PublishingContainer = connect(mapStateToProps, mapDispatchToProps)(class e
                 slug={this.props.slug}
                 publish={this.props.publish}
                 hide={this.props.hide}
-            />)
+            />);
     }
 });
 

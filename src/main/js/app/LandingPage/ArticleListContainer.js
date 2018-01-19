@@ -1,9 +1,9 @@
 // @flow
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import ArticlePreviewComponent from "./ArticlePreviewComponent";
-import type {ApplicationReducerType} from "../Configuration";
-import type {Articles} from "../Article";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import ArticlePreviewComponent from './ArticlePreviewComponent';
+import type {ApplicationReducerType} from '../Configuration';
+import type {Articles} from '../Article';
 
 type Props = {
     articles: Articles,
@@ -15,24 +15,24 @@ const mapStateToProps = (state: ApplicationReducerType) => {
     return {
         articles: state.ArticleReducer.articles || [],
         isAdmin: state.AdminReducer.isAdmin
-    }
+    };
 };
 
 const getAllArticlesAction = () => {
     return {
         type: 'ARTICLE_GET_ALL'
-    }
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return ({
         getAllArticles: () => {
-            dispatch(getAllArticlesAction())
+            dispatch(getAllArticlesAction());
         }
-    })
+    });
 };
 
-export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
+export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class ArticleListContainer extends Component<Props> {
     componentDidMount() {
         this.props.getAllArticles();
     }
@@ -42,13 +42,13 @@ export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)
         const isAdmin = this.props.isAdmin;
 
         let result = [];
-        Object.keys(articles).forEach((element, index, array) => {
+        Object.keys(articles).forEach((element) => {
             const article = articles[element];
             result.push(
                 <ArticlePreviewComponent key={'article-' + article.id} isAdmin={isAdmin} article={article}/>
             );
         });
 
-        return result.length > 0 ? <div>{result}</div> : <div />
+        return result.length > 0 ? <div>{result}</div> : <div />;
     }
 });

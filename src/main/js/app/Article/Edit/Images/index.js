@@ -1,1 +1,1 @@
-export {ImageUploadMenuContainer} from "./ImageUploadMenuContainer";
+export {ImageUploadMenuContainer} from './ImageUploadMenuContainer';

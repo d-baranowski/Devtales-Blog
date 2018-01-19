@@ -1,1 +1,1 @@
-export {AboutMeComponent} from "./AboutMeComponent"
+export {AboutMeComponent} from './AboutMeComponent';

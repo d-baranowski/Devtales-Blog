@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {Component} from 'react';
 
 type Props = {
     onToggle: (style: string) => void,
@@ -9,7 +9,7 @@ type Props = {
 }
 
 class StyleButton extends Component<Props> {
-    onToggle: (e : SyntheticMouseEvent<*>) => void;
+    onToggle: (e: SyntheticMouseEvent<*>) => void;
 
     constructor() {
         super();

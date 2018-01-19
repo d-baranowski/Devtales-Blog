@@ -1,4 +1,4 @@
-import {PageNavigationReducer, PageNavigationReducerInitialState} from "./PageNavigationReducer";
+import {PageNavigationReducer, PageNavigationReducerInitialState} from './PageNavigationReducer';
 
 
 describe('The images reducer has initial state', () => {
@@ -26,5 +26,5 @@ describe('The images reducer has state indicating that the menu is showing', () 
 
     it('when I dispatch action TOGGLE_MENU and then state will have property showMenu equal to false', () => {
         expect(reducer(state, {type: 'TOGGLE_NAVIGATION_MENU'})).toEqual({...PageNavigationReducerInitialState, navigationMenuIsOpen: false});
-    })
+    });
 });
