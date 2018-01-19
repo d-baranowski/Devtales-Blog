@@ -1,30 +1,30 @@
-import "../../Test/setup"
-import React from "react";
-import {fakeArticleTestData, beforeEachByString} from "../../Test";
+import '../../Test/setup';
+import React from 'react';
+import {fakeArticleTestData, beforeEachByString} from '../../Test';
 import { mount } from 'enzyme';
-import {ArticleReader} from "./ArticleReader";
-import {LoadingTypeEnum} from "../ArticleType";
+import {ArticleReader} from './ArticleReader';
+import {LoadingTypeEnum} from '../ArticleType';
 
 const setupSteps = {
-    "the article is loading": (context) => {
+    'the article is loading': (context) => {
         return {...context, article: {...context.article, isLoading: LoadingTypeEnum.LOADING}};
     },
-    "the article is not loading": (context) => {
+    'the article is not loading': (context) => {
         return {...context, article: {...context.article, isLoading: LoadingTypeEnum.LOADED}};
     },
-    "the slug is the same as test data article": (context) => {
-        return {...context, slug: 'this-is-test-data'}
+    'the slug is the same as test data article': (context) => {
+        return {...context, slug: 'this-is-test-data'};
     },
-    "the article has json representation": (context) => {
+    'the article has json representation': (context) => {
         return {...context, article: fakeArticleTestData};
     },
-    "the article doesn't have json representation": (context) => {
+    'the article doesn\'t have json representation': (context) => {
         return {...context, article: {...context.article, jsonRepresentation: undefined}};
     },
-    "fetch article is a spy function": (context) => {
-        return {...context, fetchArticleSpy: jasmine.createSpy("fetchArticleSpy", () => {})}
+    'fetch article is a spy function': (context) => {
+        return {...context, fetchArticleSpy: jasmine.createSpy('fetchArticleSpy', () => {})};
     },
-    "ArticleReader is mounted with parameters found in context": (context) => {
+    'ArticleReader is mounted with parameters found in context': (context) => {
         return {
             ...context,
             component: mount(
@@ -40,21 +40,21 @@ const setupSteps = {
 const expectTheLoadingSpinnerToBeVisible = function (visible, context) {
     let component = context.component;
     it(`Then the spinner is ${visible ? 'visible' : 'invisible'}`, () => {
-        expect(component.find(".spinner").length).toEqual(visible ? 1 : 0);
+        expect(component.find('.spinner').length).toEqual(visible ? 1 : 0);
     });
 };
 
 const expectTheConfiguredEditorToBeVisible = function(visible, context) {
     let component = context.component;
     it(`Then the ConfiguredEditor is ${visible ? 'visible' : 'invisible'}`, () => {
-        expect(component.find("ConfiguredEditor").length).toEqual(visible ? 1 : 0);
+        expect(component.find('ConfiguredEditor').length).toEqual(visible ? 1 : 0);
     });
 };
 
 const expectTheWarningToBeVisible = function(visible, context) {
     let component = context.component;
     it(`Then the warning is ${visible ? 'visible' : 'invisible'}`, () => {
-        expect(component.find("p").length).toEqual(visible ? 1 : 0);
+        expect(component.find('p').length).toEqual(visible ? 1 : 0);
     });
 };
 
@@ -66,10 +66,10 @@ const expectTheSpyFunctionToBeCalledNTimes = function(n, context) {
 }; //Use in container test instead
 
 const loadingTestCase =
-    "Given the article is loading " +
-    "and the article doesn't have json representation " +
-    "and the slug is the same as test data article " +
-    "and ArticleReader is mounted with parameters found in context";
+    'Given the article is loading ' +
+    'and the article doesn\'t have json representation ' +
+    'and the slug is the same as test data article ' +
+    'and ArticleReader is mounted with parameters found in context';
 
 describe(loadingTestCase, function () {
     let testCaseContext = {};
@@ -86,10 +86,10 @@ describe(loadingTestCase, function () {
 });
 
 const notLoadingErrorTestCase =
-    "Given the article is not loading " +
-    "and the article doesn't have json representation " +
-    "and the slug is the same as test data article " +
-    "and ArticleReader is mounted with parameters found in context";
+    'Given the article is not loading ' +
+    'and the article doesn\'t have json representation ' +
+    'and the slug is the same as test data article ' +
+    'and ArticleReader is mounted with parameters found in context';
 describe(notLoadingErrorTestCase, function () {
     let testCaseContext = {};
 
@@ -105,10 +105,10 @@ describe(notLoadingErrorTestCase, function () {
 });
 
 const notLoadingSuccessTestCase =
-    "Given the article has json representation " +
-    "and the article is not loading " +
-    "and the slug is the same as test data article " +
-    "and ArticleReader is mounted with parameters found in context";
+    'Given the article has json representation ' +
+    'and the article is not loading ' +
+    'and the slug is the same as test data article ' +
+    'and ArticleReader is mounted with parameters found in context';
 describe(notLoadingSuccessTestCase, function () {
     let testCaseContext = {};
 

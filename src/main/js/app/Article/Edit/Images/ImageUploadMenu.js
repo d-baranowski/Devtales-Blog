@@ -1,16 +1,24 @@
 // @flow
-import React, {Component} from "react";
-import {If} from "../../../Utility";
-import type {Props} from "./ImageUploadMenuContainer"
+import React, {Component} from 'react';
+import {If} from '../../../Utility';
+import type {Props} from './ImageUploadMenuContainer';
+import type {ImageStateType} from './State/ImagesReducer';
 
-function Image(props) {
-    return <img onClick={props.image.onClick} src={props.image.thumb} />
+type ImageType = {
+    image: {
+        ...ImageStateType,
+        onClick: (e: SyntheticEvent<*>) => void
+    }
+}
+
+function Image(props: ImageType) {
+    return <img onClick={props.image.onClick} src={props.image.thumb} />;
 }
 
 class ImageUploadMenu extends Component<Props> {
-    handleAddImageClick : (e : SyntheticEvent<*>) => void;
+    handleAddImageClick: (e: SyntheticEvent<*>) => void;
 
-    constructor(props : Props) {
+    constructor(props: Props) {
         super(props);
         this.handleAddImageClick = this.handleAddImageClick.bind(this);
     }
@@ -21,9 +29,9 @@ class ImageUploadMenu extends Component<Props> {
         }
     }
 
-    handleAddImageClick(e : SyntheticEvent<*>) {
+    handleAddImageClick(e: SyntheticEvent<*>) {
         e.preventDefault();
-        this.props.uploadImage()
+        this.props.uploadImage();
     }
 
     render() {
@@ -35,32 +43,32 @@ class ImageUploadMenu extends Component<Props> {
                 ...x,
                 onClick: () => {
                     this.props.toggleMenu();
-                    addImage(x.image)
+                    addImage(x.image);
                 }
-            }
+            };
         });
 
         let imageElements = [];
 
         for (let image of withFunction) {
-            imageElements.push(<Image key={image.image} image={image}/>)
+            imageElements.push(<Image key={image.image} image={image}/>);
         }
 
         return (
-        <div>
-            <button id="displayImageUploadMenuButton" onClick={this.props.toggleMenu}>Display Menu</button>
-            <If _={this.props.showMenu}>
-                <div className="overlay-menu">
-                    <div className="body">{imageElements}</div>
-                    <div className="footer">
-                        <form id="imageUploadForm">
-                            <input name="file" type="file" />
-                            <button id="uploadImage" onClick={this.handleAddImageClick}>Add Image</button>
-                        </form>
+            <div>
+                <button id="displayImageUploadMenuButton" onClick={this.props.toggleMenu}>Display Menu</button>
+                <If _={this.props.showMenu}>
+                    <div className="overlay-menu">
+                        <div className="body">{imageElements}</div>
+                        <div className="footer">
+                            <form id="imageUploadForm">
+                                <input name="file" type="file" />
+                                <button id="uploadImage" onClick={this.handleAddImageClick}>Add Image</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </If>
-        </div>
+                </If>
+            </div>
         );
     }
 }

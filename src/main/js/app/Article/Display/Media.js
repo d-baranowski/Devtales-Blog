@@ -1,15 +1,26 @@
-import React from "react";
+// @flow
+import React from 'react';
 
-const Audio = (props) => {
+type MediaElementType = {
+    src: string
+}
+
+const Audio = (props: MediaElementType) => {
     return <audio className="media" controls src={props.src} />;
 };
-const Image = (props) => {
+const Image = (props: MediaElementType) => {
     return <img className="media" src={props.src} />;
 };
-const Video = (props) => {
+const Video = (props: MediaElementType) => {
     return <video className="media" controls src={props.src} />;
 };
-const Media = (props) => {
+
+type MediaType = {
+    contentState: any,
+    block: any
+}
+
+const Media = (props: MediaType) => {
     const entity = props.contentState.getEntity(
         props.block.getEntityAt(0)
     );

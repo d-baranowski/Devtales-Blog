@@ -1,1 +1,1 @@
-export {HashtagDecorator} from "./HashtagDecorator"
+export {HashtagDecorator} from './HashtagDecorator';

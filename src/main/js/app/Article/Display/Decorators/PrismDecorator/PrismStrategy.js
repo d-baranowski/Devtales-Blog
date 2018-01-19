@@ -1,38 +1,31 @@
 import Prism from 'prismjs/components/prism-core';
-//noinspection ES6UnusedImports
-import clike from 'prismjs/components/prism-clike';
-//noinspection ES6UnusedImports
-import js from 'prismjs/components/prism-javascript';
-//noinspection ES6UnusedImports
-import java from 'prismjs/components/prism-java';
-//noinspection ES6UnusedImports
-import css from 'prismjs/components/prism-css';
-//noinspection ES6UnusedImports
-import sass from 'prismjs/components/prism-sass';
-//noinspection ES6UnusedImports
-import bash from 'prismjs/components/prism-bash';
-//noinspection ES6UnusedImports
-import json from 'prismjs/components/prism-json';
-//noinspection ES6UnusedImports
-import sql from 'prismjs/components/prism-sql';
+
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-sass';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-sql';
 
 const supportedLanguages = [
-    "clike", "javascript", "java", "sass", "css", "bash", "json", "sql"
+    'clike', 'javascript', 'java', 'sass', 'css', 'bash', 'json', 'sql'
 ];
 
 const detectLanguage = (text) => {
     supportedLanguages.forEach((lang) => {
-        if (text.includes("// " + lang + " //")) {
+        if (text.includes('// ' + lang + ' //')) {
             return Prism.languages[lang];
         }
     });
 
-    return Prism.languages.clike
+    return Prism.languages.clike;
 };
 
-const PrismStrategy = (contentBlock, callback, contentState) => {
-    if (contentBlock.getType() !== "code-block") {
-        return
+const PrismStrategy = (contentBlock, callback/*, contentState*/) => {
+    if (contentBlock.getType() !== 'code-block') {
+        return;
     }
 
     const text = contentBlock.getText();

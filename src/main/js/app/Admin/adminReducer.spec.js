@@ -1,4 +1,4 @@
-import {AdminReducer, AdminReducerInitialState} from "./adminReducer";
+import {AdminReducer, AdminReducerInitialState} from './AdminReducer';
 
 
 describe('The admin reducer has initial state', () => {
@@ -16,7 +16,7 @@ describe('The admin reducer has initial state', () => {
 
     it('when I dispatch action ADMIN_BECOME and admin is false it becomes true', () => {
         expect(reducer(state, {type: 'ADMIN_BECOME'})).toEqual({isAdmin: true});
-    })
+    });
 });
 
 describe('The admin reducer has state indicating that the user is admin', () => {

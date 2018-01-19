@@ -1,7 +1,7 @@
 export const SpyMiddlewareFactory = (actionList, stateList) => (store) => (next) => (action) => {
     next(action);
     actionList.push(action);
-    stateList.push(store.getState())
+    stateList.push(store.getState());
 };
 
 export const fakeArticleTestData =  {
@@ -19,12 +19,12 @@ export const fakeArticleTestData =  {
 
 export const beforeEachByString = (args) => {
     let {description, setupSteps, context} = args;
-    const chunks = description.split("and");
+    const chunks = description.split('and');
     const setupStepDefinitions = Object.keys(setupSteps);
     for (let chunk of chunks) {
         for (let definition of setupStepDefinitions) {
             if (chunk.includes(definition)) {
-                context = setupSteps[definition](context)
+                context = setupSteps[definition](context);
             }
         }
     }

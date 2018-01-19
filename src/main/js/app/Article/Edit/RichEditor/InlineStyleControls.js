@@ -1,8 +1,8 @@
 // @flow
 
-import React from "react";
-import StyleButton from "./StyleButton";
-import type {EditorState} from "draft-js";
+import React from 'react';
+import StyleButton from './StyleButton';
+import type {EditorState} from 'draft-js';
 
 
 type InlineStyleType = {
@@ -22,7 +22,7 @@ const INLINE_STYLES: InlineStyleType[] = [
     {label: 'Monospace', style: 'CODE'}
 ];
 
-const InlineStyleControls = (props : Props) => {
+const InlineStyleControls = (props: Props) => {
     const currentStyle = props.editorState.getCurrentInlineStyle();
 
     return (

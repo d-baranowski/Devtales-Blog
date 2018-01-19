@@ -1,20 +1,20 @@
-import "../../../Test/setup"
-import React from "react";
-import {ArticleEditorContainer} from "./ArticleEditorContainer";
+import '../../../Test/setup';
+import React from 'react';
+import {ArticleEditorContainer} from './ArticleEditorContainer';
 import {mount} from 'enzyme';
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {Provider} from "react-redux";
-import {ArticleReducer, ArticleReducerInitialState} from "../..";
-import {ImagesReducer, ImagesReducerInitialState} from "../";
-import {routerMiddleware} from "react-router-redux";
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {ArticleReducer, ArticleReducerInitialState} from '../..';
+import {ImagesReducer, ImagesReducerInitialState} from '../';
+import {routerMiddleware} from 'react-router-redux';
 
 const SpyMiddlewareFactory = (actionList, stateList) => (store) => (next) => (action) => {
     next(action);
     actionList.push(action);
-    stateList.push(store.getState())
+    stateList.push(store.getState());
 };
 
-describe("Article container will receive a fake article", () => {
+describe('Article container will receive a fake article', () => {
     const fakeArticle =  {
         id: 1,
         title: 'This is test data',
@@ -40,8 +40,8 @@ describe("Article container will receive a fake article", () => {
         {
             ArticleReducer: {...ArticleReducerInitialState, updating: fakeArticle},
             ImagesReducer: {...ImagesReducerInitialState, images: [{
-                image: "https://www.placecage.com/500/500",
-                thumb: "https://www.placecage.com/50/50"}
+                image: 'https://www.placecage.com/500/500',
+                thumb: 'https://www.placecage.com/50/50'}
             ]}
         },
         applyMiddleware(spyMiddleware)
@@ -53,22 +53,22 @@ describe("Article container will receive a fake article", () => {
         </Provider>
     );
 
-    describe("When I open the image upload menu and select an image ", () => {
-        wrapper.find("#displayImageUploadMenuButton").simulate("click");
-        wrapper.find("img").at(0).simulate("click");
+    describe('When I open the image upload menu and select an image ', () => {
+        wrapper.find('#displayImageUploadMenuButton').simulate('click');
+        wrapper.find('img').at(0).simulate('click');
 
-        it("There should be a single visible image", () => {
-            expect(wrapper.find("img").length).toEqual(1);
+        it('There should be a single visible image', () => {
+            expect(wrapper.find('img').length).toEqual(1);
         });
 
-        it("The image source should be equal to the image selected earlier", () => {
-            expect(wrapper.find("img").get(0).props.src).toEqual("https://www.placecage.com/500/500");
+        it('The image source should be equal to the image selected earlier', () => {
+            expect(wrapper.find('img').get(0).props.src).toEqual('https://www.placecage.com/500/500');
         });
 
-        it("The menu should be toggled twice once to show and once to hide the image", () => {
+        it('The menu should be toggled twice once to show and once to hide the image', () => {
             expect(actionsDispatched).toContain({ type: 'TOGGLE_MENU' }, { type: 'TOGGLE_MENU' });
             expect(statesInOrder[0].ImagesReducer.showMenu).toEqual(true);
             expect(statesInOrder[1].ImagesReducer.showMenu).toEqual(false);
         });
-    })
+    });
 });

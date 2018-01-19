@@ -1,6 +1,8 @@
-import React from "react";
+// @flow
+import React from 'react';
+import type {DecoratorPropsType} from '../Decorators';
 
-const HashtagSpan = (props) => {
+const HashtagSpan = (props: DecoratorPropsType) => {
     return (
         <span
             style = {{
@@ -10,7 +12,7 @@ const HashtagSpan = (props) => {
             data-offset-key={props.offsetKey}
         >
             {props.children}
-          </span>
+        </span>
     );
 };
 

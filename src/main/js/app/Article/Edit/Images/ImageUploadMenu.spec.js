@@ -1,14 +1,14 @@
-import "../../../Test/setup"
-import React from "react";
+import '../../../Test/setup';
+import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import ImageUploadMenu from "./ImageUploadMenu"
+import ImageUploadMenu from './ImageUploadMenu';
 import { shallow, mount, render } from 'enzyme';
 
 const spyFunction = (calls) => function() {
-    calls.push(arguments)
+    calls.push(arguments);
 };
 
-describe("The Image Upload Menu gets toggle menu callback and the menu is false", () => {
+describe('The Image Upload Menu gets toggle menu callback and the menu is false', () => {
     const toggleMenuCalls = [];
     const toggleMenuSpy = spyFunction(toggleMenuCalls);
 
@@ -18,16 +18,16 @@ describe("The Image Upload Menu gets toggle menu callback and the menu is false"
         toggleMenu={toggleMenuSpy}
     />);
 
-    it("It should render", () => {
+    it('It should render', () => {
         expect(wrapper.exists()).toEqual(true);
     });
 
-    it("It should do the right callback when I click the Display Menu button", () => {
+    it('It should do the right callback when I click the Display Menu button', () => {
         wrapper.find('button').simulate('click');
         expect(toggleMenuCalls.length).toEqual(1);
     });
 
-    it("The overlay-menu should be hidden", () => {
+    it('The overlay-menu should be hidden', () => {
         expect(wrapper.find('.overlay-menu').exists()).toEqual(false);
     });
 
@@ -36,7 +36,7 @@ describe("The Image Upload Menu gets toggle menu callback and the menu is false"
     });
 });
 
-describe("The Image Upload Menu gets toggle menu callback and the menu is shown", () => {
+describe('The Image Upload Menu gets toggle menu callback and the menu is shown', () => {
     const uploadImageCalls = [];
     const uploadImageSpy = spyFunction(uploadImageCalls);
 
@@ -46,20 +46,20 @@ describe("The Image Upload Menu gets toggle menu callback and the menu is shown"
         uploadImage={uploadImageSpy}
     />);
 
-    it("It should render", () => {
+    it('It should render', () => {
         expect(wrapper.exists()).toEqual(true);
     });
 
-    it("It should do the right callback when I click the Display Menu button", () => {
+    it('It should do the right callback when I click the Display Menu button', () => {
         wrapper.find('#uploadImage').simulate('click');
         expect(uploadImageCalls.length).toEqual(1);
     });
 
-    it("The overlay-menu should be shown", () => {
+    it('The overlay-menu should be shown', () => {
         expect(wrapper.find('.overlay-menu').exists()).toEqual(true);
     });
 
-    it("The imageUploadForm should be shown", () => {
+    it('The imageUploadForm should be shown', () => {
         expect(wrapper.find('#imageUploadForm').exists()).toEqual(true);
     });
 
@@ -68,16 +68,16 @@ describe("The Image Upload Menu gets toggle menu callback and the menu is shown"
     });
 });
 
-describe("The Image Upload Menu gets addImage menu callback and the menu is shown and it contains some images", () => {
+describe('The Image Upload Menu gets addImage menu callback and the menu is shown and it contains some images', () => {
     const addImageCalls = [];
     const addImageSpy = spyFunction(addImageCalls);
     const toggleMenuCalls = [];
     const toggleMenuSpy = spyFunction(toggleMenuCalls);
     const images = [
-        {image: "image 1 url", thumb: "image 1 thumb url"},
-        {image: "image 2 url", thumb: "image 2 thumb url"},
-        {image: "image 3 url", thumb: "image 3 thumb url"},
-        {image: "image 4 url", thumb: "image 4 thumb url"}
+        {image: 'image 1 url', thumb: 'image 1 thumb url'},
+        {image: 'image 2 url', thumb: 'image 2 thumb url'},
+        {image: 'image 3 url', thumb: 'image 3 thumb url'},
+        {image: 'image 4 url', thumb: 'image 4 thumb url'}
     ];
 
     const wrapper = mount(<ImageUploadMenu
@@ -88,18 +88,18 @@ describe("The Image Upload Menu gets addImage menu callback and the menu is show
         images={images}
     />);
 
-    it("It should render", () => {
+    it('It should render', () => {
         expect(wrapper.exists()).toEqual(true);
     });
 
-    it("There should be 4 visible image elements", () => {
+    it('There should be 4 visible image elements', () => {
         expect(wrapper.find('img').length).toEqual(4);
     });
 
-    it("If I click the image the correct callback should be called", () => {
+    it('If I click the image the correct callback should be called', () => {
         wrapper.find('img').at(2).simulate('click');
         expect(addImageCalls.length).toEqual(1);
-        expect(addImageCalls[0][0]).toEqual("image 3 url");
+        expect(addImageCalls[0][0]).toEqual('image 3 url');
         expect(toggleMenuCalls.length).toEqual(1);
     });
 

@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Routes from "./Navigation/Routes";
-import createHistory from "history/createBrowserHistory";
-import {BrowserRouter as Router} from "react-router-dom";
-import {Provider} from "react-redux";
-import {ApplicationStoreFactory} from "./Configuration";
-import {PageNavigationContainer} from "./Navigation";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Routes from './Navigation/Routes';
+import createHistory from 'history/createBrowserHistory';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {ApplicationStoreFactory} from './Configuration';
+import {PageNavigationContainer} from './Navigation';
 
 
 const history = createHistory();

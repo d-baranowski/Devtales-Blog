@@ -1,12 +1,12 @@
 // @flow
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {RichUtils, convertToRaw, AtomicBlockUtils, Modifier, EditorState} from 'draft-js';
-import BlockStyleControls from "./BlockStyleControls";
-import InlineStyleControls from "./InlineStyleControls";
-import {ConfiguredEditor, GenerateConfiguredEditorState} from "../../Display/index"
+import BlockStyleControls from './BlockStyleControls';
+import InlineStyleControls from './InlineStyleControls';
+import {ConfiguredEditor, GenerateConfiguredEditorState} from '../../Display/index';
 
-import type {EditorState as EditorStateType, DraftHandleValue} from "draft-js";
-import type {Article} from "../../ArticleType";
+import type {EditorState as EditorStateType, DraftHandleValue} from 'draft-js';
+import type {Article} from '../../ArticleType';
 
 type ArticleDataType = {
     html: string,
@@ -52,8 +52,8 @@ class RichEditor extends Component<Props, State> {
     }
 
     onChange(editorState: EditorStateType): void {
-        this.setState({editorState})
-    };
+        this.setState({editorState});
+    }
 
     _saveAction() {
         const saveArticle = this.props.article ? this.props.updateArticle(this.props.article.id) : this.props.saveArticle;
@@ -62,7 +62,7 @@ class RichEditor extends Component<Props, State> {
             html: document.getElementsByClassName('public-DraftEditor-content')[0].outerHTML,
             json: JSON.stringify(convertToRaw(state))
         };
-        saveArticle(data)
+        saveArticle(data);
     }
 
     _confirmMedia(url: string) {
@@ -126,7 +126,7 @@ class RichEditor extends Component<Props, State> {
             let newContentState = Modifier.replaceText(
                 editorState.getCurrentContent(),
                 editorState.getSelection(),
-                "   "
+                '   '
             );
 
             e.preventDefault();
@@ -135,7 +135,7 @@ class RichEditor extends Component<Props, State> {
         }
     }
 
-    _toggleBlockType(blockType : string): void {
+    _toggleBlockType(blockType: string): void {
         this.onChange(
             RichUtils.toggleBlockType(
                 this.state.editorState,

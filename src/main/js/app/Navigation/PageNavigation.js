@@ -1,9 +1,10 @@
-import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
-import HamburgerComponent from "./HamburgerComponent";
-import ResponsiveNavComponent from "./ResponsiveNavComponent";
+// @flow
+import React, {Component} from 'react';
+import {NavLink} from 'react-router-dom';
+import HamburgerComponent from './HamburgerComponent';
+import ResponsiveNavComponent from './ResponsiveNavComponent';
 
-import type {Props} from "./PageNavigationContainer";
+import type {Props} from './PageNavigationContainer';
 
 class PageNavigation extends Component<Props> {
     render() {
@@ -21,10 +22,10 @@ class PageNavigation extends Component<Props> {
                         </ul>
                     </ResponsiveNavComponent>
                 </nav>
-               <div id="searchBar">{/*<input placeholder="search" className="pretty-input"/><i className="fa fa-search" aria-hidden="true"/>*/}</div>
+                <div id="searchBar">{/*<input placeholder="search" className="pretty-input"/><i className="fa fa-search" aria-hidden="true"/>*/}</div>
             </header>);
 
     }
 }
 
-export default PageNavigation
+export default PageNavigation;

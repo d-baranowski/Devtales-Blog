@@ -20,8 +20,8 @@ export type Article = {
 }
 
 export const LoadingTypeEnum = {
-    LOADING: "Loading",
-    LOADED: "Loaded",
-    WILL_LOAD: "Will-Load"
+    LOADING: 'Loading',
+    LOADED: 'Loaded',
+    WILL_LOAD: 'Will-Load'
 };
 export type LoadingType = "Loading" | "Loaded" | "Will-Load";

@@ -1,10 +1,10 @@
 // @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ArticleReader} from "./ArticleReader";
+import {ArticleReader} from './ArticleReader';
 
-import type {ApplicationReducerType} from "../../Configuration"
-import type {Articles, Article} from "../."
+import type {ApplicationReducerType} from '../../Configuration';
+import type {Articles, ArticleType} from '../.';
 
 
 type Props = {
@@ -17,29 +17,29 @@ type Props = {
     fetchArticle: (slug: string) => void
 }
 
-const mapStateToProps = (state : ApplicationReducerType) => {
+const mapStateToProps = (state: ApplicationReducerType) => {
     return {
         articles: state.ArticleReducer.articles || []
-    }
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return({
-        fetchArticle: (slug) =>{ dispatch({type: "ARTICLE_GET_SPECIFIC", slug}) }
-    })
+        fetchArticle: (slug) =>{ dispatch({type: 'ARTICLE_GET_SPECIFIC', slug}); }
+    });
 };
 
-export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProps)(class extends Component<Props> {
+export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProps)(class ArticleReaderContainer extends Component<Props> {
     componentDidMount() {
-        let article = this.props.article || {};
-        if (!article.jsonRepresentation) {
+        let article =  this.props.articles[this.props.match.params.articleSlug];
+        if (!article) {
             this.props.fetchArticle(this.props.match.params.articleSlug);
         }
     }
 
     render() {
         const slug: string = this.props.match.params.articleSlug;
-        const article: Article = this.props.articles[slug];
+        const article: ArticleType = this.props.articles[slug];
 
         return <ArticleReader
             slug={slug}

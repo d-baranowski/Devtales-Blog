@@ -1,10 +1,10 @@
 // @flow
-import type {Reducer} from "redux";
+import type {Reducer} from 'redux';
 
 export const MessageReducerInitialState = {messages: []};
 export const MessageReducer : Reducer<MessageReducerType, any> = (state = MessageReducerInitialState, action) => {
-    if (typeof action.type !== "string") {
-        return state
+    if (typeof action.type !== 'string') {
+        return state;
     }
     if (action.type.includes('_ERROR')) {
         state.messages.push({msg: action.data.message, status: 'ERROR'});

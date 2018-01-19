@@ -1,9 +1,9 @@
 // @flow
 
-import type superagentType from "superagent"
+import type superagentType from 'superagent';
 
-export const HttpRequesterFactory = (superagent : superagentType) => {
-    return new HttpRequester(superagent)
+export const HttpRequesterFactory = (superagent: superagentType) => {
+    return new HttpRequester(superagent);
 };
 
 export interface HttpRequesterInterface {
@@ -16,9 +16,9 @@ export interface HttpRequesterInterface {
 }
 
 class HttpRequester implements HttpRequesterInterface {
-    superagent : superagentType;
+    superagent: superagentType;
 
-    constructor(superagent : superagentType) {
+    constructor(superagent: superagentType) {
         this.superagent = superagent;
     }
 
@@ -26,34 +26,34 @@ class HttpRequester implements HttpRequesterInterface {
         this.superagent
             .post(url)
             .send(data)
-            .end(callback)
+            .end(callback);
     }
 
     put(url: string, data: any, callback: (err: any, res: any) => void) {
         this.superagent
             .put(url)
             .send(data)
-            .end(callback)
+            .end(callback);
     }
 
     patch(url: string, callback: (err: any, res: any) => void) {
         this.superagent
             .patch(url)
             .send()
-            .end(callback)
+            .end(callback);
     }
 
     delete(url: string, callback: (err: any, res: any) => void) {
         this.superagent
             .delete(url)
             .send()
-            .end(callback)
+            .end(callback);
     }
 
     get(url: string, callback: (err: any, res: any) => void) {
         this.superagent
             .get(url)
             .send()
-            .end(callback)
+            .end(callback);
     }
 }

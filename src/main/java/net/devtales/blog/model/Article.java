@@ -26,20 +26,19 @@ public class Article {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Size(max = 30, message = "Title can't be longer than 30 characters.")
+    @Size(max = 500, message = "Title can't be longer than 500 characters.")
     private String title;
-    @Size(max = 50, message = "Title can't be longer than 50 characters.")
-    @Column(nullable = false, unique = true, length = 50)
+    @Size(max = 500, message = "Title can't be longer than 500 characters.")
+    @Column(nullable = false, unique = true, length = 500)
     private String slug;
-    @Size(max = 20480, message = "Html can't be longer than 20480 characters.")
+    @Size(max = 327680, message = "Html can't be longer than 327680 characters.")
     private String html;
-    @Size(max = 1024, message = "Summary can't be longer than 1024 characters.")
     private String summary;
     private Timestamp createdOn;
     private Timestamp updatedOn;
     @OrderBy
     private Timestamp publishedDate;
-    @Size(max = 20480, message = "Json representation can't be longer than 20480 characters.")
+    @Size(max = 327680, message = "Json representation can't be longer than 327680 characters.")
     private String jsonRepresentation;
     @ManyToMany(cascade = {MERGE, PERSIST})
     private Set<Tag> tags;

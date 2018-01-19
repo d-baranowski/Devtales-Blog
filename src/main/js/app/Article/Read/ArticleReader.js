@@ -1,9 +1,9 @@
 //@flow
 import React, {Component} from 'react';
-import {If} from '../../Utility'
+import {If} from '../../Utility';
 import {ConfiguredEditor, GenerateConfiguredEditorState} from '../Display/index';
 import {LoadingTypeEnum} from '../ArticleType';
-import type {Article as ArticleType} from '../ArticleType'
+import type {Article as ArticleType} from '../ArticleType';
 
 type Props = {
     article: ArticleType | null,
@@ -31,4 +31,4 @@ export class ArticleReader extends Component<Props> {
             </div>
         );
     }
-};
+}

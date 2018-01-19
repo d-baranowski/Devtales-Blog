@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import {Editor, DefaultDraftBlockRenderMap} from 'draft-js';
-import Immutable from "immutable";
-import Media from "./Media";
-import StyledCodeBlock from "./StyledCodeBlock";
+import Immutable from 'immutable';
+import Media from './Media';
+import StyledCodeBlock from './StyledCodeBlock';
 
 const blockRenderMap = DefaultDraftBlockRenderMap.merge(
     Immutable.Map({
@@ -13,12 +13,12 @@ const blockRenderMap = DefaultDraftBlockRenderMap.merge(
 
 const getBlockStyle = (block) => {
     switch (block.getType()) {
-        case 'blockquote':
-            return 'RichEditor-blockquote';
-        case 'summary':
-            return 'summary';
-        default:
-            return null;
+    case 'blockquote':
+        return 'RichEditor-blockquote';
+    case 'summary':
+        return 'summary';
+    default:
+        return null;
     }
 };
 

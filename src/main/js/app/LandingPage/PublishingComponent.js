@@ -1,12 +1,12 @@
 // @flow
 import React, {Component}  from 'react';
-import type {Props} from "./PublishingContainer";
-import type {Article} from "../Article/ArticleType";
+import type {Props} from './PublishingContainer';
+import type {Article} from '../Article/ArticleType';
 
-const PublishingComponent = class extends Component<Props> {
+class PublishingComponent extends Component<Props> {
     onButtonClick: () => void;
 
-    constructor(props : Props) {
+    constructor(props: Props) {
         super(props);
         this.onButtonClick = this.onButtonClick.bind(this);
     }
@@ -19,7 +19,7 @@ const PublishingComponent = class extends Component<Props> {
         } else {
             this.props.publish(article.id);
         }
-    };
+    }
 
     render() {
         const {isAdmin, article} = this.props;
@@ -28,6 +28,6 @@ const PublishingComponent = class extends Component<Props> {
             <button onClick={this.onButtonClick}>{ article.publishedDate > 0 ? 'Hide' : 'Publish'}</button>
         </div> : (null);
     }
-};
+}
 
 export default PublishingComponent;
