@@ -31,6 +31,5 @@ public class ResourceUrlsMapResolver {
 
         return listOfStaticFiles.stream()
                 .collect(Collectors.toMap(key -> key, resourceUrlProvider::getForLookupPath));
-
     }
 }
