@@ -21,7 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
 apply plugin: 'com.moowork.node'
 
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
@@ -105,6 +105,20 @@ jacocoTestReport {
     }
 }
 check.dependsOn(jacocoTestReport)
+
+task generateStaticFilesConfig {
+    def names = []
+    def sourceDir = new File('src/main/resources/static')
+    def resultFile = new File('src/main/resources/static-files-list.txt')
+    fileTree(dir: sourceDir).visit {
+        FileVisitDetails details ->
+            if (details.file.isFile()) {
+                names << sourceDir.toURI().relativize(details.file.toURI())
+            }
+    }
+    println names
+    resultFile.write(names.toString())
+}
 
 task jsInstall(type: NpmTask) {
     workingDir file("$projectDir/src/main/js")

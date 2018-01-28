@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 
@@ -23,5 +24,4 @@ public class StateModelTest {
                 .lines().collect(Collectors.joining("\n"));
         JSONAssert.assertEquals(expectedState, preState, true);
     }
-
 }

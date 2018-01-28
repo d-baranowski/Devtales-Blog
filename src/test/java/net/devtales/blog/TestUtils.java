@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-public class Utils {
+public class TestUtils {
 
     public static void printScreenshotToString(WebDriver webDriver) throws Exception {
         File srcFile = ((TakesScreenshot)webDriver).getScreenshotAs(OutputType.FILE);
