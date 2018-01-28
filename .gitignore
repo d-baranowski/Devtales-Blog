@@ -47,6 +47,7 @@ build/
 nbbuild/
 nbdist/
 .nb-gradle/
+static-files-list.txt
 
 /out
 

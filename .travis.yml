@@ -20,7 +20,7 @@ install:
     # Install the browsers
     - sudo apt-get install -y google-chrome-stable
 
-script: "./gradlew jsInstall jsFlowSetup jsBuild jsValidate jsTest check bootRepackage"
+script: "./gradlew jsInstall jsFlowSetup jsBuild jsValidate jsTest generateStaticFilesConfig check bootRepackage"
 
 after_script:
   - for i in *.png; do echo $i; base64 "$i"; echo "EOF"; done
