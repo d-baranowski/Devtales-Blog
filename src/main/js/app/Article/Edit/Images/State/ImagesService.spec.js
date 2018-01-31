@@ -100,7 +100,7 @@ describe('The api will respond to post with success and form will return form da
         actionList = [];
         mockHttpRequester = {
             post: (url, data ,callback) => {
-                callback(undefined, {body: retunedImage});
+                callback(undefined, {text: retunedImage});
             }
         };
 
