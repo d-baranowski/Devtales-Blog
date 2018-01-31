@@ -22,7 +22,8 @@ export const ImagesUploadSuccess: Creator = {
                 ...state,
                 images: [...state.images, {
                     image: prependWithAddress(action.data.text),
-                    thumb: prependWithAddress('thumb-' + action.data.text) }]
+                    thumb: prependWithAddress('thumb-' + action.data.text)
+                }]
             };
         } else {
             return {

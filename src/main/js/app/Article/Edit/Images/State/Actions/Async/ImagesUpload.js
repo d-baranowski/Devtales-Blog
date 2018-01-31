@@ -48,7 +48,7 @@ export const ImagesUpload: Creator = {
                 if (err) {
                     next(ImagesUploadError.create(err));
                 } else {
-                    next(ImagesUploadSuccess.create(res.body));
+                    next(ImagesUploadSuccess.create(res.text));
                 }
             });
     }

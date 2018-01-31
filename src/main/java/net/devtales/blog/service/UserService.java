@@ -26,7 +26,6 @@ public class UserService {
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         createUser("admin", "password", "ADMIN");
-
     }
 
     public void createUser(String username, String password, String role) {
