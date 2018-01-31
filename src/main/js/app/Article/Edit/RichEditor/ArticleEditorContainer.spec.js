@@ -8,10 +8,12 @@ import {ArticleReducer, ArticleReducerInitialState} from '../..';
 import {ImagesReducer, ImagesReducerInitialState} from '../';
 import {routerMiddleware} from 'react-router-redux';
 
-const SpyMiddlewareFactory = (actionList, stateList) => (store) => (next) => (action) => {
+const SpyMiddlewareFactory = (actionList, stateList, actionType) => (store) => (next) => (action) => {
     next(action);
-    actionList.push(action);
-    stateList.push(store.getState());
+    if (action.type === actionType) {
+        actionList.push(action);
+        stateList.push(store.getState());
+    }
 };
 
 describe('Article container will receive a fake article', () => {
@@ -30,7 +32,7 @@ describe('Article container will receive a fake article', () => {
 
     const actionsDispatched = [];
     const statesInOrder = [];
-    const spyMiddleware = SpyMiddlewareFactory(actionsDispatched, statesInOrder);
+    const spyMiddleware = SpyMiddlewareFactory(actionsDispatched, statesInOrder, 'TOGGLE_MENU');
 
     const store = createStore(
         combineReducers({
