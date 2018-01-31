@@ -41,3 +41,4 @@ export const ImagesUploadSuccess = UploadSuccess;
 export const ImagesUploadError = UploadError;
 export const ImagesToggleMenu = ToggleMenu;
 export const ImagesGet = Get;
+export const ImagesUpload = Upload;

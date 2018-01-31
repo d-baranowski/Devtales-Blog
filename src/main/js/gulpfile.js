@@ -25,7 +25,7 @@ paths.serverBundleDest = '../' + paths.resources + 'js/server-bundle.js';
 paths.clientBundleDest = '../' + paths.resources + 'js/bundle.js';
 paths.adminBundleDest = '../' + paths.resources + 'js/admin-bundle.js';
 
-
+console.log(isDev ? "Building dev." : "Building prod");
 // CSS Bundle: Gulp watch is placed on all sass files in the 'Styles' folder. If a sass file changes the "global-bundle:css" task is ran.
 // This task has a dependancy task of "compile:sass" this will be ran first before "global-bundle:css".
 // Once the sass has been compiled it will be output a css file to './wwwroot/css/global-bundle'
