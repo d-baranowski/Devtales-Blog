@@ -26,13 +26,14 @@ public class Article {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Size(max = 500, message = "Title can't be longer than 500 characters.")
+    @Size(max = 500, min = 5,message = "Title can't be longer than 500 characters.")
     private String title;
-    @Size(max = 500, message = "Title can't be longer than 500 characters.")
+    @Size(max = 500, min = 5, message = "Title can't be longer than 500 characters.")
     @Column(nullable = false, unique = true, length = 500)
     private String slug;
     @Size(max = 327680, message = "Html can't be longer than 327680 characters.")
     private String html;
+    @Size(max = 81920, message = "Title can't be longer than 500 characters.")
     private String summary;
     private Timestamp createdOn;
     private Timestamp updatedOn;

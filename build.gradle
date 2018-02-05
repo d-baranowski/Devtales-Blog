@@ -104,7 +104,6 @@ jacocoTestReport {
         csv.enabled false
     }
 }
-check.dependsOn(jacocoTestReport)
 
 task generateStaticFilesConfig {
     def names = []
@@ -140,13 +139,21 @@ task jsBuild(type: NpmTask) {
     args = ['run', 'build']
 }
 
+task jsBuildDev(type: NpmTask) {
+    workingDir file("$projectDir/src/main/js")
+    args = ['run', 'build-dev']
+}
+
 task jsTest(type: NpmTask) {
     workingDir file("$projectDir/src/main/js")
     args = ['run', 'test']
 }
 
+/*
+check.dependsOn(jacocoTestReport)
 jsValidate.dependsOn(jsInstall)
 jsBuild.dependsOn(jsValidate)
 jsTest.dependsOn(jsBuild)
 check.dependsOn(jsTest)
 bootRepackage.dependsOn(jsBuild)
+*/

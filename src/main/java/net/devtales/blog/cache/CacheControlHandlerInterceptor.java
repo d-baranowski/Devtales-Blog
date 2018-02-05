@@ -10,13 +10,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-/**
- * Provides a cache control handler interceptor to assign cache-control
- * headers to HTTP responses.
- *
- * @author Scott Rossillo
- * https://github.com/foo4u/spring-mvc-cache-control
- */
+
 public class CacheControlHandlerInterceptor extends HandlerInterceptorAdapter implements HandlerInterceptor {
 
     private static final String HEADER_EXPIRES = "Expires";
@@ -24,20 +18,11 @@ public class CacheControlHandlerInterceptor extends HandlerInterceptorAdapter im
 
     private boolean useExpiresHeader = true;
 
-    /**
-     * Creates a new cache control handler interceptor.
-     */
+
     public CacheControlHandlerInterceptor() {
         super();
     }
 
-    /**
-     * Assigns a <code>CacheControl</code> header to the given <code>response</code>.
-     *
-     * @param request the <code>HttpServletRequest</code>
-     * @param response the <code>HttpServletResponse</code>
-     * @param handler the handler for the given <code>request</code>
-     */
     private void assignCacheControlHeader(
             final HttpServletRequest request,
             final HttpServletResponse response,
@@ -54,13 +39,6 @@ public class CacheControlHandlerInterceptor extends HandlerInterceptorAdapter im
         }
     }
 
-    /**
-     *
-     * @param cacheControl the <code>CacheControl</code> annotation from which to
-     * create the returned cache control header value
-     *
-     * @return the cache control header value
-     */
     private String createCacheControlHeader(final CacheControl cacheControl) {
 
         final StringBuilder builder = new StringBuilder();
@@ -106,12 +84,6 @@ public class CacheControlHandlerInterceptor extends HandlerInterceptorAdapter im
         return (builder.length() > 0 ? builder.toString() : null);
     }
 
-    /**
-     * @param cacheControl the <code>CacheControl</code> annotation from which to
-     * create the returned expires header value
-     *
-     * @return the expires header value
-     */
     private long createExpiresHeader(final CacheControl cacheControl) {
 
         final Calendar expires = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -123,14 +95,6 @@ public class CacheControlHandlerInterceptor extends HandlerInterceptorAdapter im
         return expires.getTime().getTime();
     }
 
-    /**
-     * @param request the current <code>HttpServletRequest</code>
-     * @param response the current <code>HttpServletResponse</code>
-     * @param handler the current request handler
-     *
-     * @return the <code>CacheControl</code> annotation specified by
-     * the given <code>handler</code> if present; <code>null</code> otherwise
-     */
     private CacheControl getCacheControl(
             final HttpServletRequest request,
             final HttpServletResponse response,
@@ -161,11 +125,6 @@ public class CacheControlHandlerInterceptor extends HandlerInterceptorAdapter im
         return super.preHandle(request, response, handler);
     }
 
-    /**
-     *
-     * @param useExpiresHeader <code>true</code> to set an expires header when a
-     * <code>CacheControl</code> annotation is present on a handler; <code>false</code> otherwise
-     */
     public final void setUseExpiresHeader(final boolean useExpiresHeader) {
         this.useExpiresHeader = useExpiresHeader;
     }

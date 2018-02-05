@@ -11,7 +11,7 @@ type ArticleGetSpecificErrorType = 'ARTICLE_GET_SPECIFIC_ERROR'
 export type ArticleGetSpecificErrorAction = {
     type: ArticleGetSpecificErrorType,
     err: string,
-    data: {message: string, err: string},
+    message: string,
     slug: string
 };
 
@@ -43,7 +43,7 @@ export const ArticleGetSpecificError: Creator = {
     match: (action: Action) => ArticleGetSpecificError.type === action.type,
     create: (error: string, slug: string) => ({
         type: ArticleGetSpecificError.type, err: error,
-        data: {message: error, err: error},
+        message: error,
         slug: slug
     })
 };

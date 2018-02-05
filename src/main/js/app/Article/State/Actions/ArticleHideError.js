@@ -22,7 +22,7 @@ export const ArticleHideError: Creator = {
     match: (action: Action) => ArticleHideError.type === action.type,
     create: (error: string, slug: string) => ({
         type: ArticleHideError.type, err: error,
-        data: {message: error, err: error},
+        message: 'Failed to hide article.',
         slug: slug
     })
 };

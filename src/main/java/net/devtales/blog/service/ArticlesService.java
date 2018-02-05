@@ -9,6 +9,7 @@ import net.devtales.blog.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,9 @@ public class ArticlesService {
     }
 
     @Transactional
-    public Article createArticle(Article article) {
-        if (article.getId() != null && article.getId() != 0) {
+    public Article createArticle(@Valid Article article) {
+        final boolean articleAlreadyExists = article.getId() != null && article.getId() != 0;
+        if (articleAlreadyExists) {
             return article;
         }
 

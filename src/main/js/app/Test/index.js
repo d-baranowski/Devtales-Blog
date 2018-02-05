@@ -18,13 +18,14 @@ export const fakeArticleTestData =  {
 };
 
 export const beforeEachByString = (args) => {
+    const matchSeparatingWords = /and|when|Given/;
     let {description, setupSteps, context} = args;
-    const chunks = description.split('and');
+    const chunks = description.split(matchSeparatingWords).filter(chunk => chunk.length > 0);
     const setupStepDefinitions = Object.keys(setupSteps);
     for (let chunk of chunks) {
         for (let definition of setupStepDefinitions) {
             if (chunk.includes(definition)) {
-                context = setupSteps[definition](context);
+                context = setupSteps[definition](context, chunk);
             }
         }
     }

@@ -1,7 +1,7 @@
 import {ImagesServiceFactory} from './ImagesService';
 
 import {applyMiddleware, createStore} from 'redux';
-import {ImagesUploadError, ImagesUploadSuccess} from './Actions';
+import {ImagesGetError, ImagesUploadError, ImagesUploadSuccess} from './Actions';
 
 const SpyMiddlewareFactory = (actionList) => (store) => (next) => (action) => {
     next(action);
@@ -78,7 +78,7 @@ describe('The api will respond to get with error', () => {
             type: 'GET_IMAGES'
         });
 
-        expect(actionList).toContain({type: 'GET_IMAGES_ERROR', err: retunedError, data: {message: retunedError}});
+        expect(actionList).toContain(ImagesGetError.create(retunedError));
         expect(actionList.length).toEqual(2);
     });
 
@@ -227,7 +227,7 @@ describe('The api will respond to post error and form will return form data', ()
             data: 'some-form-id'
         });
 
-        expect(actionList).toContain({type: 'UPLOAD_IMAGE_ERROR', err: retunedError ,data: {message: retunedError}});
+        expect(actionList).toContain(ImagesUploadError.create(retunedError));
         expect(actionList.length).toEqual(2);
     });
 

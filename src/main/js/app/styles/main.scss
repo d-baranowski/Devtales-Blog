@@ -217,3 +217,23 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
   }
 }
+
+// Transitions
+
+.appear-enter {
+  opacity: 0.01;
+}
+
+.appear-enter.appear-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.appear-leave {
+  opacity: 1;
+}
+
+.appear-leave.appear-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

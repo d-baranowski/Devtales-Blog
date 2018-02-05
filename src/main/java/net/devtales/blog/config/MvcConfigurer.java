@@ -40,16 +40,16 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         VersionResourceResolver versionResourceResolver = new VersionResourceResolver()
                 .addVersionStrategy(new ContentVersionStrategy(), "/**");
 
-        ResourceChainRegistration chainRegistration = registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
-                .setCachePeriod(60 * 60 * 24 * 365) /* one year */
-                .setCacheControl(
-                        CacheControl.maxAge(365, TimeUnit.DAYS)
-                                .cachePublic().staleIfError(365, TimeUnit.DAYS)
-                                .staleWhileRevalidate(365, TimeUnit.DAYS)
-                )
-                .resourceChain(true);
-
         if (profiles.contains("prod") || profiles.contains("ci") ) {
+            ResourceChainRegistration chainRegistration = registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
+                    .setCachePeriod(60 * 60 * 24 * 365) /* one year */
+                    .setCacheControl(
+                            CacheControl.maxAge(365, TimeUnit.DAYS)
+                                    .cachePublic().staleIfError(365, TimeUnit.DAYS)
+                                    .staleWhileRevalidate(365, TimeUnit.DAYS)
+                    )
+                    .resourceChain(true);
+
             chainRegistration.addResolver(versionResourceResolver)
                     .addTransformer(new CssLinkResourceTransformer())
                     .addTransformer(jsVersionResourcesTransformer);
@@ -64,9 +64,11 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        ETagilatorInterceptor myEtagilator = new ETagilatorInterceptor();
-        myEtagilator.setApplicationContext(context);
-        registry.addInterceptor(new CacheControlHandlerInterceptor());
-        registry.addInterceptor(myEtagilator);
+        if (profiles.contains("prod") || profiles.contains("ci") ) {
+            ETagilatorInterceptor myEtagilator = new ETagilatorInterceptor();
+            myEtagilator.setApplicationContext(context);
+            registry.addInterceptor(new CacheControlHandlerInterceptor());
+            registry.addInterceptor(myEtagilator);
+        }
     }
 }

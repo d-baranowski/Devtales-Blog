@@ -1,5 +1,5 @@
 /* setup.js */
-const cTable = require('console.table');
+require('console.table');
 const { JSDOM } = require('jsdom');
 
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>');

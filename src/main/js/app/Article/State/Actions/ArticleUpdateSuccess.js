@@ -22,5 +22,6 @@ export const ArticleUpdateSuccess: Creator = {
     create: (article) => ({
         type: ArticleUpdateSuccess.type,
         data: article,
+        message: `Successfully updated article with id ${article.id}!`
     })
 };

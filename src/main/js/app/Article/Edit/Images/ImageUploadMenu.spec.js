@@ -1,6 +1,5 @@
 import '../../../Test/setup';
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
 import ImageUploadMenu from './ImageUploadMenu';
 import { shallow, mount, render } from 'enzyme';
 
