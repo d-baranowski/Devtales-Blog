@@ -24,7 +24,9 @@ class ImageUploadMenu extends Component<Props> {
     }
 
     componentWillMount() {
-        this.props.getImages();
+        if (!this.props.images) {
+            this.props.getImages();
+        }
     }
 
     handleAddImageClick(e: SyntheticEvent<*>) {

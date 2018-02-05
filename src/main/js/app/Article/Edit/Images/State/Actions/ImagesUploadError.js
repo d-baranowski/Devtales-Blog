@@ -7,7 +7,7 @@ type ImagesUploadErrorType = 'UPLOAD_IMAGE_ERROR';
 export type ImagesUploadErrorAction = {
     type: ImagesUploadErrorType,
     err: string,
-    data: {message: string}
+    message: string
 };
 
 type Creator = ApplicationActionCreator<ImagesReducerType, ImagesUploadErrorAction, ImagesUploadErrorType>
@@ -21,6 +21,6 @@ export const ImagesUploadError: Creator = {
     create: (error: string) => ({
         type: ImagesUploadError.type,
         err: error,
-        data: {message: error}
+        message: error
     })
 };

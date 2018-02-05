@@ -7,7 +7,7 @@ type ArticlePublishErrorType = 'PUBLISH_ARTICLE_ERROR'
 export type ArticlePublishErrorAction = {
     type: ArticlePublishErrorType,
     err: string,
-    data: {message: string, err: string},
+    message: string,
     slug: string
 };
 
@@ -20,9 +20,9 @@ export const ArticlePublishError: Creator = {
         return {...state};
     },
     match: (action: Action) => ArticlePublishError.type === action.type,
-    create: (error: string, slug: string) => ({
-        type: ArticlePublishError.type, err: error,
-        data: {message: error, err: error},
-        slug: slug
+    create: (error: any) => ({
+        type: ArticlePublishError.type,
+        err: error,
+        message: 'Failed to publish an article.'
     })
 };

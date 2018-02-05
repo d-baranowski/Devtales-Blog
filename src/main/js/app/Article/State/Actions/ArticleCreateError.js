@@ -7,7 +7,7 @@ type ArticleCreateErrorType = 'CREATE_ARTICLE_ERROR';
 export type ArticleCreateErrorAction = {
     type: ArticleCreateErrorType,
     err: string,
-    data: {message: string, err: string},
+    message: string,
     slug: string
 };
 
@@ -19,9 +19,9 @@ export const ArticleCreateError: Creator = {
         return {...state};
     },
     match: (action: Action) => ArticleCreateError.type === action.type,
-    create: (error: string, slug: string) => ({
-        type: ArticleCreateError.type, err: error,
-        data: {message: error, err: error},
-        slug: slug
+    create: (error: any) => ({
+        type: ArticleCreateError.type,
+        err: error,
+        message: 'Failed to create an article.'
     })
 };

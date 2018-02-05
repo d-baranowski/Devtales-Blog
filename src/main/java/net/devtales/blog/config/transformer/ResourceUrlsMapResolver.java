@@ -25,8 +25,6 @@ public class ResourceUrlsMapResolver {
     }
 
     public Map<String, String> getRelativeToVersionedUrls() {
-        log.info("Attempting to getRelativeToVersionedUrls");
-        log.info("Retrieved staticFilesDirectory procceding to walk it in search of files.");
         List<String> listOfStaticFiles = getStaticResourcePaths();
 
         return listOfStaticFiles.stream()

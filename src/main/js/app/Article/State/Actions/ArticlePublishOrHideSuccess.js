@@ -32,13 +32,20 @@ export const ArticlePublishSuccess: Creator = {
     type: 'PUBLISH_ARTICLE_SUCCESS',
     reduce: commonReduce,
     match: (action: Action) => ArticlePublishSuccess.type === action.type,
-    create: (article: Article) => ({type: ArticlePublishSuccess.type, data: article})
+    create: (article: Article) => ({
+        type: ArticlePublishSuccess.type, data: article,
+        message: `Successfully published article with id ${article.id}!`
+    })
 };
 
 export const ArticleHideSuccess: Creator = {
     type: 'HIDE_ARTICLE_SUCCESS',
     reduce: commonReduce,
     match: (action: Action) => ArticleHideSuccess.type === action.type,
-    create: (article: Article) => ({type: ArticleHideSuccess.type, data: article})
+    create: (article: Article) => ({
+        type: ArticleHideSuccess.type,
+        data: article,
+        message: `Successfully hidden article with id ${article.id}!`
+    })
 };
 

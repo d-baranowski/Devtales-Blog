@@ -180,7 +180,7 @@ class RichEditor extends Component<Props, State> {
                     onToggle={this._toggleInlineStyle}
                 />
                 <ImageUploadMenu />
-                <button onClick={this._saveAction}>Save</button>
+                <button id="save-button" onClick={this._saveAction}>Save</button>
                 <div className="middle-section">
                     <div className={className}>
                         <ConfiguredEditor

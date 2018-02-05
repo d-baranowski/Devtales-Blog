@@ -7,7 +7,7 @@ type ArticleUpdateErrorType = 'UPDATE_ARTICLE_ERROR'
 export type ArticleUpdateErrorAction = {
     type: ArticleUpdateErrorType,
     err: string,
-    data: {message: string, err: string},
+    message: string,
     slug: string
 };
 
@@ -20,9 +20,8 @@ export const ArticleUpdateError: Creator = {
         return {...state};
     },
     match: (action: Action) => ArticleUpdateError.type === action.type,
-    create: (error: string, slug: string) => ({
+    create: (error: any) => ({
         type: ArticleUpdateError.type, err: error,
-        data: {message: error, err: error},
-        slug: slug
+        message: 'Failed to update the article.'
     })
 };

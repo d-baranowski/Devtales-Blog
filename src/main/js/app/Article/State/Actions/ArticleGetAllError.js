@@ -9,7 +9,7 @@ type ArticleGetAllErrorType = 'ARTICLE_GET_ALL_ERROR';
 export type ArticleGetAllErrorAction = {
     type: ArticleGetAllErrorType,
     err: string,
-    data: {message: string, err: string}
+    message: string
 }
 
 type Creator = ApplicationActionCreator<ArticleReducerType, ArticleGetAllErrorAction, ArticleGetAllErrorType>;

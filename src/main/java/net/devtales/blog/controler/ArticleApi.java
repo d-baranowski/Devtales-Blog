@@ -1,5 +1,6 @@
 package net.devtales.blog.controler;
 
+import lombok.extern.slf4j.Slf4j;
 import net.devtales.blog.cache.CacheControl;
 import net.devtales.blog.cache.CachePolicy;
 import net.devtales.blog.cache.DeepETagger;
@@ -28,6 +29,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/article")
+@Slf4j
 public class ArticleApi {
     private final ArticlesService service;
     private final CreateArticleBodyToArticleParser parser;
@@ -77,7 +79,9 @@ public class ArticleApi {
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity create(@RequestBody CreateArticleBody article) {
         Article result = parser.parse(article);
-        return ok(service.createArticle(result));
+        Article response = service.createArticle(result);
+        log.info("Created article with slug " + response.getSlug());
+        return ok(response);
     }
 
     @PutMapping(path = "/{id}")
@@ -85,7 +89,9 @@ public class ArticleApi {
     public ResponseEntity update(@RequestBody CreateArticleBody article, @PathVariable Long id) {
         Article result = parser.parse(article);
         result.setId(id);
-        return ok(service.updateArticle(result));
+        Article response = service.updateArticle(result);
+        log.info("Updated article with slug " + result.getSlug());
+        return ok(response);
     }
 
     @PatchMapping(path = "/{id}")

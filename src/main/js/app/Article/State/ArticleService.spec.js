@@ -5,7 +5,8 @@ import {ApplicationReducer, ApplicationReducerInitialState} from '../../Configur
 import {LoadingTypeEnum} from '../ArticleType';
 import {
     ArticleCreateError, ArticleGetSpecificError, ArticleGetSpecificSuccess, ArticlePublishError,
-    ArticleUpdateError, ArticleHideError
+    ArticleUpdateError, ArticleHideError, ArticleUpdateSuccess, ArticleCreateSuccess, ArticlePublishSuccess,
+    ArticleHideSuccess
 } from './Actions';
 
 
@@ -67,7 +68,7 @@ describe('The api will respond to post with success', () => {
             }
         });
 
-        expect(actionList).toContain({type: 'CREATE_ARTICLE_SUCCESS', data: {body: returendArticle}});
+        expect(actionList).toContain(ArticleCreateSuccess.create(returendArticle));
         expect(actionList.length).toEqual(2);
     });
 
@@ -173,7 +174,7 @@ describe('The api will respond to put with success', () => {
             }
         });
 
-        expect(actionList).toContain({type: 'UPDATE_ARTICLE_SUCCESS', data: returendArticle});
+        expect(actionList).toContain(ArticleUpdateSuccess.create(returendArticle));
         expect(actionList.length).toEqual(2);
     });
 
@@ -311,10 +312,7 @@ describe('The api will respond to patch with success', () => {
             id: 1
         });
 
-        expect(actionList).toContain({
-            type: 'PUBLISH_ARTICLE_SUCCESS',
-            data: returendArticle
-        });
+        expect(actionList).toContain(ArticlePublishSuccess.create(returendArticle));
         expect(actionList.length).toEqual(2);
     });
 
@@ -427,10 +425,7 @@ describe('The api will respond to delete with success', () => {
             id: 1
         });
 
-        expect(actionList).toContain({
-            type: 'HIDE_ARTICLE_SUCCESS',
-            data: returendArticle
-        });
+        expect(actionList).toContain(ArticleHideSuccess.create(returendArticle));
         expect(actionList.length).toEqual(2);
     });
 
@@ -937,12 +932,9 @@ describe(testDescriptions[3].description, function() {
     it('when we dispatch ARTICLE_GET_SPECIFIC with payload then we should receive failed action',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC', slug: 'hello-world'});
-            expect(context.actionList).toContain({
-                type: 'ARTICLE_GET_SPECIFIC_ERROR',
-                err: returnedError,
-                data: {message: returnedError, err: returnedError},
-                slug: 'hello-world'
-            });
+            expect(context.actionList).toContain(
+                ArticleGetSpecificError.create(returnedError, 'hello-world')
+            );
         }
     );
 

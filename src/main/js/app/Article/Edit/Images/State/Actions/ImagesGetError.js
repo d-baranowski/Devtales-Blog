@@ -7,7 +7,7 @@ type ImagesGetErrorType = 'GET_IMAGES_ERROR';
 export type ImagesGetErrorAction = {
     type: ImagesGetErrorType,
     err: string,
-    data: {message: string}
+    message: string
 };
 
 type Creator = ApplicationActionCreator<ImagesReducerType, ImagesGetErrorAction, ImagesGetErrorType>
@@ -21,6 +21,6 @@ export const ImagesGetError: Creator = {
     create: (error: string) => ({
         type: ImagesGetError.type,
         err: error,
-        data: {message: error}
+        message: error
     })
 };

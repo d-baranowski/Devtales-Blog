@@ -10,7 +10,8 @@ export type ArticleCreateSuccessAction = {
     type: ArticleCreateSuccessType,
     data: {
         body: Article
-    }
+    },
+    message: string
 }
 
 type Creator = ApplicationActionCreator<ArticleReducerType, ArticleCreateSuccessAction, ArticleCreateSuccessType>
@@ -35,6 +36,7 @@ export const ArticleCreateSuccess: Creator = {
         type: ArticleCreateSuccess.type,
         data: {
             body: article
-        }
+        },
+        message: `Successfully created article with id ${article.id}!`
     })
 };
