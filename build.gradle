@@ -121,7 +121,7 @@ task generateStaticFilesConfig {
 
 task jsInstall(type: NpmTask) {
     workingDir file("$projectDir/src/main/js")
-    args = ['install']
+    args = ['install', '--no-optional']
 }
 
 task jsFlowSetup(type: NpmTask) {
