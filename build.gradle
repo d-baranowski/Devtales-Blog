@@ -21,7 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
 apply plugin: 'com.moowork.node'
 
-version = '0.0.4'
+version = '0.0.6'
 sourceCompatibility = 1.8
 
 repositories {
@@ -148,11 +148,4 @@ task jsTest(type: NpmTask) {
     workingDir file("$projectDir/src/main/js")
     args = ['run', 'test']
 }
-
-check.dependsOn(jacocoTestReport)
-jsValidate.dependsOn(jsInstall)
-jsBuild.dependsOn(jsValidate)
-jsTest.dependsOn(jsBuild)
-check.dependsOn(jsTest)
-bootRepackage.dependsOn(jsBuild)
 
