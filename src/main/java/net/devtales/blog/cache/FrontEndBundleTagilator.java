@@ -11,6 +11,7 @@ public class FrontEndBundleTagilator implements DeepETagilator {
     public String tagilate(HttpServletRequest request, HttpServletResponse response, Object handler) {
         /*File file = new ClassPathResource("static/js/bundle.js").getFile();
         return new Timestamp(file.lastModified()).toString(); THIS WILL FAIL IF FILE IS NOT ON THE FILE SYSTEM*/
-        return "0.0.4"; //TODO Update this automatically with the current version of the software
+        return "0.0.6"; //TODO Generate bundle hash when building the app and read it from resources just like file
+        //list
     }
 }
