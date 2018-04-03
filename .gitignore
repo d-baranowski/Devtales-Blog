@@ -21,9 +21,8 @@ hs_err_pid*
 node_modules
 .gradle
 !gradle/wrapper/gradle-wrapper.jar
-bundle.js
-server-bundle.js
-src/main/resources/static/css/
+*bundle.js
+api/src/main/resources/static/css/
 **/*.js.map
 
 
@@ -49,7 +48,7 @@ nbdist/
 .nb-gradle/
 static-files-list.txt
 
-/out
+api/out/
 
 /src/main/resources/static/js/admin-bundle.js
 src/test/resources/static/js/admin-bundle.js
