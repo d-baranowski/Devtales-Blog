@@ -1,0 +1,26 @@
+@import "../Notifications/Notifications";
+
+.overlay-menu {
+  position: fixed;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+  background-color: white;
+  border: solid 2px black;
+  z-index: 10;
+  padding: 10px;
+}
+
+.styleButton {
+  display: inline-block;
+  background: #3cb0fd;
+  padding: 10px 20px 10px 20px;
+  font-size: 15px;
+  margin: 5px;
+  color: #ffffff;
+
+  &.active {
+    background: #1d557a;
+  }
+}
