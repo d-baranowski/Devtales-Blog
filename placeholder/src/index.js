@@ -6,6 +6,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {ApplicationStoreFactory} from './Configuration';
 import {PageNavigationContainer} from './Navigation';
+import './styles/main.scss';
 
 
 const history = createHistory();

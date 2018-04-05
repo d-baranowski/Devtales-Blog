@@ -154,7 +154,7 @@ describe("MessageReducer", () => {
         });
 
         it('then the state will contain 5 messages', () => {
-            expect(Object.values(context.state.messages).length).toEqual(5)
+            expect(Object.keys(context.state.messages).length).toBe(5)
         });
 
         it('then the state latest id will be equal to 6', () => {
@@ -195,7 +195,7 @@ describe("MessageReducer", () => {
         });
 
         it('then the state will contain 5 messages', () => {
-            expect(Object.values(context.state.messages).length).toEqual(3)
+            expect(Object.keys(context.state.messages).length).toEqual(3)
         });
 
         it('then the state latest id will be equal to 6', () => {
@@ -228,7 +228,7 @@ describe("MessageReducer", () => {
         });
 
         it('then the state will contain 5 messages', () => {
-            expect(Object.values(context.state.messages).length).toEqual(5)
+            expect(Object.keys(context.state.messages).length).toEqual(5)
         });
 
         it('then the state latest id will be equal to 6', () => {

@@ -68,7 +68,7 @@ describe('Article container will receive a fake article', () => {
         });
 
         it('The menu should be toggled twice once to show and once to hide the image', () => {
-            expect(actionsDispatched).toContain({ type: 'TOGGLE_MENU' }, { type: 'TOGGLE_MENU' });
+            expect(actionsDispatched).toEqual(expect.arrayContaining([{ type: 'TOGGLE_MENU' }, { type: 'TOGGLE_MENU' }]));
             expect(statesInOrder[0].ImagesReducer.showMenu).toEqual(true);
             expect(statesInOrder[1].ImagesReducer.showMenu).toEqual(false);
         });
