@@ -1,0 +1,1 @@
+export {HashtagDecorator} from './HashtagDecorator';

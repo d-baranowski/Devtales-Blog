@@ -1,0 +1,19 @@
+#notification-list {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 25px;
+}
+
+.notification {
+  padding: 35px;
+  margin: 10px;
+}
+
+.notification-error {
+  background-color: firebrick;
+}
+
+.notification-success {
+  background-color: #00D455;
+}
