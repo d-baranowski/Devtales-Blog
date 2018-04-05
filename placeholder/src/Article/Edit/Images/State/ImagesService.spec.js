@@ -38,7 +38,7 @@ describe('The api will respond to get with success', () => {
             type: 'GET_IMAGES'
         });
 
-        expect(actionList).toContain({type: 'GET_IMAGES_SUCCESS', data: {body: retunedImages}});
+        expect(actionList[1]).toEqual({type: 'GET_IMAGES_SUCCESS', data: {body: retunedImages}});
         expect(actionList.length).toEqual(2);
     });
 
@@ -78,7 +78,7 @@ describe('The api will respond to get with error', () => {
             type: 'GET_IMAGES'
         });
 
-        expect(actionList).toContain(ImagesGetError.create(retunedError));
+        expect(actionList).toEqual(expect.arrayContaining([ImagesGetError.create(retunedError)]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -124,7 +124,7 @@ describe('The api will respond to post with success and form will return form da
             data: 'some-form-id'
         });
 
-        expect(actionList).toContain(ImagesUploadSuccess.create(retunedImage));
+        expect(actionList).toEqual(expect.arrayContaining([ImagesUploadSuccess.create(retunedImage)]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -134,7 +134,7 @@ describe('The api will respond to post with success and form will return form da
             type: 'UPLOAD_IMAGE',
         });
 
-        expect(actionList).toContain(ImagesUploadError.create('Failed to upload image. Action was missing data.'));
+        expect(actionList).toEqual(expect.arrayContaining([ImagesUploadError.create('Failed to upload image. Action was missing data.')]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -181,7 +181,7 @@ describe('The api will respond to post with success but form service will throw 
             data: 'some-form-id'
         });
 
-        expect(actionList).toContain(ImagesUploadError.create(thrownError));
+        expect(actionList).toEqual(expect.arrayContaining([ImagesUploadError.create(thrownError)]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -227,7 +227,7 @@ describe('The api will respond to post error and form will return form data', ()
             data: 'some-form-id'
         });
 
-        expect(actionList).toContain(ImagesUploadError.create(retunedError));
+        expect(actionList).toEqual(expect.arrayContaining([ImagesUploadError.create(retunedError)]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -237,7 +237,7 @@ describe('The api will respond to post error and form will return form data', ()
             type: 'UPLOAD_IMAGE',
         });
 
-        expect(actionList).toContain(ImagesUploadError.create('Failed to upload image. Action was missing data.'));
+        expect(actionList).toEqual(expect.arrayContaining([ImagesUploadError.create('Failed to upload image. Action was missing data.')]));
         expect(actionList.length).toEqual(2);
     });
 

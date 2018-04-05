@@ -68,7 +68,7 @@ describe('The api will respond to post with success', () => {
             }
         });
 
-        expect(actionList).toContain(ArticleCreateSuccess.create(returendArticle));
+        expect(actionList).toEqual(expect.arrayContaining([ArticleCreateSuccess.create(returendArticle)]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -111,7 +111,7 @@ describe('The api will respond to post with error', () => {
             }
         });
 
-        expect(actionList).toContain(ArticleCreateError.create('This is an error'));
+        expect(actionList).toEqual(expect.arrayContaining([ArticleCreateError.create('This is an error')]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -174,7 +174,7 @@ describe('The api will respond to put with success', () => {
             }
         });
 
-        expect(actionList).toContain(ArticleUpdateSuccess.create(returendArticle));
+        expect(actionList).toEqual(expect.arrayContaining([ArticleUpdateSuccess.create(returendArticle)]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -187,7 +187,7 @@ describe('The api will respond to put with success', () => {
             }
         });
 
-        expect(actionList).toContain(ArticleUpdateError.create('UPDATE_ARTICLE action did not contain a valid id'));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticleUpdateError.create('UPDATE_ARTICLE action did not contain a valid id'))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -197,7 +197,7 @@ describe('The api will respond to put with success', () => {
             type: 'UPDATE_ARTICLE', id: 1
         });
 
-        expect(actionList).toContain(ArticleUpdateError.create('UPDATE_ARTICLE action did not contain a valid data'));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticleUpdateError.create('UPDATE_ARTICLE action did not contain a valid data'))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -241,7 +241,7 @@ describe('The api will respond to put with error', () => {
             }
         });
 
-        expect(actionList).toContain(ArticleUpdateError.create(returnedError));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticleUpdateError.create(returnedError))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -301,7 +301,7 @@ describe('The api will respond to patch with success', () => {
             type: 'PUBLISH_ARTICLE'
         });
 
-        expect(actionList).toContain(ArticlePublishError.create('PUBLISH_ARTICLE action did not contain a valid id'));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticlePublishError.create('PUBLISH_ARTICLE action did not contain a valid id'))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -312,7 +312,7 @@ describe('The api will respond to patch with success', () => {
             id: 1
         });
 
-        expect(actionList).toContain(ArticlePublishSuccess.create(returendArticle));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticlePublishSuccess.create(returendArticle))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -352,7 +352,7 @@ describe('The api will respond to patch with error', () => {
             type: 'PUBLISH_ARTICLE', id: 1
         });
 
-        expect(actionList).toContain(ArticlePublishError.create(returnedError));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticlePublishError.create(returnedError))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -414,7 +414,7 @@ describe('The api will respond to delete with success', () => {
             type: 'HIDE_ARTICLE'
         });
 
-        expect(actionList).toContain(ArticleHideError.create('HIDE_ARTICLE action did not contain a valid id'));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticleHideError.create('HIDE_ARTICLE action did not contain a valid id'))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -425,7 +425,7 @@ describe('The api will respond to delete with success', () => {
             id: 1
         });
 
-        expect(actionList).toContain(ArticleHideSuccess.create(returendArticle));
+        expect(actionList).toEqual(expect.arrayContaining([(ArticleHideSuccess.create(returendArticle))]));
         expect(actionList.length).toEqual(2);
     });
 
@@ -516,14 +516,14 @@ describe('The api will respond to get with success and store will contain all re
             type: 'ARTICLE_GET_ALL'
         });
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_LOADING'
-        });
+        })]));
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_SUCCESS',
             data: returendArticles
-        });
+        })]));
         expect(actionList.length).toEqual(3);
     });
 });
@@ -609,14 +609,14 @@ describe('The api will respond to get with success and store will contain all re
             type: 'ARTICLE_GET_ALL'
         });
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_LOADING'
-        });
+        })]));
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_SUCCESS',
             data: returendArticles
-        });
+        })]));
         expect(actionList.length).toEqual(3);
     });
 });
@@ -660,15 +660,15 @@ describe('The api will respond to get with error and store will contain all redu
             type: 'ARTICLE_GET_ALL'
         });
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_LOADING',
-        });
+        })]));
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_ERROR',
             err: returendError,
             data: {message: returendError, err: returendError}
-        });
+        })]));
         expect(actionList.length).toEqual(3);
     });
 });
@@ -710,15 +710,15 @@ describe('The api will respond to get with error and store will contain all redu
             type: 'ARTICLE_GET_ALL'
         });
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_LOADING',
-        });
+        })]));
 
-        expect(actionList).toContain({
+        expect(actionList).toEqual(expect.arrayContaining([({
             type: 'ARTICLE_GET_ALL_ERROR',
             err: returendError,
             data: {message: returendError, err: returendError}
-        });
+        })]));
         expect(actionList.length).toEqual(3);
     });
 });
@@ -859,20 +859,20 @@ describe(testDescriptions[0].description, function () {
     it('When we dispatch ARTICLE_GET_SPECIFIC with correct payload',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC', slug: 'hello-world'});
-            expect(context.actionList).toContain(ArticleGetSpecificSuccess.create({...returnedArticle, isLoading: LoadingTypeEnum.LOADED}));
+            expect(context.actionList).toEqual(expect.arrayContaining([(ArticleGetSpecificSuccess.create({...returnedArticle, isLoading: LoadingTypeEnum.LOADED}))]));
         });
     it('When we dispatch ARTICLE_GET_SPECIFIC with correct payload',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC', slug: 'hello-world'});
-            expect(context.actionList).toContain(ArticleGetSpecificSuccess.create({...returnedArticle, isLoading: LoadingTypeEnum.LOADED}));
+            expect(context.actionList).toEqual(expect.arrayContaining([(ArticleGetSpecificSuccess.create({...returnedArticle, isLoading: LoadingTypeEnum.LOADED}))]));
 
         });
     it('When we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC'});
-            expect(context.actionList).toContain(
+            expect(context.actionList).toEqual(expect.arrayContaining([(
                 ArticleGetSpecificError.create('ARTICLE_GET_SPECIFIC action did not contain a valid slug')
-            );
+            )]));
         })
 });
 
@@ -886,9 +886,9 @@ describe(testDescriptions[1].description, function () {
     it('when we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug then we should receive failed action',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC'});
-            expect(context.actionList).toContain(
+            expect(context.actionList).toEqual(expect.arrayContaining([(
                 ArticleGetSpecificError.create('ARTICLE_GET_SPECIFIC action did not contain a valid slug')
-            );
+            )]));
         }
     );
 });
@@ -902,15 +902,15 @@ describe(testDescriptions[2].description, function () {
     it('When we dispatch ARTICLE_GET_SPECIFIC with correct payload',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC', slug: 'hello-world'});
-            expect(context.actionList).toContain(ArticleGetSpecificSuccess.create({...returnedArticle, isLoading: LoadingTypeEnum.LOADED}));
+            expect(context.actionList).toEqual(expect.arrayContaining([(ArticleGetSpecificSuccess.create({...returnedArticle, isLoading: LoadingTypeEnum.LOADED}))]));
         }
     );
     it('When we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC'});
-            expect(context.actionList).toContain(
+            expect(context.actionList).toEqual(expect.arrayContaining([(
                 ArticleGetSpecificError.create('ARTICLE_GET_SPECIFIC action did not contain a valid slug')
-            );
+            )]));
         }
     );
 });
@@ -924,17 +924,17 @@ describe(testDescriptions[3].description, function() {
     it('when we dispatch ARTICLE_GET_SPECIFIC with incorrect payload missing slug then we should receive failed action',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC'});
-            expect(context.actionList).toContain(
+            expect(context.actionList).toEqual(expect.arrayContaining([(
                 ArticleGetSpecificError.create('ARTICLE_GET_SPECIFIC action did not contain a valid slug')
-            );
+            )]));
         }
     );
     it('when we dispatch ARTICLE_GET_SPECIFIC with payload then we should receive failed action',
         function () {
             context.store.dispatch({type: 'ARTICLE_GET_SPECIFIC', slug: 'hello-world'});
-            expect(context.actionList).toContain(
+            expect(context.actionList).toEqual(expect.arrayContaining([(
                 ArticleGetSpecificError.create(returnedError, 'hello-world')
-            );
+            )]));
         }
     );
 
