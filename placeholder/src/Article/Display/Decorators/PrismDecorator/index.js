@@ -1,1 +1,0 @@
-export {PrismDecorator} from './PrismDecorator';
