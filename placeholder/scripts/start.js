@@ -13,7 +13,6 @@ process.on('unhandledRejection', err => {
 
 // Ensure environment variables are read.
 require('../config/env');
-
 const fs = require('fs');
 const chalk = require('chalk');
 const webpack = require('webpack');
@@ -80,6 +79,7 @@ choosePort(HOST, DEFAULT_PORT)
       urls.lanUrlForConfig
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
+
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
       if (err) {
