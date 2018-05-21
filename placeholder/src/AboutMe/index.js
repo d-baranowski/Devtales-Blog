@@ -1,1 +1,0 @@
-export {AboutMeComponent} from './AboutMeComponent';
