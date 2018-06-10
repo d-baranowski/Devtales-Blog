@@ -21,7 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
 apply plugin: 'com.moowork.node'
 
-version = '0.0.6'
+version = '0.1.0'
 sourceCompatibility = 1.8
 
 repositories {
@@ -118,34 +118,3 @@ task generateStaticFilesConfig {
     println names
     resultFile.write(names.toString())
 }
-
-task jsInstall(type: NpmTask) {
-    workingDir file("$projectDir/src/main/js")
-    args = ['install', '--no-optional']
-}
-
-task jsFlowSetup(type: NpmTask) {
-    workingDir file("$projectDir/src/main/js")
-    args = ['run', 'preValidate']
-}
-
-task jsValidate(type: NpmTask) {
-    workingDir file("$projectDir/src/main/js")
-    args = ['run', 'validate']
-}
-
-task jsBuild(type: NpmTask) {
-    workingDir file("$projectDir/src/main/js")
-    args = ['run', 'build']
-}
-
-task jsBuildDev(type: NpmTask) {
-    workingDir file("$projectDir/src/main/js")
-    args = ['run', 'build-dev']
-}
-
-task jsTest(type: NpmTask) {
-    workingDir file("$projectDir/src/main/js")
-    args = ['run', 'test']
-}
-
