@@ -1,9 +1,0 @@
-{
-  "ArticleReducer": {
-    "articles": {},
-    "updating": null
-  },
-  "AdminReducer": {
-    "isAdmin": false
-  }
-}
