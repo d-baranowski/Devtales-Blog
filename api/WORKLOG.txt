@@ -1,2 +1,0 @@
-I'll work for 2 hours. I'll send editor state to API when user presses CTRL+S.
-I'll work for 2 hours. I'll create an HTML Parser which will convert Created article into the format which I want to store in the database.
