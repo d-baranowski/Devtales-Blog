@@ -5,7 +5,6 @@ import net.devtales.blog.api.model.CreateArticleBody;
 import net.devtales.blog.api.parser.CreateArticleBodyToArticleParser;
 import net.devtales.blog.api.service.ArticlesService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,31 +33,26 @@ public class ArticleApi {
     }
 
     @GetMapping()
-    @PreAuthorize("permitAll()")
     public ResponseEntity<Map<String,Article>> getPublished() {
         return ok(service.readPublishedArticles());
     }
 
     @GetMapping("/{slug}")
-    @PreAuthorize("permitAll()")
     public ResponseEntity<Article> getSpecificPublished(@PathVariable String slug) {
         return ok(service.findPublishedArticleByslug(slug));
     }
 
     @GetMapping("/all/{slug}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<Article> getSpecificAll(@PathVariable String slug) {
         return ok(service.findArticleBySlug(slug));
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<Map<String,Article>> getAll() {
         return ok(service.readAll());
     }
 
     @PostMapping()
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity create(@RequestBody CreateArticleBody article) {
         Article result = parser.parse(article);
         Article response = service.createArticle(result);
@@ -67,7 +61,6 @@ public class ArticleApi {
     }
 
     @PutMapping(path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity update(@RequestBody CreateArticleBody article, @PathVariable Long id) {
         Article result = parser.parse(article);
         result.setId(id);
@@ -75,15 +68,13 @@ public class ArticleApi {
         log.info("Updated article with slug " + result.getSlug());
         return ok(response);
     }
-
+    //TODO DO THIS https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
     @PatchMapping(path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity publish(@PathVariable Long id) {
         return ok(service.publishArticle(id));
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity hide(@PathVariable Long id) {
         return ok(service.hide(id));
     }
