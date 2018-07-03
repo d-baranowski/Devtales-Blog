@@ -4,7 +4,6 @@ import net.devtales.blog.api.service.FileUploadService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +36,6 @@ public class ImagesController {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping("/file")
     @ResponseBody
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
