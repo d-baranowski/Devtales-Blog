@@ -5,8 +5,7 @@ import {NavLink} from 'react-router-dom';
 import type {Article} from '../Article/ArticleType';
 
 type Props = {
-    article: Article,
-    isAdmin: boolean
+    article: Article
 }
 
 const ArticlePreviewComponent = (props: Props) => {
@@ -21,3 +20,4 @@ const ArticlePreviewComponent = (props: Props) => {
 };
 
 export default ArticlePreviewComponent;
+a
