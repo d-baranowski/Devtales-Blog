@@ -4,6 +4,7 @@ const router = jsonServer.router('api.json');
 const middlewares = jsonServer.defaults();
 
 server.use(jsonServer.rewriter({
+    '/api/admin': '/admin',
     '/api/article/*': '/example',
     '/api/*': '/$1',
 }));

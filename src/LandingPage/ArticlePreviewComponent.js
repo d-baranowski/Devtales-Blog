@@ -16,15 +16,6 @@ const ArticlePreviewComponent = (props: Props) => {
                 <h2>{props.article.title}</h2>
                 <div dangerouslySetInnerHTML={{__html: props.article.summary}}/>
             </NavLink>
-            {(() => {
-                if (props.isAdmin) {
-                    return (
-                        <div>
-                            <a href={'/admin/' + props.article.id}>Edit</a>
-                            <PublishingContainer slug={props.article.slug} />
-                        </div>);
-                }
-            })()}
         </div>
     );
 };

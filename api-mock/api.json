@@ -5,30 +5,6 @@
       "title": "Private variables in JavaScript aka What are Closures!?",
       "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>There is a common misconception within the Java community that having private variables in JS is impossible. This isn't true. It simply requires a little more work than writing <\/span><\/span>\r\n  <span style=\"font-family: monospace; word-wrap: break-word;\"><span>private<\/span><\/span>\r\n  <span><span> in front of the variable name. <\/span><\/span>\r\n <\/div>\r\n<\/div><br><div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><br><\/span>\r\n <\/div>\r\n<\/div><br>",
       "updated_on": "2018-03-22 22:55:39"
-    },
-    {
-      "slug": "git-rebase-is-like-fire",
-      "title": "Git rebase is like fire",
-      "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>There is a common misconception within the Java community that having private variables in JS is impossible. This isn't true. It simply requires a little more work than writing <\/span><\/span>\r\n  <span style=\"font-family: monospace; word-wrap: break-word;\"><span>private<\/span><\/span>\r\n  <span><span> in front of the variable name. <\/span><\/span>\r\n <\/div>\r\n<\/div><br><div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><br><\/span>\r\n <\/div>\r\n<\/div><br>",
-      "updated_on": "2018-03-10 00:31:05"
-    },
-    {
-      "slug": "effective-jackson-with-annotations-in-spring-boot",
-      "title": "Effective Jackson with annotations in Spring Boot",
-      "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>Git rebase is like fire. In inexperienced hands in can do a lot of harm, but if its handled with care it will make your life much better. Let it help you make your projects easier to maintain. <\/span><\/span>\r\n <\/div>\r\n<\/div><br>",
-      "updated_on": "2018-03-22 22:31:52"
-    },
-    {
-      "slug": "how-not-to-start-a-blog",
-      "title": "How not to start a blog",
-      "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>As a young and passionate software developer I have a tendency to try to solve <\/span><\/span>\r\n  <span style=\"font-weight: bold;\"><span>EVERY <\/span><\/span>\r\n  <span><span>problem through writing a piece of code. When I decided to start a blog writing my own solution was only natural. <\/span><\/span>\r\n <\/div>\r\n<\/div><br><div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><br><\/span>\r\n <\/div>\r\n<\/div><br>",
-      "updated_on": "2018-02-12 23:53:55"
-    },
-    {
-      "slug": "since-i-was-a-kid-i-loved-playing-with-building-blocks",
-      "title": "Since I was a kid I loved playing with building blocks",
-      "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>Since I was a kid I loved playing with building blocks and I found that programming is <\/span><\/span>\r\n  <span style=\"font-weight: bold;\"><span>just like playing with building blocks.<\/span><\/span>\r\n <\/div>\r\n<\/div><br>",
-      "updated_on": "2018-02-07 20:31:23"
     }
   ],
   "example": {
@@ -39,5 +15,8 @@
     "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>There is a common misconception within the Java community that having private variables in JS is impossible. This isn't true. It simply requires a little more work than writing <\/span><\/span>\r\n  <span style=\"font-family: monospace; word-wrap: break-word;\"><span>private<\/span><\/span>\r\n  <span><span> in front of the variable name. <\/span><\/span>\r\n <\/div>\r\n<\/div><br><div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><br><\/span>\r\n <\/div>\r\n<\/div><br>",
     "title": "Private variables in JavaScript aka What are Closures!?",
     "updated_on": "2018-03-22 22:55:39"
+  },
+  "admin": {
+
   }
 }

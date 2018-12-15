@@ -19,9 +19,8 @@ export const ArticleGetAll: Creator = {
         }
 
         next(ArticleGetAllLoading.create());
-        const isAdmin = store.getState().AdminReducer.isAdmin;
         httpRequester
-            .get(isAdmin ? '/api/article/all' : '/api/article', (err, res) => {
+            .get('/api/article', (err, res) => {
                 if (err) {
                     next(ArticleGetAllError.create(err));
                 } else {

@@ -4,20 +4,17 @@ import {ArticleListContainer} from '../LandingPage';
 import {ArticleReaderContainer} from '../Article/Read';
 import {AboutMeComponent} from '../AboutMe';
 import {Projects} from '../Projects';
-import {LoginComponent, LoginCallbackComponent} from '../Authentication';
+import {ArticleEditorContainer} from "../Article/Edit";
 
 const Routes = () => {
     return (
         <div id="main-section">
             <Route exact path="/" component={ArticleListContainer}/>
-            <Route
-                path="/blog"
-                component={ArticleListContainer}/>
+            <Route path="/blog" component={ArticleListContainer}/>
             <Route path="/article/:articleSlug" component={ArticleReaderContainer}/>
+            <Route path="/edit/article/:articleSlug" component={ArticleEditorContainer}/>
             <Route path="/about" component={AboutMeComponent}/>
             <Route path="/projects" component={Projects}/>
-            <Route exact path="/login" component={LoginComponent} />
-            <Route exact path="/login/callback" component={LoginCallbackComponent} />
         </div>
     );
 };

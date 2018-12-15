@@ -6,7 +6,8 @@
     "start": "node scripts/start.js",
     "start-prod": "node scripts/start-prod.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "postbuild": "react-snap"
   },
   "dependencies": {
     "auth0-js": "^9.5.1",
@@ -104,7 +105,7 @@
     "jsdom": "11.5.1",
     "node-sass": "^4.8.3",
     "react-router": "4.1.1",
-    "react-snap": "^1.22.1",
+    "react-snap": "^1.23.0",
     "redux-devtools": "3.4.0",
     "sass-loader": "^6.0.7",
     "vinyl-buffer": "1.0.0",
@@ -119,8 +120,7 @@
       "<rootDir>/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/src/**/?(*.)(spec).{js}"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",

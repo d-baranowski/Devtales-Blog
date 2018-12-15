@@ -7,14 +7,12 @@ import type {Articles} from '../Article';
 
 type Props = {
     articles: Articles,
-    isAdmin: boolean,
     getAllArticles: Function
 };
 
 const mapStateToProps = (state: ApplicationReducerType) => {
     return {
-        articles: state.ArticleReducer.articles || [],
-        isAdmin: state.AdminReducer.isAdmin
+        articles: state.ArticleReducer.articles || []
     };
 };
 
@@ -39,13 +37,12 @@ export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)
 
     render() {
         const articles = this.props.articles;
-        const isAdmin = this.props.isAdmin;
 
         let result = [];
         Object.keys(articles).forEach((element) => {
             const article = articles[element];
             result.push(
-                <ArticlePreviewComponent key={'article-' + article.id} isAdmin={isAdmin} article={article}/>
+                <ArticlePreviewComponent key={'article-' + article.slug} article={article}/>
             );
         });
 

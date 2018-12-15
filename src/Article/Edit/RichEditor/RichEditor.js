@@ -15,8 +15,8 @@ type ArticleDataType = {
 
 type Props = {
     article: Article,
-    updateArticle: (id: number) => (data: ArticleDataType) => void,
     saveArticle: (data: ArticleDataType) => void,
+    downloadArticle: (data: ArticleDataType) => void,
     uploadMenuContainer: Function
 }
 
@@ -27,45 +27,36 @@ type State = {
 }
 
 class RichEditor extends Component<Props, State> {
-    onChange: (editorState: EditorStateType) => void;
-    _handleKeyCommand: (command: string) => DraftHandleValue;
-    _toggleInlineStyle: (inlineStyle: string) => void;
-    _toggleBlockType: (blockType: string) => void;
-    _onTab: (e: SyntheticKeyboardEvent<*>) => void;
-    _confirmMedia: (url: string) => void;
-    _saveAction: () => void;
-
     constructor(props: Props) {
         super(props);
         const loadState = this.props.article ? this.props.article.jsonRepresentation : false;
         this.state = {editorState: GenerateConfiguredEditorState(loadState),
             showURLInput: false,
             urlValue: ''};
-
-        this.onChange = this.onChange.bind(this);
-        this._handleKeyCommand = this._handleKeyCommand.bind(this);
-        this._toggleInlineStyle = this._toggleInlineStyle.bind(this);
-        this._toggleBlockType = this._toggleBlockType.bind(this);
-        this._onTab = this._onTab.bind(this);
-        this._confirmMedia = this._confirmMedia.bind(this);
-        this._saveAction = this._saveAction.bind(this);
     }
 
-    onChange(editorState: EditorStateType): void {
+    onChange = (editorState: EditorStateType): void => {
         this.setState({editorState});
-    }
+    };
 
-    _saveAction() {
-        const saveArticle = this.props.article ? this.props.updateArticle(this.props.article.id) : this.props.saveArticle;
+    getData = () => {
         const state = this.state.editorState.getCurrentContent();
-        const data = {
+        return {
             html: document.getElementsByClassName('public-DraftEditor-content')[0].outerHTML,
             json: JSON.stringify(convertToRaw(state))
         };
-        saveArticle(data);
-    }
+    };
 
-    _confirmMedia(url: string) {
+    _saveAction = () => {
+        const saveArticle = this.props.saveArticle;
+        saveArticle(this.getData());
+    };
+
+    _downloadAction = () => {
+        this.props.downloadArticle(this.getData());
+    };
+
+    _confirmMedia = (url: string) => {
         const {editorState} = this.state;
         const contentState = editorState.getCurrentContent();
 
@@ -92,7 +83,7 @@ class RichEditor extends Component<Props, State> {
         });
     }
 
-    _handleKeyCommand(command: string): DraftHandleValue {
+    _handleKeyCommand = (command: string): DraftHandleValue => {
         const {editorState} = this.state;
         const newState = RichUtils.handleKeyCommand(editorState, command);
         if (newState) {
@@ -102,7 +93,7 @@ class RichEditor extends Component<Props, State> {
         return false;
     }
 
-    _onTab(e: SyntheticKeyboardEvent<*>): void {
+    _onTab = (e: SyntheticKeyboardEvent<*>): void => {
         const maxDepth = 4;
         const editorState = this.state.editorState;
         const listHandle = RichUtils.onTab(e, editorState, maxDepth);
@@ -135,7 +126,7 @@ class RichEditor extends Component<Props, State> {
         }
     }
 
-    _toggleBlockType(blockType: string): void {
+    _toggleBlockType = (blockType: string): void => {
         this.onChange(
             RichUtils.toggleBlockType(
                 this.state.editorState,
@@ -144,7 +135,7 @@ class RichEditor extends Component<Props, State> {
         );
     }
 
-    _toggleInlineStyle(inlineStyle: string): void {
+    _toggleInlineStyle = (inlineStyle: string): void => {
         this.onChange(
             RichUtils.toggleInlineStyle(
                 this.state.editorState,
@@ -180,6 +171,7 @@ class RichEditor extends Component<Props, State> {
                     onToggle={this._toggleInlineStyle}
                 />
                 <ImageUploadMenu />
+                <button id="download-button" onClick={this._downloadAction}>Download</button>
                 <button id="save-button" onClick={this._saveAction}>Save</button>
                 <div className="middle-section">
                     <div className={className}>

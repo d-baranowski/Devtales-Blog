@@ -6,7 +6,6 @@ import type {Reducer} from 'redux';
 import type {Article, LoadingType} from '../ArticleType';
 
 export const EMPTY_ARTICLE = {
-    id: -1,
     title: '',
     slug: '',
     html: '',

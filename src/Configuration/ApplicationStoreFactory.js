@@ -11,7 +11,7 @@ export const ApplicationStoreFactory = (history) => {
     return createStore(
         ApplicationReducer,
         preloadedState || ApplicationReducerInitialState,
-        /*window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__( */
-        applyMiddleware(...middleWare)/* )TODO DEBUG remove in production*/
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+        applyMiddleware(...middleWare))
     );
 };

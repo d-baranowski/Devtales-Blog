@@ -25,10 +25,8 @@ export const ArticleGetSpecific: Creator = {
         } else {
             next(ArticleGetSpecificLoading.create(action.slug));
 
-            let isAdmin = store.getState().AdminReducer.isAdmin;
-
             httpRequester
-                .get((isAdmin ? '/api/article/all/' : '/api/article/') + action.slug, (err, res) => {
+                .get(('/api/article/') + action.slug, (err, res) => {
                     if (err) {
                         next(ArticleGetSpecificError.create(err, action.slug));
                     } else {

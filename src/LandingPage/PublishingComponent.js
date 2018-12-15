@@ -24,7 +24,7 @@ class PublishingComponent extends Component<Props> {
     render() {
         const {isAdmin, article} = this.props;
 
-        return isAdmin ? <div>
+        return isAdmin && article ? <div>
             <button onClick={this.onButtonClick}>{ article.publishedDate > 0 ? 'Hide' : 'Publish'}</button>
         </div> : (null);
     }
