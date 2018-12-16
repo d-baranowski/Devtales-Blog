@@ -12,26 +12,14 @@ type ImageType = {
 }
 
 function Image(props: ImageType) {
-    return <img onClick={props.image.onClick} src={props.image.thumb} />;
+    return <img alt="" onClick={props.image.onClick} src={props.image.thumb} />;
 }
 
 class ImageUploadMenu extends Component<Props> {
-    handleAddImageClick: (e: SyntheticEvent<*>) => void;
-
-    constructor(props: Props) {
-        super(props);
-        this.handleAddImageClick = this.handleAddImageClick.bind(this);
-    }
-
     componentWillMount() {
         if (!this.props.images) {
             this.props.getImages();
         }
-    }
-
-    handleAddImageClick(e: SyntheticEvent<*>) {
-        e.preventDefault();
-        this.props.uploadImage();
     }
 
     render() {
@@ -60,12 +48,6 @@ class ImageUploadMenu extends Component<Props> {
                 <If _={this.props.showMenu}>
                     <div className="overlay-menu">
                         <div className="body">{imageElements}</div>
-                        <div className="footer">
-                            <form id="imageUploadForm">
-                                <input name="file" type="file" />
-                                <button id="uploadImage" onClick={this.handleAddImageClick}>Add Image</button>
-                            </form>
-                        </div>
                     </div>
                 </If>
             </div>

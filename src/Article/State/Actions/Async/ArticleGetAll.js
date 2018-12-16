@@ -15,7 +15,7 @@ export const ArticleGetAll: Creator = {
     type: 'ARTICLE_GET_ALL',
     reduce: (store, next, action, httpRequester: HttpRequesterInterface) => {
         if (!httpRequester) {
-            throw 'Configuration issue in ArticleGetAll async action. Please provide a valid httpRequester!';
+            throw new Error('Configuration issue in ArticleGetAll async action. Please provide a valid httpRequester!');
         }
 
         next(ArticleGetAllLoading.create());

@@ -49,17 +49,8 @@ describe('The Image Upload Menu gets toggle menu callback and the menu is shown'
         expect(wrapper.exists()).toEqual(true);
     });
 
-    it('It should do the right callback when I click the Display Menu button', () => {
-        wrapper.find('#uploadImage').simulate('click');
-        expect(uploadImageCalls.length).toEqual(1);
-    });
-
     it('The overlay-menu should be shown', () => {
         expect(wrapper.find('.overlay-menu').exists()).toEqual(true);
-    });
-
-    it('The imageUploadForm should be shown', () => {
-        expect(wrapper.find('#imageUploadForm').exists()).toEqual(true);
     });
 
     afterAll(()=>{

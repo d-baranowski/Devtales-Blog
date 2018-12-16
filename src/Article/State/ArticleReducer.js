@@ -5,6 +5,14 @@ import {Actions} from './Actions';
 import type {Reducer} from 'redux';
 import type {Article, LoadingType} from '../ArticleType';
 
+export type Articles = { [slug: string]: Article }
+
+export type ArticleReducerType = {
+    loadingAll: LoadingType,
+    articles: Articles,
+    updating: Article | void
+};
+
 export const EMPTY_ARTICLE = {
     title: '',
     slug: '',
@@ -27,13 +35,4 @@ export const ArticleReducer: Reducer<ArticleReducerType, any> = (state = Article
         }
     }
     return state;
-};
-
-
-export type Articles = { [slug: string]: Article }
-
-export type ArticleReducerType = {
-    loadingAll: LoadingType,
-    articles: Articles,
-    updating: Article | void
 };

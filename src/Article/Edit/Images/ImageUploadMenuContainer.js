@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import type {ApplicationReducerType} from '../../../Configuration';
 import type {Images} from '../index';
-import {ImagesUpload, ImagesGet} from './State/Actions';
+import {ImagesGet} from './State/Actions';
 
 export type Props = {
     images: Images,
@@ -25,7 +25,6 @@ const mapStateToProps = (state: ApplicationReducerType) => {
 const mapDispatchToProps = (dispatch) => {
     return({
         getImages: () => dispatch(ImagesGet.create()),
-        uploadImage: () => dispatch(ImagesUpload.create('imageUploadForm')),
         toggleMenu: () => dispatch({type: 'TOGGLE_MENU'})
     });
 };
@@ -34,7 +33,6 @@ export const ImageUploadMenuContainer = connect(mapStateToProps, mapDispatchToPr
     render() {
         return <ImageUploadMenu toggleMenu={this.props.toggleMenu}
             showMenu={this.props.showMenu}
-            uploadImage={this.props.uploadImage}
             getImages={this.props.getImages}
             addImage={this.props.addImage}
             images={this.props.images}/>;

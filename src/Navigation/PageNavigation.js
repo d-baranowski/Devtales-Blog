@@ -10,9 +10,9 @@ class PageNavigation extends Component<Props> {
     render() {
         return (
             <header>
-                <img id="logo" src="/img/devtalesico.svg"/>
+                <img id="logo" alt="logo" src="/img/devtalesico.svg"/>
                 <nav>
-                    <img id="title" src="/img/title.svg"/>
+                    <img alt="Devtales" id="title" src="/img/title.svg"/>
                     <HamburgerComponent toggleMenu={this.props.toggleMenu} isOpen={this.props.showMenu}/>
                     <ResponsiveNavComponent isOpen={this.props.showMenu}>
                         <ul>

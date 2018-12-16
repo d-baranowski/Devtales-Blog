@@ -10,20 +10,6 @@ import type {ArticleReducerType, ImagesReducerType} from '../Article';
 import type {PageNavigationReducerType} from '../Navigation';
 import type {Action} from '../Configuration';
 
-export const ApplicationReducer: Reducer<ApplicationReducerType, any> = combineReducers({
-    ArticleReducer,
-    ImagesReducer,
-    PageNavigationReducer,
-    router: routerReducer
-});
-
-export const ApplicationReducerInitialState : ApplicationReducerType = {
-    ArticleReducer: ArticleReducerInitialState,
-    ImagesReducer: ImagesReducerInitialState,
-    PageNavigationReducer: PageNavigationReducerInitialState,
-    router: {locationBeforeTransitions: null}
-};
-
 export type ApplicationReducerType = {
     ArticleReducer: ArticleReducerType,
     ImagesReducer: ImagesReducerType,
@@ -45,3 +31,17 @@ export type ApplicationAsyncActionCreator<T> = {
 }
 
 export type Dispatch = (action: Action) => void;
+
+export const ApplicationReducer: Reducer<ApplicationReducerType, any> = combineReducers({
+    ArticleReducer,
+    ImagesReducer,
+    PageNavigationReducer,
+    router: routerReducer
+});
+
+export const ApplicationReducerInitialState : ApplicationReducerType = {
+    ArticleReducer: ArticleReducerInitialState,
+    ImagesReducer: ImagesReducerInitialState,
+    PageNavigationReducer: PageNavigationReducerInitialState,
+    router: {locationBeforeTransitions: null}
+};

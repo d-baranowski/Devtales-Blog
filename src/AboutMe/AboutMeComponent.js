@@ -4,7 +4,7 @@ export const AboutMeComponent = () => {
     return (
         <div className="article-container">
             <h1>About Me</h1>
-            <img className="float-left top-right-corner-margins" src="/img/round-profile-small.png"/>
+            <img className="float-left top-right-corner-margins" alt="My face" src="/img/round-profile-small.png"/>
             <p>My name is Daniel and I‘m a software developer based in Leeds, Great Britain. Beyond programming I love internet memes, computer games and Dungeons and Dragons. Java is my native tongue,
                 but
                 I‘m also comfortable with JavsScript, C# and SQL. </p>
@@ -21,12 +21,15 @@ export const AboutMeComponent = () => {
             <p>Don‘t hesitate to contact me with any questions or requests you might have.</p>
             <div className="social">
                 <a href="https://www.linkedin.com/in/daniel-baranowski-220011a8/"><img
+                    alt="linkedin"
                     src="/img/linkedin-icon.png" width="50"/></a>
                 <a href="https://github.com/d-baranowski"><img
+                    alt="github"
                     src="/img/github-icon.png" width="50"
                 /></a>
                 <a href="mailto:dan@devtales.net">
                     <img src="/img/email.svg" width="45"
+                         alt="email"
                         className="email" /></a>
             </div>
         </div>

@@ -4,14 +4,14 @@ import {AsyncActions} from './Actions';
 import type {ActionTypes} from './Actions';
 
 export const ImagesServiceFactory =
-    (httpRequester: HttpRequesterInterface, formDataService: (formId: string) => FormData) =>
+    (httpRequester: HttpRequesterInterface) =>
         (store: Store) =>
             (next: (action: ActionTypes) => void) =>
                 (action: ActionTypes) => {
                     next(action);
                     for (let possibleAction of AsyncActions) {
                         if (possibleAction.match(action)) {
-                            possibleAction.reduce(store, next, action, {httpRequester, formDataService});
+                            possibleAction.reduce(store, next, action, {httpRequester});
                         }
                     }
                 };

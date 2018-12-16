@@ -62,7 +62,7 @@ class RichEditor extends Component<Props, State> {
 
         const extension = url.split('.').pop();
         const contentStateWithEntity = contentState.createEntity(
-            extension == 'mp4' ? 'video' : 'image', //audio,
+            extension === 'mp4' ? 'video' : 'image', //audio,
             'IMMUTABLE',
             {src: url}
         );

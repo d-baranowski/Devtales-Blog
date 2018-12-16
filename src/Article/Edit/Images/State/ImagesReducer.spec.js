@@ -1,6 +1,5 @@
 import {ImagesReducer, ImagesReducerInitialState} from './ImagesReducer';
 
-
 describe('The images reducer has initial state', () => {
     let reducer;
     let state;
@@ -76,16 +75,6 @@ describe('The images reducer has state indicating that there are already images 
                 {image: '/blog-content/someImage4.jpg', thumb: '/blog-content/thumb-someImage4.jpg'},
                 {image: '/blog-content/someImage5.jpg', thumb: '/blog-content/thumb-someImage5.jpg'},
                 {image: '/blog-content/someImage6.jpg', thumb: '/blog-content/thumb-someImage6.jpg'}
-            ]});
-    });
-
-    it('when I dispatch action UPLOAD_IMAGE_SUCCESS and then state will have the new image', () => {
-        expect(reducer(state, {type: 'UPLOAD_IMAGE_SUCCESS', data: {text: 'someImage4.jpg'}}))
-            .toEqual({...ImagesReducerInitialState, images: [
-                {image: '/blog-content/someImage.jpg', thumb: '/blog-content/thumb-someImage.jpg'},
-                {image: '/blog-content/someImage2.jpg', thumb: '/blog-content/thumb-someImage2.jpg'},
-                {image: '/blog-content/someImage3.jpg', thumb: '/blog-content/thumb-someImage3.jpg'},
-                {image: '/blog-content/someImage4.jpg', thumb: '/blog-content/thumb-someImage4.jpg'}
             ]});
     });
 });

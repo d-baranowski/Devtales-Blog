@@ -21,8 +21,8 @@ export const ImagesGetSuccess: Creator = {
             return {
                 ...state,
                 images: action.data.body.map((x) => ({
-                    ['image']: prependWithAddress(x),
-                    ['thumb']: prependWithAddress('thumb-' + x)
+                    image: prependWithAddress(x),
+                    thumb: prependWithAddress('thumb-' + x)
                 }))
             };
         }

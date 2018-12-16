@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import PublishingContainer from './PublishingContainer';
 import {NavLink} from 'react-router-dom';
 import type {Article} from '../Article/ArticleType';
 
@@ -20,4 +19,3 @@ const ArticlePreviewComponent = (props: Props) => {
 };
 
 export default ArticlePreviewComponent;
-a

@@ -9,7 +9,7 @@ const Audio = (props: MediaElementType) => {
     return <audio className="media" controls src={props.src} />;
 };
 const Image = (props: MediaElementType) => {
-    return <img className="media" src={props.src} />;
+    return <img alt="" className="media" src={props.src} />;
 };
 const Video = (props: MediaElementType) => {
     return <video className="media" controls src={props.src} />;

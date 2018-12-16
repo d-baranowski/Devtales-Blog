@@ -21,7 +21,7 @@ export const ImagesGet: Creator = {
     type: 'GET_IMAGES',
     reduce: (store, next, action: ImagesGetAction, services) => {
         if (!services || !services.httpRequester) {
-            throw 'Configuration issue in ImagesGet async action.';
+            throw new Error('Configuration issue in ImagesGet async action.');
         }
         const httpRequester: HttpRequesterInterface = services.httpRequester;
 

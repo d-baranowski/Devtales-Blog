@@ -12,7 +12,7 @@ const Tile = (props: TileProps) => {
     return (
         <a className="tile" href={props.repo}>
             <div className="body">
-                <img  src={props.imageSrc} />
+                <img alt={props.title} src={props.imageSrc} />
             </div>
             <div className="overlay">
                 {props.children}

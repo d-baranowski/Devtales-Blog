@@ -2,6 +2,18 @@
 import type {Reducer} from 'redux';
 import {Actions} from './Actions';
 
+export type ImageStateType = {
+    image: string,
+    thumb: string
+}
+
+export type Images = ImageStateType[]
+
+export type ImagesReducerType = {
+    showMenu: boolean,
+    images: ImageStateType[]
+}
+
 export const prependWithAddress = (x: string) => {
     return '/blog-content/' + x;
 };
@@ -16,15 +28,3 @@ export const ImagesReducer: Reducer<ImagesReducerType, any> = (state = ImagesRed
 
     return state;
 };
-
-export type ImageStateType = {
-    image: string,
-    thumb: string
-}
-
-export type Images = ImageStateType[]
-
-export type ImagesReducerType = {
-    showMenu: boolean,
-    images: ImageStateType[]
-}

@@ -17,7 +17,7 @@ export const ArticleGetSpecific: Creator = {
     type: 'ARTICLE_GET_SPECIFIC',
     reduce: (store, next, action: ArticleGetSpecificAction, httpRequester: HttpRequesterInterface) => {
         if (!httpRequester) {
-            throw 'Configuration issue in ArticleGetSpecific async action. Please provide a valid httpRequester!';
+            throw new Error('Configuration issue in ArticleGetSpecific async action. Please provide a valid httpRequester!');
         }
 
         if (!action.slug) {

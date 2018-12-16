@@ -5,6 +5,8 @@ type Tag = {
     value: string
 }
 
+export type LoadingType = "Loading" | "Loaded" | "Will-Load";
+
 export type Article = {
     id: number,
     title: string,
@@ -24,4 +26,3 @@ export const LoadingTypeEnum = {
     LOADED: 'Loaded',
     WILL_LOAD: 'Will-Load'
 };
-export type LoadingType = "Loading" | "Loaded" | "Will-Load";
