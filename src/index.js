@@ -16,7 +16,7 @@ function ClientSideRender() {
     store.dispatch({type: 'IS_ADMIN'});
 
     const root = document.getElementById('mount');
-    const renderStratety = root.innerHTML ? ReactDOM.hydrate : ReactDOM.render;
+    const renderStratety = /*root.innerHTML ? ReactDOM.hydrate : */ReactDOM.render;
 
     renderStratety(
         <Provider store={store}>
