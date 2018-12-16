@@ -203,6 +203,7 @@ h1, h2, h3, h4, h5, h6 {
 
   #main-section {
     margin-top: 60px;
+    padding: 0;
   }
 
   .media {
@@ -215,6 +216,21 @@ h1, h2, h3, h4, h5, h6 {
 
   .tile {
     width: 100%;
+  }
+
+  .article-container {
+    background: white;
+    padding: 10px;
+    margin: 0;
+    box-shadow: $cardShadow;
+  }
+
+  .article-short {
+    margin: 10px;
+  }
+
+  .article-short:first-of-type {
+    margin-top: 80px;
   }
 }
 
