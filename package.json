@@ -6,8 +6,7 @@
     "start": "node scripts/start.js",
     "start-prod": "node scripts/start-prod.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "postbuild": "react-snap"
+    "test": "node scripts/test.js --env=jsdom"
   },
   "dependencies": {
     "auth0-js": "^9.5.1",
