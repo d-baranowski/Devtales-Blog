@@ -39,7 +39,7 @@ export const Projects = () => {
                     move which can cause the snake to trap itself. Its still fun to watch the snake find its way to apples.
                 </p>
             </Tile>
-            <Tile title="Free Continuous Integration"
+            <Tile title="Free CI"
                 repo="https://github.com/d-baranowski/example-github-ci"
                 imageSrc="https://github.com/d-baranowski/example-github-ci/blob/master/dreamteam.png?raw=true">
                 <p>An example project setup which uses services which provide a way of achieving continuous integration

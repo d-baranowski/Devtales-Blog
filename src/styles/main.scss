@@ -4,19 +4,21 @@
 @import "../../node_modules/prismjs/themes/prism";
 @import "../../node_modules/prism-themes/themes/prism-atom-dark";
 
+
+$tile-height: 320px;
+
 .tile-parent {
-  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-$tile-height: 25em;
-
 .tile {
-  float: left;
   background: #444444;
-  width: 32%;
+  width: $tile-height;
   height: $tile-height;
   position: relative;
-  margin: 5px;
+  margin: 15px;
 
   * {
     color: white;
@@ -116,7 +118,6 @@ body {
 #main-section {
   margin-top: $navbar-position + 50px + 80px;
   margin-bottom: 50px;
-  padding: 15px;
 }
 
 $cardShadow: 0 8px 6px -6px black, 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
@@ -188,12 +189,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media screen and (max-width: $media-navigation-links-go-lower), (device-width: $media-navigation-links-go-lower) {
-  .tile {
-    width: 45%;
-  }
-}
-
 @media screen and (max-width: $media-small), (device-width: $media-small) {
   .page-content {
     width: 100%;
@@ -212,10 +207,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .tile-parent {
     margin: 0;
-  }
-
-  .tile {
-    width: 100%;
   }
 
   .article-container {
