@@ -10,7 +10,6 @@ export type Props = {
     images: Images,
     showMenu: boolean,
     getImages: Function,
-    uploadImage: Function,
     toggleMenu: Function,
     addImage: (imageUrl: string) => void; //Passed from editor used as confirmation
 }

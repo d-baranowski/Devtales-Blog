@@ -64,10 +64,10 @@ describe('The Image Upload Menu gets addImage menu callback and the menu is show
     const toggleMenuCalls = [];
     const toggleMenuSpy = spyFunction(toggleMenuCalls);
     const images = [
-        {image: 'image 1 url', thumb: 'image 1 thumb url'},
-        {image: 'image 2 url', thumb: 'image 2 thumb url'},
-        {image: 'image 3 url', thumb: 'image 3 thumb url'},
-        {image: 'image 4 url', thumb: 'image 4 thumb url'}
+        'image 1 url',
+        'image 2 url',
+        'image 3 url',
+        'image 4 url'
     ];
 
     const wrapper = mount(<ImageUploadMenu

@@ -3,8 +3,7 @@ import type {Reducer} from 'redux';
 import {Actions} from './Actions';
 
 export type ImageStateType = {
-    image: string,
-    thumb: string
+    image: string
 }
 
 export type Images = ImageStateType[]

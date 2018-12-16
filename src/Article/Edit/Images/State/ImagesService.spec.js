@@ -2,6 +2,7 @@ import {ImagesServiceFactory} from './ImagesService';
 
 import {applyMiddleware, createStore} from 'redux';
 import {ImagesGetError} from './Actions';
+import {SAMPLE_VALID_GET_IMAGES_RESPONSE} from "./ImagesReducer.spec";
 
 const SpyMiddlewareFactory = (actionList) => (store) => (next) => (action) => {
     next(action);
@@ -13,13 +14,12 @@ describe('The api will respond to get with success', () => {
     let mock;
     let store;
     let actionList = [];
-    let retunedImages =  ['some-image-url', 'some-image-url2'];
 
     beforeEach(() => {
         actionList = [];
         mock = {
             get: (url, callback) => {
-                callback(undefined, {body: retunedImages});
+                callback(undefined, {text: SAMPLE_VALID_GET_IMAGES_RESPONSE});
             }
         };
 
@@ -38,7 +38,7 @@ describe('The api will respond to get with success', () => {
             type: 'GET_IMAGES'
         });
 
-        expect(actionList[1]).toEqual({type: 'GET_IMAGES_SUCCESS', data: {body: retunedImages}});
+        expect(actionList[1]).toEqual({type: 'GET_IMAGES_SUCCESS', response: SAMPLE_VALID_GET_IMAGES_RESPONSE});
         expect(actionList.length).toEqual(2);
     });
 

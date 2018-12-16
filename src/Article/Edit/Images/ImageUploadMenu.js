@@ -12,12 +12,12 @@ type ImageType = {
 }
 
 function Image(props: ImageType) {
-    return <img alt="" onClick={props.image.onClick} src={props.image.thumb} />;
+    return <img alt="" onClick={props.image.onClick} src={props.image.image} />;
 }
 
 class ImageUploadMenu extends Component<Props> {
     componentWillMount() {
-        if (!this.props.images) {
+        if (!this.props.images || !this.props.images.length) {
             this.props.getImages();
         }
     }
@@ -28,10 +28,10 @@ class ImageUploadMenu extends Component<Props> {
         const withFunction = actualImages.map((x) =>
         {
             return {
-                ...x,
+                image: x,
                 onClick: () => {
                     this.props.toggleMenu();
-                    addImage(x.image);
+                    addImage(x);
                 }
             };
         });

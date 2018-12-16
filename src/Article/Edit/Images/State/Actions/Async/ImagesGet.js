@@ -14,7 +14,7 @@ type ImagesGetAction = {
 type Creator = ApplicationAsyncActionCreator<ImagesGetType>
 
 type GetImagesResponseType = {
-    body: string[]
+    text: string
 }
 
 export const ImagesGet: Creator = {
@@ -26,11 +26,11 @@ export const ImagesGet: Creator = {
         const httpRequester: HttpRequesterInterface = services.httpRequester;
 
         httpRequester
-            .get('/file', (err, res: GetImagesResponseType) => {
+            .get('https://s3-eu-west-1.amazonaws.com/devtales.bucket.net/?list-type=2&prefix=blog-content', (err, res: GetImagesResponseType) => {
                 if (err) {
                     next(ImagesGetError.create(err));
                 } else {
-                    next(ImagesGetSuccess.create(res.body));
+                    next(ImagesGetSuccess.create(res.text));
                 }
             });
     },

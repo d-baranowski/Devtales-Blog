@@ -7,9 +7,7 @@ type ImagesGetSuccessType = 'GET_IMAGES_SUCCESS';
 
 export type ImagesGetSuccessAction = {
     type: ImagesGetSuccessType,
-    data: {
-        body: string[]
-    }
+    response: string
 }
 
 type Creator = ApplicationActionCreator<ImagesReducerType, ImagesGetSuccessAction, ImagesGetSuccessType>
@@ -17,25 +15,25 @@ type Creator = ApplicationActionCreator<ImagesReducerType, ImagesGetSuccessActio
 export const ImagesGetSuccess: Creator = {
     type: 'GET_IMAGES_SUCCESS',
     reduce: (state: ImagesReducerType, action: ImagesGetSuccessAction): ImagesReducerType => {
-        if (action.data.body !== undefined && action.data.body.constructor === Array) {
+        try {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(action.response, "application/xml");
             return {
                 ...state,
-                images: action.data.body.map((x) => ({
-                    image: prependWithAddress(x),
-                    thumb: prependWithAddress('thumb-' + x)
-                }))
+                images: Array.from(doc.getElementsByTagName("Key"))
+                    .map(elem => `https://devtales.net/${elem.innerHTML}`)
+                    .slice(1)
             };
+        } catch (err) {
+            return {
+                ...state,
+                error: err
+            }
         }
-        return {
-            ...state,
-            error: 'Failed to get images.'
-        };
     },
     match: (action: Action) => ImagesGetSuccess.type === action.type,
-    create: (images: string[]) => ({
+    create: (response: string) => ({
         type: ImagesGetSuccess.type,
-        data: {
-            body: images
-        }
+        response
     })
 };
