@@ -13,8 +13,6 @@ const history = createHistory();
 const store = ApplicationStoreFactory(history);
 
 function ClientSideRender() {
-    store.dispatch({type: 'IS_ADMIN'});
-
     const root = document.getElementById('mount');
     const renderStratety = root.innerHTML ? ReactDOM.hydrate : ReactDOM.render;
 
