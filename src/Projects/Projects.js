@@ -30,6 +30,16 @@ export const Projects = () => {
 
     return (
         <div className="tile-parent">
+
+            <Tile title="5e Character Sheet"
+                  repo="https://github.com/d-baranowski/dnd-character-sheet"
+                  imageSrc="https://devtales.net/img/character-sheet-project.png">
+                <p>
+                    Dungeons and Dragons character sheet I've built for my friends to use while we play.
+                    It's an Electron app built using React and Redux. All the UI is created using SVGs generated from
+                    the original D&D character sheet PDF. I can do some pretty cool things with DOM manipulations on inline svg elements.
+                </p>
+            </Tile>
             <Tile title="Snake in Python"
                 repo="https://github.com/d-baranowski/Pyhton-Snake-Game"
                 imageSrc="https://github.com/d-baranowski/Pyhton-Snake-Game/raw/master/demo.gif?raw=true">
