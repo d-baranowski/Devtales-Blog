@@ -1,5 +1,11 @@
 [
     {
+        "slug": "make-async-simple-again-aka-state-store-in-52-lines",
+        "title": "Make async simple again! - aka state store in 52 lines",
+        "summary":"<div class=\"summary\"><div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\"><span><span>Redux allows to share state between component and also it helps to separate state from the component which aids testing. Unfortunately it also adds unnecessary layers of complexity. In order to have asynchronous behaviour in Redux  you'll need to write a lot of code. In a world where everything is asynchronous I've had enough of confusing middle-wares, numerous action creators and obscure yield operators. In this article I'll demonstrate how simple async operations can become without Redux.</span></span></div></div><br><div class=\"summary\"><div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\"><span><br></span></div></div><br>",
+        "updated_on": "2018-12-18 13:49:39"
+    },
+    {
         "slug": "private-variables-in-javascript-aka-what-are-closures",
         "title": "Private variables in JavaScript aka What are Closures!?",
         "summary": "<div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><span>There is a common misconception within the Java community that having private variables in JS is impossible. This isn't true. It simply requires a little more work than writing <\/span><\/span>\r\n  <span style=\"font-family: monospace; word-wrap: break-word;\"><span>private<\/span><\/span>\r\n  <span><span> in front of the variable name. <\/span><\/span>\r\n <\/div>\r\n<\/div><br><div class=\"summary\">\r\n <div class=\"public-DraftStyleDefault-block public-DraftStyleDefault-ltr\">\r\n  <span><br><\/span>\r\n <\/div>\r\n<\/div><br>",
