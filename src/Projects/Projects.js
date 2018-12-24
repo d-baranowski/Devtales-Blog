@@ -30,7 +30,15 @@ export const Projects = () => {
 
     return (
         <div className="tile-parent">
-
+            <Tile title="Gravity Balls"
+                  repo="https://devtales.net/projects/gravity-balls/index.html"
+                  imageSrc="https://devtales.net/img/gravity-balls.gif">
+                <p>
+                    Little demo I've build to try out WebRTC DataChannel. Each time someone visits the page a random
+                    string is generated. When a second person enters the page with the same random string then they'll
+                    join the fun.
+                </p>
+            </Tile>
             <Tile title="5e Character Sheet"
                   repo="https://github.com/d-baranowski/dnd-character-sheet"
                   imageSrc="https://devtales.net/img/character-sheet-project.png">
