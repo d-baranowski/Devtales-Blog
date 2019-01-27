@@ -34,9 +34,9 @@ export const Projects = () => {
                   repo="https://devtales.net/projects/asteroideatch-match/index.html"
                   imageSrc="https://devtales.net/img/asteroideatch-match.gif">
                 <p>
-                    Little demo I've build to try out WebRTC DataChannel. Each time someone visits the page a random
-                    string is generated. When a second person enters the page with the same random string then they'll
-                    join the fun.
+                    With the new knowledge of webrtc I decided to build a simple online multi-player game. I make use
+                    of webpack to ensure that the data I send doesn't go over the limit of webrtc message. The
+                    game does not require a server. The player's browsers communicate with one another.
                 </p>
             </Tile>
             <Tile title="Gravity Balls"
