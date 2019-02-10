@@ -30,7 +30,7 @@ export const Projects = () => {
 
     return (
         <div className="tile-parent">
-            <Tile title="AsteroiDeatch Match"
+            <Tile title="AsteroiDeath Match"
                   repo="https://devtales.net/projects/asteroideatch-match/index.html"
                   imageSrc="https://devtales.net/img/asteroideatch-match.gif">
                 <p>
