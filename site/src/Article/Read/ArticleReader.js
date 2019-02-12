@@ -1,9 +1,11 @@
 //@flow
 import React, {Component} from 'react';
 import {If} from '../../Utility';
-import {ConfiguredEditor, GenerateConfiguredEditorState} from '../Display/index';
+
 import {LoadingTypeEnum} from '../ArticleType';
 import type {Article as ArticleType} from '../ArticleType';
+import MegadraftEditor from "../../Megadraft/src/components/MegadraftEditor";
+import {editorStateFromRaw} from "../../Megadraft/src/utils";
 
 type Props = {
     article: ArticleType | null,
@@ -12,7 +14,7 @@ type Props = {
 
 export class ArticleReader extends Component<Props> {
     render() {
-        let article = this.props.article || {};
+        let article = this.props.article || null;
 
         return (
             <div className="article-container">
@@ -20,9 +22,9 @@ export class ArticleReader extends Component<Props> {
                     <div className="spinner" />
                 </If>
                 <If _={article.jsonRepresentation}>
-                    <ConfiguredEditor
+                    <MegadraftEditor
                         readOnly="true"
-                        editorState={GenerateConfiguredEditorState(article.jsonRepresentation)}
+                        editorState={editorStateFromRaw(JSON.parse(article.jsonRepresentation))}
                         spellCheck={false}/>
                 </If>
                 <If _={!article.jsonRepresentation && article.isLoading === LoadingTypeEnum.LOADED}>

@@ -2,11 +2,10 @@
 import React, {Component}  from 'react';
 import {connect} from 'react-redux';
 import RichEditor from './RichEditor';
-import {ImageUploadMenuContainer} from '../Images';
 
 import type {ApplicationReducerType} from '../../../Configuration';
 import type {Article} from '../../ArticleType';
-import {If} from "../../../Utility";
+import {If, get} from "../../../Utility";
 import {withRouter} from "react-router";
 
 type Props = {
@@ -46,32 +45,14 @@ export const ArticleEditorContainer = withRouter(connect(mapStateToProps, mapDis
         }
     }
 
-    uploadMenuContainer = (props) => (<ImageUploadMenuContainer {...props} />);
-
     saveArticle = (article) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(article.html, "text/html");
+        const articleState = JSON.parse(article.json);
+        const blocks = get(articleState, ['blocks'], []);
+        const summaryBlock = blocks.find(block => block.type === "summary");
+        const titleBlock = blocks.find(block => block.type === "header-two");
 
-        const elements = doc.getElementsByTagName("*");
-
-        for (let i = 0; i < elements.length; i++) {
-            const element = elements[i];
-            for (let datasetKey in element.dataset) {
-                if (element.dataset.hasOwnProperty(datasetKey)) {
-                    delete element.dataset[datasetKey];
-                }
-            }
-        }
-
-        let summary = "";
-
-        const summaryElements = doc.getElementsByClassName("summary");
-        for (let i = 0; i < summaryElements.length; i++) {
-            summary += summaryElements[i].outerHTML + '<br>'
-        }
-
-        const headers = doc.getElementsByTagName("h1");
-        const title = headers.length > 0 ? headers[0].innerText : "";
+        let summary = summaryBlock ? summaryBlock.text : "";
+        const title = titleBlock ? titleBlock.text : "";
 
         const value = {
             title,
@@ -80,9 +61,9 @@ export const ArticleEditorContainer = withRouter(connect(mapStateToProps, mapDis
             summary
         };
 
-        localStorage.setItem(value.slug, JSON.stringify(value));
+        localStorage.setItem(value.slug || "new-article", JSON.stringify(value));
 
-        if (this.props.match.params.articleSlug !== value.slug) {
+        if (value.slug && this.props.match.params.articleSlug !== value.slug) {
             this.props.history.push(`/edit/article/${value.slug}`);
         }
 

@@ -1,12 +1,10 @@
 // @flow
 import React, {Component} from 'react';
-import {RichUtils, convertToRaw, AtomicBlockUtils, Modifier, EditorState} from 'draft-js';
-import BlockStyleControls from './BlockStyleControls';
-import InlineStyleControls from './InlineStyleControls';
-import {ConfiguredEditor, GenerateConfiguredEditorState} from '../../Display/index';
 
-import type {EditorState as EditorStateType, DraftHandleValue} from 'draft-js';
+
 import type {Article} from '../../ArticleType';
+import {editorStateFromRaw, editorStateToJSON} from "../../../Megadraft/src/utils";
+import MegadraftEditor from "../../../Megadraft/src/components/MegadraftEditor";
 
 type ArticleDataType = {
     html: string,
@@ -21,7 +19,7 @@ type Props = {
 }
 
 type State = {
-    editorState: EditorStateType,
+    editorState: any,
     showURLInput: ?boolean,
     urlValue: ?string
 }
@@ -30,20 +28,19 @@ class RichEditor extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         const loadState = this.props.article ? this.props.article.jsonRepresentation : false;
-        this.state = {editorState: GenerateConfiguredEditorState(loadState),
+        this.state = {editorState: editorStateFromRaw(JSON.parse(loadState)),
             showURLInput: false,
             urlValue: ''};
     }
 
-    onChange = (editorState: EditorStateType): void => {
+    onChange = (editorState): void => {
         this.setState({editorState});
     };
 
     getData = () => {
         const state = this.state.editorState.getCurrentContent();
         return {
-            html: document.getElementsByClassName('public-DraftEditor-content')[0].outerHTML,
-            json: JSON.stringify(convertToRaw(state))
+            json: editorStateToJSON(state)
         };
     };
 
@@ -55,94 +52,6 @@ class RichEditor extends Component<Props, State> {
     _downloadAction = () => {
         this.props.downloadArticle(this.getData());
     };
-
-    _confirmMedia = (url: string) => {
-        const {editorState} = this.state;
-        const contentState = editorState.getCurrentContent();
-
-        const extension = url.split('.').pop();
-        const contentStateWithEntity = contentState.createEntity(
-            extension === 'mp4' ? 'video' : 'image', //audio,
-            'IMMUTABLE',
-            {src: url}
-        );
-        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState : EditorStateType = EditorState.set(
-            editorState,
-            {currentContent: contentStateWithEntity}
-        );
-
-        this.setState({
-            editorState: AtomicBlockUtils.insertAtomicBlock(
-                newEditorState,
-                entityKey,
-                ' '
-            ),
-            showURLInput: false,
-            urlValue: '',
-        });
-    }
-
-    _handleKeyCommand = (command: string): DraftHandleValue => {
-        const {editorState} = this.state;
-        const newState = RichUtils.handleKeyCommand(editorState, command);
-        if (newState) {
-            this.onChange(newState);
-            return true;
-        }
-        return false;
-    }
-
-    _onTab = (e: SyntheticKeyboardEvent<*>): void => {
-        const maxDepth = 4;
-        const editorState = this.state.editorState;
-        const listHandle = RichUtils.onTab(e, editorState, maxDepth);
-        if (listHandle !== editorState) {
-            this.onChange(listHandle);
-        } else {
-            const selection = editorState.getSelection();
-            const key = selection.getAnchorKey();
-            if (key !== selection.getFocusKey()) {
-                return editorState;
-            }
-
-            const content = editorState.getCurrentContent();
-            const block = content.getBlockForKey(key);
-            const type = block.getType();
-            if (type !== 'code-block') {
-                return editorState;
-            }
-
-            let currentState = this.state.editorState;
-            let newContentState = Modifier.replaceText(
-                editorState.getCurrentContent(),
-                editorState.getSelection(),
-                '   '
-            );
-
-            e.preventDefault();
-
-            this.onChange(EditorState.push(currentState, newContentState, 'insert-characters'));
-        }
-    }
-
-    _toggleBlockType = (blockType: string): void => {
-        this.onChange(
-            RichUtils.toggleBlockType(
-                this.state.editorState,
-                blockType
-            )
-        );
-    }
-
-    _toggleInlineStyle = (inlineStyle: string): void => {
-        this.onChange(
-            RichUtils.toggleInlineStyle(
-                this.state.editorState,
-                inlineStyle
-            )
-        );
-    }
 
     render() {
         const editorState = this.state.editorState;
@@ -158,28 +67,15 @@ class RichEditor extends Component<Props, State> {
             }
         }
 
-        const ImageUploadMenu = () => this.props.uploadMenuContainer({addImage: this._confirmMedia});
-
         return (
             <div>
-                <BlockStyleControls
-                    editorState={editorState}
-                    onToggle={this._toggleBlockType}
-                />
-                <InlineStyleControls
-                    editorState={editorState}
-                    onToggle={this._toggleInlineStyle}
-                />
-                <ImageUploadMenu />
                 <button id="download-button" onClick={this._downloadAction}>Download</button>
                 <button id="save-button" onClick={this._saveAction}>Save</button>
                 <div className="middle-section">
                     <div className={className}>
-                        <ConfiguredEditor
+                        <MegadraftEditor
                             editorState={editorState}
-                            handleKeyCommand={this._handleKeyCommand}
                             onChange={this.onChange}
-                            onTab={this._onTab}
                             placeholder="Write here..."
                             spellCheck={true}
                         />

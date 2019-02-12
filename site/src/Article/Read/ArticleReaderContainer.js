@@ -30,16 +30,29 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProps)(class ArticleReaderContainer extends Component<Props> {
+    getArticle() {
+        const slug = this.props.match.params.articleSlug;
+        const localStorageArticle = localStorage.getItem(slug);
+        let article;
+
+        if (localStorageArticle) {
+            article = JSON.parse(localStorageArticle)
+        } else {
+            article =this.props.articles[slug]
+        }
+
+        return article;
+    }
+
     componentDidMount() {
-        let article =  this.props.articles[this.props.match.params.articleSlug];
-        if (!article) {
+        if (!this.getArticle()) {
             this.props.fetchArticle(this.props.match.params.articleSlug);
         }
     }
 
     render() {
         const slug: string = this.props.match.params.articleSlug;
-        const article: ArticleType = this.props.articles[slug];
+        const article: ArticleType = this.getArticle();
 
         return <ArticleReader
             slug={slug}
