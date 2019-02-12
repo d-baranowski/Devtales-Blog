@@ -1,6 +1,5 @@
 //@flow
 import React, {Component} from 'react';
-import {If} from '../../Utility';
 
 import {LoadingTypeEnum} from '../ArticleType';
 import type {Article as ArticleType} from '../ArticleType';
@@ -14,22 +13,16 @@ type Props = {
 
 export class ArticleReader extends Component<Props> {
     render() {
-        let article = this.props.article || null;
+        let article = this.props.article || {isLoading: LoadingTypeEnum.LOADING};
 
         return (
             <div className="article-container">
-                <If _={article.isLoading === LoadingTypeEnum.LOADING}>
-                    <div className="spinner" />
-                </If>
-                <If _={article.jsonRepresentation}>
+                {!article.isLoading === LoadingTypeEnum.LOADING && <div className="spinner" />}
+                {article.jsonRepresentation &&
                     <MegadraftEditor
                         readOnly="true"
                         editorState={editorStateFromRaw(JSON.parse(article.jsonRepresentation))}
-                        spellCheck={false}/>
-                </If>
-                <If _={!article.jsonRepresentation && article.isLoading === LoadingTypeEnum.LOADED}>
-                    <p>There was a problem loading this article.</p>
-                </If>
+                        spellCheck={false}/>}
             </div>
         );
     }

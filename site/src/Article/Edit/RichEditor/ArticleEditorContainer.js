@@ -5,7 +5,7 @@ import RichEditor from './RichEditor';
 
 import type {ApplicationReducerType} from '../../../Configuration';
 import type {Article} from '../../ArticleType';
-import {If, get} from "../../../Utility";
+import {get} from "../../../Utility";
 import {withRouter} from "react-router";
 
 type Props = {
@@ -84,11 +84,11 @@ export const ArticleEditorContainer = withRouter(connect(mapStateToProps, mapDis
     render() {
         const slug = this.props.match.params.articleSlug;
         const article = JSON.parse(localStorage.getItem(slug)) || this.props.articles[slug];
-        return <If _={article}><RichEditor
+        return <RichEditor
             article={article}
             downloadArticle={this.downloadArticle}
             saveArticle={this.saveArticle}
             uploadMenuContainer={this.uploadMenuContainer}
-        /></If>;
+        />;
     }
 }));
