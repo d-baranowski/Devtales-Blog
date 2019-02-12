@@ -35,7 +35,7 @@ export const Projects = () => {
                   imageSrc="https://devtales.net/img/asteroideatch-match.gif">
                 <p>
                     With the new knowledge of webrtc I decided to build a simple online multi-player game. I make use
-                    of webpack to ensure that the data I send doesn't go over the limit of webrtc message. The
+                    of MessagePack to ensure that the data I send doesn't go over the limit of webrtc message. The
                     game does not require a server. The player's browsers communicate with one another.
                 </p>
             </Tile>
