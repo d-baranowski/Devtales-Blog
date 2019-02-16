@@ -57,6 +57,16 @@ Promise.all([
     }),
 
     lambdaLocal.execute({
+        event: makeRequest("/edit/article/private-variables-in-javascript-aka-what-are-closures"),
+        lambdaPath: LAMBDA_PATH,
+        timeoutMs: 3000
+    }).then(function (result) {
+        assert.deepStrictEqual(result.uri, "/index.html", "requests to articles returns index page")
+    }).catch(function (err) {
+        assert.fail(err)
+    }),
+
+    lambdaLocal.execute({
         event: makeRequest("/img/title.svg"),
         lambdaPath: LAMBDA_PATH,
         timeoutMs: 3000

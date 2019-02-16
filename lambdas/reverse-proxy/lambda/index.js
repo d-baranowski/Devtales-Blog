@@ -11,6 +11,10 @@ exports.handler = (event, context, callback) => {
         request.uri = "/index.html";
     }
 
+    else if (request.uri.match(/^\/edit\/article\/.+$/)) {
+        request.uri = "/index.html";
+    }
+
     else if (request.uri === "/api/article") {
         request.uri = "/api/articles.json"
     }

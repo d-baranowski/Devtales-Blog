@@ -76,7 +76,6 @@ class RichEditor extends Component<Props, State> {
                         <MegadraftEditor
                             editorState={editorState}
                             onChange={this.onChange}
-                            placeholder="Write here..."
                             spellCheck={true}
                         />
                     </div>
