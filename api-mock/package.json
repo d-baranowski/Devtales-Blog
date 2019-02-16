@@ -10,5 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "json-server": "^0.14.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-http-proxy": "^1.5.1"
   }
 }

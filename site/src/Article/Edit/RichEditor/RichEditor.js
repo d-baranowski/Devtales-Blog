@@ -6,31 +6,25 @@ import type {Article} from '../../ArticleType';
 import {editorStateFromRaw, editorStateToJSON} from "../../../Megadraft/src/utils";
 import MegadraftEditor from "../../../Megadraft/src/components/MegadraftEditor";
 
-type ArticleDataType = {
-    html: string,
-    json: string
-};
-
 type Props = {
     article: Article,
-    saveArticle: (data: ArticleDataType) => void,
-    downloadArticle: (data: ArticleDataType) => void,
+    saveArticle: (data) => void,
+    downloadArticle: (data) => void,
     uploadMenuContainer: Function
 }
 
-type State = {
-    editorState: any,
-    showURLInput: ?boolean,
-    urlValue: ?string
-}
-
-class RichEditor extends Component<Props, State> {
+class RichEditor extends Component<Props> {
     constructor(props: Props) {
         super(props);
-        const loadState = this.props.article ? this.props.article.jsonRepresentation : false;
-        this.state = {editorState: editorStateFromRaw(JSON.parse(loadState)),
-            showURLInput: false,
-            urlValue: ''};
+        const loadState = this.props.article ? this.props.article.jsonRepresentation : null;
+        this.state = {editorState: editorStateFromRaw(JSON.parse(loadState))};
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps !== this.props) {
+            const loadState = this.props.article ? this.props.article.jsonRepresentation : "";
+            this.setState({editorState: editorStateFromRaw(JSON.parse(loadState))})
+        }
     }
 
     onChange = (editorState): void => {
