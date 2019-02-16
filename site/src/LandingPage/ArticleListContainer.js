@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import ArticlePreviewComponent from './ArticlePreviewComponent';
 import type {ApplicationReducerType} from '../Configuration';
 import type {Articles} from '../Article';
+import {editorStateFromRaw} from "../Megadraft/src/utils";
 
 type Props = {
     articles: Articles,
@@ -30,6 +31,8 @@ const mapDispatchToProps = (dispatch) => {
     });
 };
 
+let seen = false;
+
 export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class ArticleListContainer extends Component<Props> {
     componentDidMount() {
         this.props.getAllArticles();
@@ -39,13 +42,22 @@ export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)
         const articles = this.props.articles;
 
         let result = [];
-        Object.keys(articles).forEach((element) => {
+        Object.keys(articles).forEach((element, i) => {
             const article = articles[element];
             result.push(
-                <ArticlePreviewComponent key={'article-' + article.slug} article={article}/>
+                <ArticlePreviewComponent
+                    className={!seen ? "fly-in" : ""}
+                    style={{animationDelay: `${i * 25}ms`}}
+                    key={'article-' + article.slug}
+                    article={article}
+                />
             );
         });
 
-        return result.length > 0 ? <div>{result}</div> : <div />;
+        if (Object.keys(this.props.articles).length > 0) {
+            seen = true;
+        }
+
+        return result.length > 0 ? <div className="articles-container">{result}</div> : <div />;
     }
 });

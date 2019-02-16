@@ -12,7 +12,9 @@ const Tile = (props: TileProps) => {
     return (
         <a className="tile" href={props.repo}>
             <div className="body">
-                <img alt={props.title} src={props.imageSrc} />
+                <object data={props.imageSrc} >
+                    <div className="spinner"></div>
+                </object>
             </div>
             <div className="overlay">
                 {props.children}
@@ -34,8 +36,7 @@ export const Projects = () => {
                   repo="https://devtales.net/projects/asteroideatch-match/index.html"
                   imageSrc="https://devtales.net/img/asteroideatch-match.gif">
                 <p>
-                    With the new knowledge of webrtc I decided to build a simple online multi-player game. I make use
-                    of MessagePack to ensure that the data I send doesn't go over the limit of webrtc message. The
+                    Simple online multi-player game using WebRtc and MessagePack. The
                     game does not require a server. The player's browsers communicate with one another.
                 </p>
             </Tile>
@@ -59,22 +60,21 @@ export const Projects = () => {
             </Tile>
             <Tile title="Snake in Python"
                 repo="https://github.com/d-baranowski/Pyhton-Snake-Game"
-                imageSrc="https://github.com/d-baranowski/Pyhton-Snake-Game/raw/master/demo.gif?raw=true">
-                <p>A fun little exercise I prepared to show school kids the capabilities of python.
-                Its a Snake Game with build in autopilot using A* path finding algorithm. The A* algorithm
-                is not working fully because it doesn‘t take in account where the tail will be after each
+                imageSrc="https://devtales.net/blog-content/snake.gif">
+                <p>
+                Snake Game with build in autopilot using A* path finding. It's not working fully because it doesn‘t take in account where the tail will be after each
                     move which can cause the snake to trap itself. Its still fun to watch the snake find its way to apples.
                 </p>
             </Tile>
             <Tile title="Free CI"
                 repo="https://github.com/d-baranowski/example-github-ci"
-                imageSrc="https://github.com/d-baranowski/example-github-ci/blob/master/dreamteam.png?raw=true">
+                imageSrc="https://devtales.net/blog-content/ci.png">
                 <p>An example project setup which uses services which provide a way of achieving continuous integration
                     for free for open source projects.</p>
             </Tile>
             <Tile title="JS Matrix Letters"
                 repo="https://github.com/d-baranowski/MatrixJsFun"
-                imageSrc="https://github.com/d-baranowski/MatrixJsFun/blob/master/matrix.gif?raw=true">
+                imageSrc="https://devtales.net/blog-content/matrix.gif">
                 <p>I was bored one day and decided to create a screen of falling green letters inspired by Matrix movie. It has very bad performance
                     but it still makes for a fun to watch spectacle.</p>
             </Tile>

@@ -4,23 +4,31 @@ $position-left: 0;
 $position-right: 0;
 
 #logo {
-  height: 250px;
+  height: 200px;
   position: absolute;
-  top: 10px;
+  top: 20px;
   left: $position-left;
   z-index: 11;
 }
 
+h2 {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.125;
+}
+
 nav {
+  border-radius: 2px;
   height: 50px;
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
   position: absolute;
   top: $navbar-position;
-  left: $position-left + 10%;
+  left: 120px;
   right: $position-right;
   z-index: 10;
   background-color: #444;
+  border-bottom: 5px #F8CC46 solid;
 
   #title {
     margin-left: 150px;

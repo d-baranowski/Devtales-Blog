@@ -1,15 +1,9 @@
-// @flow
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import type {Article} from '../Article/ArticleType';
 
-type Props = {
-    article: Article
-}
-
-const ArticlePreviewComponent = (props: Props) => {
+const ArticlePreviewComponent = (props) => {
     return (
-        <div className="article-short">
+        <div style={props.style} className={"article-short " + props.className}>
             <NavLink exact to={'/article/' + props.article.slug}>
                 <h2>{props.article.title}</h2>
                 <div dangerouslySetInnerHTML={{__html: props.article.summary}}/>
