@@ -1,19 +1,8 @@
-// @flow
 import {ArticleGetAllError, ArticleGetAllLoading, ArticleGetAllSuccess} from '../index';
-import type {Action, ApplicationAsyncActionCreator} from '../../../../Configuration';
-import type {HttpRequesterInterface} from '../../../../HttpRequest';
 
-type ArticleGetAllType = 'ARTICLE_GET_ALL';
-
-export type ArticleGetAllAction = {
-    type: ArticleGetAllType
-}
-
-type Creator = ApplicationAsyncActionCreator<ArticleGetAllType>
-
-export const ArticleGetAll: Creator = {
+export const ArticleGetAll = {
     type: 'ARTICLE_GET_ALL',
-    reduce: (store, next, action, httpRequester: HttpRequesterInterface) => {
+    reduce: (store, next, action, httpRequester) => {
         if (!httpRequester) {
             throw new Error('Configuration issue in ArticleGetAll async action. Please provide a valid httpRequester!');
         }
@@ -34,7 +23,7 @@ export const ArticleGetAll: Creator = {
                 }
             });
     },
-    match: (action: Action) => (ArticleGetAll.type === action.type),
+    match: (action) => (ArticleGetAll.type === action.type),
     create: () => ({
         type: ArticleGetAll.type
     })

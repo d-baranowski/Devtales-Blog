@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import {ApplicationStoreFactory} from './Configuration';
 import {PageNavigationContainer} from './Navigation';
 import './styles/main.scss';
+import LoginCard from "./Login/LoginCard";
 
 
 const history = createHistory();
@@ -20,6 +21,7 @@ function ClientSideRender() {
         <Provider store={store}>
             <Router history={history}>
                 <div className="page-content">
+                    <LoginCard/>
                     <PageNavigationContainer/>
                     <Routes />
                 </div>

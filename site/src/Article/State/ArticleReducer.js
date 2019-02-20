@@ -1,17 +1,5 @@
-// @flow
 import {LoadingTypeEnum} from '../ArticleType';
 import {Actions} from './Actions';
-
-import type {Reducer} from 'redux';
-import type {Article, LoadingType} from '../ArticleType';
-
-export type Articles = { [slug: string]: Article }
-
-export type ArticleReducerType = {
-    loadingAll: LoadingType,
-    articles: Articles,
-    updating: Article | void
-};
 
 export const EMPTY_ARTICLE = {
     title: '',
@@ -26,9 +14,13 @@ export const EMPTY_ARTICLE = {
     isLoading: LoadingTypeEnum.WILL_LOAD
 };
 
-export const ArticleReducerInitialState : ArticleReducerType = {articles: {}, updating: undefined, loadingAll: LoadingTypeEnum.WILL_LOAD};
+export const ArticleReducerInitialState = {
+    articles: {},
+    updating: undefined,
+    loadingAll: LoadingTypeEnum.WILL_LOAD
+};
 
-export const ArticleReducer: Reducer<ArticleReducerType, any> = (state = ArticleReducerInitialState, action) => {
+export const ArticleReducer = (state = ArticleReducerInitialState, action) => {
     for (let possibleAction of Actions) {
         if (possibleAction.match(action)) {
             return possibleAction.reduce(state, action);

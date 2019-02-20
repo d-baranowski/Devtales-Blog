@@ -1,13 +1,9 @@
-// @flow
-import type {Store} from '../../Configuration/index';
-import type {HttpRequesterInterface} from '../../HttpRequest/index';
-import type {ActionTypes} from './Actions';
-import { AsyncActions } from './Actions';
+import {AsyncActions} from './Actions';
 
 export const ArticleServiceFactory =
-    (httpRequester: HttpRequesterInterface) =>
-        (store: Store) =>
-            (next: (action: ActionTypes) => void) =>
+    (httpRequester) =>
+        (store) =>
+            (next: (action) => void) =>
                 (action: any) => {
                     next(action);
                     for (let possibleAction of AsyncActions) {

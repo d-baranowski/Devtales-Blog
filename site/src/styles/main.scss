@@ -2,6 +2,7 @@
 @import "navbar";
 @import "hamburger";
 @import "spinner";
+@import "login";
 @import "../../node_modules/prismjs/themes/prism";
 @import "../../node_modules/prism-themes/themes/prism-atom-dark";
 @import "megadraft/megadraft";
@@ -163,25 +164,40 @@ $cardShadow: 0px 2px 4px rgba(0,0,0,0.18);
   animation-timing-function: ease-in-out;
 }
 
-.article-short {
+.hover-move {
   position: relative;
   top: 0;
   transition: top ease 0.5s;
-  border-top: 4px #f8cc46 solid;
-  border-radius: 0 0 3px 3px;
-  width: 320px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.hover-move:hover {
+  top: 8px;
+}
+
+.article-short {
+  &.card {
+    padding: 10px 15px 25px;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
   }
-  background: white;
-  padding: 10px 15px 25px;
-  box-shadow: $cardShadow;
+
   margin: 20px
 }
 
-.article-short:hover {
-  top: 8px;
+.card {
+  background: white;
+  padding: 10px;
+  box-shadow: $cardShadow;
+  border-top: 4px #f8cc46 solid;
+  border-radius: 0 0 3px 3px;
+  width: 320px;
 }
 
 .article-short:nth-of-type(2n) {
@@ -281,4 +297,28 @@ h1, h2, h3, h4, h5, h6 {
 .appear-leave.appear-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+.interactive-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  vertical-align: middle;
+  padding: 12px;
+  border: 2px solid #444444;
+  fill: #444444;
+}
+
+.like-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.like-container .interactive-icon:first-of-type {
+  margin-right: 25px;
 }

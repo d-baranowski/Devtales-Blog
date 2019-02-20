@@ -5,6 +5,8 @@ import {ArticleReaderContainer} from '../Article/Read';
 import {AboutMeComponent} from '../AboutMe';
 import {Projects} from '../Projects';
 import {ArticleEditorContainer} from "../Article/Edit";
+import GithubLoginHandler from "../Login/GithubLoginHandler";
+import LoginCard from "../Login/LoginCard";
 
 const Routes = () => {
     return (
@@ -15,6 +17,7 @@ const Routes = () => {
             <Route path="/edit/article/:articleSlug" component={ArticleEditorContainer}/>
             <Route path="/about" component={AboutMeComponent}/>
             <Route path="/projects" component={Projects}/>
+            <Route path="/auth/github" component={GithubLoginHandler} />
         </div>
     );
 };

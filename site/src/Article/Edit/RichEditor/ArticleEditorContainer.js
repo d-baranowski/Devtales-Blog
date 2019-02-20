@@ -1,20 +1,12 @@
-// @flow
 import React, {Component}  from 'react';
 import {connect} from 'react-redux';
 import RichEditor from './RichEditor';
 
-import type {ApplicationReducerType} from '../../../Configuration';
-import type {Article} from '../../ArticleType';
 import {get} from "../../../Utility";
 import {withRouter} from "react-router";
 
-type Props = {
-    article: Article,
-    saveArticle: Function,
-    updateArticle: Function
-}
 
-const mapStateToProps = (state: ApplicationReducerType) => {
+const mapStateToProps = (state) => {
     return {
         articles: state.ArticleReducer.articles
     };
@@ -36,7 +28,7 @@ const slugify = string => string
         .replace(/^-+/, "")
         .replace(/-+$/, "");
 
-export const ArticleEditorContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(class ArticleEditorContainer extends Component<Props> {
+export const ArticleEditorContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(class ArticleEditorContainer extends Component {
     componentDidMount() {
         const slug = this.props.match.params.articleSlug;
         let article = localStorage.getItem(slug) || this.props.articles[slug];

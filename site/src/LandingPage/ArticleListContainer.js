@@ -1,17 +1,8 @@
-// @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ArticlePreviewComponent from './ArticlePreviewComponent';
-import type {ApplicationReducerType} from '../Configuration';
-import type {Articles} from '../Article';
-import {editorStateFromRaw} from "../Megadraft/src/utils";
 
-type Props = {
-    articles: Articles,
-    getAllArticles: Function
-};
-
-const mapStateToProps = (state: ApplicationReducerType) => {
+const mapStateToProps = (state) => {
     return {
         articles: state.ArticleReducer.articles || []
     };
@@ -33,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 
 let seen = false;
 
-export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class ArticleListContainer extends Component<Props> {
+export const ArticleListContainer = connect(mapStateToProps, mapDispatchToProps)(class ArticleListContainer extends Component {
     componentDidMount() {
         this.props.getAllArticles();
     }

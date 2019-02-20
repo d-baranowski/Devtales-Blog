@@ -1,17 +1,9 @@
-// @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PageNavigation from './PageNavigation';
 import {withRouter} from 'react-router';
 
-import type {ApplicationReducerType} from '../Configuration';
-
-export type Props = {
-    showMenu: boolean,
-    toggleMenu: () => void
-}
-
-const mapStateToProps = (state: ApplicationReducerType) => {
+const mapStateToProps = (state) => {
     return {
         showMenu: state.PageNavigationReducer.navigationMenuIsOpen
     };

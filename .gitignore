@@ -60,3 +60,5 @@ blog-content
 flow-typed
 /src/main/js/npm-debug.log.*
 
+.env.local
+
