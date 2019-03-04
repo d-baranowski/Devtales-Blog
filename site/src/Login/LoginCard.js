@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 
 const loginWithGithub = () => {
-    localStorage.setItem("devtales-login-return-to", window.location.pathname);
-
+    sessionStorage.setItem("devtales-login-return-to", window.location.pathname);
     const searchParams = new URLSearchParams({
         client_id: process.env.REACT_APP_GITHUB_CI_KEY,
         scope: 'user:email'
