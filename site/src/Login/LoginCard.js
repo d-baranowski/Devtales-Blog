@@ -1,5 +1,6 @@
 import React from 'react';
-import {connect} from "react-redux";
+import connect from "../StateManager/connect";
+import LoginStore from "./LoginStore";
 
 const loginWithGithub = () => {
     sessionStorage.setItem("devtales-login-return-to", window.location.pathname);
@@ -22,10 +23,10 @@ const LoginCard = (props) => (
 
 LoginCard.propTypes = {};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
     return {
-        show: state.LoginReducer.showLoginCard
+        show: store.showLoginCard
     }
 };
 
-export default connect(mapStateToProps)(LoginCard);
+export default connect(LoginStore, mapStateToProps)(LoginCard);

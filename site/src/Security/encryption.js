@@ -12,18 +12,21 @@ const importSecretKey = (rawKey) => {
 const counter = new TextEncoder("utf-8").encode(process.env.REACT_APP_ENCRYPT_COUNTER);
 
 let key;
-importSecretKey(JSON.parse(process.env.REACT_APP_ENCRYPT_KEY)).then((k) => key = k);
+
+const loadKey = async () => {
+    key = await importSecretKey(JSON.parse(process.env.REACT_APP_ENCRYPT_KEY));
+};
 
 const encodeMessage = (message) => {
     let enc = new TextEncoder();
     return enc.encode(message);
 };
 
-/*
-  Get the encoded message, encrypt it and display a representation
-  of the ciphertext in the "Ciphertext" element.
-  */
 const encryptMessage = async (message) => {
+    if (!key) {
+        await loadKey();
+    }
+
     let encoded = encodeMessage(message);
     // The counter block value must never be reused with a given key.
     return await window.crypto.subtle.encrypt(
@@ -37,11 +40,11 @@ const encryptMessage = async (message) => {
     );
 };
 
-/*
-  Fetch the encoded message and decrypt it.
-  Write the decrypted message into the "Decrypted" box.
-  */
 const decryptMessage = async (message) => {
+    if (!key) {
+        await loadKey();
+    }
+
     let decrypted = await window.crypto.subtle.decrypt(
         {
             name: "AES-CTR",
