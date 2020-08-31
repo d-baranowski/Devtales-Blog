@@ -3,6 +3,7 @@ import {ArticleGetSpecificError, ArticleGetSpecificLoading, ArticleGetSpecificSu
 
 import type {ApplicationAsyncActionCreator} from '../../../../Configuration';
 import type {HttpRequesterInterface} from '../../../../HttpRequest';
+import type {LoadingType} from "../../../ArticleType";
 
 type ArticleGetSpecificType = 'ARTICLE_GET_SPECIFIC';
 
@@ -26,13 +27,31 @@ export const ArticleGetSpecific: Creator = {
             next(ArticleGetSpecificLoading.create(action.slug));
 
             httpRequester
-                .get(('/api/article/') + action.slug, (err, res) => {
+                .get(`/article/${action.slug}.md`, (err, res) => {
                     if (err) {
                         next(ArticleGetSpecificError.create(err, action.slug));
                     } else {
-                        const data = JSON.parse(res.text);
+                        let txt = res.text;
+                        const tagLength = '<metadata-json>'.length;
+                        const matches  = txt.match(/<metadata-json>([\s\S]*?)<metadata-json>/gm);
+                        let metadata = matches[0];
 
-                        next(ArticleGetSpecificSuccess.create(data));
+                        txt = txt.substring(metadata.length, txt.length);
+
+                        metadata = metadata.substring(tagLength, metadata.length);
+                        metadata = metadata.substring(0, metadata.length - tagLength);
+                        const parsed = JSON.parse(metadata);
+                        console.log(parsed);
+
+                        next(ArticleGetSpecificSuccess.create({
+                            id: parsed.id,
+                            title: parsed.title,
+                            slug: action.slug,
+                            summary: "",
+                            date: parsed.date,
+                            tags: parsed.tags,
+                            text: txt,
+                        }));
                     }
                 });
         }

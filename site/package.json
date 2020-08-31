@@ -11,8 +11,6 @@
   "dependencies": {
     "backstage-modal": "^0.3.2",
     "classnames": "^2.2.6",
-    "draft-js": "0.10.4",
-    "draft-js-code": "^0.3.0",
     "immutable": "3.8.2",
     "node-sass": "^4.13.1",
     "prism-themes": "1.0.0",
@@ -21,9 +19,11 @@
     "react": "16.3.0",
     "react-dev-utils": "5.0.0",
     "react-dom": "16.3.0",
+    "react-markdown": "^4.3.1",
     "react-redux": "5.0.5",
     "react-router-dom": "4.1.1",
     "react-router-redux": "4.0.8",
+    "react-syntax-highlighter": "^13.5.1",
     "react-transition-group": "1.2.1",
     "redux": "3.6.0"
   },

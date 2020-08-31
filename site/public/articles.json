@@ -1,0 +1,38 @@
+[
+  {
+    "summary": "This article aims to give pointers on how to design effective logs for your applications. In a world of growing complexity, a carefully designed logging strategy is crucial to the successful operation of distributed systems.",
+    "title": "Structured Logging",
+    "slug": "structured-logging",
+    "updatedOn": "2020-08-31T10:35:25.794Z"
+  },
+  {
+    "summary": "With the current craze about micro-services I spend a considerable amount of time dealing with Rest API's. They mostly send and receive data in JSON format. That is where Jackson comes in handy. In this article I'll show some code examples of some non trivial use cases of Jackson I came across.\n",
+    "title": "Effective Jackson with annotations in Spring Boot",
+    "slug": "effective-jackson-with-annotations-in-spring-boot",
+    "updatedOn": "2019-02-16T09:08:00.463Z"
+  },
+  {
+    "summary": "Git rebase is like fire. In inexperienced hands in can do a lot of harm, but if its handled with care it will make your life much better. Let it help you make your projects easier to maintain.  ",
+    "title": "Git rebase is like fire",
+    "slug": "git-rebase-is-like-fire",
+    "updatedOn": "2019-02-16T09:08:00.463Z"
+  },
+  {
+    "summary": "As a young and passionate software developer I have a tendency to try to solve EVERY problem through writing a piece of code. When I decided to start a blog writing my own solution was only natural. \n",
+    "title": "How not to start a blog",
+    "slug": "how-not-to-start-a-blog",
+    "updatedOn": "2019-02-16T09:08:00.464Z"
+  },
+  {
+    "summary": "In a world where everything is asynchronous I've had enough of confusing middle-wares, numerous action creators and obscure yield operators. In this article I will demonstrate how simple async operations can become without Redux.",
+    "title": "Redux inspired state container",
+    "slug": "redux-inspired-state-container",
+    "updatedOn": "2019-02-16T09:34:29.024Z"
+  },
+  {
+    "summary": "There is a common misconception within the Java community that having private variables in JS is impossible. This isn't true. It simply requires a little more work than writing private in front of the variable name. \n",
+    "title": "Private variables in JavaScript aka What are Closures!?",
+    "slug": "private-variables-in-javascript-aka-what-are-closures",
+    "updatedOn": "2019-02-16T09:08:00.466Z"
+  }
+]

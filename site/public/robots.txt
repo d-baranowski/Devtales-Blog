@@ -1,5 +1,5 @@
 User-Agent: *
-Disallow: 
+Disallow:
 Allow: /
 Allow: /about
 Allow: /projects
@@ -8,4 +8,5 @@ Allow: /article/git-rebase-is-like-fire
 Allow: /article/effective-jackson-with-annotations-in-spring-boot
 Allow: /article/how-not-to-start-a-blog
 Allow: /article/since-i-was-a-kid-i-loved-playing-with-building-blocks
+Allow: /article/structured-logging
 Sitemap: https://www.devtales.net/sitemap.xml

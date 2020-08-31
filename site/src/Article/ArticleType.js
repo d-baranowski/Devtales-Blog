@@ -1,23 +1,16 @@
 // @flow
 
-type Tag = {
-    id: number,
-    value: string
-}
-
 export type LoadingType = "Loading" | "Loaded" | "Will-Load";
 
 export type Article = {
-    id: number,
+    id: string,
     title: string,
     slug: string,
-    html: string,
     summary: string,
-    createdOn: number,
-    updatedOn: number,
-    publishedDate: number,
-    jsonRepresentation: string | null,
-    tags: Tag[],
+    date: string,
+    tags: string[],
+    text: string,
+
     isLoading: LoadingType
 }
 

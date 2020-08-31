@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 
 import {LoadingTypeEnum} from '../ArticleType';
-import MegadraftEditor from "../../Megadraft/src/components/MegadraftEditor";
-import {editorStateFromRaw} from "../../Megadraft/src/utils";
-
 import LikesContainer from "../../Likes/LikesContainer";
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "./CodeBlock";
 
 export class ArticleReader extends Component {
     render() {
@@ -14,12 +13,15 @@ export class ArticleReader extends Component {
         return (
             <div>
                 <div className="article-container">
-                    {!article.isLoading === LoadingTypeEnum.LOADING && <div className="spinner" />}
-                    {article.jsonRepresentation &&
-                        <MegadraftEditor
-                            readOnly="true"
-                            editorState={editorStateFromRaw(JSON.parse(article.jsonRepresentation))}
-                            spellCheck={false}/>}
+                    {!article.isLoading === LoadingTypeEnum.LOADING && <div className="spinner"/>}
+                    {article.text &&
+                    <div>
+                        <h1>{this.props.article.title}</h1>
+                        <ReactMarkdown
+                            source={article.text}
+                            renderers={{code: CodeBlock}}
+                        />
+                    </div>}
                 </div>
 
                 <LikesContainer liked={true}/>
