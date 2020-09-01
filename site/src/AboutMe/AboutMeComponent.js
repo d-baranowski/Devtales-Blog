@@ -4,18 +4,17 @@ export const AboutMeComponent = () => {
     return (
         <div className="article-container">
             <h1>About Me</h1>
-            <img className="float-left top-right-corner-margins" alt="My face" src="/img/round-profile-small.png"/>
-            <p>My name is Daniel and I‘m a software developer based in Leeds, Great Britain. Beyond programming I love internet memes, computer games and Dungeons and Dragons. Java is my native tongue,
-                but
-                I‘m also comfortable with JavsScript, C# and SQL. </p>
-
-            <p className="clear-left">As a programmer I spend a considerable amount of time fixing bugs. Sometimes problems I encounter don‘t
-                make sense. In these situations the internet is my best friend. Programmers form an amazing worldwide
-                community which openly shares code and solutions to problems. <b>We‘ve got each
-                    other‘s backs!</b> I feel that I own a great deal of my professional success to the internet and I decided
-                to create this blog to start to repay that debt. I‘ve built it with Java Spring Boot as the backend and
-                React.js in the frontend. I plan to post my own discoveries in here, hoping that someone
-                somewhere will find it useful. <b>Happy Coding!</b></p>
+            <img className="float-left top-right-corner-margins my-face" alt="My face" src="/avatar.png"/>
+            <p>My name is Daniel. I'm a Computer Science Graduate and professional software developer. For the entirety of my career I have been
+                working as part of small tightly knit teams where engineers are expected to pick up different roles
+                depending on circumstances. I thrive in these kind of environments as I enjoy learning new skills to
+                solve problems at hand.
+                My work experience is mainly in consultancies, where writing clean robust and testable code is part
+                of the culture. I care deeply about the quality of my work and continuously educate myself to follow
+                highest standards. I worked with object-oriented programming languages such as Java and C# and
+                gained experience with other paradigms while programming in Node and GoLang.
+                I am passionate about my work and often go the extra mile, learning new things which will benefit
+                the projects I work on.</p>
 
             <h1>Contact</h1>
             <p>Don‘t hesitate to contact me with any questions or requests you might have.</p>
@@ -30,7 +29,7 @@ export const AboutMeComponent = () => {
                 <a href="mailto:dan@devtales.net">
                     <img src="/img/email.svg" width="45"
                          alt="email"
-                        className="email" /></a>
+                         className="email"/></a>
             </div>
         </div>
     );

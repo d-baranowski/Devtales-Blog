@@ -1,0 +1,98 @@
+
+.interactive-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 24px;
+  vertical-align: middle;
+  padding: 12px;
+  border: 2px solid #444444;
+  fill: #444444;
+  background-color: rgba(0,0,0,0);
+  cursor: pointer;
+  transition: border 500ms ease-in-out;
+}
+
+.like-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.like-container .interactive-icon:first-of-type {
+  margin-right: 25px;
+}
+
+svg path.main-content {
+  transition: fill 500ms ease-in-out;
+}
+
+.like-icon:hover {
+  border: 2px solid #60cf65;
+
+  svg path.main-content {
+    fill: #60cf65;
+  }
+}
+
+.like-icon.liked {
+  border: 2px solid #60cf65;
+
+  svg path.main-content {
+    fill: #60cf65;
+  }
+}
+
+
+.dislike-icon:hover {
+  border: 2px solid #BB261A;
+
+  svg path.main-content {
+    fill: #BB261A;
+  }
+}
+
+.dislike-icon.disliked {
+  border: 2px solid #BB261A;
+
+  svg path.main-content {
+    fill: #BB261A;
+  }
+}
+
+@keyframes dislike {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(-4deg);
+  }
+}
+
+.dislike-icon.disliked {
+  animation: dislike 0.5s ease-in-out;
+  animation-iteration-count: 2;
+}
+
+@keyframes like {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(-4deg);
+  }
+}
+
+.like-icon.liked {
+  animation: like 0.5s ease-in-out;
+  animation-iteration-count: 2;
+}

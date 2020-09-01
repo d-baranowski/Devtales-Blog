@@ -3,6 +3,7 @@
 @import "hamburger";
 @import "spinner";
 @import "login";
+@import "likes";
 @import "../../node_modules/prismjs/themes/prism";
 @import "../../node_modules/prism-themes/themes/prism-atom-dark";
 @import "megadraft/megadraft";
@@ -299,26 +300,16 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity 300ms ease-in;
 }
 
-.interactive-icon {
-  width: 24px;
-  height: 24px;
+.article-container img {
+  margin: 10px auto 20px;
+  display: block;
+}
+
+.my-face {
+  float: left;
+  shape-outside: circle();
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
-  text-align: center;
-  line-height: 24px;
-  vertical-align: middle;
-  padding: 12px;
-  border: 2px solid #444444;
-  fill: #444444;
-}
-
-.like-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.like-container .interactive-icon:first-of-type {
-  margin-right: 25px;
+  margin-right: 20px !important;
 }

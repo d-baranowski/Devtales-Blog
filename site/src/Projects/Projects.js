@@ -12,7 +12,7 @@ const Tile = (props: TileProps) => {
     return (
         <a className="tile" href={props.repo}>
             <div className="body">
-                <object data={props.imageSrc} >
+                <object data={props.imageSrc}>
                     <div className="spinner"></div>
                 </object>
             </div>
@@ -55,28 +55,39 @@ export const Projects = () => {
                 <p>
                     Dungeons and Dragons character sheet I've built for my friends to use while we play.
                     It's an Electron app built using React and Redux. All the UI is created using SVGs generated from
-                    the original D&D character sheet PDF. I can do some pretty cool things with DOM manipulations on inline svg elements.
+                    the original D&D character sheet PDF. I can do some pretty cool things with DOM manipulations on
+                    inline svg elements.
                 </p>
             </Tile>
             <Tile title="Snake in Python"
-                repo="https://github.com/d-baranowski/Pyhton-Snake-Game"
-                imageSrc="https://devtales.net/blog-content/snake.gif">
+                  repo="https://github.com/d-baranowski/Pyhton-Snake-Game"
+                  imageSrc="https://devtales.net/blog-content/snake.gif">
                 <p>
-                Snake Game with build in autopilot using A* path finding. It's not working fully because it doesn‘t take in account where the tail will be after each
-                    move which can cause the snake to trap itself. Its still fun to watch the snake find its way to apples.
+                    Snake Game with build in autopilot using A* path finding. It's not working fully because it doesn‘t
+                    take in account where the tail will be after each
+                    move which can cause the snake to trap itself. Its still fun to watch the snake find its way to
+                    apples.
                 </p>
             </Tile>
             <Tile title="Free CI"
-                repo="https://github.com/d-baranowski/example-github-ci"
-                imageSrc="https://devtales.net/blog-content/ci.png">
+                  repo="https://github.com/d-baranowski/example-github-ci"
+                  imageSrc="https://devtales.net/blog-content/ci.png">
                 <p>An example project setup which uses services which provide a way of achieving continuous integration
                     for free for open source projects.</p>
             </Tile>
             <Tile title="JS Matrix Letters"
-                repo="https://github.com/d-baranowski/MatrixJsFun"
-                imageSrc="https://devtales.net/blog-content/matrix.gif">
-                <p>I was bored one day and decided to create a screen of falling green letters inspired by Matrix movie. It has very bad performance
+                  repo="https://github.com/d-baranowski/MatrixJsFun"
+                  imageSrc="https://devtales.net/blog-content/matrix.gif">
+                <p>I was bored one day and decided to create a screen of falling green letters inspired by Matrix movie.
+                    It has very bad performance
                     but it still makes for a fun to watch spectacle.</p>
+            </Tile>
+            <Tile title="WebAssembly Game of Life"
+                  repo="https://devtales.net/projects/game-of-life/index.html"
+                  imageSrc="https://devtales.net/img/game-of-life.gif">
+                <p>The Game of Life, also known simply as Life, is a cellular automaton devised by the British
+                    mathematician John Horton Conway in 1970.
+                    The game is a zero-player game.</p>
             </Tile>
         </div>
     );

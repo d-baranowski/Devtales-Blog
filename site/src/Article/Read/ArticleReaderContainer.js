@@ -41,6 +41,7 @@ export const ArticleReaderContainer = connect(mapStateToProps, mapDispatchToProp
             article =this.props.articles[slug]
         }
 
+        console.log(article);
         return article;
     }
 

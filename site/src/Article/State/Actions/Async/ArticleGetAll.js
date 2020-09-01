@@ -9,7 +9,7 @@ export const ArticleGetAll = {
 
         next(ArticleGetAllLoading.create());
         httpRequester
-            .get('/api/article', (err, res) => {
+            .get('/articles.json', (err, res) => {
                 if (err) {
                     next(ArticleGetAllError.create(err));
                 } else {
@@ -19,7 +19,7 @@ export const ArticleGetAll = {
                     } catch (err) {
                         next(ArticleGetAllError.create(err));
                     }
-                    
+
                 }
             });
     },

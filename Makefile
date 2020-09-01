@@ -5,7 +5,11 @@ deploy-site:
 deploy-reverse-proxy:
 	-rm lambdas/reverse-proxy/index.zip
 	sh -c "cd lambdas/reverse-proxy && node test.js && cd lambda && zip -r ../index.zip *"
-	aws lambda update-function-code --function-name reverse_proxy --zip-file fileb://lambdas/reverse-proxy/index.zip --profile devtales
+	aws lambda update-function-code --function-name reverse_proxy --zip-file fileb://lambdas/reverse-proxy/index.zip --profile devtales --region us-east-1
+deploy-likes-post:
+	-rm lambdas/likes-post/index.zip
+	sh -c "cd lambdas/likes-post && node test.js && cd lambda && zip -r ../index.zip *"
+	aws lambda update-function-code --function-name like_article --zip-file fileb://lambdas/likes-post/index.zip --profile devtales  --region us-east-1
 deploy-articles:
 	node helpers/generateArticlesJson.js articles > articles/articles.json
 	aws s3 sync ./articles s3://devtales.bucket.net/api --profile devtales --acl public-read
