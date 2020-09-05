@@ -1,5 +1,11 @@
 [
   {
+    "summary": "In order to keep better track of my money I decided to create a little cli which will allow me to extract useful information from monzo api.",
+    "title": "Creating Monzo CLI",
+    "slug": "creating-monzo-cli",
+    "updatedOn": "2020-09-04T17:25:00.794Z"
+  },
+  {
     "summary": "This article aims to give pointers on how to design effective logs for your applications. In a world of growing complexity, a carefully designed logging strategy is crucial to the successful operation of distributed systems.",
     "title": "Structured Logging",
     "slug": "structured-logging",

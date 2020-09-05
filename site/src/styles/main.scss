@@ -125,9 +125,9 @@ $cardShadow: 0px 2px 4px rgba(0,0,0,0.18);
 .article-container {
   background: white;
   padding: 30px;
-  margin: 30px 0;
   box-shadow: $cardShadow;
   border-radius: 1px;
+  margin: 30px 0 20px;
 }
 
 .media {
@@ -303,6 +303,7 @@ h1, h2, h3, h4, h5, h6 {
 .article-container img {
   margin: 10px auto 20px;
   display: block;
+  max-width: 100%;
 }
 
 .my-face {
