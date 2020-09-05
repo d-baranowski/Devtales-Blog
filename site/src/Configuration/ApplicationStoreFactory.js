@@ -8,10 +8,11 @@ export const ApplicationStoreFactory = (history) => {
     delete window.__PRELOADED_STATE__;
 
     const middleWare = ApplicationServices(history);
+    console.log(middleWare);
     return createStore(
         ApplicationReducer,
         preloadedState || ApplicationReducerInitialState,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-        applyMiddleware(...middleWare))
+        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+        applyMiddleware(...middleWare)/*)*/
     );
 };
