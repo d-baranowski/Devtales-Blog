@@ -89,7 +89,7 @@
     "jasmine": "2.8.0",
     "jasmine-es6": "0.4.3",
     "jest": "20.0.4",
-    "jsdom": "11.5.1",
+    "jsdom": "16.5.0",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "prop-types": "^15.5.10",
